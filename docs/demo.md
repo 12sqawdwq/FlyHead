@@ -136,13 +136,23 @@ python flyhead/monitor/preview.py --compute-host <alias>                     # S
 
 ---
 
-## Real-site map renders / 真实场地地图的渲染
+## Real-site material / 真实场地素材
 
-The decision and stage-6 renders above use the synthetic arena. Renders on the saved SLAM map of a
-real site (`onboard_20260926_manual_cleanup_20261005`, the map the stage-3 and stage-5 sims were
-written against) exist locally and are **not published** here: the map is a floor plan of a real
-building. Publishing them needs the owner's approval. The sim runs on that map give 0 contacts for
-the brain in the person_front scenario. Stage 6 on that map (seed 1): the planner arm arrives; the
-reflex arm arrived in one repeat (139.7 s, 2 takeovers, 0 contacts) and timed out at 180 s in an earlier
-run with the same code and seed (5 takeovers, 0 contacts). The difference is run-to-run variation of the
-real-time simulation, not yet explained.
+Published with the site owner's consent (the map package itself stays out of the repository). The README
+section "Videos" shows each item with a preview; this table gives the sources.
+
+| Item | Source data | Renderer |
+| --- | --- | --- |
+| `realmap/slam_map_build.mp4` | map package `onboard_20260926_manual_cleanup_20261005`: `map.ply`, `trajectory.csv` of the 2026-09-25 mapping session | `tools/render_real.py mapbuild` |
+| `realmap/slam_map_orbit.mp4` | the same `map.ply` (points below 1.3 m in the map frame) | `tools/render_real.py orbit` |
+| `realmap/nav_layers.png` | `map.pgm`, height layers, `trajectory.csv`, real tour logs | `tools/render_real.py layers` |
+| `realmap/real_tour_729s.mp4`, `real_tour_138s.mp4` | **real robot** console observation logs `standing_tour_observation_20261004T213408.jsonl`, `standing_tour_independent_axes_20261004T215856.jsonl` (navigator messages: pose, route, goal, state, reason, fitness, command) | `tools/render_real.py navlog` |
+| `realmap/decision_<scenario>.mp4` (8) | `flyhead.sim.loom_sim <scenario> brain … --map <package> --decoder 9` on the GPU host | `tools/render_demo.py decision --map` |
+| `realmap/scenarios_brain_vs_blind.png`, `decoder_states.png` | the same runs plus the blind arm | `tools/render_real.py scenarios`, `states` |
+| `realmap/stage6_planner_vs_reflex.mp4` | `flyhead.sim.reflex_sim <package> planner|reflex 1` with the brain service | `tools/render_demo.py reflex --map` |
+| `realmap/console/*` | the control server replaying `make_synthetic_raw.py --map <shifted package> --from-cloud --person` on `--base <shifted map.ply>`, brain service running; console recorded headless | `tools/shift_map_package.py`, `tools/make_synthetic_raw.py` |
+
+The console replay's scans are taken from the saved cloud (occluded by the grid) along a scripted
+path, with a person cylinder added; it relocalizes at fitness 1.00. A recording generated from the
+grid alone does not relocalize on a real cloud (about 60 % of wall points agree), which is why the
+cloud is used.

@@ -24,64 +24,161 @@ SLAM、导航和大脑都运行在计算主机上；机器人只负责 I/O。
 
 ## 目录
 
-1. [视频](#视频)
-2. [系统概览](#系统概览)
-3. [什么是真实的、什么是仿真的、什么只是主张](#什么是真实的什么是仿真的什么只是主张)
-4. [自主导航](#自主导航不经过果蝇脑)
-5. [果蝇脑](#果蝇脑)
-6. [目前的结果](#目前的结果)
-7. [验证与仿真](#验证与仿真)
-8. [已知问题与未解决事项](#已知问题与未解决事项)
-9. [目录结构](#目录结构)
-10. [快速开始](#快速开始)
-11. [安全](#安全)
-12. [文档索引](#文档索引)
-13. [致谢与许可](#致谢与许可)
+1. [视频](#视频)：实体机器人、真实场地 SLAM 地图、真实巡逻回放、真实地图上的大脑、stage 6、上位机
+2. [状态全景](#状态全景每种状态在哪里可以看到)
+3. [系统概览](#系统概览)
+4. [什么是真实的、什么是仿真的、什么只是主张](#什么是真实的什么是仿真的什么只是主张)
+5. [自主导航](#自主导航不经过果蝇脑)
+6. [果蝇脑](#果蝇脑)
+7. [目前的结果](#目前的结果)
+8. [验证与仿真](#验证与仿真)
+9. [已知问题与未解决事项](#已知问题与未解决事项)
+10. [目录结构](#目录结构)
+11. [快速开始](#快速开始)
+12. [安全](#安全)
+13. [文档索引](#文档索引)
+14. [致谢与许可](#致谢与许可)
 
 ---
 
 ## 视频
 
-每段视频都标明了它是什么。**REAL（真实）** 是实体机器人。**SIM（仿真）** 是带有射线投射激光雷达的模拟世界，
-大脑是 GPU 上的完整连接组。**CONSOLE（上位机回放）** 是真实的操作员控制台和控制服务器，输入合成的激光雷达回放，
-大脑处于影子模式（显示决策但从不发送）。视频在 [`docs/media/`](docs/media) 中；[docs/demo.md](docs/demo.md) 页面给出每段视频对应的运行、
-以及每个面板背后的代码和日志字段。
+每段素材都标明了它是什么：
 
-### 实体机器人
+| 标签 | 含义 |
+| --- | --- |
+| **REAL（真实）** | 实体机器人（手机拍摄），或机器人自身日志的回放 |
+| **REAL SITE（真实场地）** | 机器人所在真实建筑的已保存 SLAM 地图（`onboard_20260926_manual_cleanup_20261005`） |
+| **SIM（仿真）** | 仿真激光雷达（在该地图上射线投射）；大脑是 GPU 上的完整连接组 |
+| **CONSOLE（上位机）** | 未经修改的操作员控制台和控制服务器，输入一段回放；大脑处于影子模式（显示但从不发送） |
+
+所有素材都在 [`docs/media/`](docs/media) 中。[docs/demo.md](docs/demo.md) 给出每段素材对应的运行，以及每个面板背后的代码和日志字段。
+地图包本身不在仓库中，仓库里只有它的渲染视图。
+
+### 1. 实体机器人
 
 | 自主导航：走廊中的姿态与路线行驶（19 s） | 自主导航：夜间办公室，4 倍速（90 s） |
 | --- | --- |
 | ![走廊](docs/media/preview/nav_hallway.gif) | ![办公室](docs/media/preview/nav_office.gif) |
-| [mp4](docs/media/real/hallway_posture_drive.mp4) | [mp4](docs/media/real/office_night_drive_4x.mp4) |
+| [mp4](docs/media/real/hallway_posture_drive.mp4) · 无果蝇脑 | [mp4](docs/media/real/office_night_drive_4x.mp4) · 无果蝇脑 |
 
 | 果蝇脑驱动、有人逼近：stage 5，运行 stage5_004（54 s） |
 | --- |
 | ![大脑驱动](docs/media/preview/real_stage5_escape.gif) |
-| [mp4](docs/media/real/stage5_004_brain_drive_escape.mp4) |
+| [mp4](docs/media/real/stage5_004_brain_drive_escape.mp4) · 由大脑决策；包络、围栏和 0.3 s 租约位于轮子之前 |
 
-大脑视频按手机录制时间（本地 22:57:17）与驱动窗口（22:53:38–22:58:03）对应。该次运行中，大脑发出了 30 次逃逸程序，
-报告 0 次碰撞；两段导航视频展示的是没有大脑参与的平台。两段导航视频的文件时间戳为 2026-10-08，即导航栈重建的当天
-（录制日期没有其他依据确认）。
+大脑视频按手机录制时间（本地 22:57:17）与驱动窗口（22:53:38–22:58:03）对应。该次运行：大脑驱动 262 s，30 次逃逸程序，报告 0 次碰撞。
+两段导航视频的文件时间戳为 2026-10-08，即导航栈重建的当天。
 
-### 仿真（合成场地，射线投射激光雷达）
+### 2. 真实场地：SLAM 地图
 
-| 逐窗口的决策链：有人逼近（25 s） | Stage 6：规划器（左）与果蝇反射（右）（44 s） |
+| 建图会话回放（真实场地，42 s） | 保存的三维点云（真实场地，24 s） |
 | --- | --- |
-| ![决策链](docs/media/preview/decision_chain.gif) | ![stage 6](docs/media/preview/stage6.gif) |
-| [mp4](docs/media/sim/decision_chain_person_front.mp4) · [截图](docs/media/sim/decision_chain_escape.png) | [mp4](docs/media/sim/stage6_planner_vs_reflex.mp4) · [截图](docs/media/sim/stage6_planner_vs_reflex.png) |
+| ![建图](docs/media/preview/rm_mapbuild.gif) | ![点云](docs/media/preview/rm_orbit.gif) |
+| [mp4](docs/media/realmap/slam_map_build.mp4) | [mp4](docs/media/realmap/slam_map_orbit.mp4) |
 
-决策链展示激光雷达场景、写入 LC4/LPLC2/LC9 输入格的速率、下行神经元速率、解码器状态和实际执行的命令。
-截图是 4.3 s 时的逃逸。Stage 6 是合成场地上的种子 1：大脑只在冻结或逃逸时接管。
+地图于 2026-09-25 在一次会话中建成：1407 s，行驶 54.7 m，550975 个点，0.05 m 分辨率的 912 × 926 栅格，并于 2026-10-05 人工清理。
+建图回放视频按该会话自身的轨迹播放：机器人第一次进入某部分点云 4 m 范围时，这部分点云才出现。
 
-### 操作员控制台（回放，大脑影子模式）
+[![导航图层](docs/media/realmap/nav_layers.png)](docs/media/realmap/nav_layers.png)
 
-| 回放会话中的上位机，大脑影子模式（61 s） |
+*同一张地图的导航图层：*（1）占据栅格；（2）规划器的净空场和所有路线遵循的中心线；（3）决定什么会挡住蹲伏或站立机器人的障碍物高度层；
+（4）建图路径和下文的真实自主巡逻。
+
+### 3. 真实自主导航，按机器人自身日志回放
+
+| 自主巡逻，2026-10-04（真实日志，729 s，约 11 倍速） |
 | --- |
-| ![上位机](docs/media/preview/console.gif) |
-| [mp4](docs/media/console/console_replay_brain_shadow.mp4) · [截图](docs/media/console/console_brain_shadow.png) |
+| ![真实巡逻](docs/media/preview/rm_tour.gif) |
+| [mp4，729 s 巡逻](docs/media/realmap/real_tour_729s.mp4) · [mp4，138 s 巡逻](docs/media/realmap/real_tour_138s.mp4) |
 
-未经修改的控制台，经 SSH 隧道连到服务器。影子模式显示大脑的实时状态（例如 `shadow · connected · TURN_LEFT`），但从不发送。
-这段回放是合成的，大脑对本录制中走近的人反应较弱；逃逸行为见决策链视频和实体 stage 5 视频。
+由实体机器人的控制台观测日志（`standing_tour_*_20261004*.jsonl`）渲染，不是仿真：每一帧是一条记录下来的导航消息，包含机器人位姿、规划路线、
+目标点、导航状态和原因、定位度以及命令。这些巡逻运行的是 2026-10-04 的导航栈，比下文所述的重建早四天。
+
+| 巡逻 | 行驶距离 | 记录到的状态（消息数） | 定位度 |
+| --- | --- | --- | --- |
+| 729 s | 56.1 m | driving 454、waiting 68、stopped 11、avoiding 5、planning 1 | 最低 0.963，中位 0.995 |
+| 138 s | 12.6 m | driving 104、idle 26、waiting 8、stopped 4、planning 1 | 最低 0.910，中位 0.995 |
+
+等待（waiting）大多来自位姿过期门控（"SLAM 位姿暂时过期，停车等待"）；避让（avoiding）是局部绕行。
+
+### 4. 真实地图上的果蝇脑（仿真）
+
+stage 3 套件的每个场景都在真实 SLAM 地图上用完整连接组（解码器 V9）运行，并附盲基线（经过同一包络的恒定前进）：
+
+| 场景 | 发生了什么 | 大脑：碰撞、最小净空 | 盲基线：碰撞 | 视频 |
+| --- | --- | --- | --- | --- |
+| `person_front` | 一个人走向机器人，在 0.7 m 处停下 | 0，0.69 m | 0 | [mp4](docs/media/realmap/decision_person_front.mp4) |
+| `person_left` | 同上，从左侧 | 0，0.70 m | 0 | [mp4](docs/media/realmap/decision_person_left.mp4) |
+| `person_right` | 同上，从右侧 | 0，0.56 m | 0 | [mp4](docs/media/realmap/decision_person_right.mp4) |
+| `wall_ahead` | 沿通道驶向远处的墙 | 0，0.88 m | 0 | [mp4](docs/media/realmap/decision_wall_ahead.mp4) |
+| `roam_open` | 120 s 自由漫游 | 0，0.45 m | 0 | [mp4](docs/media/realmap/decision_roam_open.mp4) |
+| `loom_front` | 以 0.6 m/s 运动、永不停下的物体（压力测试） | 37，−0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_front.mp4) |
+| `loom_left` | 同上，从左侧 | 21，−0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_left.mp4) |
+| `loom_right` | 同上，从右侧 | 21，−0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_right.mp4) |
+
+| 决策链，人从左侧逼近 | 120 s 自由漫游 |
+| --- | --- |
+| ![决策链](docs/media/preview/rm_decision.gif) | ![漫游](docs/media/preview/rm_roam.gif) |
+
+每段视频显示地图和射线投射的激光雷达、写入 LC4/LPLC2/LC9 输入格的速率、下行神经元速率、解码器特征与决策，以及整次运行的解码器状态。
+`loom_*` 物体无论机器人做什么都会穿过它：大脑会逃逸，但物体一直跟着，所以这些场景统计碰撞，不算通过。
+
+[![场景](docs/media/realmap/scenarios_brain_vs_blind.png)](docs/media/realmap/scenarios_brain_vs_blind.png)
+[![解码器状态](docs/media/realmap/decoder_states.png)](docs/media/realmap/decoder_states.png)
+
+### 5. 真实地图上的 Stage 6：规划器与果蝇反射（仿真）
+
+| 同一种子、同一个人；左：只有规划器（大脑影子模式），右：大脑可以接管 |
+| --- |
+| ![stage 6](docs/media/preview/rm_stage6.gif) |
+| [mp4](docs/media/realmap/stage6_planner_vs_reflex.mp4) |
+
+规划器组：122.1 s 到达，0 次碰撞。反射组：139.7 s 到达，0 次碰撞，2 次反射接管（大脑控制了 39 个窗口）。相同代码、相同种子的另一次运行在
+180 s 超时，0 次碰撞；见 [已知问题](#已知问题与未解决事项)。
+
+### 6. 真实地图上的操作员控制台（上位机）
+
+| 在真实地图上回放会话的控制台，大脑影子模式（61 s） |
+| --- |
+| ![上位机](docs/media/preview/rm_console.gif) |
+| [mp4](docs/media/realmap/console/console_real_map_brain_shadow.mp4) |
+
+| Home | Mission | Drive | Display |
+| --- | --- | --- | --- |
+| [![home](docs/media/realmap/console/tab_home.png)](docs/media/realmap/console/tab_home.png) | [![mission](docs/media/realmap/console/tab_mission.png)](docs/media/realmap/console/tab_mission.png) | [![drive](docs/media/realmap/console/tab_drive.png)](docs/media/realmap/console/tab_drive.png) | [![display](docs/media/realmap/console/tab_display.png)](docs/media/realmap/console/tab_display.png) |
+
+控制台和服务器是真实的；会话是回放。它的扫描沿一条脚本路径从保存的点云生成，并加入了一个人，因此会话能在真实地图上重定位（定位度 1.00）。
+画面显示：重定位、姿态（站立，激光雷达 0.45 m）、人被提交为地图变化，以及大脑的影子决策（HOLD、EXPLORE、TURN_LEFT/RIGHT、REST、FORWARD）。
+充电锁始终开启；回放没有机器人连接。
+
+### 7. 早期的合成场地素材（仿真、上位机）
+
+[决策链](docs/media/sim/decision_chain_person_front.mp4) · [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) ·
+[上位机回放](docs/media/console/console_replay_brain_shadow.mp4)。合成场地是生成的矩形；这些素材早于真实地图渲染，因验证记录引用了它们而保留。
+
+---
+
+## 状态全景：每种状态在哪里可以看到
+
+| 层 | 状态 | 展示位置 |
+| --- | --- | --- |
+| 导航（真实日志） | `driving`、`waiting`、`stopped`、`avoiding`、`planning`、`idle` | §3 真实巡逻（状态色带、机器人颜色） |
+| 导航（仿真） | `driving`、`arrived`、反射保持 | §5 stage 6 |
+| 导航门控 | 位姿过期 → 等待；绕行（`avoiding`）；航点进度 | §3 原因文字 |
+| 定位 | 在保存的地图上重定位（定位度 1.00）；真实巡逻中的定位度 | §6 上位机；§3 定位度曲线 |
+| 姿态 | 蹲伏、站立 | §1 走廊视频；§3（posture 一行）；§6（Chassis `stand · 0.47 m`） |
+| 地图变化 | 提交新障碍物、清除临时障碍物 | §3 方框；§6 消息 |
+| 解码器（大脑） | FORWARD、EXPLORE、TURN_LEFT、TURN_RIGHT | §4 所有场景 |
+| 解码器（大脑） | FREEZE、ESCAPE_PROGRAM、BACK_OFF、FLEE | §4 人与逼近场景、`roam_open`；§1 stage5_004（实体机器人上的逃逸） |
+| 解码器（大脑） | HOLD、REST | §4 `roam_open`（HOLD）；§6 上位机（HOLD、REST） |
+| 大脑模式 | `off` | §1 导航视频、§3 |
+| 大脑模式 | `shadow` | §5 规划器组、§6 上位机 |
+| 大脑模式 | `drive` | §1 stage5_004（实体机器人） |
+| 大脑模式 | `reflex` | §5 反射组 |
+| 安全 | 充电锁开启 | §6 横幅 |
+| 安全 | 包络削减大脑命令 | §4 决策视频（面板 3 中的 "envelope:"；`loom_*`、`person_right`、`roam_open` 中有削减） |
+
 
 ---
 
@@ -136,8 +233,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 * **建图会话：** *启动 LiDAR* 在计算主机上以子进程运行 KISS-ICP 里程计。只有 IMU 覆盖的扫描会被去畸变；否则等待一小段时间后
   不去畸变地处理。与保存地图的持续差异会作为带版本的障碍物变化（`added` / `removed`）提交，并进入规划。
 * **保存的地图包**（`maps/<名称>/`）：`map.pgm` / `map.yaml`（0.05 m 栅格）、`map.ply`（保存的点云）、高度层
-  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**：
-  它们是真实建筑的平面图。
+  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**；经场地所有者同意，真实场地地图的渲染视图发布在 [视频](#视频) 中。
 * **重定位：** 新会话在基础地图上全局搜索自己的位姿（匹配度 ≥ 0.8，并对最好和次好的候选做比值检验）。操作员的位姿提示可以替代歧义检验，
   适用于距离提示 1 m、朝向 30° 以内的候选。未完成定位前拒绝导航；定位度 < 0.6 持续 1 s 会取消任务。
 * **地图修正：** 行驶时用基础地图修正位姿。连续两次因幅度过大（0.3 m / 5°）而被拒绝、但对齐良好的修正会触发漂移告警；
@@ -332,6 +428,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 | **阶段 6 在真实场地地图上的运行。** 同一份代码、同一个种子，一次超时，一次到达。 | 实时仿真的运行差异，原因未查明。 |
 | **合成录制的重定位。** 按场地栅格生成的录制与保存的点云对不上（约 60 % 的墙面点能对上），因此无法在该地图上重定位。 | 测试数据的限制；真实录制不受影响。 |
 | **机器人端代码不在本仓库中。** 底盘驱动的改动（只报告的 guard、姿态准入）位于机器人的 `~/diablo_ws`；自动建图驱动（"scheme A"）只存在于计算服务器的脚本中。 | 开放的仓库缺口；`robot/` 不能保证与机器人上运行的代码一致。 |
+| **永不停下的逼近物体（`loom_*` 压力测试）。** 在真实地图上大脑会逃逸，但物体一直跟随，`loom_front` 中的碰撞数比盲基线还多（37 对 19）。 | 开放：针对追赶物体的逃逸距离与方向。 |
 | **许可证。** FlyHead 自身代码尚未选定许可证。 | 开放；目前保留所有权利。 |
 
 ---
@@ -423,6 +520,7 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 
 | 文档 | 内容 |
 | --- | --- |
+| `tools/render_real.py`、`tools/render_demo.py` | 所有图和视频的渲染器，输入为日志和地图包 |
 | [docs/demo.md](docs/demo.md) | 每段视频：对应的运行、每个面板背后的代码和日志字段、如何重新生成 |
 | [docs/architecture.md](docs/architecture.md) | 机器、进程、模块边界、每个窗口的数据流 |
 | [docs/reproduce.md](docs/reproduce.md) | 四个层级的复现，从单元测试到实体机器人 |
