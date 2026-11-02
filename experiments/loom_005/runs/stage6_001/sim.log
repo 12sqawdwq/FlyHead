@@ -1,0 +1,6 @@
+reflex 1 timeout
+planner 1 timeout
+reflex 2 timeout
+planner 2 timeout
+reflex 3 timeout
+planner 3 timeout

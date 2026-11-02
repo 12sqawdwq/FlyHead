@@ -1,0 +1,227 @@
+{
+  "status": "COMPLETE_STATEFUL_VIDEO_PROBE",
+  "protocol_sha256": "3c2c3bd5eae4f75722575a0b8f6fff8d58e3464ff5169dfaf99166dd7f34a126",
+  "robot_io": false,
+  "time_basis": "OFFLINE_MEDIA_PTS_NOT_SENSOR_CLOCK",
+  "neural_state_persistence": true,
+  "equivalence": [
+    {
+      "video": "tum_fr1_xyz",
+      "frame_counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "video": "tum_fr1_desk",
+      "frame_counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    }
+  ],
+  "episodes": [
+    {
+      "episode_id": "tum_fr1_xyz__CONTINUOUS__20260923",
+      "video": "tum_fr1_xyz",
+      "arm": "CONTINUOUS",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__CONTINUOUS__20260923.npz",
+      "artifact_sha256": "fcfa600a53d6164782e287b3cd2fca58ccdc081a02bb3e52f0ad5b46b51498c2"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__CONTINUOUS__20260924",
+      "video": "tum_fr1_xyz",
+      "arm": "CONTINUOUS",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__CONTINUOUS__20260924.npz",
+      "artifact_sha256": "33c0e1482da42f039ed41fd9150c4fc6d944d9a2fbb3ee810e1849d96748f203"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__FROZEN_FIRST__20260923",
+      "video": "tum_fr1_xyz",
+      "arm": "FROZEN_FIRST",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__FROZEN_FIRST__20260923.npz",
+      "artifact_sha256": "6bc4e0ae84221b239813c8c79ff43c0f68ff3b25ced87fa3d46ad963d7e8a798"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__FROZEN_FIRST__20260924",
+      "video": "tum_fr1_xyz",
+      "arm": "FROZEN_FIRST",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__FROZEN_FIRST__20260924.npz",
+      "artifact_sha256": "76d755e624b31fef39a2460f6b7285a05414e1e50906de14783a63b7fc17d9a2"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__RESET_STATE__20260923",
+      "video": "tum_fr1_xyz",
+      "arm": "RESET_STATE",
+      "seed": 20260923,
+      "state_resets": 90,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__RESET_STATE__20260923.npz",
+      "artifact_sha256": "adb54ee44095eb5d877b9682e516ee1c897eeff659852f5da6e2d4323695c744"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__RESET_STATE__20260924",
+      "video": "tum_fr1_xyz",
+      "arm": "RESET_STATE",
+      "seed": 20260924,
+      "state_resets": 90,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__RESET_STATE__20260924.npz",
+      "artifact_sha256": "7e24b82c95f63ecf9eade554813ff6ac8208207f04fc7ff2679db16bc97aa529"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__HS_ONLY__20260923",
+      "video": "tum_fr1_xyz",
+      "arm": "HS_ONLY",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__HS_ONLY__20260923.npz",
+      "artifact_sha256": "4f9f83e6a517cf5c7cad1aee542b525d52ec4f62c09098c263df9641b009e24d"
+    },
+    {
+      "episode_id": "tum_fr1_xyz__HS_ONLY__20260924",
+      "video": "tum_fr1_xyz",
+      "arm": "HS_ONLY",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_xyz__HS_ONLY__20260924.npz",
+      "artifact_sha256": "dbb5b444e82593c91ff29ff3620a89228b84e6e330829c8dcb0c79e7311680a7"
+    },
+    {
+      "episode_id": "tum_fr1_desk__CONTINUOUS__20260923",
+      "video": "tum_fr1_desk",
+      "arm": "CONTINUOUS",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__CONTINUOUS__20260923.npz",
+      "artifact_sha256": "d6a706dde34f60f1b1287581df40c706aa13e1df03542cf57f257aa4b2a19d92"
+    },
+    {
+      "episode_id": "tum_fr1_desk__CONTINUOUS__20260924",
+      "video": "tum_fr1_desk",
+      "arm": "CONTINUOUS",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__CONTINUOUS__20260924.npz",
+      "artifact_sha256": "7458168c1d5c832b09dc17f199b8e9f90386772f9e948ad6e3cda2a24da511dd"
+    },
+    {
+      "episode_id": "tum_fr1_desk__FROZEN_FIRST__20260923",
+      "video": "tum_fr1_desk",
+      "arm": "FROZEN_FIRST",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__FROZEN_FIRST__20260923.npz",
+      "artifact_sha256": "6bc4e0ae84221b239813c8c79ff43c0f68ff3b25ced87fa3d46ad963d7e8a798"
+    },
+    {
+      "episode_id": "tum_fr1_desk__FROZEN_FIRST__20260924",
+      "video": "tum_fr1_desk",
+      "arm": "FROZEN_FIRST",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__FROZEN_FIRST__20260924.npz",
+      "artifact_sha256": "76d755e624b31fef39a2460f6b7285a05414e1e50906de14783a63b7fc17d9a2"
+    },
+    {
+      "episode_id": "tum_fr1_desk__RESET_STATE__20260923",
+      "video": "tum_fr1_desk",
+      "arm": "RESET_STATE",
+      "seed": 20260923,
+      "state_resets": 90,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__RESET_STATE__20260923.npz",
+      "artifact_sha256": "3cdb44d07b1288093d240a3440a7c5a006c3979a7526dffba854e6618b05b7fc"
+    },
+    {
+      "episode_id": "tum_fr1_desk__RESET_STATE__20260924",
+      "video": "tum_fr1_desk",
+      "arm": "RESET_STATE",
+      "seed": 20260924,
+      "state_resets": 90,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__RESET_STATE__20260924.npz",
+      "artifact_sha256": "1521455c1b2ebdd87c9f5d8ee962adc8d366d4458503e626812cc1479973e4fd"
+    },
+    {
+      "episode_id": "tum_fr1_desk__HS_ONLY__20260923",
+      "video": "tum_fr1_desk",
+      "arm": "HS_ONLY",
+      "seed": 20260923,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__HS_ONLY__20260923.npz",
+      "artifact_sha256": "a3a2edad38342817d445e787376200d1a59695bd7d1288fc2a5b9debc4d5765f"
+    },
+    {
+      "episode_id": "tum_fr1_desk__HS_ONLY__20260924",
+      "video": "tum_fr1_desk",
+      "arm": "HS_ONLY",
+      "seed": 20260924,
+      "state_resets": 1,
+      "rng_seed_resets": 1,
+      "artifact": "tum_fr1_desk__HS_ONLY__20260924.npz",
+      "artifact_sha256": "65e447037e285bab614ec9afbae66200671c654275e12bcc1bca2e9022592ebc"
+    }
+  ],
+  "resources_start": {
+    "available_bytes": 24832667648,
+    "rss_bytes": 550219776
+  },
+  "cuda_free_at_admission": 6328025088,
+  "gpu_telemetry_before": "6035 MiB, 97 %",
+  "model": {
+    "neurons": 138639,
+    "connections": 15091983,
+    "dt_ms": 0.1,
+    "max_abs_weight_sum": 69948,
+    "parameters": {
+      "tauSyn": 5.0,
+      "tDelay": 1.8,
+      "v0": -52.0,
+      "vReset": -52.0,
+      "vRest": -52.0,
+      "vThreshold": -45.0,
+      "tauMem": 20.0,
+      "tRefrac": 2.2,
+      "scalePoisson": 250,
+      "wScale": 0.275
+    }
+  },
+  "setup_seconds": 11.053329685993958,
+  "result_bytes": 13282882,
+  "resources_end": {
+    "available_bytes": 27601584128,
+    "rss_bytes": 3387101184
+  },
+  "peak_allocated_bytes": 366217216,
+  "peak_reserved_bytes": 419430400
+}

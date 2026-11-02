@@ -1,0 +1,10 @@
+M1 windows 1083 over 89 s; brain 84/85 ms p50/p95; input age 0.18/0.29 s; stale 3.4 %
+M3 ESCAPE in 24.5 % of windows in this interval
+M2 {'episode': 1, 't': 12.4, 'duration_s': 8.6, 'loom_side': 'left', 'reaction_s': 0.41, 'within_1s': True, 'first_state': 'ESCAPE_PROGRAM', 'turn_w': 0.0, 'turn_away': False}
+M2 {'episode': 2, 't': 21.7, 'duration_s': 6.0, 'loom_side': 'left', 'reaction_s': 0.24, 'within_1s': True, 'first_state': 'ESCAPE_PROGRAM', 'turn_w': -0.4, 'turn_away': True}
+M2 {'episode': 3, 't': 29.5, 'duration_s': 4.3, 'loom_side': 'right', 'reaction_s': 0.24, 'within_1s': True, 'first_state': 'ESCAPE', 'turn_w': 0.4, 'turn_away': True}
+M2 {'episode': 4, 't': 34.2, 'duration_s': 4.9, 'loom_side': 'right', 'reaction_s': 0.33, 'within_1s': True, 'first_state': 'ESCAPE', 'turn_w': -0.0, 'turn_away': False}
+M2 {'episode': 5, 't': 39.3, 'duration_s': 5.7, 'loom_side': 'right', 'reaction_s': 0.08, 'within_1s': True, 'first_state': 'ESCAPE_PROGRAM', 'turn_w': 0.4, 'turn_away': True}
+M2 {'episode': 6, 't': 45.6, 'duration_s': 4.8, 'loom_side': 'both', 'reaction_s': 0.23, 'within_1s': True, 'first_state': 'ESCAPE', 'turn_w': -0.0, 'turn_away': False}
+M2 {'episode': 7, 't': 51.5, 'duration_s': 5.6, 'loom_side': 'right', 'reaction_s': 0.0, 'within_1s': True, 'first_state': 'ESCAPE', 'turn_w': -0.0, 'turn_away': False}
+M2 {'episode': 8, 't': 57.3, 'duration_s': 6.6, 'loom_side': 'both', 'reaction_s': 0.31, 'within_1s': True, 'first_state': 'ESCAPE', 'turn_w': 0.2, 'turn_away': False}

@@ -1,0 +1,76 @@
+{
+ "checks": {
+  "no_contacts": true,
+  "no_early_takeover": true,
+  "reaction": true,
+  "arrived": true
+ },
+ "rows": {
+  "planner_1": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": null,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 122.8,
+   "min_person_m": 0.52,
+   "min_wall_m": 0.52,
+   "reflex_count": 0
+  },
+  "planner_2": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": null,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 123.0,
+   "min_person_m": 0.5,
+   "min_wall_m": 0.51,
+   "reflex_count": 0
+  },
+  "planner_3": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": null,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 121.4,
+   "min_person_m": 0.5,
+   "min_wall_m": 0.53,
+   "reflex_count": 0
+  },
+  "reflex_1": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": 3.0,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 160.5,
+   "min_person_m": 0.56,
+   "min_wall_m": 0.38,
+   "reflex_count": 2
+  },
+  "reflex_2": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": 3.0,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 137.5,
+   "min_person_m": 0.44,
+   "min_wall_m": 0.43,
+   "reflex_count": 2
+  },
+  "reflex_3": {
+   "contacts": 0,
+   "takeovers_before": 0,
+   "reaction_s": 2.9,
+   "arrived": true,
+   "result": "arrived: ",
+   "t_end": 144.2,
+   "min_person_m": 0.42,
+   "min_wall_m": 0.44,
+   "reflex_count": 2
+  }
+ }
+}

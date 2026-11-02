@@ -1,0 +1,23 @@
+[
+  {
+    "path": "photos/china.jpg",
+    "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/25dee604bae18205b01548348388baf7a1cdfe0e/sklearn/datasets/images/china.jpg",
+    "commit": "25dee604bae18205b01548348388baf7a1cdfe0e",
+    "bytes": 196653,
+    "sha256": "8378025ad2519d649d02e32bd98990db4ab572357d9f09841c2fbfbb4fefad29"
+  },
+  {
+    "path": "photos/flower.jpg",
+    "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/25dee604bae18205b01548348388baf7a1cdfe0e/sklearn/datasets/images/flower.jpg",
+    "commit": "25dee604bae18205b01548348388baf7a1cdfe0e",
+    "bytes": 142987,
+    "sha256": "a77f6ec41e353afdf8bdff2ea981b2955535d8d83294f8cfa49cf4e423dd5638"
+  },
+  {
+    "path": "photos/README.txt",
+    "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/25dee604bae18205b01548348388baf7a1cdfe0e/sklearn/datasets/images/README.txt",
+    "commit": "25dee604bae18205b01548348388baf7a1cdfe0e",
+    "bytes": 709,
+    "sha256": "3c7ef15a1fa25b998d38c92132378635955aadedc1dcf3e40e63dc0098f6b8f7"
+  }
+]

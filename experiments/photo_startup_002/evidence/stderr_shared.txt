@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/run_experiment_shared.py", line 64, in <module>
+    if free < 5.25*GIB: raise RuntimeError('GPU_FREE_GATE')
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: GPU_FREE_GATE

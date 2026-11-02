@@ -1,0 +1,392 @@
+[
+  {
+    "path": "inference_service/AGENTS.md",
+    "sha256": "7a25c3371e8b0c33b7be4fa882dd68a7efe9f3954c1a2b8bd076247e939b744c",
+    "bytes": 950
+  },
+  {
+    "path": "inference_service/deployments/flywire_lif_001/DOWNLOAD_MANIFEST.json",
+    "sha256": "3d622fdc7029d0c433e4fbeb075fbaa88134918544bd3bd78b9673eb31274839",
+    "bytes": 2078
+  },
+  {
+    "path": "inference_service/deployments/flywire_lif_001/PROTOCOL.md",
+    "sha256": "124890e12b9c08db79de0ad95e252fe89bd96ab475c31cc9a41e500a97c8263b",
+    "bytes": 3288
+  },
+  {
+    "path": "inference_service/deployments/flywire_lif_001/upstream/code/benchmark.py",
+    "sha256": "e18dae9072baf9ee0f0581282641c58864fdc138c6e75b718a542eb27d272874",
+    "bytes": 19369
+  },
+  {
+    "path": "inference_service/deployments/flywire_lif_001/upstream/code/run_pytorch.py",
+    "sha256": "699655db7a56045271ba467268be153d0a3318d4cc4cecc0a13f33e69ce79667",
+    "bytes": 22859
+  },
+  {
+    "path": "inference_service/mappings/loom_005/PLAN.md",
+    "sha256": "4b5afaa86e5a9d24be9d44b6a82cd508598f7da76027e28744a9eddeec14f77f",
+    "bytes": 2565
+  },
+  {
+    "path": "inference_service/mappings/loom_005/PROTOCOL_STAGE3.md",
+    "sha256": "301a06595478465c32b8e46c7321cd03aca8d62da03b016bc6da6cc311557fd0",
+    "bytes": 7102
+  },
+  {
+    "path": "inference_service/mappings/loom_005/PROTOCOL_STAGE4.md",
+    "sha256": "90ea03b7e1d193aa3a9a4aebcec79a33d60357b498c32a0078fb14075f86741b",
+    "bytes": 2926
+  },
+  {
+    "path": "inference_service/mappings/loom_005/PROTOCOL_STAGE5.md",
+    "sha256": "838ce1bd707c83caeb960ef0b46ade20a7da124cfb45447228697ff17363ab87",
+    "bytes": 8893
+  },
+  {
+    "path": "inference_service/mappings/loom_005/PROTOCOL_STAGE6.md",
+    "sha256": "4eaa96e8ce2116700f1b04819e62f87791a46c338830efca3e2c3a4eb9c6ff2e",
+    "bytes": 3684
+  },
+  {
+    "path": "inference_service/mappings/loom_005/RESULTS.md",
+    "sha256": "3da1a738a9d78094946ade57eb1dc164aa5c1b62a0240fd9bc6298b43fae46fe",
+    "bytes": 13907
+  },
+  {
+    "path": "inference_service/mappings/loom_005/brain.py",
+    "sha256": "b6cf022ee40f638ee5827d3d53500b5c2f5082c5be0045ad08e2564ecfecd8ce",
+    "bytes": 3377
+  },
+  {
+    "path": "inference_service/mappings/loom_005/brain_service.py",
+    "sha256": "925b7d84dba82b559a73967e431529ba4209f6652b9e743683a7c88c6ffcbeed",
+    "bytes": 4745
+  },
+  {
+    "path": "inference_service/mappings/loom_005/config/keepin_exclude.json",
+    "sha256": "70b0ced57c3815e42b3215947be886e1804ba318580274c9d4c0a2bbbd8d4547",
+    "bytes": 258
+  },
+  {
+    "path": "inference_service/mappings/loom_005/config/loom_registry.json",
+    "sha256": "8b6cc094cfa15c9c4cc3993d27ed13e3defd0a725b8716738917d3b84baa0d92",
+    "bytes": 67388
+  },
+  {
+    "path": "inference_service/mappings/loom_005/decoder.py",
+    "sha256": "2ac11fd368681b4951824fcae0d0db6d3ac559d1730a5e750885e92d9c11c54b",
+    "bytes": 25285
+  },
+  {
+    "path": "inference_service/mappings/loom_005/envelope.py",
+    "sha256": "b08a87c7cccd9df35c52944871d6e1d815c79ae096549e912b7c58eba45b36f7",
+    "bytes": 3007
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3.sha256",
+    "sha256": "4af2c0a92906c010cce55a58e4f6905768fd38a9a206933e25044ce00201cee5",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_003.sha256",
+    "sha256": "f7789841ed8732ab493f44a37e8ff007fac7a956d284229f39deda71c109b901",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_004.sha256",
+    "sha256": "4b51d89ca5f8ad665d11e264b33e2d5d3fa907df98c42b83b9f9d755984c2f2a",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_005.sha256",
+    "sha256": "728446b946687a7bc9c8e9b91008fc370fb7ea2590199bdaea44f8a40ede0a4a",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_006.sha256",
+    "sha256": "65da7d653c5dfb447b04bc55e71be383e6c7dd8e1f689ff9c1a8e8f076ce9397",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_007.sha256",
+    "sha256": "4296531f6b5a5115c5863c4c58cf3719b66d3ea17c256f367d0d586ce8646738",
+    "bytes": 723
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_008.sha256",
+    "sha256": "ac872ddbdc3850554ac6c238c3d9247a315ac96dd18e79a5fdeaa851430db7c8",
+    "bytes": 886
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_009.sha256",
+    "sha256": "6d0658ae8430ef59444dc5ce2912aed3553f032b249231dc972da56279a95cb2",
+    "bytes": 886
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage3_010.sha256",
+    "sha256": "27f6d9926b7f88852c7db2b1dedc154ef4730a8ea905132422bc92d01db089ff",
+    "bytes": 886
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage4_001.sha256",
+    "sha256": "cac1012775e4811f45de387d6d36a43de89dc484284e97c8ba1356a511c50037",
+    "bytes": 1120
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage4_002.sha256",
+    "sha256": "e3eb52f88528a1a2e75893d24dce44fdee280dfb6e433c7323f5beea666e78ae",
+    "bytes": 1129
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_001.sha256",
+    "sha256": "94a53231640871ec96a7131a0589ed1224ba173d7516d52d0252b58bb2880e29",
+    "bytes": 958
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_002.sha256",
+    "sha256": "83fd5b87a9b6619793b2149795ea48daf0cdb9891cf038f3ff2aa2c823144175",
+    "bytes": 1052
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_003.sha256",
+    "sha256": "5f7ca0ade6061aad54d97424332142f3de62da34b5cc5ece88415f46e1eb3032",
+    "bytes": 1036
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_004.sha256",
+    "sha256": "ef7968d5f1431a7d3bb175f86b1f0421f1b83845aa44f71686310a28d903d47b",
+    "bytes": 1044
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_005.sha256",
+    "sha256": "02dc84f90d673b7d6d4fe71c6c28387757facb7d39530bfbd21fb9b482ff5730",
+    "bytes": 1036
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_006.sha256",
+    "sha256": "3a8d886e6e65e6d98945645b7d86fd8215e3cc31f265849ad75ae1fd66af0e04",
+    "bytes": 1381
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_007.sha256",
+    "sha256": "51c4d427a98115e66e2f1d73f00a4f64177f259983824c671324e47b2eb3de95",
+    "bytes": 1466
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_007_rev0.sha256",
+    "sha256": "1674a7a4f0a20b35618c0e5839c80a003f370589c01691c4518cf245084a8974",
+    "bytes": 1466
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage5_008.sha256",
+    "sha256": "690bfc8186a100376c1abb8d12aea15404759bf9560861cebbf980c1796c94a2",
+    "bytes": 1458
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage6_001.sha256",
+    "sha256": "2c52712d468120add5ebbd2622b760128c0e8dd5f5f90e30cea8dbd4233a8e30",
+    "bytes": 2597
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage6_002.sha256",
+    "sha256": "d351cdb665c8ed185ae2754175d16d7c03ecfacddb1a8f5d452ed324b266ef10",
+    "bytes": 2597
+  },
+  {
+    "path": "inference_service/mappings/loom_005/protocol_lock_stage6_003.sha256",
+    "sha256": "f83fa078813924f4f128799d261b1b53962d2ce5ac4eabca92e707e090c20bdb",
+    "bytes": 2597
+  },
+  {
+    "path": "inference_service/mappings/loom_005/retina.py",
+    "sha256": "3904ad322efb6653cc8463b5230d0822a7b92427fbbc32fb0662109322bef62a",
+    "bytes": 13136
+  },
+  {
+    "path": "inference_service/mappings/loom_005/retina_eval.py",
+    "sha256": "d6e4c2d57be3a0d7ba9e0f4401a761e5aba84f84ecb4f4e27d67d6054395509e",
+    "bytes": 1568
+  },
+  {
+    "path": "inference_service/mappings/loom_005/retina_eval3.py",
+    "sha256": "b068a7dd6d88fe8666fd00b6c3275c0237ff4c7f4641a5354aceaeb39ff64110",
+    "bytes": 1365
+  },
+  {
+    "path": "inference_service/mappings/loom_005/retina_sweep.py",
+    "sha256": "1b3480de3bb307ac79f4321f121fe88857e18f65db9bf934461167ac7f8bb096",
+    "bytes": 1692
+  },
+  {
+    "path": "inference_service/mappings/loom_005/sim_brain.py",
+    "sha256": "d666de07de6466814a655c600951c3d4c0efcdb62d057f5eeaa7124ffdecc962",
+    "bytes": 7381
+  },
+  {
+    "path": "inference_service/mappings/loom_005/sim_reflex.py",
+    "sha256": "eeb1f694650ccd7c353d992a56443683f571b229c926c5e5b3befaf5d5bdbbb4",
+    "bytes": 7242
+  },
+  {
+    "path": "inference_service/mappings/loom_005/sim_report.py",
+    "sha256": "422d6b43d9d7aeb321ed5796e163e5610869ab59d95f016a69ab7ef9e8791929",
+    "bytes": 1106
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage1_curves.py",
+    "sha256": "4f833377c531b09707eb86b2b52bd7dc4ed6e11788c355a4933cef82701bcea2",
+    "bytes": 3023
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage2_brain.py",
+    "sha256": "06ab6c290955d0e010cbd01fbbe3bf0139f81de71df8e87d3efcf9caeaa0d862",
+    "bytes": 1690
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage2_brain3.py",
+    "sha256": "eaa09dc71fccb2c12fa5290f52ac57dca6c3420dfea86cd6dd4e128aa1df6137",
+    "bytes": 2044
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage2_retina.py",
+    "sha256": "590e42faf6770cc85b9638747e56e024e3357ec6a9c08fa5bef4fece383ff2ad",
+    "bytes": 3910
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage3_eval.py",
+    "sha256": "df36872d45ab94864e2fc26f17473b3a251269f22d1ef75474da99d0d842fcc2",
+    "bytes": 2130
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage3_eval7.py",
+    "sha256": "b18f3a7aab863c3de96bfe6200c7ca91ac60a4596f8f23a7739ceaf59a5a409b",
+    "bytes": 3483
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage3_run.sh",
+    "sha256": "7190a4a2baf1714606c3b18320ee665223436084ce96433b7dee60f5310356cf",
+    "bytes": 685
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage3_run2.sh",
+    "sha256": "0f3c5df546441d7ca7507baa5b4898da000f4ee4017501c902d2ecf6fa209833",
+    "bytes": 783
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage4_eval.py",
+    "sha256": "b9741faecd174700360af82a7e9037256b8d2956dc8f17de2442c40067ba24cc",
+    "bytes": 3079
+  },
+  {
+    "path": "inference_service/mappings/loom_005/stage6_eval.py",
+    "sha256": "3a3f74b209e9d5232999cd6e9a13bb9c64b5ad707d1e8aa6214c5e17f9b6cac2",
+    "bytes": 1939
+  },
+  {
+    "path": "inference_service/mappings/loom_005/start_brain_service.sh",
+    "sha256": "0993d032bac18eac5f0bddd93eea6a6294571f991c6c16b99623acf61b611650",
+    "bytes": 832
+  },
+  {
+    "path": "inference_service/mappings/loom_005/tools/build_registry.py",
+    "sha256": "aff225387379875a2d0f6c83892f6e9d4ea4f51fa566529f5628d8d71c801747",
+    "bytes": 2825
+  },
+  {
+    "path": "inference_service/mappings/loom_005/tools/explore.py",
+    "sha256": "00f5d37a048a6dd8d6827ac56ae945f43129becf30cd853c08931853ceab38ba",
+    "bytes": 1895
+  },
+  {
+    "path": "inference_service/mappings/loom_005/tools/wsend.py",
+    "sha256": "6a6aab3178df6dd355e9e69b9e8006e109a00ab24f52c5bccf2e139dbc79e45c",
+    "bytes": 897
+  },
+  {
+    "path": "inference_service/mappings/video_004/vendor/engines.py",
+    "sha256": "918e10a9b73f1401e29059ac38c70b81639cf3f6b4b315697d10890a60b3397b",
+    "bytes": 1781
+  },
+  {
+    "path": "inference_service/mappings/video_004/vendor/event_model.py",
+    "sha256": "71de06b360d7d5b92ca6e27b458a88935ee65f50aa04e204cb7416e219cfddb1",
+    "bytes": 2432
+  },
+  {
+    "path": "inference_service/mappings/video_004/vendor/fly_mapping/__init__.py",
+    "sha256": "65b7dc00c96ee7f3e8b71c0f2272dd01826039e8d9868d62c0ccf5d3fb24e98f",
+    "bytes": 78
+  },
+  {
+    "path": "inference_service/mappings/video_004/vendor/fly_mapping/commands.py",
+    "sha256": "bfb0bdd64431537ea96a367e3767b3e830960fbe8026bf1a65fe2705a841367c",
+    "bytes": 4419
+  },
+  {
+    "path": "inference_service/mappings/video_004/vendor/fly_mapping/vision.py",
+    "sha256": "dea8ba46ab88f9411445c5e85a3a015ce40301e2215fdad8e06af947340e3658",
+    "bytes": 6045
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/brain_link.py",
+    "sha256": "7d4f6cb76b7462740c254174d516430409f726e9e0c30648c01004721edc08b6",
+    "bytes": 14835
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/nav.py",
+    "sha256": "11038b449bcd54ff89b22c9eaf09abaa09f94cbdb9649ce8e25a355bcf5eb7ed",
+    "bytes": 77010
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/navmap.py",
+    "sha256": "038b34dba4b14f2f4d8517165938e999525aef7e1715c335684f05ce880fc6a9",
+    "bytes": 16692
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/planning.py",
+    "sha256": "e44c6b3e6e266d601644fdb1b28bf493588f8f0bf509588020d820113c9b0afe",
+    "bytes": 24664
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/rawlog.py",
+    "sha256": "f6335555a674206bd5e6596ff6c11697e151cda4f18789d1480a74816994250e",
+    "bytes": 1545
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/recording.py",
+    "sha256": "44cbc31219fdb236379aef43e9806156f6304740346d68a380901744d204516d",
+    "bytes": 4828
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/reloc.py",
+    "sha256": "676df3fb934ece27364f3c4abbf4d93f7f9ef6b52b7d66794a618d749fd7cdbd",
+    "bytes": 8218
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/remote_clock.py",
+    "sha256": "940efb9371f811a46c26c4c29953db6384fb64c3e06a7727478ad2c0af1bec38",
+    "bytes": 3247
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/server.py",
+    "sha256": "546e189e8e142e511733621983bcf655fb43847b4dc1a614220f1136f24fa84b",
+    "bytes": 86930
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/slam.py",
+    "sha256": "2ba517b8ccc250bd7af29c8b658d371748538efe9c0389bb329c8150b2756c7f",
+    "bytes": 32046
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/slam_process.py",
+    "sha256": "c1c5a975b926eb74262e2c79100b0ea5832138b1d2df55f23552ffc889f967f8",
+    "bytes": 8885
+  },
+  {
+    "path": "slam/deployments/distributed_control/server/start_remote.sh",
+    "sha256": "06c8edf35f2befbb263cd216e90c21b75ba40c10e9f921b1ff614b10f7a1d3f8",
+    "bytes": 1899
+  }
+]

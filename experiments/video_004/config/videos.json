@@ -1,0 +1,26 @@
+[
+  {
+    "name": "tum_fr1_xyz",
+    "source_sha256": "1820b52939af2a2e7afdf78f6398cfbc7816399c8809b3836a9ba8da9bef8022",
+    "frames_file": "inputs/tum_fr1_xyz.npy",
+    "timestamps_file": "inputs/tum_fr1_xyz_timestamps.json",
+    "preview_file": "inputs/tum_fr1_xyz.mp4",
+    "frames": 80,
+    "sample_hz": 10,
+    "interval_ms": 100,
+    "duration_seconds": 8,
+    "genuine_recorded_video": true
+  },
+  {
+    "name": "tum_fr1_desk",
+    "source_sha256": "3faa0fa667fa95d28ecf0d231c3383ddef8695f391f07d48f484af39de43a854",
+    "frames_file": "inputs/tum_fr1_desk.npy",
+    "timestamps_file": "inputs/tum_fr1_desk_timestamps.json",
+    "preview_file": "inputs/tum_fr1_desk.mp4",
+    "frames": 80,
+    "sample_hz": 10,
+    "interval_ms": 100,
+    "duration_seconds": 8,
+    "genuine_recorded_video": true
+  }
+]

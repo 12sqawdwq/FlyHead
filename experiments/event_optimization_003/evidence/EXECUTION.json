@@ -1,0 +1,9 @@
+{
+  "utc": "2026-09-22T17:03:16.148305+00:00",
+  "pid": 1058799,
+  "status": "COMPLETE",
+  "returncode": 0,
+  "wall_seconds": 22.09240892100206,
+  "stop_reason": null,
+  "observed_peak_rss_bytes": 5189468160
+}

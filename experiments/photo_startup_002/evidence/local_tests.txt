@@ -1,0 +1,13 @@
+test_all_rates_valid_and_only_declared_inputs (test_inputs.InputTests.test_all_rates_valid_and_only_declared_inputs) ... ok
+test_blank_is_zero (test_inputs.InputTests.test_blank_is_zero) ... ok
+test_complete_factorial (test_inputs.InputTests.test_complete_factorial) ... ok
+test_hs_ablation (test_inputs.InputTests.test_hs_ablation) ... ok
+test_lc9_ablation (test_inputs.InputTests.test_lc9_ablation) ... ok
+test_no_direct_behavior_stimulation (test_inputs.InputTests.test_no_direct_behavior_stimulation) ... ok
+test_static_and_motion_separation (test_inputs.InputTests.test_static_and_motion_separation) ... ok
+test_unique_cells (test_inputs.InputTests.test_unique_cells) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.027s
+
+OK

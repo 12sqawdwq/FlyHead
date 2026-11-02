@@ -1,0 +1,9 @@
+{
+  "root": "<SERVER_ROOT>/inference_service/mappings/event_optimization_003",
+  "protocol_sha256": "7597d38d8051a750266f5acdc0f7b23d8b1f72ba6d84a7caa892c7a6e683f582",
+  "result_sha256": "755d32e8cfce28950d8075b794ba10a17ed2d9bb0ebd317d2ff552499597be12",
+  "locked_source_files": 5,
+  "result_files": 16,
+  "closeout_files": 4,
+  "status": "PASS"
+}

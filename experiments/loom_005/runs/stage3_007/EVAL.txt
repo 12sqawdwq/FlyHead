@@ -1,0 +1,6 @@
+C1  wall_ahead    PASS  contacts 0, overrides 0.0%, min clearance 0.89 m
+C2  roam_open     PASS  contacts 0, ESCAPE 2.7% of windows
+C3  person_front  PASS  contacts 0, reaction 0.1 s after onset, distance to person 0.95 -> 1.48 m
+C3  person_left   PASS  contacts 0, reaction 0.2 s after onset, distance to person 1.01 -> 1.06 m
+C3  person_right  FAIL  contacts 0, reaction 2.3 s after onset, distance to person 2.10 -> 0.99 m
+STAGE 3 FAILED

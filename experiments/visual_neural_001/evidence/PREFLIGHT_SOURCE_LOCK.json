@@ -1,0 +1,45 @@
+{
+  "utc": "2026-09-22T15:57:08.590210+00:00",
+  "files": [
+    {
+      "path": "config/mapping_profile.json",
+      "sha256": "e56c09463b159c8fc35f158d6affe042666e08434103a46a369234c23a071486"
+    },
+    {
+      "path": "config/neuron_registry.json",
+      "sha256": "b53d46f20a9b1135dda0fbcc0056a668a4bc9484f3d7056a0107ae16172b7d35"
+    },
+    {
+      "path": "fly_mapping/__init__.py",
+      "sha256": "65b7dc00c96ee7f3e8b71c0f2272dd01826039e8d9868d62c0ccf5d3fb24e98f"
+    },
+    {
+      "path": "fly_mapping/commands.py",
+      "sha256": "bfb0bdd64431537ea96a367e3767b3e830960fbe8026bf1a65fe2705a841367c"
+    },
+    {
+      "path": "fly_mapping/vision.py",
+      "sha256": "dea8ba46ab88f9411445c5e85a3a015ce40301e2215fdad8e06af947340e3658"
+    },
+    {
+      "path": "tools/build_registry.py",
+      "sha256": "47ee925fd8d4684ffbfbc255ed010d60daa30992015468ad77109102762aa113"
+    },
+    {
+      "path": "tools/run_neural_probe.py",
+      "sha256": "1d4cb7b91dde7b30493fc324e17b52b53499c6778ddb1f39eb03447b72032fb0"
+    },
+    {
+      "path": "tools/supervise_probe.py",
+      "sha256": "0a1bfe963f32935a25eb107933a434d80937895d55c905a054740acde88d10b7"
+    },
+    {
+      "path": "tools/validate_results.py",
+      "sha256": "ddf938154bbcd32e4d92511a6d8d43a137560fb77a1b5ba4ebcda387add0e5db"
+    },
+    {
+      "path": "tests/test_mapping.py",
+      "sha256": "a76f5df35cab32511a9788b94450715c0633fafaab671c8f50fb93510f8f2dea"
+    }
+  ]
+}

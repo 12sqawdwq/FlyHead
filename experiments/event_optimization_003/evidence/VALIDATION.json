@@ -1,0 +1,79 @@
+{
+  "status": "PASS_ARTIFACT_VALIDATION",
+  "event_backend_accepted": true,
+  "checks": [
+    {
+      "condition": "ZERO",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "HS_LEFT",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "HS_RIGHT",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "LC9_200",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "china_STATIC_COMBINED",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "flower_STATIC_COMBINED",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    }
+  ],
+  "live_robot_qualified": false
+}

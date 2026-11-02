@@ -1,0 +1,60 @@
+{
+  "scope": "new closeout files; original source and GPU outputs separately locked",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e8df863363a852f17127a37cd0f353a7850b1297b521575ee27537f5c78f15eb",
+      "bytes": 1406
+    },
+    {
+      "path": "MAPPING.zh-CN.md",
+      "sha256": "bb17d09916fd1a5143a5b31495431309f3aec776ead34f1921963d50c7cdee1d",
+      "bytes": 4986
+    },
+    {
+      "path": "RESULTS.md",
+      "sha256": "2940a845aa19426f02e6fdb2300cda30a300e4784704b21ba89562778dbbde11",
+      "bytes": 4645
+    },
+    {
+      "path": "TECHNICAL_NOTE.md",
+      "sha256": "8c4c5cdd02ecfd3b91b1735684c59c5216291e02b3c19026bf4c465d3a2dceb0",
+      "bytes": 1115
+    },
+    {
+      "path": "RESULT_LOCK_v2.json",
+      "sha256": "1a34f9502804270600caf178661fc281f78c16984d71697d6e9a5b3b8746edd9",
+      "bytes": 2587
+    },
+    {
+      "path": "evidence/INDEPENDENT_VALIDATION_LOCAL.json",
+      "sha256": "8997ad6ef85b293584669ff3db16d02429fbd670c7b85ce884c5e83af7957da9",
+      "bytes": 3032
+    },
+    {
+      "path": "evidence/INDEPENDENT_VALIDATION_SERVER.json",
+      "sha256": "ffe582e4177c78205e10b2eee475cc0181dece57f999eee927c4a8742c3a5310",
+      "bytes": 2924
+    },
+    {
+      "path": "evidence/VALIDATION_COMPARISON.json",
+      "sha256": "127cd164148a3ad63292deea7d4f1960d8a1cb019dda246cd46f5947c3e7b8e7",
+      "bytes": 511
+    },
+    {
+      "path": "evidence/PREEXEC_VALIDATION.json",
+      "sha256": "a89cc29be5db6d179577456e0bd12d7e10d50c6ffac1637f4ec58a15634b092f",
+      "bytes": 285
+    },
+    {
+      "path": "evidence/local_validation_stdout.json",
+      "sha256": "8997ad6ef85b293584669ff3db16d02429fbd670c7b85ce884c5e83af7957da9",
+      "bytes": 3032
+    },
+    {
+      "path": "email/MAPPING_RESULT.md",
+      "sha256": "22c743fce0edeba032ade664bf86b6724c17931b7fb33f8536d509771052956f",
+      "bytes": 1733
+    }
+  ]
+}

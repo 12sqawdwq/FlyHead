@@ -1,0 +1,11 @@
+{
+  "status": "PASS_PARSED_FIELDS_AND_COUNTS",
+  "initial_byte_identity_assertion": "FAILED_PRESERVED",
+  "raw_byte_identity": false,
+  "parsed_json_identical": true,
+  "difference": "Windows validator output CRLF versus Linux LF; no numeric or text-field difference",
+  "local_sha256": "8997ad6ef85b293584669ff3db16d02429fbd670c7b85ce884c5e83af7957da9",
+  "server_sha256": "ffe582e4177c78205e10b2eee475cc0181dece57f999eee927c4a8742c3a5310",
+  "model_rerun": false,
+  "locked_code_modified": false
+}

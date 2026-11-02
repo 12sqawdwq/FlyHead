@@ -1,0 +1,484 @@
+{
+  "status": "PASS_TECHNICAL_PROBE",
+  "evidence": "SYNTHETIC_VISUAL_FULL_GRAPH_PROBE",
+  "protocol_sha256": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+  "motion_published": false,
+  "model_graph_cropped": false,
+  "conditions": {
+    "ZERO": {
+      "drive": {
+        "rates_hz": {
+          "720575940628031249": 0.0,
+          "720575940615933919": 0.0,
+          "720575940629153020": 0.0,
+          "720575940629148007": 0.0,
+          "720575940622312965": 0.0,
+          "720575940628743496": 0.0
+        },
+        "valid": true,
+        "features": {},
+        "reason": "zero_input_control"
+      },
+      "neural_counts_by_id": {
+        "720575940629327659": 0,
+        "720575940604737708": 0,
+        "720575940635872101": 0,
+        "720575940627652358": 0,
+        "720575940627787609": 0,
+        "720575940644438551": 0,
+        "720575940622838154": 0,
+        "720575940632499757": 0
+      },
+      "total_spikes": 0,
+      "active_neurons": 0,
+      "input_spikes": 0,
+      "wall_seconds": 0.26908931400976144,
+      "simulated_seconds": 0.1,
+      "model_only_realtime_ratio": 0.3716238244836895,
+      "model_only_exceeds_100ms": true,
+      "offline_shadow_intent": {
+        "session_id": "ZERO",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "model_identity": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+        "state": "HOLD",
+        "shadow_forward_m_s": 0.0,
+        "shadow_yaw_rad_s": 0.0,
+        "publish_allowed": false,
+        "ros_motion_command": null,
+        "hardware_calibration_complete": false,
+        "reason": null,
+        "readout_rates_hz": {
+          "DNa02_left": 0.0,
+          "DNa02_right": 0.0,
+          "DNp09_left": 0.0,
+          "DNp09_right": 0.0,
+          "DNa01_left": 0.0,
+          "DNa01_right": 0.0,
+          "DNp01_left": 0.0,
+          "DNp01_right": 0.0
+        }
+      },
+      "source_clock_or_hardware_admission_tested": false,
+      "counts_file": "ZERO_counts.npy",
+      "counts_sha256": "85733f4d28c59f3368ca1fb90eff8723ea60527620b69432b5bc44d8964aea9e"
+    },
+    "TONIC": {
+      "drive": {
+        "session_id": "TONIC",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "valid": true,
+        "fault_latched": false,
+        "reason": null,
+        "rates_hz": {
+          "720575940628031249": 5.0,
+          "720575940615933919": 5.0,
+          "720575940629153020": 5.0,
+          "720575940629148007": 5.0,
+          "720575940622312965": 5.0,
+          "720575940628743496": 5.0
+        },
+        "features": {
+          "HSN_left": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSN_right": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSE_left": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSE_right": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSS_left": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSS_right": {
+            "horizontal_shift_px": 0,
+            "velocity_px_s": 0.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          }
+        },
+        "encoding": "ENGINEERED_HS_MOTION_PROXY",
+        "motion_output": null
+      },
+      "neural_counts_by_id": {
+        "720575940629327659": 0,
+        "720575940604737708": 0,
+        "720575940635872101": 0,
+        "720575940627652358": 0,
+        "720575940627787609": 0,
+        "720575940644438551": 0,
+        "720575940622838154": 0,
+        "720575940632499757": 0
+      },
+      "total_spikes": 1,
+      "active_neurons": 1,
+      "input_spikes": 1,
+      "wall_seconds": 0.2237120480131125,
+      "simulated_seconds": 0.1,
+      "model_only_realtime_ratio": 0.44700319400830246,
+      "model_only_exceeds_100ms": true,
+      "offline_shadow_intent": {
+        "session_id": "TONIC",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "model_identity": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+        "state": "HOLD",
+        "shadow_forward_m_s": 0.0,
+        "shadow_yaw_rad_s": 0.0,
+        "publish_allowed": false,
+        "ros_motion_command": null,
+        "hardware_calibration_complete": false,
+        "reason": null,
+        "readout_rates_hz": {
+          "DNa02_left": 0.0,
+          "DNa02_right": 0.0,
+          "DNp09_left": 0.0,
+          "DNp09_right": 0.0,
+          "DNa01_left": 0.0,
+          "DNa01_right": 0.0,
+          "DNp01_left": 0.0,
+          "DNp01_right": 0.0
+        }
+      },
+      "source_clock_or_hardware_admission_tested": false,
+      "counts_file": "TONIC_counts.npy",
+      "counts_sha256": "be9b81f72cc446127e9014616f40dd09b80f9dd4c8bcd841e05791bc6981f6aa"
+    },
+    "LEFT_IMAGE_MOTION": {
+      "drive": {
+        "session_id": "LEFT_IMAGE_MOTION",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "valid": true,
+        "fault_latched": false,
+        "reason": null,
+        "rates_hz": {
+          "720575940628031249": 200.0,
+          "720575940615933919": 5.0,
+          "720575940629153020": 200.0,
+          "720575940629148007": 5.0,
+          "720575940622312965": 200.0,
+          "720575940628743496": 5.0
+        },
+        "features": {
+          "HSN_left": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          },
+          "HSN_right": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSE_left": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          },
+          "HSE_right": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSS_left": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          },
+          "HSS_right": {
+            "horizontal_shift_px": -4,
+            "velocity_px_s": -40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          }
+        },
+        "encoding": "ENGINEERED_HS_MOTION_PROXY",
+        "motion_output": null
+      },
+      "neural_counts_by_id": {
+        "720575940629327659": 2,
+        "720575940604737708": 0,
+        "720575940635872101": 0,
+        "720575940627652358": 0,
+        "720575940627787609": 0,
+        "720575940644438551": 0,
+        "720575940622838154": 0,
+        "720575940632499757": 0
+      },
+      "total_spikes": 119,
+      "active_neurons": 37,
+      "input_spikes": 55,
+      "wall_seconds": 0.22293207999609876,
+      "simulated_seconds": 0.1,
+      "model_only_realtime_ratio": 0.4485671151578991,
+      "model_only_exceeds_100ms": true,
+      "offline_shadow_intent": {
+        "session_id": "LEFT_IMAGE_MOTION",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "model_identity": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+        "state": "TURN_LEFT",
+        "shadow_forward_m_s": 0.0,
+        "shadow_yaw_rad_s": 0.06,
+        "publish_allowed": false,
+        "ros_motion_command": null,
+        "hardware_calibration_complete": false,
+        "reason": null,
+        "readout_rates_hz": {
+          "DNa02_left": 20.0,
+          "DNa02_right": 0.0,
+          "DNp09_left": 0.0,
+          "DNp09_right": 0.0,
+          "DNa01_left": 0.0,
+          "DNa01_right": 0.0,
+          "DNp01_left": 0.0,
+          "DNp01_right": 0.0
+        }
+      },
+      "source_clock_or_hardware_admission_tested": false,
+      "counts_file": "LEFT_IMAGE_MOTION_counts.npy",
+      "counts_sha256": "7a03f4eb6fd4338dcc4b13c0008a65d43d0fcce6970fc7956370bb03a1e0ecb8"
+    },
+    "RIGHT_IMAGE_MOTION": {
+      "drive": {
+        "session_id": "RIGHT_IMAGE_MOTION",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "valid": true,
+        "fault_latched": false,
+        "reason": null,
+        "rates_hz": {
+          "720575940628031249": 5.0,
+          "720575940615933919": 200.0,
+          "720575940629153020": 5.0,
+          "720575940629148007": 200.0,
+          "720575940622312965": 5.0,
+          "720575940628743496": 200.0
+        },
+        "features": {
+          "HSN_left": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSN_right": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          },
+          "HSE_left": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSE_right": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          },
+          "HSS_left": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 5.0
+          },
+          "HSS_right": {
+            "horizontal_shift_px": 4,
+            "velocity_px_s": 40.0,
+            "correlation": 1.0,
+            "input_rate_hz": 200.0
+          }
+        },
+        "encoding": "ENGINEERED_HS_MOTION_PROXY",
+        "motion_output": null
+      },
+      "neural_counts_by_id": {
+        "720575940629327659": 0,
+        "720575940604737708": 2,
+        "720575940635872101": 0,
+        "720575940627652358": 0,
+        "720575940627787609": 0,
+        "720575940644438551": 0,
+        "720575940622838154": 0,
+        "720575940632499757": 0
+      },
+      "total_spikes": 117,
+      "active_neurons": 23,
+      "input_spikes": 59,
+      "wall_seconds": 0.2236241219943622,
+      "simulated_seconds": 0.1,
+      "model_only_realtime_ratio": 0.4471789496954229,
+      "model_only_exceeds_100ms": true,
+      "offline_shadow_intent": {
+        "session_id": "RIGHT_IMAGE_MOTION",
+        "sequence": 2,
+        "source_ns": 1100000000,
+        "clock_id": "OFFLINE_FIXTURE_CLOCK",
+        "model_identity": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+        "state": "TURN_RIGHT",
+        "shadow_forward_m_s": 0.0,
+        "shadow_yaw_rad_s": -0.06,
+        "publish_allowed": false,
+        "ros_motion_command": null,
+        "hardware_calibration_complete": false,
+        "reason": null,
+        "readout_rates_hz": {
+          "DNa02_left": 0.0,
+          "DNa02_right": 20.0,
+          "DNp09_left": 0.0,
+          "DNp09_right": 0.0,
+          "DNa01_left": 0.0,
+          "DNa01_right": 0.0,
+          "DNp01_left": 0.0,
+          "DNp01_right": 0.0
+        }
+      },
+      "source_clock_or_hardware_admission_tested": false,
+      "counts_file": "RIGHT_IMAGE_MOTION_counts.npy",
+      "counts_sha256": "de2d06dc241e18cc83de3671dd2dec1e2fbe15d42bdec72fcd9681e79ee67ef5"
+    }
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5090 D v2",
+    "capability": [
+      12,
+      0
+    ],
+    "torch": "2.12.0+cu130",
+    "cuda": "13.0",
+    "arch_list": [
+      "sm_75",
+      "sm_80",
+      "sm_86",
+      "sm_90",
+      "sm_100",
+      "sm_120"
+    ]
+  },
+  "model": {
+    "neurons": 138639,
+    "sparse_entries": 15091983,
+    "dt_ms": 0.1,
+    "parameters": {
+      "tauSyn": 5.0,
+      "tDelay": 1.8,
+      "v0": -52.0,
+      "vReset": -52.0,
+      "vRest": -52.0,
+      "vThreshold": -45.0,
+      "tauMem": 20.0,
+      "tRefrac": 2.2,
+      "scalePoisson": 250,
+      "wScale": 0.275
+    },
+    "dtype": "torch.float32"
+  },
+  "structural_paths": {
+    "HSN_left": {
+      "DNa02_left": 1,
+      "DNa02_right": 2,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 2,
+      "DNa01_right": 3,
+      "DNp01_left": 2,
+      "DNp01_right": 3
+    },
+    "HSN_right": {
+      "DNa02_left": 2,
+      "DNa02_right": 1,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 3,
+      "DNa01_right": 2,
+      "DNp01_left": 2,
+      "DNp01_right": 2
+    },
+    "HSE_left": {
+      "DNa02_left": 1,
+      "DNa02_right": 2,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 2,
+      "DNa01_right": 3,
+      "DNp01_left": 2,
+      "DNp01_right": 2
+    },
+    "HSE_right": {
+      "DNa02_left": 2,
+      "DNa02_right": 1,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 3,
+      "DNa01_right": 2,
+      "DNp01_left": 2,
+      "DNp01_right": 2
+    },
+    "HSS_left": {
+      "DNa02_left": 1,
+      "DNa02_right": 2,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 2,
+      "DNa01_right": 3,
+      "DNp01_left": 2,
+      "DNp01_right": 2
+    },
+    "HSS_right": {
+      "DNa02_left": 2,
+      "DNa02_right": 1,
+      "DNp09_left": 2,
+      "DNp09_right": 2,
+      "DNa01_left": 3,
+      "DNa01_right": 2,
+      "DNp01_left": 2,
+      "DNp01_right": 2
+    }
+  },
+  "structural_path_caveat": "Signed graph reachability only, not neural response or steering direction.",
+  "setup_and_structure_seconds": 4.093711946014082,
+  "peak_cuda_allocated_bytes": 217290752,
+  "peak_cuda_reserved_bytes": 228589568,
+  "resources_end": {
+    "host_available_bytes": 25489739776,
+    "rss_bytes": 2999255040
+  },
+  "behavior_validated": false,
+  "visual_readout_nonzero": true
+}

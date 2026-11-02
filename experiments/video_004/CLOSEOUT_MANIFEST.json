@@ -1,0 +1,65 @@
+{
+  "scope": "new closeout artifacts; locked inputs and results unchanged",
+  "files": [
+    {
+      "path": "RESULTS.md",
+      "sha256": "3bf99a3b2097797d7b95860e57df57391521394c744f9a2e4396f89ce29f1505",
+      "bytes": 5641
+    },
+    {
+      "path": "README.md",
+      "sha256": "35505433a1273a3d21b653310568ea38516631f7cffa3e0f080c08fc4747dd66",
+      "bytes": 1020
+    },
+    {
+      "path": "RESULT_LOCK.json",
+      "sha256": "be2797df2d8f6432616a8be845a0f0c9ebcca3475cbd6c127eca85407ac8c484",
+      "bytes": 6870
+    },
+    {
+      "path": "VIDEO_RESPONSE.html",
+      "sha256": "ccd0dc47b56da95ca6f28e9e0ec4b72d809722e3375ab620d358f43b6693be56",
+      "bytes": 3677693
+    },
+    {
+      "path": "VIDEO_RESPONSE_PREVIEW.png",
+      "sha256": "b267d8d59d27b4289be8bd62c550940f182d7d953b0066ef489da25b5ec4c087",
+      "bytes": 325545
+    },
+    {
+      "path": "FRAME_RESPONSES.csv",
+      "sha256": "2323ca3881141ac9edc8dd247e56b8b532260a4dc99b3f3a54468cc3bd0c3dc2",
+      "bytes": 245621
+    },
+    {
+      "path": "email/RESULT.md",
+      "sha256": "85a90537fda65d9ae30a65019d875f1afb22f05cae521dc2a6d133d837f3f69f",
+      "bytes": 1599
+    },
+    {
+      "path": "tools/build_viewer.py",
+      "sha256": "3f0db1825585913ad842d5b004b992c54f8803f1c318dcdbfab52aefefad4618",
+      "bytes": 11037
+    },
+    {
+      "path": "evidence/VIEWER_VALIDATION.json",
+      "sha256": "0749ee8d5ed35d0532bd4ca7795df70cf2b74e187b569b3d5ca66d7603ceede2",
+      "bytes": 144
+    },
+    {
+      "path": "evidence/DESCRIPTIVE_VIDEO_DIAGNOSTICS.json",
+      "sha256": "9534e158225a42d0430ed5fcec6b9f132112db24f4f17d97cf3f0b745af878f2",
+      "bytes": 628
+    },
+    {
+      "path": "evidence/VALIDATION_SERVER.json",
+      "sha256": "f368c5c8e0dc9204e97cc3ff97165ed513a338f7b7aa62cf3a1582fabfd2a142",
+      "bytes": 12972
+    },
+    {
+      "path": "evidence/PREEXEC_VALIDATION.json",
+      "sha256": "ac64c99b4fb9708ce61c3327a53ded82f693e2f32e7a2f0b45b3bc0397e5f135",
+      "bytes": 150
+    }
+  ]
+}

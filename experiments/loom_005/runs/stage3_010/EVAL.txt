@@ -1,0 +1,6 @@
+C1  wall_ahead    PASS  contacts 0, overrides 0.0%, min clearance 0.88 m
+C2  roam_open     FAIL  contacts 0, defensive onsets 4; REST 0% of windows, bouts [] s; FLEE bouts [9.5, 11.0, 12.5] s
+C3  person_front  PASS  contacts 0, first response ESCAPE_PROGRAM after 0.2 s; escape at 0.2 s, distance 0.94 -> 1.59 m 3 s later; [v6 metric: 1.05 -> 1.59 m 3 s after onset]; FREEZE [0.7] s, FLEE [9.5] s
+C3  person_left   PASS  contacts 0, first response ESCAPE_PROGRAM after 0.5 s; escape at 0.5 s, distance 0.95 -> 1.43 m 3 s later; [v6 metric: 1.16 -> 1.35 m 3 s after onset]; FREEZE [] s, FLEE [9.7] s
+C3  person_right  FAIL  contacts 0, first response BACK_OFF after 1.6 s; escape at 2.3 s, distance 0.92 -> 1.51 m 3 s later; [v6 metric: 2.10 -> 0.98 m 3 s after onset]; FREEZE [] s, FLEE [9.8] s
+STAGE 3 FAILED

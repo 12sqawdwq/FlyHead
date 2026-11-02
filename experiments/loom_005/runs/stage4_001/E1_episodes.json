@@ -1,0 +1,28 @@
+{
+ "t0": 1791638426.34,
+ "t1": 1791638742.6969159,
+ "episodes": [
+  {
+   "episode": 1,
+   "t": 88.9,
+   "duration_s": 33.4,
+   "loom_side": "both",
+   "reaction_s": 0.25,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": -0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 2,
+   "t": 145.8,
+   "duration_s": 6.0,
+   "loom_side": "left",
+   "reaction_s": 0.34,
+   "within_1s": true,
+   "first_state": "ESCAPE_PROGRAM",
+   "turn_w": -0.4,
+   "turn_away": true
+  }
+ ]
+}

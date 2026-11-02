@@ -1,0 +1,134 @@
+{
+  "utc": "2026-09-22T15:59:15.012727+00:00",
+  "scope": "SYNTHETIC_VISUAL_FULL_GRAPH_MAPPING_PROBE_NO_HARDWARE",
+  "local_files": [
+    {
+      "path": "PROTOCOL.md",
+      "sha256": "470bf2198f57e65dfc2fa3413ba66a5efe34099f9a05ae98d98fdfe26ff8d46b"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "8386a734376c1204d82d9e4493e7b11a96e519aae21292ebed838779ffde03af"
+    },
+    {
+      "path": "config/mapping_profile.json",
+      "sha256": "e56c09463b159c8fc35f158d6affe042666e08434103a46a369234c23a071486"
+    },
+    {
+      "path": "config/neuron_registry.json",
+      "sha256": "b53d46f20a9b1135dda0fbcc0056a668a4bc9484f3d7056a0107ae16172b7d35"
+    },
+    {
+      "path": "fly_mapping/__init__.py",
+      "sha256": "65b7dc00c96ee7f3e8b71c0f2272dd01826039e8d9868d62c0ccf5d3fb24e98f"
+    },
+    {
+      "path": "fly_mapping/commands.py",
+      "sha256": "bfb0bdd64431537ea96a367e3767b3e830960fbe8026bf1a65fe2705a841367c"
+    },
+    {
+      "path": "fly_mapping/vision.py",
+      "sha256": "dea8ba46ab88f9411445c5e85a3a015ce40301e2215fdad8e06af947340e3658"
+    },
+    {
+      "path": "tools/build_registry.py",
+      "sha256": "47ee925fd8d4684ffbfbc255ed010d60daa30992015468ad77109102762aa113"
+    },
+    {
+      "path": "tools/run_neural_probe.py",
+      "sha256": "1d4cb7b91dde7b30493fc324e17b52b53499c6778ddb1f39eb03447b72032fb0"
+    },
+    {
+      "path": "tools/supervise_probe.py",
+      "sha256": "0a1bfe963f32935a25eb107933a434d80937895d55c905a054740acde88d10b7"
+    },
+    {
+      "path": "tools/validate_results.py",
+      "sha256": "ddf938154bbcd32e4d92511a6d8d43a137560fb77a1b5ba4ebcda387add0e5db"
+    },
+    {
+      "path": "tests/test_mapping.py",
+      "sha256": "a76f5df35cab32511a9788b94450715c0633fafaab671c8f50fb93510f8f2dea"
+    },
+    {
+      "path": "evidence/supplemental_files_Supplemental_file1_neuron_annotations.tsv",
+      "sha256": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be"
+    },
+    {
+      "path": "evidence/2025_Completeness_783.csv",
+      "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+    },
+    {
+      "path": "evidence/ANNOTATION_SOURCES.json",
+      "sha256": "6b233fb0ffa7cdca6cc9ddca00b41b51b10d47067816f5f6955f17d508bf0302"
+    }
+  ],
+  "external_files": [
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/run_pytorch.py",
+      "sha256": "699655db7a56045271ba467268be153d0a3318d4cc4cecc0a13f33e69ce79667"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/benchmark.py",
+      "sha256": "e18dae9072baf9ee0f0581282641c58864fdc138c6e75b718a542eb27d272874"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/data/2025_Completeness_783.csv",
+      "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/data/2025_Connectivity_783.parquet",
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/evidence/ASSET_ENV_INVENTORY.json",
+      "sha256": "d5ddde65d456b15b40ff7418c5ec3eb373a382d5216190a818c1f0f34c4234a2"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/bin/python",
+      "sha256": "cb7356ff4d997137a063aa492e9fc377138e299166a1e8e4666ce3c8b67e96e1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/version.py",
+      "sha256": "a3f452de1a9dcee621e34adc683ab3b1e20836c6a69e40df94f93de21fced9df"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_python.so",
+      "sha256": "4e9f7bce51a488590af06e57d24b6bbffdc51557081e31e7fc6a79d78f721120"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cuda_linalg.so",
+      "sha256": "be2ecddebc2127739dd531de39f397e2a5022d0d5f6829d7fbfcda682e5ee5f9"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so",
+      "sha256": "c70c6cd4a5764953c1ab555cc397a29d836ac816cf68ecea3b488b6b847d1ae5"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_global_deps.so",
+      "sha256": "22e580920a618c7c45e2aae16752f0bdfb23ae9a31150ae8f4066bbe8020e104"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cpu.so",
+      "sha256": "1ddb374d691b38b381ff88d35a12b0f69cd283430513f625522dd12d3b2be91f"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_nvshmem.so",
+      "sha256": "b03bba0a4942c0fe786f659d85befd88cdfcd8651627c32e31e25b69717278f1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/nvidia/cu13/lib/libcusparse.so.12",
+      "sha256": "09339f848f60bb1111a61ee0fe91ed0c25132b7ff63298244d7ac14e61b58466"
+    }
+  ],
+  "environment_identity_scope": "version inventory and listed critical runtime files; not an exhaustive OS image",
+  "seed": 20260922,
+  "conditions": [
+    "ZERO",
+    "TONIC",
+    "LEFT_IMAGE_MOTION",
+    "RIGHT_IMAGE_MOTION"
+  ],
+  "simulated_ms_per_condition": 100,
+  "wall_limit_seconds": 300
+}

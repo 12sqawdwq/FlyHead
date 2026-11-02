@@ -1,0 +1,1166 @@
+[
+  {
+    "name": "ZERO",
+    "rates_file": "inputs/ZERO_rates.npy",
+    "metadata": {
+      "kind": "zero"
+    }
+  },
+  {
+    "name": "HS_LEFT",
+    "rates_file": "inputs/HS_LEFT_rates.npy",
+    "metadata": {
+      "kind": "HS_control"
+    }
+  },
+  {
+    "name": "HS_RIGHT",
+    "rates_file": "inputs/HS_RIGHT_rates.npy",
+    "metadata": {
+      "kind": "HS_control"
+    }
+  },
+  {
+    "name": "LC9_50",
+    "rates_file": "inputs/LC9_50_rates.npy",
+    "metadata": {
+      "kind": "LC9_dose_control"
+    }
+  },
+  {
+    "name": "LC9_100",
+    "rates_file": "inputs/LC9_100_rates.npy",
+    "metadata": {
+      "kind": "LC9_dose_control"
+    }
+  },
+  {
+    "name": "LC9_200",
+    "rates_file": "inputs/LC9_200_rates.npy",
+    "metadata": {
+      "kind": "LC9_dose_control"
+    }
+  },
+  {
+    "name": "china_STATIC_HS_ONLY",
+    "rates_file": "inputs/china_STATIC_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "STATIC",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_STATIC_LC9_ONLY",
+    "rates_file": "inputs/china_STATIC_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "STATIC",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_STATIC_COMBINED",
+    "rates_file": "inputs/china_STATIC_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "STATIC",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_LEFT_HS_ONLY",
+    "rates_file": "inputs/china_LEFT_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "LEFT",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_LEFT_LC9_ONLY",
+    "rates_file": "inputs/china_LEFT_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "LEFT",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_LEFT_COMBINED",
+    "rates_file": "inputs/china_LEFT_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "LEFT",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_RIGHT_HS_ONLY",
+    "rates_file": "inputs/china_RIGHT_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "RIGHT",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_RIGHT_LC9_ONLY",
+    "rates_file": "inputs/china_RIGHT_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "RIGHT",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "china_RIGHT_COMBINED",
+    "rates_file": "inputs/china_RIGHT_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "china",
+      "direction": "RIGHT",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.27174559235572815,
+        "right": 0.3135472536087036
+      },
+      "lc9_rates_hz": {
+        "left": 200.0,
+        "right": 200.0
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_STATIC_HS_ONLY",
+    "rates_file": "inputs/flower_STATIC_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "STATIC",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_STATIC_LC9_ONLY",
+    "rates_file": "inputs/flower_STATIC_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "STATIC",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_STATIC_COMBINED",
+    "rates_file": "inputs/flower_STATIC_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "STATIC",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 0,
+          "velocity_px_s": 0.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_LEFT_HS_ONLY",
+    "rates_file": "inputs/flower_LEFT_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "LEFT",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_LEFT_LC9_ONLY",
+    "rates_file": "inputs/flower_LEFT_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "LEFT",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_LEFT_COMBINED",
+    "rates_file": "inputs/flower_LEFT_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "LEFT",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": -4,
+          "velocity_px_s": -40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": -4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_RIGHT_HS_ONLY",
+    "rates_file": "inputs/flower_RIGHT_HS_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "RIGHT",
+      "branch": "HS_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_RIGHT_LC9_ONLY",
+    "rates_file": "inputs/flower_RIGHT_LC9_ONLY_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "RIGHT",
+      "branch": "LC9_ONLY",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "flower_RIGHT_COMBINED",
+    "rates_file": "inputs/flower_RIGHT_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "flower",
+      "direction": "RIGHT",
+      "branch": "COMBINED",
+      "hs_valid": true,
+      "hs_reason": null,
+      "hs_features": {
+        "HSN_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSN_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSE_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSE_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        },
+        "HSS_left": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 5.0
+        },
+        "HSS_right": {
+          "horizontal_shift_px": 4,
+          "velocity_px_s": 40.0,
+          "correlation": 1.0,
+          "input_rate_hz": 200.0
+        }
+      },
+      "static_contrast": {
+        "left": 0.21377035975456238,
+        "right": 0.2130386382341385
+      },
+      "lc9_rates_hz": {
+        "left": 171.0162878036499,
+        "right": 170.4309105873108
+      },
+      "artificial_shift_px": 4,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  },
+  {
+    "name": "blank_STATIC_COMBINED",
+    "rates_file": "inputs/blank_STATIC_COMBINED_rates.npy",
+    "metadata": {
+      "kind": "photo_proxy",
+      "photo": "blank",
+      "direction": "STATIC",
+      "branch": "COMBINED",
+      "hs_valid": false,
+      "hs_reason": "insufficient_motion_texture",
+      "hs_features": {},
+      "static_contrast": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "lc9_rates_hz": {
+        "left": 0.0,
+        "right": 0.0
+      },
+      "artificial_shift_px": 0,
+      "source_is_video": false,
+      "motion_publish_allowed": false
+    }
+  }
+]

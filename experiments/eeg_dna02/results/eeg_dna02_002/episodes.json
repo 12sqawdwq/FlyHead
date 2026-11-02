@@ -1,0 +1,1349 @@
+[
+  {
+    "tag": "baseline",
+    "seed": 101,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 101,
+    "left_hz": 10.0,
+    "right_hz": 0.0,
+    "mean_w": 0.16,
+    "mean_v": 0.0,
+    "dna_left": 10.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 101,
+    "left_hz": 0.0,
+    "right_hz": 10.0,
+    "mean_w": -0.16,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 8.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 101,
+    "left_hz": 20.0,
+    "right_hz": 0.0,
+    "mean_w": 0.22000000000000003,
+    "mean_v": 0.0,
+    "dna_left": 19.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 101,
+    "left_hz": 0.0,
+    "right_hz": 20.0,
+    "mean_w": -0.26000000000000006,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 17.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 101,
+    "left_hz": 40.0,
+    "right_hz": 0.0,
+    "mean_w": 0.34,
+    "mean_v": 0.0,
+    "dna_left": 36.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 101,
+    "left_hz": 0.0,
+    "right_hz": 40.0,
+    "mean_w": -0.38,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 39.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 101,
+    "left_hz": 80.0,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 68.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 101,
+    "left_hz": 0.0,
+    "right_hz": 80.0,
+    "mean_w": -0.4,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 83.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "baseline",
+    "seed": 202,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 202,
+    "left_hz": 10.0,
+    "right_hz": 0.0,
+    "mean_w": 0.12000000000000002,
+    "mean_v": 0.0,
+    "dna_left": 6.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 202,
+    "left_hz": 0.0,
+    "right_hz": 10.0,
+    "mean_w": -0.16,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 9.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 202,
+    "left_hz": 20.0,
+    "right_hz": 0.0,
+    "mean_w": 0.26,
+    "mean_v": 0.0,
+    "dna_left": 15.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 202,
+    "left_hz": 0.0,
+    "right_hz": 20.0,
+    "mean_w": -0.30000000000000004,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 21.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 202,
+    "left_hz": 40.0,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 39.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 202,
+    "left_hz": 0.0,
+    "right_hz": 40.0,
+    "mean_w": -0.4,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 42.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 202,
+    "left_hz": 80.0,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 78.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 202,
+    "left_hz": 0.0,
+    "right_hz": 80.0,
+    "mean_w": -0.4,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 85.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "baseline",
+    "seed": 303,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 303,
+    "left_hz": 10.0,
+    "right_hz": 0.0,
+    "mean_w": 0.14,
+    "mean_v": 0.0,
+    "dna_left": 7.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 303,
+    "left_hz": 0.0,
+    "right_hz": 10.0,
+    "mean_w": -0.14,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 7.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 303,
+    "left_hz": 20.0,
+    "right_hz": 0.0,
+    "mean_w": 0.24000000000000005,
+    "mean_v": 0.0,
+    "dna_left": 16.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 303,
+    "left_hz": 0.0,
+    "right_hz": 20.0,
+    "mean_w": -0.3000000000000001,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 22.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 303,
+    "left_hz": 40.0,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 40.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 303,
+    "left_hz": 0.0,
+    "right_hz": 40.0,
+    "mean_w": -0.38,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 36.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "left",
+    "seed": 303,
+    "left_hz": 80.0,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 73.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ]
+  },
+  {
+    "tag": "right",
+    "seed": 303,
+    "left_hz": 0.0,
+    "right_hz": 80.0,
+    "mean_w": -0.4,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 89.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ]
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1000,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 0,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.5852083563804626,
+      0.41479167342185974
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1001,
+    "left_hz": 29.49615478515625,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 35.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 1,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.8687019348144531,
+      0.13129806518554688
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1002,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 2,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.3636445105075836,
+      0.6363555192947388
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1003,
+    "left_hz": 24.41825270652771,
+    "right_hz": 0.0,
+    "mean_w": 0.34,
+    "mean_v": 0.0,
+    "dna_left": 26.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 3,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.8052281737327576,
+      0.19477185606956482
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1004,
+    "left_hz": 39.277192652225494,
+    "right_hz": 0.0,
+    "mean_w": 0.33999999999999997,
+    "mean_v": 0.0,
+    "dna_left": 48.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 4,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9909648895263672,
+      0.009035073220729828
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1005,
+    "left_hz": 28.94981026649475,
+    "right_hz": 0.0,
+    "mean_w": 0.30000000000000004,
+    "mean_v": 0.0,
+    "dna_left": 23.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 5,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.8618726134300232,
+      0.13812735676765442
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1006,
+    "left_hz": 31.654122173786163,
+    "right_hz": 0.0,
+    "mean_w": 0.28,
+    "mean_v": 0.0,
+    "dna_left": 22.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 6,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.8956764936447144,
+      0.10432343930006027
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1007,
+    "left_hz": 39.111474342644215,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 32.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 7,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.988893449306488,
+      0.011106590740382671
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1008,
+    "left_hz": 39.39477922394872,
+    "right_hz": 0.0,
+    "mean_w": 0.33999999999999997,
+    "mean_v": 0.0,
+    "dna_left": 35.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 8,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9924347400665283,
+      0.007565259467810392
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1009,
+    "left_hz": 38.41652914881706,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 25.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 9,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9802066087722778,
+      0.019793380051851273
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1010,
+    "left_hz": 0.0,
+    "right_hz": 32.794571816921234,
+    "mean_w": -0.3,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 20.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ],
+    "trial_index": 10,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.09006784111261368,
+      0.9099321365356445
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1011,
+    "left_hz": 37.902080714702606,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 41.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 11,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9737759828567505,
+      0.026223964989185333
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1012,
+    "left_hz": 28.19864273071289,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 27.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 12,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.8524830341339111,
+      0.14751696586608887
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1013,
+    "left_hz": 39.54504173249006,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 38.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 13,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9943130016326904,
+      0.005686958320438862
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1014,
+    "left_hz": 0.0,
+    "right_hz": 39.45272874087095,
+    "mean_w": -0.4,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 44.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ],
+    "trial_index": 14,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.006840896792709827,
+      0.9931591153144836
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1015,
+    "left_hz": 32.88725554943085,
+    "right_hz": 0.0,
+    "mean_w": 0.26,
+    "mean_v": 0.0,
+    "dna_left": 17.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 15,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9110907316207886,
+      0.0889093428850174
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1016,
+    "left_hz": 34.18762564659119,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 32.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 16,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.927345335483551,
+      0.07265469431877136
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1017,
+    "left_hz": 37.79926858842373,
+    "right_hz": 0.0,
+    "mean_w": 0.34,
+    "mean_v": 0.0,
+    "dna_left": 34.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 17,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9724908471107483,
+      0.027509132400155067
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1018,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 18,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.7746171355247498,
+      0.22538281977176666
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1019,
+    "left_hz": 36.40014633536339,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 45.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 19,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9550018310546875,
+      0.0449981726706028
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1020,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 20,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.5759576559066772,
+      0.42404237389564514
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1021,
+    "left_hz": 0.0,
+    "right_hz": 35.69567382335663,
+    "mean_w": -0.36,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 44.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ],
+    "trial_index": 21,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.05380411446094513,
+      0.9461959600448608
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1022,
+    "left_hz": 0.0,
+    "right_hz": 36.763104647397995,
+    "mean_w": -0.36,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 28.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ],
+    "trial_index": 22,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.04046120122075081,
+      0.9595388174057007
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1023,
+    "left_hz": 39.72836723551154,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 38.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 23,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9966045618057251,
+      0.0033953809179365635
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1024,
+    "left_hz": 35.56507006287575,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 32.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 24,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.9445633888244629,
+      0.0554366372525692
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1025,
+    "left_hz": 34.38874036073685,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 38.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 25,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.9298592209815979,
+      0.07014071196317673
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1026,
+    "left_hz": 33.464159071445465,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 33.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 26,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.9183019995689392,
+      0.08169802278280258
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1027,
+    "left_hz": 27.527798414230347,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 28.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 27,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.8440974950790405,
+      0.15590253472328186
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1028,
+    "left_hz": 38.44962231814861,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 48.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 28,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.980620265007019,
+      0.01937970705330372
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1029,
+    "left_hz": 0.0,
+    "right_hz": 27.47588574886322,
+    "mean_w": -0.33999999999999997,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 40.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_RIGHT"
+    ],
+    "trial_index": 29,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.15655143558979034,
+      0.8434485793113708
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1030,
+    "left_hz": 34.55763280391693,
+    "right_hz": 0.0,
+    "mean_w": 0.34,
+    "mean_v": 0.0,
+    "dna_left": 38.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD",
+      "TURN_LEFT"
+    ],
+    "trial_index": 30,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.9319704174995422,
+      0.06802959740161896
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1031,
+    "left_hz": 0.0,
+    "right_hz": 33.50006192922592,
+    "mean_w": -0.36,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 27.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_RIGHT"
+    ],
+    "trial_index": 31,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.08124921470880508,
+      0.9187507629394531
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1032,
+    "left_hz": 39.68544282019138,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 41.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 32,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.996068000793457,
+      0.003931930288672447
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1033,
+    "left_hz": 39.45189129561186,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 49.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 33,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9931486248970032,
+      0.006851342506706715
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1034,
+    "left_hz": 38.80698826164007,
+    "right_hz": 0.0,
+    "mean_w": 0.4,
+    "mean_v": 0.0,
+    "dna_left": 46.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 34,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.9850873947143555,
+      0.014912688173353672
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1035,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 35,
+    "truth": 1,
+    "prediction": 0,
+    "probabilities": [
+      0.7597416043281555,
+      0.24025842547416687
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1036,
+    "left_hz": 38.79794105887413,
+    "right_hz": 0.0,
+    "mean_w": 0.38,
+    "mean_v": 0.0,
+    "dna_left": 39.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 36,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9849742650985718,
+      0.015025738626718521
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1037,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 37,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.24892652034759521,
+      0.7510734796524048
+    ],
+    "gate": "uncertain"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1038,
+    "left_hz": 37.83314384520054,
+    "right_hz": 0.0,
+    "mean_w": 0.36,
+    "mean_v": 0.0,
+    "dna_left": 26.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "TURN_LEFT"
+    ],
+    "trial_index": 38,
+    "truth": 0,
+    "prediction": 0,
+    "probabilities": [
+      0.9729142785072327,
+      0.0270856823772192
+    ],
+    "gate": "accepted"
+  },
+  {
+    "tag": "eeg_replay",
+    "seed": 1039,
+    "left_hz": 0.0,
+    "right_hz": 0.0,
+    "mean_w": 0.0,
+    "mean_v": 0.0,
+    "dna_left": 0.0,
+    "dna_right": 0.0,
+    "off_max_abs_w": 0.0,
+    "off_last_w": -0.0,
+    "states": [
+      "HOLD"
+    ],
+    "trial_index": 39,
+    "truth": 1,
+    "prediction": 1,
+    "probabilities": [
+      0.30863311886787415,
+      0.6913669109344482
+    ],
+    "gate": "uncertain"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "FAIL",
+  "protocol_sha256": "f27766c85d7498bea78f427124acec7109dc61346cd5cad75a7e93d209b21e6a",
+  "resource_mode": "SHARED_GPU_CONTENDED_NOT_EXCLUSIVE_BENCHMARK",
+  "robot_io": false,
+  "real_video": false,
+  "graph_cropped": false,
+  "trials": [],
+  "resources_start": {
+    "available_bytes": 23206793216,
+    "rss_bytes": 500858880
+  },
+  "cuda_free_bytes_at_admission": 5499650048,
+  "gpu_telemetry_before": "5245 MiB, 96 %",
+  "error": "RuntimeError('GPU_FREE_GATE')"
+}

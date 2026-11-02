@@ -1,0 +1,9 @@
+{
+  "utc": "2026-09-22T16:44:29.918499+00:00",
+  "pid": 1030979,
+  "status": "FAILED",
+  "returncode": 1,
+  "wall_seconds": 2.002125333994627,
+  "stop_reason": null,
+  "observed_peak_rss_bytes": 603033600
+}

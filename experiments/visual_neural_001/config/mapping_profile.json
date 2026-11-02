@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "mode": "SHADOW_ONLY",
+  "publish_motion": false,
+  "vision": {
+    "width": 160,
+    "height": 120,
+    "max_shift_px": 4,
+    "minimum_patch_std": 0.02,
+    "minimum_correlation": 0.25,
+    "baseline_hz": 5.0,
+    "max_rate_hz": 200.0,
+    "max_source_age_ms": 100,
+    "max_frame_gap_ms": 200,
+    "preferred_dx_sign_left": -1,
+    "preferred_dx_sign_right": 1,
+    "band_types": ["HSN", "HSE", "HSS"],
+    "receptive_fields_reconstructed": false
+  },
+  "readout": {
+    "forward_type": "DNp09",
+    "turn_type": "DNa02",
+    "diagnostic_only_types": ["DNa01", "DNp01"],
+    "reference_rate_hz": 100.0,
+    "max_forward_m_s": 0.10,
+    "max_yaw_rad_s": 0.30,
+    "turn_state_threshold_rad_s": 0.015,
+    "candidate_positive_yaw_from_left_minus_right": true,
+    "robot_yaw_sign_calibrated": false,
+    "max_source_age_ms": 100
+  },
+  "commands": {
+    "representation": "BodyVelocityIntent",
+    "states": ["HOLD", "EXPLORE", "TURN_LEFT", "TURN_RIGHT", "FAULT_HOLD"],
+    "automatic_rearm": false,
+    "jump_allowed": false,
+    "body_mode_change_allowed": false,
+    "ros_publisher_implemented": false
+  }
+}

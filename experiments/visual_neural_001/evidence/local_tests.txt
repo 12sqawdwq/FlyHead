@@ -1,0 +1,37 @@
+test_command_bounds (test_mapping.CommandTests.test_command_bounds) ... ok
+test_diagnostics_do_not_trigger_motion_or_jump (test_mapping.CommandTests.test_diagnostics_do_not_trigger_motion_or_jump) ... ok
+test_excessive_or_noninteger_count_rejected (test_mapping.CommandTests.test_excessive_or_noninteger_count_rejected) ... ok
+test_forward_from_bilateral_p9_only (test_mapping.CommandTests.test_forward_from_bilateral_p9_only) ... ok
+test_invalid_visual_input_suppresses_intent (test_mapping.CommandTests.test_invalid_visual_input_suppresses_intent) ... ok
+test_left_dna02_yields_candidate_left_turn (test_mapping.CommandTests.test_left_dna02_yields_candidate_left_turn) ... ok
+test_missing_readout_is_not_zero (test_mapping.CommandTests.test_missing_readout_is_not_zero) ... ok
+test_repeated_result_rejected (test_mapping.CommandTests.test_repeated_result_rejected) ... ok
+test_right_dna02_yields_candidate_right_turn (test_mapping.CommandTests.test_right_dna02_yields_candidate_right_turn) ... ok
+test_silent_brain_holds (test_mapping.CommandTests.test_silent_brain_holds) ... ok
+test_stale_result_latches (test_mapping.CommandTests.test_stale_result_latches) ... ok
+test_unhealthy_brain_holds (test_mapping.CommandTests.test_unhealthy_brain_holds) ... ok
+test_wrong_model_identity_latches (test_mapping.CommandTests.test_wrong_model_identity_latches) ... ok
+test_alias_collision_not_merged (test_mapping.RegistryTests.test_alias_collision_not_merged) ... ok
+test_exact_registry_size (test_mapping.RegistryTests.test_exact_registry_size) ... ok
+test_ids_preserve_integer_precision_as_strings (test_mapping.RegistryTests.test_ids_preserve_integer_precision_as_strings) ... ok
+test_no_direct_action_neuron_stimulation (test_mapping.RegistryTests.test_no_direct_action_neuron_stimulation) ... ok
+test_p9_sides_follow_annotation_not_upstream_comment (test_mapping.RegistryTests.test_p9_sides_follow_annotation_not_upstream_comment) ... ok
+test_clock_mismatch_latches (test_mapping.VisionTests.test_clock_mismatch_latches) ... ok
+test_complex_image_latches (test_mapping.VisionTests.test_complex_image_latches) ... ok
+test_first_frame_is_not_motion_evidence (test_mapping.VisionTests.test_first_frame_is_not_motion_evidence) ... ok
+test_left_moving_image_uses_declared_proxy (test_mapping.VisionTests.test_left_moving_image_uses_declared_proxy) ... ok
+test_long_frame_gap_latches (test_mapping.VisionTests.test_long_frame_gap_latches) ... ok
+test_nan_image_latches (test_mapping.VisionTests.test_nan_image_latches) ... ok
+test_no_texture_is_not_free_space (test_mapping.VisionTests.test_no_texture_is_not_free_space) ... ok
+test_ragged_array_latches (test_mapping.VisionTests.test_ragged_array_latches) ... ok
+test_repeated_sequence_latches (test_mapping.VisionTests.test_repeated_sequence_latches) ... ok
+test_rgb_input (test_mapping.VisionTests.test_rgb_input) ... ok
+test_right_moving_image_uses_declared_proxy (test_mapping.VisionTests.test_right_moving_image_uses_declared_proxy) ... ok
+test_stale_frame_fault_does_not_recover (test_mapping.VisionTests.test_stale_frame_fault_does_not_recover) ... ok
+test_static_texture_is_explicit_tonic_input (test_mapping.VisionTests.test_static_texture_is_explicit_tonic_input) ... ok
+test_wrong_shape_latches (test_mapping.VisionTests.test_wrong_shape_latches) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.013s
+
+OK

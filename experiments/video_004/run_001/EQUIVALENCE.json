@@ -1,0 +1,26 @@
+[
+  {
+    "video": "tum_fr1_xyz",
+    "frame_counts_exact": true,
+    "state_errors": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pass": true
+  },
+  {
+    "video": "tum_fr1_desk",
+    "frame_counts_exact": true,
+    "state_errors": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pass": true
+  }
+]

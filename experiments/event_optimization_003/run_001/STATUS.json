@@ -1,0 +1,161 @@
+{
+  "status": "COMPLETE_TECHNICAL_VALIDATION",
+  "scope": "FULL_GRAPH_EXACT_EVENT_PROPAGATION",
+  "protocol_sha256": "7597d38d8051a750266f5acdc0f7b23d8b1f72ba6d84a7caa892c7a6e683f582",
+  "robot_io": false,
+  "equivalence": [
+    {
+      "condition": "ZERO",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "HS_LEFT",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "HS_RIGHT",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "LC9_200",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "china_STATIC_COMBINED",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    },
+    {
+      "condition": "flower_STATIC_COMBINED",
+      "counts_exact": true,
+      "state_errors": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pass": true
+    }
+  ],
+  "gpu_telemetry_before": "23415 MiB, 16 %",
+  "triton": "3.7.0",
+  "timing_scope": "SHARED_GPU_DESCRIPTIVE_ONLY",
+  "integer_exactness_guard": {
+    "max_absolute_postsynaptic_weight_sum": 69948,
+    "upper_bound": 16777215,
+    "all_weights_integral": true
+  },
+  "jit_and_capture_seconds": 0.8520759210077813,
+  "setup_seconds": 5.52668740900117,
+  "accepted": true,
+  "timings": {
+    "HS_LEFT": {
+      "seconds": {
+        "reference": [
+          0.22248558099090587,
+          0.2223068780003814,
+          0.22294134199910332,
+          0.22268523699312937,
+          0.22307842900045216,
+          0.22287744500499684,
+          0.22268583699769806,
+          0.22239780001109466,
+          0.2226112489879597,
+          0.22288463100267109
+        ],
+        "event": [
+          0.045968305988935754,
+          0.04599365500325803,
+          0.04567266099911649,
+          0.045563610998215154,
+          0.045722785012912937,
+          0.045861651000450365,
+          0.04579053400084376,
+          0.04600247900816612,
+          0.04593549101264216,
+          0.045885034996899776
+        ]
+      },
+      "reference_median_ms": 222.6855369954137,
+      "event_median_ms": 45.87334299867507,
+      "median_speedup": 4.854355981900979
+    },
+    "LC9_200": {
+      "seconds": {
+        "reference": [
+          0.2225786600029096,
+          0.22268015499867033,
+          0.2226328039978398,
+          0.22286717699898873,
+          0.22282534699479584,
+          0.22268780300510116,
+          0.22272762999637052,
+          0.22261218199855648,
+          0.22297200100729242,
+          0.22249839500000235
+        ],
+        "event": [
+          0.04793763000634499,
+          0.0478769640030805,
+          0.04834937800478656,
+          0.0478651000012178,
+          0.047777222003787756,
+          0.04775636199337896,
+          0.04809578000276815,
+          0.0475271120085381,
+          0.04786487799719907,
+          0.04792284900031518
+        ]
+      },
+      "reference_median_ms": 222.68397900188575,
+      "event_median_ms": 47.87103200214915,
+      "median_speedup": 4.651748034007047
+    }
+  },
+  "peak_allocated_bytes": 367880704,
+  "peak_reserved_bytes": 423624704,
+  "resources_end": {
+    "available": 26290384896,
+    "rss": 3128950784
+  }
+}

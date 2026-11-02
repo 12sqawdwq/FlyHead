@@ -1,0 +1,20 @@
+Weights not found, constructing COO weight matrix...
+Traceback (most recent call last):
+  File "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/run_pytorch.py", line 299, in get_weights
+    with open(coo_path, 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/eeg_dna02_20261013/source/inference_service/mappings/loom_005/cache/weight_coo.pkl'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/eeg_dna02_20261013/experiments/eeg_dna02/run_offline.py", line 32, in <module>
+    brain=Brain(reg,indices,LOOM/'cache',zero_refractory_indices=original)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/eeg_dna02_20261013/source/inference_service/mappings/loom_005/brain.py", line 28, in __init__
+    cpu = backend.get_weights(str(BASE / 'upstream/data/2025_Connectivity_783.parquet'),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/run_pytorch.py", line 311, in get_weights
+    with open(coo_path, 'wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/eeg_dna02_20261013/source/inference_service/mappings/loom_005/cache/weight_coo.pkl'

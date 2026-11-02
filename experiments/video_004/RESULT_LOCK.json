@@ -1,0 +1,178 @@
+{
+  "scope": "16_STATEFUL_VIDEO_EPISODES_1440_WINDOWS",
+  "protocol_sha256": "3c2c3bd5eae4f75722575a0b8f6fff8d58e3464ff5169dfaf99166dd7f34a126",
+  "files": [
+    {
+      "path": "run_001/EQUIVALENCE.json",
+      "sha256": "836df3721e6a3e3f0c475075350ce240da22c96083b233f23d58ba3a4c2b9c13"
+    },
+    {
+      "path": "run_001/equivalence_tum_fr1_desk_event.npz",
+      "sha256": "3de8a678478b52a3854c7a76b82e3477287dfe1d3e294cf383eaa8a9568fc33a"
+    },
+    {
+      "path": "run_001/equivalence_tum_fr1_desk_reference.npz",
+      "sha256": "3de8a678478b52a3854c7a76b82e3477287dfe1d3e294cf383eaa8a9568fc33a"
+    },
+    {
+      "path": "run_001/equivalence_tum_fr1_xyz_event.npz",
+      "sha256": "38966000ac13e8b5be7d4012f1b0ba03fecbe75de6853c482a889c735eee66c6"
+    },
+    {
+      "path": "run_001/equivalence_tum_fr1_xyz_reference.npz",
+      "sha256": "38966000ac13e8b5be7d4012f1b0ba03fecbe75de6853c482a889c735eee66c6"
+    },
+    {
+      "path": "run_001/RESULTS.json",
+      "sha256": "09bce35d3bfb336e43c16ea2c24c50ed8c4b1e01ae9e5019391a714cdcc64452"
+    },
+    {
+      "path": "run_001/STATUS.json",
+      "sha256": "09bce35d3bfb336e43c16ea2c24c50ed8c4b1e01ae9e5019391a714cdcc64452"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__CONTINUOUS__20260923.json",
+      "sha256": "58010d14f5d7455865ce9b529478c0311f4425451e35400f0acbd2cf4b8dfc77"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__CONTINUOUS__20260923.npz",
+      "sha256": "d6a706dde34f60f1b1287581df40c706aa13e1df03542cf57f257aa4b2a19d92"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__CONTINUOUS__20260924.json",
+      "sha256": "1575aea4140001b341e8a2bbb0c2ff4f2bb184815b1f5e00cf7892874a8abceb"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__CONTINUOUS__20260924.npz",
+      "sha256": "7458168c1d5c832b09dc17f199b8e9f90386772f9e948ad6e3cda2a24da511dd"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__FROZEN_FIRST__20260923.json",
+      "sha256": "d6a0751a666d49f03a23e78bf4e85a7af98e0d4a0e2b6ef587bc7b6246724487"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__FROZEN_FIRST__20260923.npz",
+      "sha256": "6bc4e0ae84221b239813c8c79ff43c0f68ff3b25ced87fa3d46ad963d7e8a798"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__FROZEN_FIRST__20260924.json",
+      "sha256": "8c4319437a306a0ba974e322832e205c2df8b21c0fd11722ce085799881e822b"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__FROZEN_FIRST__20260924.npz",
+      "sha256": "76d755e624b31fef39a2460f6b7285a05414e1e50906de14783a63b7fc17d9a2"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__HS_ONLY__20260923.json",
+      "sha256": "5242314f03fcb7ba004871170b78506be1477f1ad7f4ba118d521ba0216ece0c"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__HS_ONLY__20260923.npz",
+      "sha256": "a3a2edad38342817d445e787376200d1a59695bd7d1288fc2a5b9debc4d5765f"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__HS_ONLY__20260924.json",
+      "sha256": "a94efc70b8fff4458196ddcb64d17023ad61e531258ca31e874edcdbc7cf2ee0"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__HS_ONLY__20260924.npz",
+      "sha256": "65e447037e285bab614ec9afbae66200671c654275e12bcc1bca2e9022592ebc"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__RESET_STATE__20260923.json",
+      "sha256": "d4684dd73e6d1829ab7fb691ab683669152950df3625b45baf6f8c6e27508f8f"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__RESET_STATE__20260923.npz",
+      "sha256": "3cdb44d07b1288093d240a3440a7c5a006c3979a7526dffba854e6618b05b7fc"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__RESET_STATE__20260924.json",
+      "sha256": "d208ac0ed5f1e42ac53deb5f43f2ec36af206ace63ac5f7f0dece43d02051484"
+    },
+    {
+      "path": "run_001/tum_fr1_desk__RESET_STATE__20260924.npz",
+      "sha256": "1521455c1b2ebdd87c9f5d8ee962adc8d366d4458503e626812cc1479973e4fd"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__CONTINUOUS__20260923.json",
+      "sha256": "c25ad2071eff142e94f516b5b559805045e74022bb7d3f4e4036fcb94c1d6877"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__CONTINUOUS__20260923.npz",
+      "sha256": "fcfa600a53d6164782e287b3cd2fca58ccdc081a02bb3e52f0ad5b46b51498c2"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__CONTINUOUS__20260924.json",
+      "sha256": "8edff4c7108d71d20acefe728add3b0b34836a23f904e7f44d444af3b25f81a1"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__CONTINUOUS__20260924.npz",
+      "sha256": "33c0e1482da42f039ed41fd9150c4fc6d944d9a2fbb3ee810e1849d96748f203"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__FROZEN_FIRST__20260923.json",
+      "sha256": "100c3ecf4aeb8d462a3ffb5ea65e2b027187b5621d92992fe8884d3bedcae2d1"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__FROZEN_FIRST__20260923.npz",
+      "sha256": "6bc4e0ae84221b239813c8c79ff43c0f68ff3b25ced87fa3d46ad963d7e8a798"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__FROZEN_FIRST__20260924.json",
+      "sha256": "4c01f515696295345e63b1e61e6c8b6b79c0f7f7f65263bccdeb364ef218753b"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__FROZEN_FIRST__20260924.npz",
+      "sha256": "76d755e624b31fef39a2460f6b7285a05414e1e50906de14783a63b7fc17d9a2"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__HS_ONLY__20260923.json",
+      "sha256": "de220632539db10ac2083f29eba1725a57568a2988088d9ff4d01204bad59d2d"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__HS_ONLY__20260923.npz",
+      "sha256": "4f9f83e6a517cf5c7cad1aee542b525d52ec4f62c09098c263df9641b009e24d"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__HS_ONLY__20260924.json",
+      "sha256": "453873da2946f205b3efaf9f6610f60ce5d4bf66eeab4c5824200ff3a047dcfe"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__HS_ONLY__20260924.npz",
+      "sha256": "dbb5b444e82593c91ff29ff3620a89228b84e6e330829c8dcb0c79e7311680a7"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__RESET_STATE__20260923.json",
+      "sha256": "2e2af195efbe6427a9e31b14d30a63bf767b650bacb516dffbb3ab3dbc7767bf"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__RESET_STATE__20260923.npz",
+      "sha256": "adb54ee44095eb5d877b9682e516ee1c897eeff659852f5da6e2d4323695c744"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__RESET_STATE__20260924.json",
+      "sha256": "461c1ef8542698a089dcfa3f3fe0d4d9fa88871749d7e92f6f69202bad6fac9c"
+    },
+    {
+      "path": "run_001/tum_fr1_xyz__RESET_STATE__20260924.npz",
+      "sha256": "7e24b82c95f63ecf9eade554813ff6ac8208207f04fc7ff2679db16bc97aa529"
+    },
+    {
+      "path": "evidence/VALIDATION.json",
+      "sha256": "f368c5c8e0dc9204e97cc3ff97165ed513a338f7b7aa62cf3a1582fabfd2a142"
+    },
+    {
+      "path": "evidence/EXECUTION.json",
+      "sha256": "4bc57b3886ead68672c347391f1e74dc4a44f82fd78df24b9db8c601d9fa8d25"
+    },
+    {
+      "path": "evidence/server_tests.txt",
+      "sha256": "a1e7f0e392010f82429d93b20bcfe5adbff1b654a18c2fd83696c291238c4ab3"
+    },
+    {
+      "path": "evidence/local_tests.txt",
+      "sha256": "66e6c31aa91f6484523b0f0027b0660fd936be497bdff5576e221faf0bee9ed5"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "node_id": "TA_kwDOAAzd1toAKGI4YzQzNWI2YzU4MGNmMTA2ODVmZjAxMmQzZDFlN2I3ODZkNWYyNDQ",
+  "sha": "b8c435b6c580cf10685ff012d3d1e7b786d5f244",
+  "url": "https://api.github.com/repos/scikit-learn/scikit-learn/git/tags/b8c435b6c580cf10685ff012d3d1e7b786d5f244",
+  "tagger": {
+    "name": "J\u00e9r\u00e9mie du Boisberranger",
+    "email": "jeremie@probabl.ai",
+    "date": "2025-09-08T10:10:34Z"
+  },
+  "object": {
+    "sha": "25dee604bae18205b01548348388baf7a1cdfe0e",
+    "type": "commit",
+    "url": "https://api.github.com/repos/scikit-learn/scikit-learn/git/commits/25dee604bae18205b01548348388baf7a1cdfe0e"
+  },
+  "tag": "1.7.2",
+  "message": "scikit-learn 1.7.2\n",
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}

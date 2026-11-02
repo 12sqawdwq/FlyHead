@@ -1,0 +1,25 @@
+{
+  "scope": "closeout additions; raw outputs and source separately locked",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "1b736ec64b096c4d6b339a8dbb6a8047f1e87d2861978841a8348d396b525fde",
+      "bytes": 722
+    },
+    {
+      "path": "RESULTS.md",
+      "sha256": "47ea8792d08a1619f2ccd900dd968eae614a9cadd6ec71aa8a62aa771724c45a",
+      "bytes": 3286
+    },
+    {
+      "path": "RESULT_LOCK.json",
+      "sha256": "755d32e8cfce28950d8075b794ba10a17ed2d9bb0ebd317d2ff552499597be12",
+      "bytes": 2468
+    },
+    {
+      "path": "email/RESULT.md",
+      "sha256": "dac043a4becddaa00061ed43bd193a42f01564e4c588ab187064ce899785fca1",
+      "bytes": 1156
+    }
+  ]
+}

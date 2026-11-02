@@ -1,0 +1,13 @@
+test_first_frame_not_motion_evidence (test_stream.StreamTests.test_first_frame_not_motion_evidence) ... ok
+test_frozen_motion_zero_after_priming (test_stream.StreamTests.test_frozen_motion_zero_after_priming) ... ok
+test_hs_only_removes_lc9 (test_stream.StreamTests.test_hs_only_removes_lc9) ... ok
+test_no_input_tail (test_stream.StreamTests.test_no_input_tail) ... ok
+test_rates_are_bounded (test_stream.StreamTests.test_rates_are_bounded) ... ok
+test_real_frames_and_causal_timestamps (test_stream.StreamTests.test_real_frames_and_causal_timestamps) ... ok
+test_reset_and_continuous_inputs_identical (test_stream.StreamTests.test_reset_and_continuous_inputs_identical) ... ok
+test_target_set (test_stream.StreamTests.test_target_set) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.107s
+
+OK

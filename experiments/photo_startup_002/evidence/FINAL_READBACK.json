@@ -1,0 +1,9 @@
+{
+  "root": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002",
+  "protocol_sha256": "2f760a33bb5fa12f1967b5abdfa14e509002c5e9e938988860c4b337e91883a1",
+  "result_sha256": "45fe219205dc6b5ab8489cbd9f4b92b1da2434969d887dfce2533f2dc8aa8a9f",
+  "locked_source_files": 57,
+  "result_files": 164,
+  "closeout_files": 12,
+  "status": "PASS"
+}

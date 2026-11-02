@@ -1,0 +1,440 @@
+{
+  "utc": "2026-09-22T17:56:18.761461+00:00",
+  "scope": "REAL_VIDEO_STATEFUL_OFFLINE_NEURAL_PROBE",
+  "local_files": [
+    {
+      "path": "run.py",
+      "sha256": "90b6ab86a31dc6a219f0e53d5d7ccce58334544f0aeaed5db0ac001b3b3fec3d"
+    },
+    {
+      "path": "stream_input.py",
+      "sha256": "29f1ff4d8be7e2db44bb4a065c012eea8d020735dd902c381429ff84ce47eb12"
+    },
+    {
+      "path": "supervise.py",
+      "sha256": "2af84d81dd91b6cb94eaf7bddfe3347a4dc87dbf90323d3d82063ac8868cd2a2"
+    },
+    {
+      "path": "validate.py",
+      "sha256": "de49039b467eceeb7e27ddcef4b4ef4476648d7de163815b3494ae99687a7b44"
+    },
+    {
+      "path": "PROTOCOL.md",
+      "sha256": "d5ebfc7d9be85a953e788d511ee4fbb45bb200ef7ab14459272fdc988c9b9ee3"
+    },
+    {
+      "path": "config/mapping_profile.json",
+      "sha256": "e56c09463b159c8fc35f158d6affe042666e08434103a46a369234c23a071486"
+    },
+    {
+      "path": "config/readout_registry.json",
+      "sha256": "b53d46f20a9b1135dda0fbcc0056a668a4bc9484f3d7056a0107ae16172b7d35"
+    },
+    {
+      "path": "config/startup_registry.json",
+      "sha256": "8bd4f8d97952a0dfefe0217fc9920398ae0898b1d72dd1f5dd3ab13b93347996"
+    },
+    {
+      "path": "config/videos.json",
+      "sha256": "8d90f79f0c1d578d2ed0c5f34df15edeb741b86d2a9d373006a0db9d1dd82dac"
+    },
+    {
+      "path": "inputs/tum_fr1_desk.mp4",
+      "sha256": "2e64db4a8c7c2401031e3fd970c2a6050191b0f4ec17543bf0b52df70b274ecf"
+    },
+    {
+      "path": "inputs/tum_fr1_desk.npy",
+      "sha256": "e9a3280761b0a5b6d7cfcdf1950d2246e9beee2cb7df2fee6b945e5a57e905bb"
+    },
+    {
+      "path": "inputs/tum_fr1_desk_frame0.png",
+      "sha256": "3028bba78f98cd41ea75dc86079bcb608b5a38e283e269aba6ef21f69352c927"
+    },
+    {
+      "path": "inputs/tum_fr1_desk_frame30.png",
+      "sha256": "962ec3889fe521049ec8430627f5f51d08dbdef6ca9d3583eb91d315fe62fa7b"
+    },
+    {
+      "path": "inputs/tum_fr1_desk_frame60.png",
+      "sha256": "e861628523957b2f3402f06ea6a62db40f8724975d7e2626310c605812d4ec29"
+    },
+    {
+      "path": "inputs/tum_fr1_desk_timestamps.json",
+      "sha256": "b79e0e52149479abcdfb73332cff3aec5b634df2a8f783ece4d69e52c1d0dde9"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz.mp4",
+      "sha256": "0447a7fb24e140a976231f9eb3de11fd53cebeb3333f054fdd7f23e9ef656d5a"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz.npy",
+      "sha256": "f740ba97d0cbb4e7fc18794adaff0056f38578a5b8a87db00680be6ec42558cb"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz_frame0.png",
+      "sha256": "0be8f496ca8a0dd809c30da2c718e23cac9befbe7604f62e448c29d145d1d83b"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz_frame30.png",
+      "sha256": "1a71089e95c74247915219066f1bf8706f372a7902dbfe837cdda75c0d83d793"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz_frame60.png",
+      "sha256": "522dbeb103812b2cbd52aa92440dd87eb75c189601fe51d696ae8e15f9ffcb05"
+    },
+    {
+      "path": "inputs/tum_fr1_xyz_timestamps.json",
+      "sha256": "b79e0e52149479abcdfb73332cff3aec5b634df2a8f783ece4d69e52c1d0dde9"
+    },
+    {
+      "path": "vendor/engines.py",
+      "sha256": "918e10a9b73f1401e29059ac38c70b81639cf3f6b4b315697d10890a60b3397b"
+    },
+    {
+      "path": "vendor/event_model.py",
+      "sha256": "71de06b360d7d5b92ca6e27b458a88935ee65f50aa04e204cb7416e219cfddb1"
+    },
+    {
+      "path": "vendor/fly_mapping/__init__.py",
+      "sha256": "65b7dc00c96ee7f3e8b71c0f2272dd01826039e8d9868d62c0ccf5d3fb24e98f"
+    },
+    {
+      "path": "vendor/fly_mapping/commands.py",
+      "sha256": "bfb0bdd64431537ea96a367e3767b3e830960fbe8026bf1a65fe2705a841367c"
+    },
+    {
+      "path": "vendor/fly_mapping/vision.py",
+      "sha256": "dea8ba46ab88f9411445c5e85a3a015ce40301e2215fdad8e06af947340e3658"
+    },
+    {
+      "path": "tools/prepare_video.py",
+      "sha256": "96c51a6bba17c0de673e28edf52c2a9ea6d466eee509899655c307edb3288d4c"
+    },
+    {
+      "path": "tests/test_stream.py",
+      "sha256": "a77b517d4982f40a1c166b4279531170ee1243d974f75e6fc3ea70e43708c259"
+    },
+    {
+      "path": "videos/tum_fr1_desk.avi",
+      "sha256": "3faa0fa667fa95d28ecf0d231c3383ddef8695f391f07d48f484af39de43a854"
+    },
+    {
+      "path": "videos/tum_fr1_xyz.avi",
+      "sha256": "1820b52939af2a2e7afdf78f6398cfbc7816399c8809b3836a9ba8da9bef8022"
+    },
+    {
+      "path": "evidence/VIDEO_SOURCES.json",
+      "sha256": "e488fb451af1025a6a214000250e23a3f776786ad8bcaeeddd3b43867e740b4b"
+    }
+  ],
+  "external_files": [
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/run_pytorch.py",
+      "sha256": "699655db7a56045271ba467268be153d0a3318d4cc4cecc0a13f33e69ce79667"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/code/benchmark.py",
+      "sha256": "e18dae9072baf9ee0f0581282641c58864fdc138c6e75b718a542eb27d272874"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/data/2025_Completeness_783.csv",
+      "sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/upstream/data/2025_Connectivity_783.parquet",
+      "sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/evidence/ASSET_ENV_INVENTORY.json",
+      "sha256": "d5ddde65d456b15b40ff7418c5ec3eb373a382d5216190a818c1f0f34c4234a2"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/bin/python",
+      "sha256": "cb7356ff4d997137a063aa492e9fc377138e299166a1e8e4666ce3c8b67e96e1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/version.py",
+      "sha256": "a3f452de1a9dcee621e34adc683ab3b1e20836c6a69e40df94f93de21fced9df"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_python.so",
+      "sha256": "4e9f7bce51a488590af06e57d24b6bbffdc51557081e31e7fc6a79d78f721120"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cuda_linalg.so",
+      "sha256": "be2ecddebc2127739dd531de39f397e2a5022d0d5f6829d7fbfcda682e5ee5f9"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so",
+      "sha256": "c70c6cd4a5764953c1ab555cc397a29d836ac816cf68ecea3b488b6b847d1ae5"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_global_deps.so",
+      "sha256": "22e580920a618c7c45e2aae16752f0bdfb23ae9a31150ae8f4066bbe8020e104"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_cpu.so",
+      "sha256": "1ddb374d691b38b381ff88d35a12b0f69cd283430513f625522dd12d3b2be91f"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/torch/lib/libtorch_nvshmem.so",
+      "sha256": "b03bba0a4942c0fe786f659d85befd88cdfcd8651627c32e31e25b69717278f1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/nvidia/cu13/lib/libcusparse.so.12",
+      "sha256": "09339f848f60bb1111a61ee0fe91ed0c25132b7ff63298244d7ac14e61b58466"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/visual_neural_001/protocol_lock.json",
+      "sha256": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/PROTOCOL.md",
+      "sha256": "ec9275968a10f77d225b99e2f12c6f8bd928d167969a6f1605a1204abd4d81ec"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/config/conditions.json",
+      "sha256": "b66cfe484d665da2f08c434147b1629a22307057438e1df633abf3469b3fbdca"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/config/mapping_profile.json",
+      "sha256": "e56c09463b159c8fc35f158d6affe042666e08434103a46a369234c23a071486"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/config/model_labels.json",
+      "sha256": "e312b604135373e96c0549581e6e3dc0b7783288483e588954f5a8542d861194"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/config/readout_registry.json",
+      "sha256": "b53d46f20a9b1135dda0fbcc0056a668a4bc9484f3d7056a0107ae16172b7d35"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/config/startup_registry.json",
+      "sha256": "8bd4f8d97952a0dfefe0217fc9920398ae0898b1d72dd1f5dd3ab13b93347996"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/HS_LEFT_rates.npy",
+      "sha256": "1502c333e919a6e28603e8028b5623041adf20519532b91e22c2e8712584c4c1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/HS_RIGHT_rates.npy",
+      "sha256": "099ec8a56e04c45c88614c0ecdbe2a2425e3f5284be3270398b87a7c68d55a84"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/LC9_100_rates.npy",
+      "sha256": "6305cf891313c1b8127b06b4d4d0f4dcc6a10abc17c3f707e9aad72af0fc9fdb"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/LC9_200_rates.npy",
+      "sha256": "daff223acba4205d5d4eb5abba666d3304fecb72f6381deba04cf3fa78d4642c"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/LC9_50_rates.npy",
+      "sha256": "f56b7b06bfc93d70ab53938220feb94bbb1bc17735beec7bfb23c52b3c3e756b"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/ZERO_rates.npy",
+      "sha256": "1d51ba60b52e121b98edb16291f0876d1e1ecb38114921ec031cebe642975454"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/blank_STATIC_COMBINED_rates.npy",
+      "sha256": "1d51ba60b52e121b98edb16291f0876d1e1ecb38114921ec031cebe642975454"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/blank_resized.png",
+      "sha256": "b0eafe18a07032d5edeb4b038edb64ae6fde785e635c842fbea3b5317f464070"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_LEFT_COMBINED_rates.npy",
+      "sha256": "2eea1834c4d43bed819187d813a89dd24987b52b27ab16070e7d23f8cd60b307"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_LEFT_HS_ONLY_rates.npy",
+      "sha256": "1502c333e919a6e28603e8028b5623041adf20519532b91e22c2e8712584c4c1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_LEFT_LC9_ONLY_rates.npy",
+      "sha256": "daff223acba4205d5d4eb5abba666d3304fecb72f6381deba04cf3fa78d4642c"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_RIGHT_COMBINED_rates.npy",
+      "sha256": "43e5a1ab260ccdb71a871f8985a53b7b1c639d2e8a7b02ab6c609ceeac857f12"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_RIGHT_HS_ONLY_rates.npy",
+      "sha256": "099ec8a56e04c45c88614c0ecdbe2a2425e3f5284be3270398b87a7c68d55a84"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_RIGHT_LC9_ONLY_rates.npy",
+      "sha256": "daff223acba4205d5d4eb5abba666d3304fecb72f6381deba04cf3fa78d4642c"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_STATIC_COMBINED_rates.npy",
+      "sha256": "99f63fb7780c46d681f8a5bd0b6c22de70995593802548467a681a4905444d35"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_STATIC_HS_ONLY_rates.npy",
+      "sha256": "bfbf86473b0965cc9ea4e668a2892ab6ccc96b30783317f8329da6e481ec1fd7"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_STATIC_LC9_ONLY_rates.npy",
+      "sha256": "daff223acba4205d5d4eb5abba666d3304fecb72f6381deba04cf3fa78d4642c"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/china_resized.png",
+      "sha256": "e932b4fef00aba8c79ab77201a9b9297f7decb034b75b763cda1d95a984de504"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_LEFT_COMBINED_rates.npy",
+      "sha256": "4509359dcd6e8d49315faa9c84342a17ebba3b3661b801abc2f68ea93f7ae6b5"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_LEFT_HS_ONLY_rates.npy",
+      "sha256": "1502c333e919a6e28603e8028b5623041adf20519532b91e22c2e8712584c4c1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_LEFT_LC9_ONLY_rates.npy",
+      "sha256": "7600245aca1c3e78bd395cf823a6eac6bf57c301359874156b219dff32d0ffb1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_RIGHT_COMBINED_rates.npy",
+      "sha256": "e74c0d317dcccf307f46e27a06861c9a456949231b60cbb7b8bc76ddb2cb3d20"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_RIGHT_HS_ONLY_rates.npy",
+      "sha256": "099ec8a56e04c45c88614c0ecdbe2a2425e3f5284be3270398b87a7c68d55a84"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_RIGHT_LC9_ONLY_rates.npy",
+      "sha256": "7600245aca1c3e78bd395cf823a6eac6bf57c301359874156b219dff32d0ffb1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_STATIC_COMBINED_rates.npy",
+      "sha256": "9b437a83ba29cd45cba7ab0887c6f233e3e50abe32dddc24e372b7e7abd47384"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_STATIC_HS_ONLY_rates.npy",
+      "sha256": "bfbf86473b0965cc9ea4e668a2892ab6ccc96b30783317f8329da6e481ec1fd7"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_STATIC_LC9_ONLY_rates.npy",
+      "sha256": "7600245aca1c3e78bd395cf823a6eac6bf57c301359874156b219dff32d0ffb1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/inputs/flower_resized.png",
+      "sha256": "01c4bfbbeb7a38a7ba618508b72c1967d88c7654a35e3bbfe244058c199498e1"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/prepare_inputs.py",
+      "sha256": "b88995bcaee27459745e01be958b6abffaa369afb2d6fd5c11d7861623f86c30"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/run_experiment.py",
+      "sha256": "ca64234f353a4a844c723f96b37765da249119d73b2ac7d7af03efd6d1609051"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/supervise.py",
+      "sha256": "1b839e00958ec6970b56872f688fa59c7871f6e31415c2de04d9f7012f37cb45"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/validate_results.py",
+      "sha256": "b4158c9f7e4a707074d9ee6ab20f98c9d7a107d24e7d711b83ede55dd1ccca18"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/service/engines.py",
+      "sha256": "918e10a9b73f1401e29059ac38c70b81639cf3f6b4b315697d10890a60b3397b"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/vendor/fly_mapping/__init__.py",
+      "sha256": "65b7dc00c96ee7f3e8b71c0f2272dd01826039e8d9868d62c0ccf5d3fb24e98f"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/vendor/fly_mapping/commands.py",
+      "sha256": "bfb0bdd64431537ea96a367e3767b3e830960fbe8026bf1a65fe2705a841367c"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/vendor/fly_mapping/vision.py",
+      "sha256": "dea8ba46ab88f9411445c5e85a3a015ce40301e2215fdad8e06af947340e3658"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tests/test_inputs.py",
+      "sha256": "e46efa83b3dad581500a12128e1c1b7bd5658898b9d16001250d93b8f2e039fb"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/photos/README.txt",
+      "sha256": "3c7ef15a1fa25b998d38c92132378635955aadedc1dcf3e40e63dc0098f6b8f7"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/photos/china.jpg",
+      "sha256": "8378025ad2519d649d02e32bd98990db4ab572357d9f09841c2fbfbb4fefad29"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/photos/flower.jpg",
+      "sha256": "a77f6ec41e353afdf8bdff2ea981b2955535d8d83294f8cfa49cf4e423dd5638"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/evidence/PHOTO_SOURCES.json",
+      "sha256": "321c7342bcc55321b6088c280367cb761b0824418a2f44e41493cec94e21d887"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/AMENDMENT_SHARED.md",
+      "sha256": "d755b6f27c1104f22b2f70e261800f749f217f94f11e1e858c658d737ea12707"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/run_experiment_shared.py",
+      "sha256": "1e514d71d0a8d94468fc78844644ab1fe77b0eef73cd0d62128be9bb2f37d711"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/supervise_shared.py",
+      "sha256": "673cfadb8b1e853566ccca9026cb26598392d42a27e218be95325b65a87e3189"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/validate_results_shared.py",
+      "sha256": "2a8bf09e20811aaadbfc92d561b93655cb6fc0923596debcec704a8c0f927ec5"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/protocol_lock.json",
+      "sha256": "270572b5c2904752388b39d0839d13dae951196ffdcb7af0ef28a2d22e6c2f4f"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/AMENDMENT_CONTEXT_BUDGET.md",
+      "sha256": "3cd8a9f4b87b2465d6d178a56a5dbbe9f03dcb55957b77957e1efec5eeeed842"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/run_experiment_context.py",
+      "sha256": "09945846f7cc3924a1d11ec6d43cfdffc802fd328399e84c5e08569111d263d2"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/supervise_context.py",
+      "sha256": "da94080eae25693ecd4b61a891e1fa0d392cc5c8c6bc79aba9062b017e1be724"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/tools/validate_results_context.py",
+      "sha256": "b7eb619d992e9361f9a1874bc9a08b7059f19d8afe32b9dbe0afe86a84c1c7c0"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002/protocol_lock_shared.json",
+      "sha256": "f27766c85d7498bea78f427124acec7109dc61346cd5cad75a7e93d209b21e6a"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/triton/__init__.py",
+      "sha256": "1d02da1c872f91eef29fa8fab3f8d59d69c40be662bf777c5f5a30724f35e001"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/triton/compiler/compiler.py",
+      "sha256": "021a45ca590052ab6ca6d850eb0a102abf542165836ad92bfb3bb573218fc5d3"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/deployments/flywire_lif_001/env/lib/python3.11/site-packages/triton/backends/nvidia/compiler.py",
+      "sha256": "d012f2a7e705592e590630a0df58099ceeb9ef71517c561fc81644c0c9399658"
+    },
+    {
+      "path": "<SERVER_ROOT>/inference_service/mappings/event_optimization_003/protocol_lock.json",
+      "sha256": "7597d38d8051a750266f5acdc0f7b23d8b1f72ba6d84a7caa892c7a6e683f582"
+    }
+  ],
+  "episodes": 16,
+  "windows_per_episode": 90,
+  "neural_parameter_changes": false,
+  "robot_authorized": false
+}

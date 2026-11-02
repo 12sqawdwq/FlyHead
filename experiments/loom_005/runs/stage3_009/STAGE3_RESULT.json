@@ -1,0 +1,35 @@
+{
+ "passed": false,
+ "rows": [
+  {
+   "id": "C1",
+   "scenario": "wall_ahead",
+   "passed": true,
+   "detail": "contacts 0, overrides 0.0%, min clearance 0.89 m"
+  },
+  {
+   "id": "C2",
+   "scenario": "roam_open",
+   "passed": true,
+   "detail": "contacts 0, defensive onsets 1; REST 0% of windows, bouts [] s; FLEE bouts [3.3] s"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_front",
+   "passed": true,
+   "detail": "contacts 0, first response FREEZE after 0.1 s; escape at 0.2 s, distance 0.96 -> 1.58 m 3 s later; [v6 metric: 0.95 -> 1.58 m 3 s after onset]; FREEZE [0.1, 2.0] s, FLEE [3.3] s"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_left",
+   "passed": true,
+   "detail": "contacts 0, first response ESCAPE_PROGRAM after 0.2 s; escape at 0.2 s, distance 0.91 -> 1.47 m 3 s later; [v6 metric: 1.01 -> 1.43 m 3 s after onset]; FREEZE [] s, FLEE [3.4] s"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_right",
+   "passed": false,
+   "detail": "contacts 0, first response ESCAPE_PROGRAM after 2.3 s; escape at 2.3 s, distance 0.94 -> 1.51 m 3 s later; [v6 metric: 2.10 -> 0.99 m 3 s after onset]; FREEZE [] s, FLEE [3.4] s"
+  }
+ ]
+}

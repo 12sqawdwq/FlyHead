@@ -1,0 +1,18 @@
+{
+  "calibration_cases": 24,
+  "calibration_direction_correct": 24,
+  "replay_trials": 40,
+  "accepted": 33,
+  "rejected": 7,
+  "accepted_direction_matches_prediction": 33,
+  "accepted_direction_matches_truth": 25,
+  "classifier_correct": 29,
+  "gpu_peak_mib": 158.8505859375,
+  "elapsed_s": 45.117949733001296,
+  "max_off_last_abs_w": 0.0,
+  "limitations": [
+    "DNa02 direct stimulation/readout, not proof of upstream brain computation",
+    "40 selected trials, reset between trials, saved probability replay only",
+    "no lidar combination, no network or live stop test, no robot commands"
+  ]
+}

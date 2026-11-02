@@ -1,0 +1,27 @@
+{
+  "repo": "flyconnectome/flywire_annotations",
+  "commit": "8587524c1748ce5ef2080822a2fc890fc03bf597",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/8587524c1748ce5ef2080822a2fc890fc03bf597/README.md",
+      "path": "README.md",
+      "bytes": 16464,
+      "git_blob_sha1": "12ee41094ed00328912d1095ec320851cc9f4a2a",
+      "sha256": "c19f76977329a18fe09987e56c445dd2e095152c7228851a76fe80bfd49af47e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/8587524c1748ce5ef2080822a2fc890fc03bf597/supplemental_files/README.md",
+      "path": "supplemental_files_README.md",
+      "bytes": 7525,
+      "git_blob_sha1": "49e63fc9162353d25ec151711b4b93b7b3326f52",
+      "sha256": "49e884a1273105427ded3c110d48266702a3f90148006cf02c1a0fa50919eb71"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/8587524c1748ce5ef2080822a2fc890fc03bf597/supplemental_files/Supplemental_file1_neuron_annotations.tsv",
+      "path": "supplemental_files_Supplemental_file1_neuron_annotations.tsv",
+      "bytes": 31718505,
+      "git_blob_sha1": "afea3e15a5671f5da0b9f7dd2e932d328c3b57a0",
+      "sha256": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be"
+    }
+  ]
+}

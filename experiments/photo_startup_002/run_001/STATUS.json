@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "protocol_sha256": "270572b5c2904752388b39d0839d13dae951196ffdcb7af0ef28a2d22e6c2f4f",
+  "robot_io": false,
+  "real_video": false,
+  "graph_cropped": false,
+  "trials": [],
+  "resources_start": {
+    "available_bytes": 23540187136,
+    "rss_bytes": 500875264
+  },
+  "error": "RuntimeError('GPU_FREE_GATE')"
+}

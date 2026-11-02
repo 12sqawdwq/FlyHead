@@ -1,0 +1,44 @@
+{
+  "mode": "OFFLINE_NO_ROBOT_IO",
+  "decoder_version": 4,
+  "decoder_sha256": "2ac11fd368681b4951824fcae0d0db6d3ac559d1730a5e750885e92d9c11c54b",
+  "registry_sha256": "8b6cc094cfa15c9c4cc3993d27ed13e3defd0a725b8716738917d3b84baa0d92",
+  "prediction_sha256": "4274a4d0549cf6397c9646384ca7c976e6c2b4604e6796041d689de996177486",
+  "stimulation_cells": {
+    "right": {
+      "root_id": "720575940604737708",
+      "model_index": 904,
+      "cell_type": "DNa02",
+      "anatomical_side": "right"
+    },
+    "left": {
+      "root_id": "720575940629327659",
+      "model_index": 92992,
+      "cell_type": "DNa02",
+      "anatomical_side": "left"
+    }
+  },
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "levels_hz": [
+    0,
+    10,
+    20,
+    40,
+    80
+  ],
+  "calibration_on_windows": 10,
+  "off_windows": 5,
+  "window_s": 0.1,
+  "replay_gain_hz": 40,
+  "replay_threshold": 0.8,
+  "replay_selection": "first 20 test indices per ground-truth class, chronological sort; no outcome selection",
+  "refractory_policy": "original LC inputs zero; added DNa02 retains upstream 2.2ms",
+  "source": "saved_TCFormer_subject01_seed0_test_probabilities; not fresh live EEG",
+  "no_lidar": true,
+  "no_service": true,
+  "gpu": "NVIDIA GeForce RTX 5090 D v2"
+}

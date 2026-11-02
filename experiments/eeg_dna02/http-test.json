@@ -1,0 +1,9 @@
+{
+  "unauthenticated": true,
+  "wrong_origin": true,
+  "released_ticket_rejected": true,
+  "unknown_dataset_rejected": true,
+  "second_page_rejected": true,
+  "stop_accepted": true,
+  "job_stopped": true
+}

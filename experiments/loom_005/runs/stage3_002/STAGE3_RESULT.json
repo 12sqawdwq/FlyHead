@@ -1,0 +1,35 @@
+{
+ "passed": false,
+ "rows": [
+  {
+   "id": "C1",
+   "scenario": "wall_ahead",
+   "passed": true,
+   "detail": "contacts 0, overrides 0.0%, min clearance 0.89 m"
+  },
+  {
+   "id": "C2",
+   "scenario": "roam_open",
+   "passed": true,
+   "detail": "contacts 0, ESCAPE 0.8% of windows"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_front",
+   "passed": false,
+   "detail": "contacts 0, reaction 0.1 s after onset, distance to person 0.95 -> 0.88 m"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_left",
+   "passed": false,
+   "detail": "contacts 0, reaction 0.4 s after onset, distance to person 1.01 -> 0.89 m"
+  },
+  {
+   "id": "C3",
+   "scenario": "person_right",
+   "passed": false,
+   "detail": "contacts 0, reaction 4.5 s after onset, distance to person 2.10 -> 0.93 m"
+  }
+ ]
+}

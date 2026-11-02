@@ -1,0 +1,70 @@
+{
+  "scope": "FULL_CONNECTOME_EVENT_PROPAGATION_EQUIVALENCE_AND_TIMING",
+  "protocol_sha256": "7597d38d8051a750266f5acdc0f7b23d8b1f72ba6d84a7caa892c7a6e683f582",
+  "files": [
+    {
+      "path": "run_001/china_STATIC_COMBINED_event.npz",
+      "sha256": "1f91ab2cb53d2a869fc2fe9b6c29a4a47a2f056e81833684981406a24baa1f7d"
+    },
+    {
+      "path": "run_001/china_STATIC_COMBINED_reference.npz",
+      "sha256": "1f91ab2cb53d2a869fc2fe9b6c29a4a47a2f056e81833684981406a24baa1f7d"
+    },
+    {
+      "path": "run_001/flower_STATIC_COMBINED_event.npz",
+      "sha256": "5eb63f1cc3c21a3b1938f4b243d2b58d8e64a3b2f517b68f4eeb7590efea005a"
+    },
+    {
+      "path": "run_001/flower_STATIC_COMBINED_reference.npz",
+      "sha256": "5eb63f1cc3c21a3b1938f4b243d2b58d8e64a3b2f517b68f4eeb7590efea005a"
+    },
+    {
+      "path": "run_001/HS_LEFT_event.npz",
+      "sha256": "95585b20ceceaf5b3496b0e886d6dff81d684d794334681017f64751deba53a6"
+    },
+    {
+      "path": "run_001/HS_LEFT_reference.npz",
+      "sha256": "95585b20ceceaf5b3496b0e886d6dff81d684d794334681017f64751deba53a6"
+    },
+    {
+      "path": "run_001/HS_RIGHT_event.npz",
+      "sha256": "1325e60f62b6bbf86053273b704c2657e790982b237a6e50b332b59af4ea0489"
+    },
+    {
+      "path": "run_001/HS_RIGHT_reference.npz",
+      "sha256": "1325e60f62b6bbf86053273b704c2657e790982b237a6e50b332b59af4ea0489"
+    },
+    {
+      "path": "run_001/LC9_200_event.npz",
+      "sha256": "5d26bf689f40e8ed99a7f1da2bf5975e72068c10e9e89ad30532c74a71992e6d"
+    },
+    {
+      "path": "run_001/LC9_200_reference.npz",
+      "sha256": "5d26bf689f40e8ed99a7f1da2bf5975e72068c10e9e89ad30532c74a71992e6d"
+    },
+    {
+      "path": "run_001/RESULTS.json",
+      "sha256": "105dc70f3d0b8c3842dfdb2f2fc55410dbdca7c65fc3ee5495f97333fe5e1a16"
+    },
+    {
+      "path": "run_001/STATUS.json",
+      "sha256": "105dc70f3d0b8c3842dfdb2f2fc55410dbdca7c65fc3ee5495f97333fe5e1a16"
+    },
+    {
+      "path": "run_001/ZERO_event.npz",
+      "sha256": "2c6ac89e1c92143985051c32d0cee1c3428ee796a8ae03928b1237e8f818f859"
+    },
+    {
+      "path": "run_001/ZERO_reference.npz",
+      "sha256": "2c6ac89e1c92143985051c32d0cee1c3428ee796a8ae03928b1237e8f818f859"
+    },
+    {
+      "path": "evidence/VALIDATION.json",
+      "sha256": "24e00038abc0725b27e90c4dd4a82b3878888f4f108e998fab6c14532383e760"
+    },
+    {
+      "path": "evidence/EXECUTION.json",
+      "sha256": "bcc84be7bfd268603fc6a142827835d02d2d4c468d9064de166d36ec6d6b1d3b"
+    }
+  ]
+}

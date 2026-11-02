@@ -1,0 +1,1261 @@
+{
+  "candidate": "LC9_TO_P9",
+  "lc9": [
+    {
+      "root_id": "720575940603944672",
+      "model_index": 406,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940604681830",
+      "model_index": 842,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940604922982",
+      "model_index": 1092,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940605020337",
+      "model_index": 1221,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940605318880",
+      "model_index": 1566,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940606423170",
+      "model_index": 3208,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940606521180",
+      "model_index": 3359,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940607313756",
+      "model_index": 4531,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940607839189",
+      "model_index": 5138,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940608166101",
+      "model_index": 5605,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940609454798",
+      "model_index": 7489,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940609860803",
+      "model_index": 8158,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940610002033",
+      "model_index": 8404,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940610230738",
+      "model_index": 8793,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612021475",
+      "model_index": 12873,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612224943",
+      "model_index": 13427,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612258513",
+      "model_index": 13525,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612354983",
+      "model_index": 13833,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612617453",
+      "model_index": 14664,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612627106",
+      "model_index": 14695,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940612942442",
+      "model_index": 15787,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940613370482",
+      "model_index": 17136,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940613481330",
+      "model_index": 17510,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940614135739",
+      "model_index": 19405,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940614303890",
+      "model_index": 19927,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940614766166",
+      "model_index": 21524,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940614775238",
+      "model_index": 21555,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615012667",
+      "model_index": 22306,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615061906",
+      "model_index": 22485,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615238075",
+      "model_index": 23149,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615480281",
+      "model_index": 23985,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615517813",
+      "model_index": 24115,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940615893249",
+      "model_index": 25330,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616204059",
+      "model_index": 26494,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616215513",
+      "model_index": 26529,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616386449",
+      "model_index": 27099,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616492096",
+      "model_index": 27479,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616522726",
+      "model_index": 27573,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616677121",
+      "model_index": 28110,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940616721921",
+      "model_index": 28235,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617284283",
+      "model_index": 30270,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617432603",
+      "model_index": 30848,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617467485",
+      "model_index": 30962,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617486552",
+      "model_index": 31053,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617836117",
+      "model_index": 32456,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617878869",
+      "model_index": 32631,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617922097",
+      "model_index": 32803,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940617978789",
+      "model_index": 33042,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940618046292",
+      "model_index": 33339,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940618541995",
+      "model_index": 35550,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940618735105",
+      "model_index": 36358,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940618930459",
+      "model_index": 37117,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619163045",
+      "model_index": 38098,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619410671",
+      "model_index": 38952,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619434432",
+      "model_index": 39047,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619529455",
+      "model_index": 39346,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619601392",
+      "model_index": 39603,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619613422",
+      "model_index": 39661,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619643190",
+      "model_index": 39784,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619676654",
+      "model_index": 39933,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619719668",
+      "model_index": 40141,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940619788276",
+      "model_index": 40451,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620130462",
+      "model_index": 42038,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620178299",
+      "model_index": 42259,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620435158",
+      "model_index": 43435,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620542746",
+      "model_index": 44008,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620696280",
+      "model_index": 44957,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620821333",
+      "model_index": 45696,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620827425",
+      "model_index": 45730,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940620982049",
+      "model_index": 46652,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621001485",
+      "model_index": 46744,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621352447",
+      "model_index": 48723,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621415382",
+      "model_index": 49111,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621440862",
+      "model_index": 49251,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621506451",
+      "model_index": 49603,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940621585903",
+      "model_index": 50063,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622008230",
+      "model_index": 52508,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622162456",
+      "model_index": 53462,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622285183",
+      "model_index": 54186,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622341354",
+      "model_index": 54522,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622345215",
+      "model_index": 54553,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622457235",
+      "model_index": 55178,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940622964477",
+      "model_index": 57932,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940623047438",
+      "model_index": 58435,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940623073205",
+      "model_index": 58604,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624069578",
+      "model_index": 64201,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624070090",
+      "model_index": 64202,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624273508",
+      "model_index": 65421,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624319880",
+      "model_index": 65715,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624330254",
+      "model_index": 65783,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624339652",
+      "model_index": 65842,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624624176",
+      "model_index": 67300,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624740185",
+      "model_index": 67870,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940624856112",
+      "model_index": 68458,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625045837",
+      "model_index": 69597,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625127728",
+      "model_index": 70048,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625232009",
+      "model_index": 70490,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625390979",
+      "model_index": 71216,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625746709",
+      "model_index": 72982,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625772943",
+      "model_index": 73130,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625777941",
+      "model_index": 73154,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625809816",
+      "model_index": 73332,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940625971204",
+      "model_index": 74192,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626005641",
+      "model_index": 74380,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626397258",
+      "model_index": 76281,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626451081",
+      "model_index": 76545,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626456330",
+      "model_index": 76568,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626475858",
+      "model_index": 76657,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626566931",
+      "model_index": 77099,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626594447",
+      "model_index": 77253,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626613609",
+      "model_index": 77337,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940626803624",
+      "model_index": 78442,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940627180618",
+      "model_index": 80863,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940627814281",
+      "model_index": 84578,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940627841730",
+      "model_index": 84729,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628237415",
+      "model_index": 87039,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628261873",
+      "model_index": 87181,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628337103",
+      "model_index": 87633,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628347722",
+      "model_index": 87704,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628654927",
+      "model_index": 89466,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628679887",
+      "model_index": 89587,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628858954",
+      "model_index": 90613,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628875902",
+      "model_index": 90686,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628889551",
+      "model_index": 90771,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628908375",
+      "model_index": 90882,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940628972332",
+      "model_index": 91224,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940629300242",
+      "model_index": 92865,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940629419594",
+      "model_index": 93447,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940629549049",
+      "model_index": 94169,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940629594839",
+      "model_index": 94377,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940629791275",
+      "model_index": 95293,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940630162755",
+      "model_index": 97241,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940630247243",
+      "model_index": 97669,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940630642861",
+      "model_index": 99692,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940630788772",
+      "model_index": 100570,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940630865197",
+      "model_index": 100959,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631148113",
+      "model_index": 102500,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631199744",
+      "model_index": 102770,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631357651",
+      "model_index": 103595,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631379449",
+      "model_index": 103692,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631486163",
+      "model_index": 104217,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940631711225",
+      "model_index": 105270,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940632214497",
+      "model_index": 107425,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940632603873",
+      "model_index": 109187,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940632619880",
+      "model_index": 109266,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940632949807",
+      "model_index": 110698,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940634073825",
+      "model_index": 114348,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940634140011",
+      "model_index": 114488,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940634186647",
+      "model_index": 114589,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940634336887",
+      "model_index": 114982,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940634545400",
+      "model_index": 115444,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635224943",
+      "model_index": 117295,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635294309",
+      "model_index": 117496,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635376052",
+      "model_index": 117706,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635689370",
+      "model_index": 118550,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635703262",
+      "model_index": 118608,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635970446",
+      "model_index": 119299,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940635986522",
+      "model_index": 119331,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940636056895",
+      "model_index": 119476,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940636759386",
+      "model_index": 121008,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940636760292",
+      "model_index": 121009,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940637379517",
+      "model_index": 122375,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940638793304",
+      "model_index": 125608,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940638976233",
+      "model_index": 126019,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940639201269",
+      "model_index": 126604,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940639459280",
+      "model_index": 127147,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940642959895",
+      "model_index": 132012,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940642995360",
+      "model_index": 132027,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940643039255",
+      "model_index": 132055,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940644095511",
+      "model_index": 132834,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940644686388",
+      "model_index": 133421,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940644843118",
+      "model_index": 133618,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940645023268",
+      "model_index": 133816,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940647603252",
+      "model_index": 135957,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940648290937",
+      "model_index": 136277,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940650416249",
+      "model_index": 136794,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940652785057",
+      "model_index": 137270,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940658141057",
+      "model_index": 138067,
+      "cell_type": "LC9",
+      "side": "right",
+      "predicted_nt": "acetylcholine"
+    },
+    {
+      "root_id": "720575940661191041",
+      "model_index": 138580,
+      "cell_type": "LC9",
+      "side": "left",
+      "predicted_nt": "acetylcholine"
+    }
+  ],
+  "excluded_absent_from_model": [],
+  "input_count": 185,
+  "annotation_sha256": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be"
+}

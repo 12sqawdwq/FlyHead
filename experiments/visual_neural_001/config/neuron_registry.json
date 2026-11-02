@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "dataset": "FlyWire783",
+  "model_neurons": 138639,
+  "annotation_commit": "8587524c1748ce5ef2080822a2fc890fc03bf597",
+  "annotation_sha256": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be",
+  "model_completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+  "identity_rule": "exact current cell_type then exact root_id join; no synonym union",
+  "encoding_mode": "ENGINEERED_HS_VISUAL_MOTION_PROXY_NOT_RETINAL_RECONSTRUCTION",
+  "anatomical_side_is_validated_camera_field": false,
+  "robot_yaw_sign_calibrated": false,
+  "cells": {
+    "DNa02_right": {
+      "root_id": "720575940604737708",
+      "model_index": 904,
+      "cell_type": "DNa02",
+      "anatomical_side": "right",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "DNa02"
+    },
+    "HSE_left": {
+      "root_id": "720575940629153020",
+      "model_index": 92158,
+      "cell_type": "HSE",
+      "anatomical_side": "left",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSE"
+    },
+    "DNp09_left": {
+      "root_id": "720575940635872101",
+      "model_index": 119032,
+      "cell_type": "DNp09",
+      "anatomical_side": "left",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "DNp09"
+    },
+    "DNa02_left": {
+      "root_id": "720575940629327659",
+      "model_index": 92992,
+      "cell_type": "DNa02",
+      "anatomical_side": "left",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "DNa02"
+    },
+    "DNp09_right": {
+      "root_id": "720575940627652358",
+      "model_index": 83620,
+      "cell_type": "DNp09",
+      "anatomical_side": "right",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "DNp09"
+    },
+    "DNa01_right": {
+      "root_id": "720575940644438551",
+      "model_index": 133149,
+      "cell_type": "DNa01",
+      "anatomical_side": "right",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "VES006"
+    },
+    "HSS_right": {
+      "root_id": "720575940628743496",
+      "model_index": 89928,
+      "cell_type": "HSS",
+      "anatomical_side": "right",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSS"
+    },
+    "HSN_left": {
+      "root_id": "720575940628031249",
+      "model_index": 85848,
+      "cell_type": "HSN",
+      "anatomical_side": "left",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSN"
+    },
+    "DNa01_left": {
+      "root_id": "720575940627787609",
+      "model_index": 84431,
+      "cell_type": "DNa01",
+      "anatomical_side": "left",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "VES006"
+    },
+    "HSS_left": {
+      "root_id": "720575940622312965",
+      "model_index": 54352,
+      "cell_type": "HSS",
+      "anatomical_side": "left",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSS"
+    },
+    "HSN_right": {
+      "root_id": "720575940615933919",
+      "model_index": 25467,
+      "cell_type": "HSN",
+      "anatomical_side": "right",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSN"
+    },
+    "HSE_right": {
+      "root_id": "720575940629148007",
+      "model_index": 92123,
+      "cell_type": "HSE",
+      "anatomical_side": "right",
+      "flow": "intrinsic",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "HSE"
+    },
+    "DNp01_right": {
+      "root_id": "720575940632499757",
+      "model_index": 108748,
+      "cell_type": "DNp01",
+      "anatomical_side": "right",
+      "flow": "efferent",
+      "predicted_nt": "glutamate",
+      "hemibrain_type_reference_only": "Giant Fiber"
+    },
+    "DNp01_left": {
+      "root_id": "720575940622838154",
+      "model_index": 57246,
+      "cell_type": "DNp01",
+      "anatomical_side": "left",
+      "flow": "efferent",
+      "predicted_nt": "acetylcholine",
+      "hemibrain_type_reference_only": "Giant Fiber"
+    }
+  },
+  "visual_input_keys": [
+    "HSN_left",
+    "HSN_right",
+    "HSE_left",
+    "HSE_right",
+    "HSS_left",
+    "HSS_right"
+  ],
+  "readout_keys": [
+    "DNa02_left",
+    "DNa02_right",
+    "DNp09_left",
+    "DNp09_right",
+    "DNa01_left",
+    "DNa01_right",
+    "DNp01_left",
+    "DNp01_right"
+  ],
+  "excluded_cross_namespace_name_collisions": [
+    {
+      "root_id": "720575940633095137",
+      "cell_type": "DNp71",
+      "hemibrain_type": "DNp09",
+      "side": "right"
+    },
+    {
+      "root_id": "720575940618167579",
+      "cell_type": "DNae001",
+      "hemibrain_type": "DNa01",
+      "side": "left"
+    },
+    {
+      "root_id": "720575940625673196",
+      "cell_type": "DNp71",
+      "hemibrain_type": "DNp09",
+      "side": "left"
+    },
+    {
+      "root_id": "720575940626328707",
+      "cell_type": "DNae001",
+      "hemibrain_type": "DNa01",
+      "side": "right"
+    }
+  ],
+  "upstream_p9_comment_conflict": {
+    "720575940627652358": "upstream comment left; current annotation right",
+    "720575940635872101": "upstream comment right; current annotation left"
+  },
+  "oDN1": "not resolved by exact annotation; not silently equated to P9"
+}

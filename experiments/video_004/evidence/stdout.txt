@@ -1,0 +1,16 @@
+{"episode": "tum_fr1_xyz__CONTINUOUS__20260923", "frames": 90, "spikes": 664057, "model_median_ms": 92.92744350386783}
+{"episode": "tum_fr1_xyz__CONTINUOUS__20260924", "frames": 90, "spikes": 666262, "model_median_ms": 92.58025349845411}
+{"episode": "tum_fr1_xyz__FROZEN_FIRST__20260923", "frames": 90, "spikes": 660211, "model_median_ms": 92.7536399976816}
+{"episode": "tum_fr1_xyz__FROZEN_FIRST__20260924", "frames": 90, "spikes": 661591, "model_median_ms": 92.61656199669233}
+{"episode": "tum_fr1_xyz__RESET_STATE__20260923", "frames": 90, "spikes": 640184, "model_median_ms": 92.65800299908733}
+{"episode": "tum_fr1_xyz__RESET_STATE__20260924", "frames": 90, "spikes": 642334, "model_median_ms": 92.35384999919916}
+{"episode": "tum_fr1_xyz__HS_ONLY__20260923", "frames": 90, "spikes": 5515, "model_median_ms": 89.02690250397427}
+{"episode": "tum_fr1_xyz__HS_ONLY__20260924", "frames": 90, "spikes": 5239, "model_median_ms": 88.99448299780488}
+{"episode": "tum_fr1_desk__CONTINUOUS__20260923", "frames": 90, "spikes": 663630, "model_median_ms": 92.70925000600982}
+{"episode": "tum_fr1_desk__CONTINUOUS__20260924", "frames": 90, "spikes": 665396, "model_median_ms": 92.85511150665116}
+{"episode": "tum_fr1_desk__FROZEN_FIRST__20260923", "frames": 90, "spikes": 660211, "model_median_ms": 92.92736150382552}
+{"episode": "tum_fr1_desk__FROZEN_FIRST__20260924", "frames": 90, "spikes": 661591, "model_median_ms": 93.18980000534793}
+{"episode": "tum_fr1_desk__RESET_STATE__20260923", "frames": 90, "spikes": 639829, "model_median_ms": 93.30914300517179}
+{"episode": "tum_fr1_desk__RESET_STATE__20260924", "frames": 90, "spikes": 642076, "model_median_ms": 93.39921900391346}
+{"episode": "tum_fr1_desk__HS_ONLY__20260923", "frames": 90, "spikes": 4208, "model_median_ms": 89.96996799396584}
+{"episode": "tum_fr1_desk__HS_ONLY__20260924", "frames": 90, "spikes": 4473, "model_median_ms": 90.05907899700105}

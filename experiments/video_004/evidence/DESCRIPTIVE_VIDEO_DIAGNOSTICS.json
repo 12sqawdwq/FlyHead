@@ -1,0 +1,22 @@
+[
+  {
+    "episode": "tum_fr1_xyz__CONTINUOUS__20260923",
+    "lc9_side_samples_at_200hz_fraction": 0.975,
+    "processing_median_ms": 113.8777200030745
+  },
+  {
+    "episode": "tum_fr1_xyz__CONTINUOUS__20260924",
+    "lc9_side_samples_at_200hz_fraction": 0.975,
+    "processing_median_ms": 113.58117900090292
+  },
+  {
+    "episode": "tum_fr1_desk__CONTINUOUS__20260923",
+    "lc9_side_samples_at_200hz_fraction": 1.0,
+    "processing_median_ms": 113.66755100607406
+  },
+  {
+    "episode": "tum_fr1_desk__CONTINUOUS__20260924",
+    "lc9_side_samples_at_200hz_fraction": 1.0,
+    "processing_median_ms": 113.81481349962996
+  }
+]

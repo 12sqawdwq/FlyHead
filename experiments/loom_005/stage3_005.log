@@ -1,0 +1,20 @@
+sim_brain.py: OK
+retina.py: OK
+brain.py: OK
+decoder.py: OK
+envelope.py: OK
+sim_report.py: OK
+stage3_eval.py: OK
+config/loom_registry.json: OK
+PROTOCOL_STAGE3.md: OK
+done wall_ahead brain
+done wall_ahead blind
+done roam_open brain
+done roam_open blind
+done person_front brain
+done person_front blind
+done person_left brain
+done person_left blind
+done person_right brain
+done person_right blind
+ALL DONE

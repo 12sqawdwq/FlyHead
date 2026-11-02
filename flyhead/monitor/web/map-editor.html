@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map Artifact Editor</title>
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--chrome:#f0f0f0;--chrome-2:#e4e4e4;--panel:#fff;--line:#c9c9c9;--line-2:#e6e6e6;--text:#1e1e1e;--muted:#5f5f5f;--faint:#9a9a9a;
+  --gold:#ffb71b;--gold-soft:#fff3d1;--sel:#fde8b3;--bad:#d9001b;--info:#2f6fbf;--ui:"Segoe UI",system-ui,sans-serif;--mono:Consolas,"Cascadia Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--chrome);color:var(--text);font:12px/1.45 var(--ui);height:100vh;display:grid;grid-template-rows:auto 1fr}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:5px 10px;background:#2b2b2b;color:#e8e8e8}
+h1{margin:0;font:600 12px var(--ui);color:var(--gold);letter-spacing:.04em}
+header p{margin:0;font-size:11.5px;color:#c4c4c4}
+header strong{color:#fff;font-weight:600}
+main{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0}
+#viewport{position:relative;min-width:0;min-height:320px;overflow:hidden;background:linear-gradient(180deg,#7d9fc9 0%,#b9cbe3 45%,#fff 100%)}
+canvas{display:block;touch-action:none}
+#viewport.drawing canvas{cursor:crosshair}
+#hud{position:absolute;z-index:2;top:8px;left:8px;display:flex;gap:2px;padding:2px;background:var(--chrome);border:1px solid var(--line);box-shadow:0 1px 4px #0002;pointer-events:none}
+#hud>*{pointer-events:auto}
+#cursorInfo{position:absolute;z-index:2;bottom:8px;left:8px;padding:2px 8px;border:1px solid var(--line);background:#ffffffd9;font:11px var(--mono);color:var(--muted)}
+aside{overflow:auto;border-left:1px solid var(--line);background:var(--panel)}
+section{border-bottom:1px solid var(--line);padding:0 0 10px}
+h2{margin:0 0 6px;padding:4px 10px;background:var(--chrome-2);border-bottom:1px solid var(--line);font:600 12px var(--ui)}
+section>*:not(h2){margin-left:10px;margin-right:10px}
+button{font:12px var(--ui);color:var(--text);background:#f4f4f4;border:1px solid #b9b9b9;border-radius:2px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+button:hover:not(:disabled){background:var(--gold-soft);border-color:var(--gold)}
+button:active:not(:disabled){background:var(--sel)}
+button:focus-visible{outline:1px dotted var(--text);outline-offset:-3px}
+button.primary{border-color:#c98a00;background:var(--gold);font-weight:600}
+button.primary:hover:not(:disabled){background:#ffc84a}
+button.danger{color:var(--bad)}
+button:disabled,button.primary:disabled{background:#f4f4f4;border-color:#d6d6d6;color:var(--faint);font-weight:400;cursor:default}
+#hud button{border-color:transparent;background:transparent}
+#hud button:hover:not(:disabled){border-color:var(--gold);background:var(--gold-soft)}
+input[type=text],input[type=number]{font:12px var(--ui);color:var(--text);background:#fff;border:1px solid #b9b9b9;padding:2px 5px}
+input[type=text]:focus,input[type=number]:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+input:disabled{background:#f4f4f4;color:var(--faint)}
+input[type=range]{flex:1;min-width:60px;accent-color:#606060}
+input[type=checkbox]{accent-color:#606060}
+.row{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+label{display:flex;gap:8px;align-items:center;margin:6px 0;color:var(--muted)}
+label input[type=number]{width:80px}label input[type=text]{min-width:0;width:100%}
+.note{font-size:11.5px;color:var(--muted);margin:6px 0 0}
+.note b{color:var(--text)}
+#mapInfo,#draftInfo,#selectionInfo,#storageInfo,#heightInfo{white-space:pre-wrap;overflow-wrap:anywhere}
+#mapInfo{font:11px var(--mono)}
+#message{min-height:34px;padding:6px 10px;border-bottom:1px solid var(--line);border-left:4px solid var(--info);white-space:pre-wrap;background:#f4f8fd}
+#message.error{border-left-color:var(--bad);color:var(--bad);background:#fdf2f3}
+#regionList{display:flex;flex-direction:column;gap:2px;max-height:220px;overflow:auto;color:var(--muted)}
+#regionList button{text-align:left;white-space:normal;background:#fff;border-color:var(--line-2)}
+#regionList button.selected{background:var(--sel);border-color:var(--gold)}
+#vertices{max-height:120px;overflow:auto;margin:6px 10px 0;padding-left:24px;font:11px var(--mono);color:var(--muted)}
+.swatch{color:#c000c0;font-weight:600} .sel{background:var(--sel);border:1px solid var(--gold);padding:0 3px} .draft{color:#000;font-weight:600}
+dialog{border:1px solid #888;padding:0;min-width:360px;max-width:440px;box-shadow:0 8px 30px #0005;font:12px var(--ui)}
+dialog::backdrop{background:#0003}
+dialog h3{margin:0;padding:6px 10px;background:var(--chrome-2);border-bottom:1px solid var(--line);font-size:12px;font-weight:600}
+dialog p{margin:0;padding:12px 14px 4px;line-height:1.6}
+dialog .row{justify-content:flex-end;padding:10px 12px;margin:0;background:var(--chrome)}
+dialog .row button{min-width:76px}
+@media(max-width:760px){body{height:auto;min-height:100vh}main{grid-template-columns:1fr}#viewport{height:55vh}aside{border-left:0;border-top:1px solid var(--line)}}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+</head>
+<body>
+<header>
+  <h1>MAP ARTIFACT EDITOR</h1>
+  <p><strong>Offline:</strong> no robot connection, no commands; map files are never modified. Candidate regions are proposals, not confirmed free space.</p>
+</header>
+<main>
+  <div id="viewport">
+    <div id="hud">
+      <button id="topView" disabled>Top · draw</button>
+      <button id="spatialView" disabled>3D</button>
+      <button id="fitView" disabled>Fit</button>
+    </div>
+    <div id="cursorInfo">loading the local point cloud…</div>
+  </div>
+  <aside>
+    <div id="message" role="status" aria-live="polite">Loading the local fixed map.</div>
+    <section>
+      <h2>1 · Display map</h2>
+      <div id="mapInfo" class="note"></div>
+      <p class="note">Downsampled display cloud, not the occupancy grid. Exports are bound to this map identity.</p>
+    </section>
+    <section>
+      <h2>Height slice</h2>
+      <label>Min Z <input id="displayMinRange" type="range" step="0.01" aria-label="Display height minimum slider" disabled><input id="displayMin" type="number" step="0.01" aria-label="Display height minimum (m)" disabled></label>
+      <label>Max Z <input id="displayMaxRange" type="range" step="0.01" aria-label="Display height maximum slider" disabled><input id="displayMax" type="number" step="0.01" aria-label="Display height maximum (m)" disabled></label>
+      <div id="heightInfo" class="note">Waiting for the map height range.</div>
+      <div class="row"><button id="resetDisplayHeight" disabled>All heights</button><button id="useDisplayHeight" disabled>Use for region</button></div>
+    </section>
+    <section>
+      <h2>2 · Outline artifacts</h2>
+      <div class="row"><button id="draw" class="primary" disabled>New polygon</button><button id="finish" disabled>Finish</button><button id="undoVertex" disabled>Undo vertex</button><button id="cancelDraw" disabled>Cancel</button></div>
+      <p class="note">Top view: click adds a vertex · right drag pans · wheel zooms · <b>Enter</b> finish · <b>Esc</b> cancel · <b>Backspace</b> remove vertex.</p>
+      <div id="draftInfo" class="note">Nothing outlined yet.</div>
+      <ol id="vertices"></ol>
+      <label>Name <input id="regionName" type="text" maxlength="80" value="Suspected person artifact" disabled></label>
+      <div class="row"><label>Min Z <input id="zMin" type="number" step="0.05" value="0.00" disabled></label><label>Max Z <input id="zMax" type="number" step="0.05" value="1.80" disabled></label></div>
+      <p class="note">Absolute map height. Only display points inside the polygon and this height range become candidates.</p>
+      <button id="updateRegion" disabled>Update selected region</button>
+    </section>
+    <section>
+      <h2>3 · Review</h2>
+      <div id="regionList"></div>
+      <div class="row"><button id="deleteRegion" class="danger" disabled>Remove</button><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button></div>
+      <label><input id="hideCandidates" type="checkbox" disabled> Hide candidates in preview</label>
+      <p class="note"><span class="swatch">Magenta</span> = candidate points · red = regions · <span class="sel">gold</span> = selected · <span class="draft">black</span> = polygon being drawn.</p>
+      <div id="selectionInfo" class="note">Waiting for the map.</div>
+      <label>Point size <input id="pointSize" type="range" min="1" max="6" step="0.5" value="2.5" disabled></label>
+    </section>
+    <section>
+      <h2>4 · Draft</h2>
+      <div class="row"><button id="exportDraft" class="primary" disabled>Export JSON</button><button id="importDraft" disabled>Import</button><button id="clearDraft" class="danger" disabled>Clear</button></div>
+      <input id="importFile" type="file" accept=".json,application/json" hidden>
+      <div id="storageInfo" class="note">Finished regions are saved in this browser automatically; an unfinished polygon is not.</div>
+      <p class="note">Apply a draft offline with <b>tools/correct_map.py</b> (writes a new map package).</p>
+    </section>
+  </aside>
+</main>
+<dialog id="ask"><h3 id="askTitle"></h3><p id="askBody"></p>
+  <div class="row"><button class="primary" id="askYes">OK</button><button id="askNo">Cancel</button></div></dialog>
+<script type="module" src="./map-editor.js"></script>
+</body>
+</html>

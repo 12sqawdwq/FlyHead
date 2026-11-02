@@ -1,0 +1,116 @@
+{
+ "t0": 1791639140.0,
+ "t1": 1e+18,
+ "episodes": [
+  {
+   "episode": 1,
+   "t": 12.4,
+   "duration_s": 8.6,
+   "loom_side": "left",
+   "reaction_s": 0.41,
+   "within_1s": true,
+   "first_state": "ESCAPE_PROGRAM",
+   "turn_w": 0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 2,
+   "t": 21.7,
+   "duration_s": 6.0,
+   "loom_side": "left",
+   "reaction_s": 0.24,
+   "within_1s": true,
+   "first_state": "ESCAPE_PROGRAM",
+   "turn_w": -0.4,
+   "turn_away": true
+  },
+  {
+   "episode": 3,
+   "t": 29.5,
+   "duration_s": 4.3,
+   "loom_side": "right",
+   "reaction_s": 0.24,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": 0.4,
+   "turn_away": true
+  },
+  {
+   "episode": 4,
+   "t": 34.2,
+   "duration_s": 4.9,
+   "loom_side": "right",
+   "reaction_s": 0.33,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": -0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 5,
+   "t": 39.3,
+   "duration_s": 5.7,
+   "loom_side": "right",
+   "reaction_s": 0.08,
+   "within_1s": true,
+   "first_state": "ESCAPE_PROGRAM",
+   "turn_w": 0.4,
+   "turn_away": true
+  },
+  {
+   "episode": 6,
+   "t": 45.6,
+   "duration_s": 4.8,
+   "loom_side": "both",
+   "reaction_s": 0.23,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": -0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 7,
+   "t": 51.5,
+   "duration_s": 5.6,
+   "loom_side": "right",
+   "reaction_s": 0.0,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": -0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 8,
+   "t": 57.3,
+   "duration_s": 6.6,
+   "loom_side": "both",
+   "reaction_s": 0.31,
+   "within_1s": true,
+   "first_state": "ESCAPE",
+   "turn_w": 0.2,
+   "turn_away": false
+  },
+  {
+   "episode": 9,
+   "t": 397.6,
+   "duration_s": 3.1,
+   "loom_side": "left",
+   "reaction_s": 2.94,
+   "within_1s": false,
+   "first_state": "BACK_OFF",
+   "turn_w": -0.0,
+   "turn_away": false
+  },
+  {
+   "episode": 10,
+   "t": 1027.4,
+   "duration_s": 3.2,
+   "loom_side": "left",
+   "reaction_s": null,
+   "within_1s": false,
+   "first_state": null,
+   "turn_w": null,
+   "turn_away": null
+  }
+ ]
+}

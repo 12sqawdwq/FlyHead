@@ -1,0 +1,3131 @@
+{
+ "schema_version": 1,
+ "dataset": "FlyWire783",
+ "model_neurons": 138639,
+ "annotation_sha256": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be",
+ "model_completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+ "identity_rule": "exact current cell_type then exact root_id join; no synonym union",
+ "encoding_mode": "ENGINEERED_LIDAR_LOOM_PROXY_NOT_RETINAL_RECONSTRUCTION",
+ "field_to_eye_assignment_validated": false,
+ "robot_yaw_sign_calibrated": false,
+ "inputs": {
+  "LC4": [
+   {
+    "root_id": "720575940603637438",
+    "model_index": 264,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940605598892",
+    "model_index": 1911,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940610522009",
+    "model_index": 9350,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940611134833",
+    "model_index": 10627,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612093351",
+    "model_index": 13067,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612323025",
+    "model_index": 13728,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612380723",
+    "model_index": 13909,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612498129",
+    "model_index": 14284,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612518055",
+    "model_index": 14345,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612580977",
+    "model_index": 14563,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612968421",
+    "model_index": 15883,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940613256863",
+    "model_index": 16821,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613260959",
+    "model_index": 16836,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613609484",
+    "model_index": 17935,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940613638041",
+    "model_index": 18045,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614572742",
+    "model_index": 20770,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940614582946",
+    "model_index": 20810,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614914107",
+    "model_index": 22002,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615053580",
+    "model_index": 22455,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615127227",
+    "model_index": 22751,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615232217",
+    "model_index": 23130,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940615462587",
+    "model_index": 23927,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615575007",
+    "model_index": 24281,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616066705",
+    "model_index": 25985,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616713355",
+    "model_index": 28213,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617026260",
+    "model_index": 29383,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617176321",
+    "model_index": 29887,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617266722",
+    "model_index": 30208,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617348379",
+    "model_index": 30533,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618002644",
+    "model_index": 33149,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618234704",
+    "model_index": 34245,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618234715",
+    "model_index": 34246,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618266459",
+    "model_index": 34402,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618267227",
+    "model_index": 34409,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618275520",
+    "model_index": 34445,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618312606",
+    "model_index": 34603,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618676440",
+    "model_index": 36093,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618709158",
+    "model_index": 36239,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618723749",
+    "model_index": 36310,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618807105",
+    "model_index": 36646,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619397542",
+    "model_index": 38907,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620314221",
+    "model_index": 42880,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620314612",
+    "model_index": 42886,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620731380",
+    "model_index": 45196,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620795728",
+    "model_index": 45558,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620903551",
+    "model_index": 46146,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940621145821",
+    "model_index": 47583,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621522458",
+    "model_index": 49698,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621753579",
+    "model_index": 51100,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622108001",
+    "model_index": 53122,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622330582",
+    "model_index": 54455,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622531767",
+    "model_index": 55583,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622939836",
+    "model_index": 57783,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624017251",
+    "model_index": 63894,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624111763",
+    "model_index": 64467,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624790781",
+    "model_index": 68119,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624856762",
+    "model_index": 68461,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625038090",
+    "model_index": 69551,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625841351",
+    "model_index": 73496,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625845447",
+    "model_index": 73522,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625906702",
+    "model_index": 73846,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625932421",
+    "model_index": 73964,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625934973",
+    "model_index": 73977,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625991043",
+    "model_index": 74288,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626553596",
+    "model_index": 77031,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626605200",
+    "model_index": 77298,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626626895",
+    "model_index": 77411,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626916936",
+    "model_index": 79150,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627519107",
+    "model_index": 82937,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628064260",
+    "model_index": 86033,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628081541",
+    "model_index": 86146,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628419527",
+    "model_index": 88184,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628454522",
+    "model_index": 88373,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628462340",
+    "model_index": 88424,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628518400",
+    "model_index": 88693,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628599895",
+    "model_index": 89165,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628606713",
+    "model_index": 89200,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628699560",
+    "model_index": 89699,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628891863",
+    "model_index": 90786,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629753807",
+    "model_index": 95107,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629964591",
+    "model_index": 96243,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630154660",
+    "model_index": 97190,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630484495",
+    "model_index": 98862,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630851036",
+    "model_index": 100901,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630998339",
+    "model_index": 101707,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631032657",
+    "model_index": 101892,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631338271",
+    "model_index": 103513,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632475449",
+    "model_index": 108651,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632715234",
+    "model_index": 109680,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632769180",
+    "model_index": 109955,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940633013355",
+    "model_index": 110942,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940633218863",
+    "model_index": 111699,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940633580384",
+    "model_index": 112907,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940634517856",
+    "model_index": 115387,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635835967",
+    "model_index": 118928,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636957006",
+    "model_index": 121451,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940638456227",
+    "model_index": 124829,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940638496720",
+    "model_index": 124935,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940639817947",
+    "model_index": 127954,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940640612480",
+    "model_index": 129665,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940641213824",
+    "model_index": 130519,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940645821316",
+    "model_index": 134682,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940649229433",
+    "model_index": 136520,
+    "cell_type": "LC4",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940652611745",
+    "model_index": 137218,
+    "cell_type": "LC4",
+    "anatomical_side": "right"
+   }
+  ],
+  "LPLC2": [
+   {
+    "root_id": "720575940603989420",
+    "model_index": 427,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940605825666",
+    "model_index": 2306,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940606126438",
+    "model_index": 2816,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940606217138",
+    "model_index": 2954,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940606855554",
+    "model_index": 3942,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940607683011",
+    "model_index": 4954,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940607845250",
+    "model_index": 5141,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940607854531",
+    "model_index": 5157,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940608088259",
+    "model_index": 5503,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940608875531",
+    "model_index": 6545,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940609592674",
+    "model_index": 7703,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610116757",
+    "model_index": 8586,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610226645",
+    "model_index": 8785,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940610536290",
+    "model_index": 9379,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610681829",
+    "model_index": 9658,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610953651",
+    "model_index": 10209,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940611352234",
+    "model_index": 11095,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940611567638",
+    "model_index": 11653,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940611740569",
+    "model_index": 12110,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940611821334",
+    "model_index": 12326,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612045352",
+    "model_index": 12934,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612096462",
+    "model_index": 13077,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612254701",
+    "model_index": 13515,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612462307",
+    "model_index": 14164,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612560680",
+    "model_index": 14493,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612766691",
+    "model_index": 15167,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612874536",
+    "model_index": 15527,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612944382",
+    "model_index": 15796,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612994929",
+    "model_index": 16013,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940613145258",
+    "model_index": 16485,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613219474",
+    "model_index": 16700,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613470947",
+    "model_index": 17467,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613763759",
+    "model_index": 18413,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613804906",
+    "model_index": 18555,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940613821290",
+    "model_index": 18594,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614067167",
+    "model_index": 19222,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614373279",
+    "model_index": 20166,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614526974",
+    "model_index": 20621,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614631079",
+    "model_index": 20981,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940614738444",
+    "model_index": 21420,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615055989",
+    "model_index": 22464,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615116731",
+    "model_index": 22701,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940615288203",
+    "model_index": 23330,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940615332502",
+    "model_index": 23467,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615907723",
+    "model_index": 25387,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615920453",
+    "model_index": 25423,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940615953302",
+    "model_index": 25538,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615967377",
+    "model_index": 25605,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616008854",
+    "model_index": 25758,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616083345",
+    "model_index": 26047,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616116697",
+    "model_index": 26169,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616166685",
+    "model_index": 26360,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616377817",
+    "model_index": 27074,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616491993",
+    "model_index": 27478,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616735489",
+    "model_index": 28264,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940617289782",
+    "model_index": 30292,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617294219",
+    "model_index": 30313,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617480094",
+    "model_index": 31030,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617997241",
+    "model_index": 33127,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618172509",
+    "model_index": 33951,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618307046",
+    "model_index": 34579,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618450496",
+    "model_index": 35171,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618538641",
+    "model_index": 35534,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618608177",
+    "model_index": 35831,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618711535",
+    "model_index": 36252,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618927892",
+    "model_index": 37106,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619197318",
+    "model_index": 38211,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619263937",
+    "model_index": 38463,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619627934",
+    "model_index": 39722,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619654149",
+    "model_index": 39827,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619750822",
+    "model_index": 40277,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619900993",
+    "model_index": 40910,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619981494",
+    "model_index": 41281,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620001718",
+    "model_index": 41386,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620139678",
+    "model_index": 42085,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620306904",
+    "model_index": 42850,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620575476",
+    "model_index": 44200,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620783180",
+    "model_index": 45496,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620887834",
+    "model_index": 46058,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621634913",
+    "model_index": 50384,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621914904",
+    "model_index": 52037,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622009284",
+    "model_index": 52512,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622156799",
+    "model_index": 53436,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622174463",
+    "model_index": 53517,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622312072",
+    "model_index": 54345,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622425271",
+    "model_index": 54998,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622680088",
+    "model_index": 56360,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622769159",
+    "model_index": 56884,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622992205",
+    "model_index": 58087,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940623047629",
+    "model_index": 58436,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940623262461",
+    "model_index": 59739,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623333770",
+    "model_index": 60151,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940623551684",
+    "model_index": 61444,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623652083",
+    "model_index": 61937,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623769783",
+    "model_index": 62487,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940623827348",
+    "model_index": 62781,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623925774",
+    "model_index": 63351,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624014524",
+    "model_index": 63874,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624016778",
+    "model_index": 63888,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624208824",
+    "model_index": 65063,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624244922",
+    "model_index": 65254,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624359093",
+    "model_index": 65959,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624417584",
+    "model_index": 66296,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624531652",
+    "model_index": 66837,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624611002",
+    "model_index": 67237,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624755504",
+    "model_index": 67955,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624903064",
+    "model_index": 68741,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624919077",
+    "model_index": 68836,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624931530",
+    "model_index": 68909,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625001735",
+    "model_index": 69313,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625216202",
+    "model_index": 70434,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625477721",
+    "model_index": 71655,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625695269",
+    "model_index": 72725,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625697772",
+    "model_index": 72742,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625700739",
+    "model_index": 72757,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625835278",
+    "model_index": 73464,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626161930",
+    "model_index": 75148,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626236041",
+    "model_index": 75477,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626375172",
+    "model_index": 76164,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626384200",
+    "model_index": 76218,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626414279",
+    "model_index": 76378,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626447848",
+    "model_index": 76530,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626617084",
+    "model_index": 77358,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626735016",
+    "model_index": 78031,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626745392",
+    "model_index": 78101,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626873000",
+    "model_index": 78878,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940627368254",
+    "model_index": 82056,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627553923",
+    "model_index": 83138,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940627685765",
+    "model_index": 83815,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627902078",
+    "model_index": 85065,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627902979",
+    "model_index": 85075,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628039034",
+    "model_index": 85903,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628197892",
+    "model_index": 86797,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628395797",
+    "model_index": 88027,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628552247",
+    "model_index": 88882,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628603842",
+    "model_index": 89187,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628778058",
+    "model_index": 90122,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628847164",
+    "model_index": 90556,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628849668",
+    "model_index": 90573,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628921303",
+    "model_index": 90959,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628976956",
+    "model_index": 91245,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628990214",
+    "model_index": 91306,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629292785",
+    "model_index": 92830,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629368015",
+    "model_index": 93176,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629384271",
+    "model_index": 93265,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629967703",
+    "model_index": 96263,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630209603",
+    "model_index": 97473,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630650936",
+    "model_index": 99745,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630719831",
+    "model_index": 100157,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630731847",
+    "model_index": 100229,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630831185",
+    "model_index": 100807,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631095158",
+    "model_index": 102213,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631312428",
+    "model_index": 103389,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631380695",
+    "model_index": 103701,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631397549",
+    "model_index": 103783,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631582751",
+    "model_index": 104684,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631742405",
+    "model_index": 105415,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632009167",
+    "model_index": 106560,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632080146",
+    "model_index": 106877,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632129848",
+    "model_index": 107113,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632512226",
+    "model_index": 108811,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632711052",
+    "model_index": 109663,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632777124",
+    "model_index": 109987,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632779932",
+    "model_index": 110006,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940633552685",
+    "model_index": 112800,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940633588320",
+    "model_index": 112936,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940634146967",
+    "model_index": 114505,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940634700980",
+    "model_index": 115843,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635004271",
+    "model_index": 116609,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635040357",
+    "model_index": 116704,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635234478",
+    "model_index": 117332,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635307639",
+    "model_index": 117525,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635516084",
+    "model_index": 118032,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635572592",
+    "model_index": 118209,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636295019",
+    "model_index": 119993,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940636529520",
+    "model_index": 120493,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940636539102",
+    "model_index": 120524,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636878682",
+    "model_index": 121258,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636950505",
+    "model_index": 121442,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636999401",
+    "model_index": 121544,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940637088602",
+    "model_index": 121733,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940637702222",
+    "model_index": 123165,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940637958709",
+    "model_index": 123713,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940638626118",
+    "model_index": 125217,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940638835288",
+    "model_index": 125695,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940638857048",
+    "model_index": 125744,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940638922624",
+    "model_index": 125897,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940639109795",
+    "model_index": 126366,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940639177449",
+    "model_index": 126552,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940639878352",
+    "model_index": 128089,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940639884878",
+    "model_index": 128102,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940639895003",
+    "model_index": 128134,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940640302389",
+    "model_index": 129051,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940640510427",
+    "model_index": 129480,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940641552347",
+    "model_index": 130854,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940641704656",
+    "model_index": 131032,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940642397128",
+    "model_index": 131542,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940642414837",
+    "model_index": 131563,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940643740964",
+    "model_index": 132516,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940645180196",
+    "model_index": 134013,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940645328436",
+    "model_index": 134164,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940645407268",
+    "model_index": 134247,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940645699124",
+    "model_index": 134553,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940647358243",
+    "model_index": 135809,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940647369507",
+    "model_index": 135821,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940648418425",
+    "model_index": 136325,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940653666465",
+    "model_index": 137555,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940653742753",
+    "model_index": 137567,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940655750305",
+    "model_index": 137933,
+    "cell_type": "LPLC2",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940661316993",
+    "model_index": 138623,
+    "cell_type": "LPLC2",
+    "anatomical_side": "right"
+   }
+  ],
+  "LC9": [
+   {
+    "root_id": "720575940603944672",
+    "model_index": 406,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940604681830",
+    "model_index": 842,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940604922982",
+    "model_index": 1092,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940605020337",
+    "model_index": 1221,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940605318880",
+    "model_index": 1566,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940606423170",
+    "model_index": 3208,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940606521180",
+    "model_index": 3359,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940607313756",
+    "model_index": 4531,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940607839189",
+    "model_index": 5138,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940608166101",
+    "model_index": 5605,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940609454798",
+    "model_index": 7489,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940609860803",
+    "model_index": 8158,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610002033",
+    "model_index": 8404,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940610230738",
+    "model_index": 8793,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612021475",
+    "model_index": 12873,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940612224943",
+    "model_index": 13427,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612258513",
+    "model_index": 13525,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612354983",
+    "model_index": 13833,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612617453",
+    "model_index": 14664,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612627106",
+    "model_index": 14695,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940612942442",
+    "model_index": 15787,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940613370482",
+    "model_index": 17136,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940613481330",
+    "model_index": 17510,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940614135739",
+    "model_index": 19405,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614303890",
+    "model_index": 19927,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940614766166",
+    "model_index": 21524,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940614775238",
+    "model_index": 21555,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615012667",
+    "model_index": 22306,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615061906",
+    "model_index": 22485,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615238075",
+    "model_index": 23149,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615480281",
+    "model_index": 23985,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940615517813",
+    "model_index": 24115,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940615893249",
+    "model_index": 25330,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616204059",
+    "model_index": 26494,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616215513",
+    "model_index": 26529,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616386449",
+    "model_index": 27099,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616492096",
+    "model_index": 27479,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616522726",
+    "model_index": 27573,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616677121",
+    "model_index": 28110,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940616721921",
+    "model_index": 28235,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617284283",
+    "model_index": 30270,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617432603",
+    "model_index": 30848,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617467485",
+    "model_index": 30962,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940617486552",
+    "model_index": 31053,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940617836117",
+    "model_index": 32456,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940617878869",
+    "model_index": 32631,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940617922097",
+    "model_index": 32803,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940617978789",
+    "model_index": 33042,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618046292",
+    "model_index": 33339,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940618541995",
+    "model_index": 35550,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618735105",
+    "model_index": 36358,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940618930459",
+    "model_index": 37117,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619163045",
+    "model_index": 38098,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619410671",
+    "model_index": 38952,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619434432",
+    "model_index": 39047,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619529455",
+    "model_index": 39346,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619601392",
+    "model_index": 39603,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619613422",
+    "model_index": 39661,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940619643190",
+    "model_index": 39784,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619676654",
+    "model_index": 39933,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619719668",
+    "model_index": 40141,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940619788276",
+    "model_index": 40451,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620130462",
+    "model_index": 42038,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620178299",
+    "model_index": 42259,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940620435158",
+    "model_index": 43435,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620542746",
+    "model_index": 44008,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620696280",
+    "model_index": 44957,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620821333",
+    "model_index": 45696,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620827425",
+    "model_index": 45730,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620982049",
+    "model_index": 46652,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940621001485",
+    "model_index": 46744,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621352447",
+    "model_index": 48723,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621415382",
+    "model_index": 49111,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621440862",
+    "model_index": 49251,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940621506451",
+    "model_index": 49603,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940621585903",
+    "model_index": 50063,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622008230",
+    "model_index": 52508,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622162456",
+    "model_index": 53462,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622285183",
+    "model_index": 54186,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622341354",
+    "model_index": 54522,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622345215",
+    "model_index": 54553,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622457235",
+    "model_index": 55178,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940622964477",
+    "model_index": 57932,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623047438",
+    "model_index": 58435,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940623073205",
+    "model_index": 58604,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624069578",
+    "model_index": 64201,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624070090",
+    "model_index": 64202,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624273508",
+    "model_index": 65421,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624319880",
+    "model_index": 65715,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624330254",
+    "model_index": 65783,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624339652",
+    "model_index": 65842,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624624176",
+    "model_index": 67300,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940624740185",
+    "model_index": 67870,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940624856112",
+    "model_index": 68458,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625045837",
+    "model_index": 69597,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625127728",
+    "model_index": 70048,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625232009",
+    "model_index": 70490,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625390979",
+    "model_index": 71216,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625746709",
+    "model_index": 72982,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625772943",
+    "model_index": 73130,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625777941",
+    "model_index": 73154,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940625809816",
+    "model_index": 73332,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940625971204",
+    "model_index": 74192,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626005641",
+    "model_index": 74380,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626397258",
+    "model_index": 76281,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626451081",
+    "model_index": 76545,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626456330",
+    "model_index": 76568,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626475858",
+    "model_index": 76657,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626566931",
+    "model_index": 77099,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626594447",
+    "model_index": 77253,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940626613609",
+    "model_index": 77337,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940626803624",
+    "model_index": 78442,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627180618",
+    "model_index": 80863,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940627814281",
+    "model_index": 84578,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940627841730",
+    "model_index": 84729,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628237415",
+    "model_index": 87039,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628261873",
+    "model_index": 87181,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628337103",
+    "model_index": 87633,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628347722",
+    "model_index": 87704,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628654927",
+    "model_index": 89466,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628679887",
+    "model_index": 89587,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628858954",
+    "model_index": 90613,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628875902",
+    "model_index": 90686,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628889551",
+    "model_index": 90771,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940628908375",
+    "model_index": 90882,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940628972332",
+    "model_index": 91224,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629300242",
+    "model_index": 92865,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629419594",
+    "model_index": 93447,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629549049",
+    "model_index": 94169,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629594839",
+    "model_index": 94377,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629791275",
+    "model_index": 95293,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630162755",
+    "model_index": 97241,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630247243",
+    "model_index": 97669,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940630642861",
+    "model_index": 99692,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630788772",
+    "model_index": 100570,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940630865197",
+    "model_index": 100959,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631148113",
+    "model_index": 102500,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631199744",
+    "model_index": 102770,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631357651",
+    "model_index": 103595,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631379449",
+    "model_index": 103692,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631486163",
+    "model_index": 104217,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940631711225",
+    "model_index": 105270,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632214497",
+    "model_index": 107425,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632603873",
+    "model_index": 109187,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632619880",
+    "model_index": 109266,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940632949807",
+    "model_index": 110698,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940634073825",
+    "model_index": 114348,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940634140011",
+    "model_index": 114488,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940634186647",
+    "model_index": 114589,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940634336887",
+    "model_index": 114982,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940634545400",
+    "model_index": 115444,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635224943",
+    "model_index": 117295,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635294309",
+    "model_index": 117496,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940635376052",
+    "model_index": 117706,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635689370",
+    "model_index": 118550,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635703262",
+    "model_index": 118608,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635970446",
+    "model_index": 119299,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635986522",
+    "model_index": 119331,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636056895",
+    "model_index": 119476,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636759386",
+    "model_index": 121008,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940636760292",
+    "model_index": 121009,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940637379517",
+    "model_index": 122375,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940638793304",
+    "model_index": 125608,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940638976233",
+    "model_index": 126019,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940639201269",
+    "model_index": 126604,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940639459280",
+    "model_index": 127147,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940642959895",
+    "model_index": 132012,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940642995360",
+    "model_index": 132027,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940643039255",
+    "model_index": 132055,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940644095511",
+    "model_index": 132834,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940644686388",
+    "model_index": 133421,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940644843118",
+    "model_index": 133618,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940645023268",
+    "model_index": 133816,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940647603252",
+    "model_index": 135957,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940648290937",
+    "model_index": 136277,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940650416249",
+    "model_index": 136794,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940652785057",
+    "model_index": 137270,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940658141057",
+    "model_index": 138067,
+    "cell_type": "LC9",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940661191041",
+    "model_index": 138580,
+    "cell_type": "LC9",
+    "anatomical_side": "left"
+   }
+  ]
+ },
+ "readouts": {
+  "DNp01": [
+   {
+    "root_id": "720575940622838154",
+    "model_index": 57246,
+    "cell_type": "DNp01",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940632499757",
+    "model_index": 108748,
+    "cell_type": "DNp01",
+    "anatomical_side": "right"
+   }
+  ],
+  "DNp02": [
+   {
+    "root_id": "720575940619654053",
+    "model_index": 39826,
+    "cell_type": "DNp02",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940620468718",
+    "model_index": 43619,
+    "cell_type": "DNp02",
+    "anatomical_side": "right"
+   }
+  ],
+  "DNp04": [
+   {
+    "root_id": "720575940604954289",
+    "model_index": 1133,
+    "cell_type": "DNp04",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629757036",
+    "model_index": 95123,
+    "cell_type": "DNp04",
+    "anatomical_side": "right"
+   }
+  ],
+  "DNp06": [
+   {
+    "root_id": "720575940611644529",
+    "model_index": 11861,
+    "cell_type": "DNp06",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940622673860",
+    "model_index": 56320,
+    "cell_type": "DNp06",
+    "anatomical_side": "left"
+   }
+  ],
+  "DNp11": [
+   {
+    "root_id": "720575940620054694",
+    "model_index": 41678,
+    "cell_type": "DNp11",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940629777018",
+    "model_index": 95216,
+    "cell_type": "DNp11",
+    "anatomical_side": "right"
+   }
+  ],
+  "DNp09": [
+   {
+    "root_id": "720575940627652358",
+    "model_index": 83620,
+    "cell_type": "DNp09",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940635872101",
+    "model_index": 119032,
+    "cell_type": "DNp09",
+    "anatomical_side": "left"
+   }
+  ],
+  "DNa01": [
+   {
+    "root_id": "720575940627787609",
+    "model_index": 84431,
+    "cell_type": "DNa01",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940644438551",
+    "model_index": 133149,
+    "cell_type": "DNa01",
+    "anatomical_side": "right"
+   }
+  ],
+  "DNa02": [
+   {
+    "root_id": "720575940604737708",
+    "model_index": 904,
+    "cell_type": "DNa02",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940629327659",
+    "model_index": 92992,
+    "cell_type": "DNa02",
+    "anatomical_side": "left"
+   }
+  ],
+  "MDN": [
+   {
+    "root_id": "720575940610236514",
+    "model_index": 8808,
+    "cell_type": "MDN",
+    "anatomical_side": "right"
+   },
+   {
+    "root_id": "720575940616026939",
+    "model_index": 25844,
+    "cell_type": "MDN",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940631082808",
+    "model_index": 102124,
+    "cell_type": "MDN",
+    "anatomical_side": "left"
+   },
+   {
+    "root_id": "720575940640331472",
+    "model_index": 129127,
+    "cell_type": "MDN",
+    "anatomical_side": "right"
+   }
+  ]
+ },
+ "counts": {
+  "LC4": 104,
+  "LPLC2": 210,
+  "LC9": 179,
+  "DNp01": 2,
+  "DNp02": 2,
+  "DNp04": 2,
+  "DNp06": 2,
+  "DNp11": 2,
+  "DNp09": 2,
+  "DNa01": 2,
+  "DNa02": 2,
+  "MDN": 4
+ }
+}

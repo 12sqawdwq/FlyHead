@@ -1,0 +1,7 @@
+planner 1 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': None, 'arrived': True, 'result': 'arrived: ', 't_end': 121.4, 'min_person_m': 0.5, 'min_wall_m': 0.53, 'reflex_count': 0}
+planner 2 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': None, 'arrived': True, 'result': 'arrived: ', 't_end': 121.1, 'min_person_m': 0.49, 'min_wall_m': 0.52, 'reflex_count': 0}
+planner 3 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': None, 'arrived': True, 'result': 'arrived: ', 't_end': 123.1, 'min_person_m': 0.52, 'min_wall_m': 0.52, 'reflex_count': 0}
+reflex 1 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': 3.0, 'arrived': False, 'result': 'timeout', 't_end': 180.0, 'min_person_m': 0.56, 'min_wall_m': 0.45, 'reflex_count': 5}
+reflex 2 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': 2.9, 'arrived': False, 'result': 'timeout', 't_end': 180.0, 'min_person_m': 0.42, 'min_wall_m': 0.36, 'reflex_count': 4}
+reflex 3 {'contacts': 0, 'takeovers_before': 0, 'reaction_s': 2.8, 'arrived': True, 'result': 'arrived: ', 't_end': 176.2, 'min_person_m': 0.43, 'min_wall_m': 0.41, 'reflex_count': 3}
+{'no_contacts': True, 'no_early_takeover': True, 'reaction': True, 'arrived': False} STAGE 6 SIM FAILED

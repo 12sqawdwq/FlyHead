@@ -1,0 +1,16 @@
+{
+  "mapping_root": "<SERVER_ROOT>/inference_service/mappings/photo_startup_002",
+  "optimization_root": "<SERVER_ROOT>/inference_service/mappings/event_optimization_003",
+  "stage": "PHOTO_RESPONSE_AND_EXACT_EVENT_BACKEND_COMPLETED",
+  "forward_readout_observed": true,
+  "realtime_qualified": false,
+  "model_step_100ms_median_wall_ms": [
+    45.87,
+    47.87
+  ],
+  "real_camera_qualified": false,
+  "robot_motion_authorized": false,
+  "persistent_service_running": false,
+  "photo_result_sha256": "45fe219205dc6b5ab8489cbd9f4b92b1da2434969d887dfce2533f2dc8aa8a9f",
+  "optimization_result_sha256": "755d32e8cfce28950d8075b794ba10a17ed2d9bb0ebd317d2ff552499597be12"
+}

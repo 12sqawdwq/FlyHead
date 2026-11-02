@@ -1,0 +1,4 @@
+{"condition": "ZERO", "spikes": 0, "readout_spikes": 0, "wall_seconds": 0.26908931400976144}
+{"condition": "TONIC", "spikes": 1, "readout_spikes": 0, "wall_seconds": 0.2237120480131125}
+{"condition": "LEFT_IMAGE_MOTION", "spikes": 119, "readout_spikes": 2, "wall_seconds": 0.22293207999609876}
+{"condition": "RIGHT_IMAGE_MOTION", "spikes": 117, "readout_spikes": 2, "wall_seconds": 0.2236241219943622}

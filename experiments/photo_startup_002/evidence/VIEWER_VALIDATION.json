@@ -1,0 +1,1 @@
+{"status": "PASS_JS_SYNTAX", "trials": 75, "initial_syntax_failure": "Python interpreted JS newline escape; repaired with raw HTML template", "scientific_results_changed": false}

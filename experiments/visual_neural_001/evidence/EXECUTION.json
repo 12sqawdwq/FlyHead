@@ -1,0 +1,9 @@
+{
+  "utc": "2026-09-22T15:59:55.123544+00:00",
+  "pid": 978202,
+  "status": "COMPLETE",
+  "scope": "synthetic full-graph mapping probe; no robot I/O",
+  "returncode": 0,
+  "wall_seconds": 7.008593008009484,
+  "stop_reason": null
+}

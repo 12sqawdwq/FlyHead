@@ -1,0 +1,64 @@
+{
+  "utc": "2026-09-22T16:06:14.360798+00:00",
+  "scope": "SYNTHETIC_VISUAL_MAPPING_TECHNICAL_PROBE_ONLY",
+  "protocol_sha256": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+  "independent_local_server_validation_fields_identical": true,
+  "validator_raw_bytes_identical": false,
+  "validator_byte_difference": "CRLF versus LF; original files preserved",
+  "primary_turn_response_observed": true,
+  "forward_response_observed": false,
+  "realtime_control_qualified": false,
+  "real_camera_or_robot_used": false,
+  "files": [
+    {
+      "path": "runs/probe_001/LEFT_IMAGE_MOTION_counts.npy",
+      "sha256": "7a03f4eb6fd4338dcc4b13c0008a65d43d0fcce6970fc7956370bb03a1e0ecb8"
+    },
+    {
+      "path": "runs/probe_001/RESULTS.json",
+      "sha256": "61e85ca67a7c59685581db6e6063b1e5b5bb12c0a5d2cf922485d47365a9159d"
+    },
+    {
+      "path": "runs/probe_001/RIGHT_IMAGE_MOTION_counts.npy",
+      "sha256": "de2d06dc241e18cc83de3671dd2dec1e2fbe15d42bdec72fcd9681e79ee67ef5"
+    },
+    {
+      "path": "runs/probe_001/status.json",
+      "sha256": "61e85ca67a7c59685581db6e6063b1e5b5bb12c0a5d2cf922485d47365a9159d"
+    },
+    {
+      "path": "runs/probe_001/TONIC_counts.npy",
+      "sha256": "be9b81f72cc446127e9014616f40dd09b80f9dd4c8bcd841e05791bc6981f6aa"
+    },
+    {
+      "path": "runs/probe_001/ZERO_counts.npy",
+      "sha256": "85733f4d28c59f3368ca1fb90eff8723ea60527620b69432b5bc44d8964aea9e"
+    },
+    {
+      "path": "evidence/INDEPENDENT_VALIDATION_LOCAL.json",
+      "sha256": "8997ad6ef85b293584669ff3db16d02429fbd670c7b85ce884c5e83af7957da9"
+    },
+    {
+      "path": "evidence/INDEPENDENT_VALIDATION_SERVER.json",
+      "sha256": "ffe582e4177c78205e10b2eee475cc0181dece57f999eee927c4a8742c3a5310"
+    },
+    {
+      "path": "evidence/VALIDATION_COMPARISON.json",
+      "sha256": "127cd164148a3ad63292deea7d4f1960d8a1cb019dda246cd46f5947c3e7b8e7"
+    },
+    {
+      "path": "evidence/EXECUTION.json",
+      "sha256": "fc81581a3dcffce51b37dfc99883c1a7cf75ed4f10ebd38a9112d010110405b5"
+    },
+    {
+      "path": "evidence/server_tests.txt",
+      "sha256": "17866ad54bf5c9e7e6dbed97cb52153b1eb1cdfa10dcac3426fe92fca7442d59"
+    },
+    {
+      "path": "evidence/local_tests.txt",
+      "sha256": "8cc8616d5445aa4e75c91c51cf0bb426957e6956a2a11ba1bda6af728ba2f291"
+    }
+  ],
+  "archive_amendment": "Platform-specific validator filenames; no neural, metric, protocol or run change.",
+  "supersedes_local_lock_sha256": "a194874042c905fcb30f241ee62c9d60dbe21666e0921366a255c0ef75fc6bc2"
+}

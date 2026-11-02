@@ -1,0 +1,24 @@
+{
+  "node_id": "TA_kwDOAE3xU9oAKGNiZWU2ODQxNjM4ZWRiNmZiYzgxMTBkZjdjZDUyYmI4ZTNkNjYyMTE",
+  "sha": "cbee6841638edb6fbc8110df7cd52bb8e3d66211",
+  "url": "https://api.github.com/repos/opencv/opencv/git/tags/cbee6841638edb6fbc8110df7cd52bb8e3d66211",
+  "tagger": {
+    "name": "Alexander Smorkalov",
+    "email": "alexander.smorkalov@opencv.ai",
+    "date": "2025-07-02T12:41:45Z"
+  },
+  "object": {
+    "sha": "49486f61fb25722cbcf586b7f4320921d46fb38e",
+    "type": "commit",
+    "url": "https://api.github.com/repos/opencv/opencv/git/commits/49486f61fb25722cbcf586b7f4320921d46fb38e"
+  },
+  "tag": "4.12.0",
+  "message": "Release 4.12.0\n",
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ref": "refs/tags/1.7.2",
+  "node_id": "MDM6UmVmODQzMjIyOnJlZnMvdGFncy8xLjcuMg==",
+  "url": "https://api.github.com/repos/scikit-learn/scikit-learn/git/refs/tags/1.7.2",
+  "object": {
+    "sha": "b8c435b6c580cf10685ff012d3d1e7b786d5f244",
+    "type": "tag",
+    "url": "https://api.github.com/repos/scikit-learn/scikit-learn/git/tags/b8c435b6c580cf10685ff012d3d1e7b786d5f244"
+  }
+}

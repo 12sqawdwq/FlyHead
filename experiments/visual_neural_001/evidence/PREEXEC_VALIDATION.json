@@ -1,0 +1,11 @@
+{
+  "status": "PASS_BEFORE_GPU_EXECUTION",
+  "protocol_lock_sha256": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+  "local_source_and_input_files": 15,
+  "conditions": [
+    "ZERO",
+    "TONIC",
+    "LEFT_IMAGE_MOTION",
+    "RIGHT_IMAGE_MOTION"
+  ]
+}

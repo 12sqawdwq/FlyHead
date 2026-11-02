@@ -1,0 +1,9 @@
+{
+  "mapping_root": "<SERVER_ROOT>/inference_service/mappings/visual_neural_001",
+  "protocol_sha256": "415a0a0b2b969c715634701e216eb5b44c9f9d0d66aaa81cc3c7158536f732d9",
+  "result_lock_sha256": "1a34f9502804270600caf178661fc281f78c16984d71697d6e9a5b3b8746edd9",
+  "stage": "SYNTHETIC_TURN_SHADOW_RESPONSE_OBSERVED",
+  "forward_readout_observed": false,
+  "realtime_qualified": false,
+  "robot_motion_authorized": false
+}

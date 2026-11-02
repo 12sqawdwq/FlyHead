@@ -1,0 +1,18 @@
+{
+  "status": "PREMODEL_RESOURCE_GATE_FAILURE",
+  "neural_trials": 0,
+  "files": [
+    {
+      "path": "run_002/RESULTS.json",
+      "sha256": "6ff6b9876b6cf276aca1236abb4f4f0a5cbcf0819acaaaf020610802363ce56f"
+    },
+    {
+      "path": "evidence/EXECUTION_SHARED.json",
+      "sha256": "d81edbca3df297bcea599346f8cf4bacd27bc5253e900fdd9a642c7d36edbfaf"
+    },
+    {
+      "path": "evidence/stderr_shared.txt",
+      "sha256": "a5d33076acbec59074cff46c371f416d4df20245c7ca08fc376bd19e57cf5bd1"
+    }
+  ]
+}
