@@ -1,118 +1,135 @@
-# FlyHead
+<div align="center">
 
-**A whole-brain fruit-fly connectome as the head of a wheel-legged robot.**
+<img src="docs/media/banner.png" alt="FlyHead banner" width="100%">
 
-FlyHead is a research robot stack with two decision layers that share one body:
+<p>
+<img src="https://img.shields.io/badge/connectome-FlyWire%20v783-3fb950?style=flat-square" alt="FlyWire v783">
+<img src="https://img.shields.io/badge/neurons-138%2C639%20LIF-58a6ff?style=flat-square" alt="138,639 LIF neurons">
+<img src="https://img.shields.io/badge/PyTorch-CUDA-ee4c2c?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch CUDA">
+<img src="https://img.shields.io/badge/ROS%202-Foxy-22314e?style=flat-square&logo=ros&logoColor=white" alt="ROS 2 Foxy">
+<img src="https://img.shields.io/badge/SLAM-KISS--ICP-6e7781?style=flat-square" alt="KISS-ICP">
+<img src="https://img.shields.io/badge/status-research%20code-d29922?style=flat-square" alt="research code">
+</p>
 
-1. **Autonomous navigation (no fly brain).** The robot maps a building with LiDAR SLAM, relocalizes on
-   the saved map, and drives routes: goals, exploration, looped tours, return to the charger, and a
-   faster "Turbo" mode. It works on its own and is the layer the brain sits on top of.
-2. **The fly brain.** The complete FlyWire v783 *Drosophila* connectome (138,639 leaky
-   integrate-and-fire neurons, 15,091,983 connection records, PyTorch/CUDA) receives encoded LiDAR
-   looming and decides escape, turns and walking through identified descending neurons. Its output
-   passes only through a safety envelope that can reduce or zero a command, never add one.
+<p>
+<b>English</b> · <a href="README.zh-CN.md">中文</a> ·
+<a href="#-gallery">Gallery</a> ·
+<a href="#-state-coverage">State coverage</a> ·
+<a href="#-quick-start">Quick start</a> ·
+<a href="docs/demo.md">Demo page</a> ·
+<a href="docs/architecture.md">Architecture</a> ·
+<a href="docs/verification.md">Verification</a> ·
+<a href="experiments/README.md">Experiments</a>
+</p>
 
-Hardware: a DIABLO wheel-legged robot (Raspberry Pi 4B, ROS 2 Foxy, Unitree L1 LiDAR), a GPU compute
-host, and a Windows operator PC. SLAM, navigation and the brain run on the compute host; the robot does I/O.
+</div>
 
-[中文说明](README.zh-CN.md) · [Demo page](docs/demo.md) · [Architecture](docs/architecture.md) ·
-[Reproduce](docs/reproduce.md) · [Verification](docs/verification.md) · [Experiments](experiments/README.md)
+FlyHead is a research robot with **two decision layers in one body**:
 
-*Mythology note: Xingtian (刑天) fights on after losing his head. Here a fly brain is the head.*
+| | |
+| --- | --- |
+| 🧭 **Autonomous navigation** | LiDAR SLAM on a saved map of the building, centreline route planning, tours, detours and a host safety chain. Works on its own, without the brain. |
+| 🧠 **The fly brain** | The complete FlyWire v783 *Drosophila* connectome on a GPU turns LiDAR looming into escape, turning and walking through identified descending neurons. A safety envelope may only reduce or zero its commands. |
+
+Hardware: a DIABLO wheel-legged robot (Raspberry Pi 4B, ROS 2 Foxy, Unitree L1 LiDAR), a GPU compute host
+and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; here a fly brain is the head.*
 
 ---
 
-## Contents
+## 🎬 Gallery
 
-1. [Videos](#videos): real robot, real-site SLAM map, real tour replays, brain on the real map, stage 6, console
-2. [State coverage](#state-coverage-every-state-and-where-to-see-it)
-3. [System overview](#system-overview)
-4. [What is real, what is simulated, what is a claim](#what-is-real-what-is-simulated-what-is-a-claim)
-5. [Autonomous navigation](#autonomous-navigation-no-brain)
-6. [The fly brain](#the-fly-brain)
-7. [Results](#results-so-far)
-8. [Verification and simulation](#verification-and-simulation)
-9. [Known problems and open issues](#known-problems-and-open-issues)
-10. [Repository layout](#repository-layout)
-11. [Quick start](#quick-start)
-12. [Safety](#safety)
-13. [Documentation index](#documentation-index)
-14. [Credits and licences](#credits-and-licences)
+<p>
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> physical robot (phone footage) &nbsp;
+<img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> the robot's own logs, replayed &nbsp;
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> the saved SLAM map of the real building &nbsp;
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> simulated LiDAR, full connectome on GPU &nbsp;
+<img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> real console and server, replayed session
+</p>
 
----
+### 🤖 The real robot
 
-## Videos
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/nav_hallway.gif" width="100%" alt="hallway">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · hallway</b><br>
+<sub>Standing / crouched posture and route driving, no fly brain · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/nav_office.gif" width="100%" alt="office at night">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · office at night</b><br>
+<sub>Route driving through the mapped office, no fly brain · 6 min at 4× · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/real_brain.gif" width="100%" alt="brain drive">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>The fly brain drives · stage5_004</b><br>
+<sub>A person approaches; 262 s of brain drive, 30 escape programs, 0 contacts reported · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/tour.gif" width="100%" alt="real tour replay">
+<img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>Autonomous tour, from the robot's log</b><br>
+<sub>2026-10-04 · 729 s, 56.1 m, fitness ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s tour</a></sub>
+</td>
+</tr>
+</table>
 
-Every clip is labelled by what it is:
+### 🗺️ The real site: SLAM map
 
-| Label | Meaning |
-| --- | --- |
-| **REAL** | the physical robot (phone footage), or the robot's own logs replayed |
-| **REAL SITE** | the saved SLAM map of the real building the robot drives in (`onboard_20260926_manual_cleanup_20261005`) |
-| **SIM** | simulated LiDAR (ray-cast on that map); the brain is the full connectome on the GPU |
-| **CONSOLE** | the unmodified operator console and control server, fed a replay; brain in shadow mode (shown, never sent) |
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/mapbuild.gif" width="100%" alt="map build-up">
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The mapping session, replayed</b><br>
+<sub>2026-09-25 · 1,407 s, 54.7 m, 550,975 points · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/orbit.gif" width="100%" alt="3-D point cloud">
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The saved point cloud in 3-D</b><br>
+<sub>Walls and furniture below 1.3 m, coloured by height · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="navigation layers"></a>
+<sub><b>Navigation layers of the same map:</b> occupancy grid · clearance field and the centreline every route follows · obstacle heights (what blocks a crouched or a standing robot) · the mapping path and the real tours.</sub>
+</td>
+</tr>
+</table>
 
-All clips are in [`docs/media/`](docs/media). [docs/demo.md](docs/demo.md) gives, for each one, the run it
-belongs to and the code and log fields behind every panel. The map package itself is not in the
-repository; only rendered views of it are.
+### 🧠 The fly brain on the real map
 
-### 1. Real robot
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/decision.gif" width="100%" alt="decision chain">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>The decision chain, window by window</b><br>
+<sub>A person from the left: LiDAR → LC4/LPLC2/LC9 → descending neurons → decoder → command · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/roam.gif" width="100%" alt="free roaming">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s of free roaming</b><br>
+<sub>18.9 m, 0 contacts; explore, escape, flee, freeze and hold in one run · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/stage6.gif" width="100%" alt="stage 6">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6: planner vs. fly reflexes</b><br>
+<sub>Both arms arrive with 0 contacts; the brain takes over twice · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/console.gif" width="100%" alt="operator console">
+<img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>Operator console on the real map</b><br>
+<sub>Relocalized at fitness 1.00, brain in shadow mode, charging lock on · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub>
+</td>
+</tr>
+</table>
 
-| Autonomous navigation: hallway, posture and route driving (19 s) | Autonomous navigation: office at night, 4× speed (90 s) |
-| --- | --- |
-| ![hallway](docs/media/preview/nav_hallway.gif) | ![office](docs/media/preview/nav_office.gif) |
-| [mp4](docs/media/real/hallway_posture_drive.mp4) · no fly brain | [mp4](docs/media/real/office_night_drive_4x.mp4) · no fly brain |
-
-| Fly brain drives, a person approaches: stage 5, run stage5_004 (54 s) |
-| --- |
-| ![brain drive](docs/media/preview/real_stage5_escape.gif) |
-| [mp4](docs/media/real/stage5_004_brain_drive_escape.mp4) · the brain decides; envelope, geofence and 0.3 s lease in front of the wheels |
-
-The brain clip is matched to its run by the phone's recording time (22:57:17 local, inside the drive
-window 22:53:38–22:58:03). That run: 262 s of brain drive, 30 escape programs, 0 contacts reported.
-The two navigation clips have file timestamps of 2026-10-08, the day the navigation stack was rebuilt.
-
-### 2. The real site: the SLAM map
-
-| Mapping session replayed (REAL SITE, 42 s) | The saved point cloud in 3-D (REAL SITE, 24 s) |
-| --- | --- |
-| ![map build](docs/media/preview/rm_mapbuild.gif) | ![orbit](docs/media/preview/rm_orbit.gif) |
-| [mp4](docs/media/realmap/slam_map_build.mp4) | [mp4](docs/media/realmap/slam_map_orbit.mp4) |
-
-The map was built on 2026-09-25 in one session: 1,407 s, 54.7 m driven, 550,975 points, a 912 × 926
-grid at 0.05 m, cleaned up by hand on 2026-10-05. The build-up video replays the session's own
-trajectory and shows each part of the saved cloud when the robot first came within 4 m of it.
-
-[![navigation layers](docs/media/realmap/nav_layers.png)](docs/media/realmap/nav_layers.png)
-
-*Navigation layers of the same map:* (1) the occupancy grid, (2) the planner's clearance field and the
-centreline every route follows, (3) the obstacle-height layer that decides what blocks a crouched or a
-standing robot, (4) the mapping path and the real autonomous tours below.
-
-### 3. Real autonomous navigation, replayed from the robot's own logs
-
-| Autonomous tour, 2026-10-04 (REAL log, 729 s at ≈ 11×) |
-| --- |
-| ![real tour](docs/media/preview/rm_tour.gif) |
-| [mp4, 729 s tour](docs/media/realmap/real_tour_729s.mp4) · [mp4, 138 s tour](docs/media/realmap/real_tour_138s.mp4) |
-
-Rendered from the console's observation logs of the real robot (`standing_tour_*_20261004*.jsonl`),
-not simulated: every frame is one recorded navigator message with the robot's pose, the planned
-route, the goal, the navigator state and reason, localization fitness and the command. These tours
-ran on the navigation stack of 2026-10-04, four days before the rebuild described below.
-
-| Tour | Driven | States recorded (messages) | Fitness |
-| --- | --- | --- | --- |
-| 729 s | 56.1 m | driving 454, waiting 68, stopped 11, avoiding 5, planning 1 | min 0.963, median 0.995 |
-| 138 s | 12.6 m | driving 104, idle 26, waiting 8, stopped 4, planning 1 | min 0.910, median 0.995 |
-
-Waiting is mostly the stale-pose gate ("SLAM pose temporarily stale, stop and wait"); avoiding is a
-local detour.
-
-### 4. The fly brain on the real map (SIM)
-
-Every scenario of the stage-3 suite, run on the real SLAM map with the full connectome (decoder V9),
-plus the blind baseline (constant forward through the same envelope):
+<details>
+<summary><b>All eight brain scenarios on the real map</b> (videos, outcomes, overview figures)</summary>
+<br>
 
 | Scenario | What happens | Brain: contacts, min clearance | Blind: contacts | Video |
 | --- | --- | --- | --- | --- |
@@ -125,79 +142,86 @@ plus the blind baseline (constant forward through the same envelope):
 | `loom_left` | the same from the left | 21, −0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_left.mp4) |
 | `loom_right` | the same from the right | 21, −0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_right.mp4) |
 
-| Decision chain, person from the left | 120 s free roaming |
-| --- | --- |
-| ![decision](docs/media/preview/rm_decision.gif) | ![roam](docs/media/preview/rm_roam.gif) |
+The `loom_*` objects drive through the robot whatever it does: the brain escapes, the object follows. They
+count contacts and are not passed scenarios.
 
-Each video shows the map and ray-cast LiDAR, the rates written into the LC4/LPLC2/LC9 cells, the
-descending-neuron rates, the decoder features and decision, and the decoder state over the whole run.
-The `loom_*` objects drive through the robot whatever it does: the brain escapes, but the object
-follows it, so these count contacts and are not passed scenarios.
+<a href="docs/media/realmap/scenarios_brain_vs_blind.png"><img src="docs/media/realmap/scenarios_brain_vs_blind.png" width="100%" alt="brain vs blind"></a>
+<a href="docs/media/realmap/decoder_states.png"><img src="docs/media/realmap/decoder_states.png" width="100%" alt="decoder states"></a>
 
-[![scenarios](docs/media/realmap/scenarios_brain_vs_blind.png)](docs/media/realmap/scenarios_brain_vs_blind.png)
-[![decoder states](docs/media/realmap/decoder_states.png)](docs/media/realmap/decoder_states.png)
+</details>
 
-### 5. Stage 6 on the real map: planner vs. fly reflexes (SIM)
+<details>
+<summary><b>The four console tabs</b> and what the replay is</summary>
+<br>
 
-| Same seed and person; left: planner only (brain in shadow), right: the brain may take over |
-| --- |
-| ![stage 6](docs/media/preview/rm_stage6.gif) |
-| [mp4](docs/media/realmap/stage6_planner_vs_reflex.mp4) |
+<table>
+<tr>
+<td width="25%"><a href="docs/media/realmap/console/tab_home.png"><img src="docs/media/realmap/console/tab_home.png" width="100%" alt="Home"></a><br><sub><b>Home</b> · session, map, tours</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_mission.png"><img src="docs/media/realmap/console/tab_mission.png" width="100%" alt="Mission"></a><br><sub><b>Mission</b> · goals, limits, brain modes</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_drive.png"><img src="docs/media/realmap/console/tab_drive.png" width="100%" alt="Drive"></a><br><sub><b>Drive</b> · chassis, posture</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_display.png"><img src="docs/media/realmap/console/tab_display.png" width="100%" alt="Display"></a><br><sub><b>Display</b> · views, map changes</sub></td>
+</tr>
+</table>
 
-Planner arm: arrived after 122.1 s, 0 contacts. Reflex arm: arrived after 139.7 s, 0 contacts, 2 reflex
-takeovers (39 windows in control of the brain). Another run with the same code and seed timed out at
-180 s with 0 contacts; see [Known problems](#known-problems-and-open-issues).
+The console and server are real; the session is a replay whose scans were taken from the saved point cloud
+along a scripted path, with a person added. Shown: relocalization, posture (stand, LiDAR 0.45 m), the person
+committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN_LEFT/RIGHT, REST, FORWARD).
 
-### 6. The operator console on the real map (CONSOLE)
+</details>
 
-| Console replaying a session on the real map, brain in shadow (61 s) |
-| --- |
-| ![console](docs/media/preview/rm_console.gif) |
-| [mp4](docs/media/realmap/console/console_real_map_brain_shadow.mp4) |
+<details>
+<summary><b>How each clip was made</b> and the earlier synthetic-arena clips</summary>
+<br>
 
-| Home | Mission | Drive | Display |
-| --- | --- | --- | --- |
-| [![home](docs/media/realmap/console/tab_home.png)](docs/media/realmap/console/tab_home.png) | [![mission](docs/media/realmap/console/tab_mission.png)](docs/media/realmap/console/tab_mission.png) | [![drive](docs/media/realmap/console/tab_drive.png)](docs/media/realmap/console/tab_drive.png) | [![display](docs/media/realmap/console/tab_display.png)](docs/media/realmap/console/tab_display.png) |
+* The brain clip is matched to its run by the phone's recording time (22:57:17 local, inside the drive window
+  22:53:38–22:58:03). The two navigation clips carry file timestamps of 2026-10-08, the day the navigation
+  stack was rebuilt.
+* The tour replays are rendered from the console's observation logs of the real robot
+  (`standing_tour_*_20261004*.jsonl`): every frame is one recorded navigator message. They ran on the navigation
+  stack of 2026-10-04, four days before the rebuild.
 
-The console and server are real; the session is a replay. Its scans were generated from the saved
-point cloud along a scripted path, with a person added, so the session relocalizes on the real map
-(fitness 1.00). Shown: relocalization, posture (stand, LiDAR 0.45 m), the person committed as a map
-change, and the brain's shadow decisions (HOLD, EXPLORE, TURN_LEFT/RIGHT, REST, FORWARD). The charging
-lock stays on; a replay has no robot link.
+  | Tour | Driven | Navigator states (messages) | Fitness |
+  | --- | --- | --- | --- |
+  | 729 s | 56.1 m | driving 454, waiting 68, stopped 11, avoiding 5, planning 1 | min 0.963, median 0.995 |
+  | 138 s | 12.6 m | driving 104, idle 26, waiting 8, stopped 4, planning 1 | min 0.910, median 0.995 |
 
-### 7. Earlier clips on a synthetic arena (SIM, CONSOLE)
+* The map was built on 2026-09-25 (912 × 926 grid at 0.05 m) and cleaned up by hand on 2026-10-05. The map package
+  itself is not in the repository; only rendered views of it, published with the site owner's consent.
+* Stage 6: planner arm arrived after 122.1 s; reflex arm after 139.7 s with 2 takeovers (39 windows under the
+  brain). Another run with the same seed timed out at 180 s with 0 contacts.
+* Earlier synthetic-arena clips: [decision chain](docs/media/sim/decision_chain_person_front.mp4) ·
+  [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) · [console](docs/media/console/console_replay_brain_shadow.mp4).
+* Sources and renderers for every item: [docs/demo.md](docs/demo.md).
 
-[Decision chain](docs/media/sim/decision_chain_person_front.mp4) ·
-[stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) ·
-[console replay](docs/media/console/console_replay_brain_shadow.mp4). The arena is a generated
-rectangle; these predate the real-map renders and are kept because the verification record refers to them.
+</details>
 
 ---
 
-## State coverage: every state and where to see it
+## 🧭 State coverage
 
-| Layer | State | Where it is shown |
+| Layer | State | Where to see it |
 | --- | --- | --- |
-| Navigator (real logs) | `driving`, `waiting`, `stopped`, `avoiding`, `planning`, `idle` | §3 real tours (state band, robot colour) |
-| Navigator (sim) | `driving`, `arrived`, reflex hold | §5 stage 6 |
-| Navigator gates | stale pose → wait; detour (`avoiding`); waypoint progress | §3 reason text |
-| Localization | relocalized on the saved map (fitness 1.00); fitness over a real tour | §6 console; §3 fitness plot |
-| Posture | crouch, stand | §1 hallway clip; §3 (`posture` line); §6 (Chassis `stand · 0.47 m`) |
-| Map changes | new obstacle committed, temporary obstacle cleared | §3 boxes; §6 messages |
-| Decoder (brain) | FORWARD, EXPLORE, TURN_LEFT, TURN_RIGHT | §4 all scenarios |
-| Decoder (brain) | FREEZE, ESCAPE_PROGRAM, BACK_OFF, FLEE | §4 person and loom scenarios, `roam_open`; §1 stage5_004 (escapes on the real robot) |
-| Decoder (brain) | HOLD, REST | §4 `roam_open` (HOLD); §6 console (HOLD, REST) |
-| Brain mode | `off` | §1 navigation clips, §3 |
-| Brain mode | `shadow` | §5 planner arm, §6 console |
-| Brain mode | `drive` | §1 stage5_004 (real robot) |
-| Brain mode | `reflex` | §5 reflex arm |
-| Safety | charging lock on | §6 banner |
-| Safety | envelope reducing a brain command | §4 decision videos ("envelope:" in panel 3; overrides in `loom_*`, `person_right`, `roam_open`) |
+| Navigator (real logs) | `driving` · `waiting` · `stopped` · `avoiding` · `planning` · `idle` | 🤖 tour replay (state band, robot colour) |
+| Navigator (sim) | `driving` · `arrived` · reflex hold | 🧠 Stage 6 |
+| Navigator gates | stale pose → wait · detour (`avoiding`) · waypoint progress | 🤖 tour replay (reason line) |
+| Localization | relocalized on the saved map (fitness 1.00) · fitness over a real tour | 🧠 console · 🤖 tour replay |
+| Posture | crouch · stand | 🤖 hallway clip, tour replay · 🧠 console (`stand · 0.47 m`) |
+| Map changes | new obstacle committed · temporary obstacle cleared | 🤖 tour replay (boxes) · 🧠 console messages |
+| Decoder | FORWARD · EXPLORE · TURN_LEFT · TURN_RIGHT | 🧠 every scenario |
+| Decoder | FREEZE · ESCAPE_PROGRAM · BACK_OFF · FLEE | 🧠 person, loom and roam scenarios · 🤖 stage5_004 on the real robot |
+| Decoder | HOLD · REST | 🧠 roam (HOLD) · console (HOLD, REST) |
+| Brain mode | `off` | 🤖 navigation clips and tour replays |
+| Brain mode | `shadow` | 🧠 Stage 6 planner arm · console |
+| Brain mode | `drive` | 🤖 stage5_004 on the real robot |
+| Brain mode | `reflex` | 🧠 Stage 6 reflex arm |
+| Safety | charging lock on | 🧠 console banner |
+| Safety | envelope reducing a brain command | 🧠 decision videos ("envelope:" in panel 3; loom, `person_right`, roam) |
 
+🤖 = [the real robot](#-the-real-robot) · 🧠 = [the fly brain on the real map](#-the-fly-brain-on-the-real-map)
 
 ---
 
-## System overview
+## 🧱 System overview
 
 ```text
                  ┌────────────── compute host (GPU) ──────────────────────────────────┐
@@ -215,7 +239,7 @@ decoders are plain NumPy, and the robot bridge does not import the package. Modu
 
 ---
 
-## What is real, what is simulated, what is a claim
+## 🔍 What is real, what is simulated, what is a claim
 
 | Layer | It is | It is not |
 | --- | --- | --- |
@@ -231,11 +255,13 @@ marks the field→eye assignment and the yaw sign as **not calibrated**.
 
 ---
 
-## Autonomous navigation (no brain)
+## 🚗 Autonomous navigation (no brain)
 
 This layer is complete on its own. It is what the robot runs when the brain mode is **off**.
 
-### Sensing and the body model
+<details>
+<summary><b>Sensing and the body model</b></summary>
+<br>
 
 * **LiDAR:** Unitree L1 on the robot, streamed to the compute host as binary frames over SSH stdout.
   The L1 faces backwards, so the body moves LiDAR −x (`lidar_slam.BODY_YAW_DEG = 180`).
@@ -247,7 +273,11 @@ This layer is complete on its own. It is what the robot runs when the brain mode
 * **Posture:** crouched or standing, from the LiDAR height above the map floor. The robot's own body is
   masked out of the scan with a learned self-mask.
 
-### Mapping and localization
+</details>
+
+<details>
+<summary><b>Mapping and localization</b></summary>
+<br>
 
 * **Mapping session:** *Start LiDAR* runs KISS-ICP odometry in a child process on the compute host. Each
   scan is deskewed with the IMU when the IMU covers it; otherwise it is processed undeskewed after a short
@@ -256,7 +286,7 @@ This layer is complete on its own. It is what the robot runs when the brain mode
 * **Saved map package** (`maps/<name>/`): `map.pgm` / `map.yaml` (0.05 m grid), `map.ply` (the saved
   cloud), height layers (`floor.npy`, `obst_hmin/hmax.npy`, `obst_bins.npy`) and `MAP_INFO.json` with the
   session lineage. Map packages are not committed to this repository; rendered views of the real
-  site's map are published in [Videos](#videos) with the site owner's consent.
+  site's map are published in [Videos](#-gallery) with the site owner's consent.
 * **Relocalization:** a new session searches the base map for its pose (global search, fitness ≥ 0.8,
   ratio test between the best and second candidate). An operator pose hint can replace the ambiguity test
   for candidates within 1 m and 30° of the hint. Navigation is refused until localized; fitness < 0.6 for
@@ -265,7 +295,11 @@ This layer is complete on its own. It is what the robot runs when the brain mode
   corrections rejected only for their size (0.3 m / 5°) that align well raise a drift alarm; the server
   then cancels the task and relocalizes.
 
-### Planning: centreline routes
+</details>
+
+<details>
+<summary><b>Planning: centreline routes</b></summary>
+<br>
 
 Routes follow the centreline of free space, so between two walls the robot keeps equal clearance on
 both sides and never runs along one wall.
@@ -282,7 +316,11 @@ both sides and never runs along one wall.
 traced out and back. Branches up to 3 m deep are cut; deeper ones stay as out-and-back excursions. In the
 current map the tour is a 71 m loop from the usual start.
 
-### Following a route
+</details>
+
+<details>
+<summary><b>Following a route</b></summary>
+<br>
 
 A committed route is never re-planned on a timer. It changes only when:
 
@@ -297,7 +335,11 @@ never jumps. **Cusps** (out-and-back turnarounds) are handled explicitly: the ro
 the return leg. Arrival needs the remaining arc and the end-point distance within 0.20 m (goals) or
 0.30 m (tours).
 
-### Control (10 Hz)
+</details>
+
+<details>
+<summary><b>Control (10 Hz)</b></summary>
+<br>
 
 * **Gates:** a missing chassis status, a stale pose or obstacle layer (> 3 s), or low fitness holds the
   task; it resumes after 5 fresh frames.
@@ -309,7 +351,11 @@ the return leg. Arrival needs the remaining arc and the end-point distance withi
   (ceiling 0.30) until the error is under 12°.
 * **Rate limits** on the previous command: linear +0.10 / −0.20 m/s², angular +0.8 / −1.2 rad/s².
 
-### Host safety chain
+</details>
+
+<details>
+<summary><b>Host safety chain</b></summary>
+<br>
 
 The host stops before the chassis guard has to:
 
@@ -325,7 +371,11 @@ The host stops before the chassis guard has to:
 These constants are commanded-speed figures and are optimistic: standing, the robot moves 1.3–2× the
 command. They are not yet replaced by measured stops.
 
-### Operator limits, laps and Turbo
+</details>
+
+<details>
+<summary><b>Operator limits, laps and Turbo</b></summary>
+<br>
 
 * **Operator ceiling:** `XT_MAX_V` (default 0.30 m/s, never above 1.0). Turn rates and speed are set live
   from the console *Limits* group.
@@ -336,7 +386,11 @@ command. They are not yet replaced by measured stops.
   straights, a stop rule of 0.8 s + *v*² / (2 × 0.5 m/s²), and fitness-scaled speed (full at ≥ 0.95,
   0.30 m/s at ≤ 0.85).
 
-### Measured performance (2026-10-08, standing, on the robot)
+</details>
+
+<details>
+<summary><b>Measured performance (2026-10-08, standing, on the robot)</b></summary>
+<br>
 
 Tuned plain laps of about 130 m (route 126–135 m, one lap per setpoint):
 
@@ -358,9 +412,13 @@ it stops to turn in place. Turbo on the robot, one lap each:
 
 Emergency stops (Turbo lanes, from the 10 Hz records): 0.74 m/s peak → 0.71 m; 0.77 m/s peak → 0.81 m in
 1.76 s. The Turbo budget is 2.15 m at 1.0 m/s. The Turbo slip incident is in
-[Known problems](#known-problems-and-open-issues).
+[Known problems](#-known-problems-and-open-issues).
 
-### The console (operator PC)
+</details>
+
+<details>
+<summary><b>The console (operator PC)</b></summary>
+<br>
 
 The console is a web page served on the operator PC; the control server stays on the compute host. Its
 ribbon has four tabs:
@@ -376,7 +434,11 @@ The outline tree shows the base map, the session (LiDAR), localization (fitness)
 LiDAR height), the mission (state and reason), map changes and solution information. The message list
 records every event the server raises, including the reasons a command was refused.
 
-### Maps and the operator's workflow
+</details>
+
+<details>
+<summary><b>Maps and the operator's workflow</b></summary>
+<br>
 
 1. **Charging lock:** the session starts locked (`XT_CHASSIS_DISABLED=1`). *Start LiDAR* streams the
    sensors and localizes; no motion until the lock is lifted with both opt-ins.
@@ -389,11 +451,15 @@ records every event the server raises, including the reasons a command was refus
 Coverage is the main limit: a base map with large unknown areas makes relocalization fail outside the
 mapped region ([docs/slam_history.md](docs/slam_history.md)).
 
+</details>
+
 ---
 
-## The fly brain
+## 🧠 The fly brain
 
-### Pipeline
+<details>
+<summary><b>Pipeline</b></summary>
+<br>
 
 | Step | Where | Output |
 | --- | --- | --- |
@@ -406,7 +472,11 @@ mapped region ([docs/slam_history.md](docs/slam_history.md)).
 Window data flow: a 100 ms window of rates and spikes. Intents older than 0.35 s, or computed from scans
 older than 0.45 s, are dropped ([docs/architecture.md](docs/architecture.md)).
 
-### Readouts and decoder states
+</details>
+
+<details>
+<summary><b>Readouts and decoder states</b></summary>
+<br>
 
 | Readout | Role in the decoder |
 | --- | --- |
@@ -420,7 +490,11 @@ Decoder states: **FORWARD**, **EXPLORE**, **TURN_LEFT**, **TURN_RIGHT**, **HOLD*
 **ESCAPE_PROGRAM**, **BACK_OFF**, **FLEE**. Decoder v9 (used in the latest runs) adds an endogenous
 exploration drive and longer flights.
 
-### Brain modes
+</details>
+
+<details>
+<summary><b>Brain modes</b></summary>
+<br>
 
 | Mode | What the brain does | Where it is used |
 | --- | --- | --- |
@@ -429,16 +503,22 @@ exploration drive and longer flights.
 | `drive` (*Roam*) | intent → envelope → geofence / keep-in → the normal 0.3 s lease; the brain drives the robot | stage 5 |
 | `reflex` | the planner drives; the brain takes over only to freeze or escape, then the task replans around a keep-out disc | stage 6 |
 
-### Neuron registry
+</details>
+
+<details>
+<summary><b>Neuron registry</b></summary>
+<br>
 
 `configs/fly/loom_registry.json` binds every input and readout cell by exact `cell_type`, `root_id` and
 model index for FlyWire 783 (annotation TSV SHA-256 `9a4f8b2f…`). It is rebuilt with
 `tools/build_registry.py` and was verified from a fresh clone (513 cells, identical). Indices are not
 portable to other connectome versions.
 
+</details>
+
 ---
 
-## Results so far
+## 📈 Results so far
 
 All numbers come from the recorded experiments in [`experiments/`](experiments/README.md).
 
@@ -458,7 +538,7 @@ All numbers come from the recorded experiments in [`experiments/`](experiments/R
 
 ---
 
-## Verification and simulation
+## ✅ Verification and simulation
 
 * **Unit tests** (any machine): registry identity, retina, decoders, EEG encoder, envelope, synthetic
   arena (`pytest`, 11 tests).
@@ -474,7 +554,7 @@ Not covered there: `robot/` on real hardware, and the numbers that depend on the
 
 ---
 
-## Known problems and open issues
+## 🐞 Known problems and open issues
 
 These are the problems we know about, from the recorded experiments and from this repository's own
 checks. None is a known regression from the repository move: the navigation, SLAM and relocalization
@@ -496,7 +576,11 @@ versions of the stage-6 simulation gave the same result on the same map.
 
 ---
 
-## Repository layout
+## 📁 Repository layout
+
+<details>
+<summary><b>Show the layout: packages, what each does, where it runs</b></summary>
+<br>
 
 | Path | Role | Runs on |
 | --- | --- | --- |
@@ -512,9 +596,11 @@ versions of the stage-6 simulation gave the same result on the same map.
 | [`docs/`](docs) | architecture, reproduction, verification, demos, SLAM operations, navigation | — |
 | `configs/`, `scripts/`, `tools/`, `tests/` | neuron registry, launchers, map tools, renderers, unit tests | — |
 
+</details>
+
 ---
 
-## Quick start
+## 🚀 Quick start
 
 ### Anywhere: unit tests and blind simulation
 
@@ -561,7 +647,7 @@ bridge enforces the same two interlocks.
 
 ---
 
-## Safety
+## 🔒 Safety
 
 Physical motion needs two explicit opt-ins on both the compute host and the robot
 (`XT_CHASSIS_DISABLED=0`, `XT_REMOTE_MOTION_ENABLED=1`); the default is a charging lock.
@@ -579,11 +665,11 @@ Physical motion needs two explicit opt-ins on both the compute host and the robo
 | Brain envelope | server | intents only reduced or zeroed; geofence and keep-in before the lease |
 
 Commands expire after 0.3 s, the speed ceiling defaults to 0.30 m/s, and an RC supervisor is expected
-during any drive. This is research code. See [Known problems](#known-problems-and-open-issues).
+during any drive. This is research code. See [Known problems](#-known-problems-and-open-issues).
 
 ---
 
-## Documentation index
+## 📚 Documentation index
 
 | Document | What it covers |
 | --- | --- |
@@ -599,7 +685,7 @@ during any drive. This is research code. See [Known problems](#known-problems-an
 
 ---
 
-## Credits and licences
+## 📜 Credits and licences
 
 * Connectome model: [eonsystemspbc/fly-brain](https://github.com/eonsystemspbc/fly-brain) (GPL-2.0), fetched at a pinned commit, not redistributed here.
 * Connectome and annotations: FlyWire (Dorkenwald et al. 2024, Schlegel et al. 2024; [flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)).

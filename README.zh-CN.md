@@ -1,110 +1,135 @@
-# 蝇首 FlyHead
+<div align="center">
 
-**用完整果蝇连接组当轮足机器人"刑天"的头。**
+<img src="docs/media/banner.png" alt="FlyHead 横幅" width="100%">
 
-刑天在神话里断首后仍继续作战；本项目给它装上一个果蝇的脑。
+<p>
+<img src="https://img.shields.io/badge/connectome-FlyWire%20v783-3fb950?style=flat-square" alt="FlyWire v783">
+<img src="https://img.shields.io/badge/neurons-138%2C639%20LIF-58a6ff?style=flat-square" alt="138,639 LIF neurons">
+<img src="https://img.shields.io/badge/PyTorch-CUDA-ee4c2c?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch CUDA">
+<img src="https://img.shields.io/badge/ROS%202-Foxy-22314e?style=flat-square&logo=ros&logoColor=white" alt="ROS 2 Foxy">
+<img src="https://img.shields.io/badge/SLAM-KISS--ICP-6e7781?style=flat-square" alt="KISS-ICP">
+<img src="https://img.shields.io/badge/status-research%20code-d29922?style=flat-square" alt="research code">
+</p>
 
-FlyHead 是一套研究用机器人系统，有两层决策，共用同一个机身：
+<p>
+<a href="README.md">English</a> · <b>中文</b> ·
+<a href="#-视频画廊">视频画廊</a> ·
+<a href="#-状态全景">状态全景</a> ·
+<a href="#-快速开始">快速开始</a> ·
+<a href="docs/demo.md">演示页</a> ·
+<a href="docs/architecture.md">架构</a> ·
+<a href="docs/verification.md">验证</a> ·
+<a href="experiments/README.md">实验</a>
+</p>
 
-1. **自主导航（不经过果蝇脑）。** 机器人用激光雷达 SLAM 建图，在保存的地图上重定位，并执行路线：
-   目标点、探索、环形巡逻、返回充电、以及更快的 Turbo 模式。这一层可以独立运行，果蝇脑建立在它之上。
-2. **果蝇脑。** 完整的 FlyWire v783 果蝇连接组（138639 个漏电积分发放神经元、15091983 条连接记录，
-   PyTorch/CUDA）接收编码后的 LiDAR 逼近信号，通过已鉴定的下行神经元决定逃逸、转向和行走。
-   它的输出只经过一个安全包络，包络只能减速或归零命令，不能增加运动。
+</div>
+
+FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
+
+| | |
+| --- | --- |
+| 🧭 **自主导航** | 在建筑的已保存地图上做激光雷达 SLAM，中心线路径规划、巡逻、绕行和主机安全链。不需要大脑也能独立工作。 |
+| 🧠 **果蝇脑** | GPU 上的完整 FlyWire v783 果蝇连接组，把激光雷达的逼近信号经已鉴定的下行神经元转化为逃逸、转向和行走。安全包络只能减速或归零它的命令。 |
 
 硬件：DIABLO 轮足机器人（树莓派 4B、ROS 2 Foxy、Unitree L1 激光雷达）、GPU 计算主机和 Windows 操作员电脑。
-SLAM、导航和大脑都运行在计算主机上；机器人只负责 I/O。
-
-[English](README.md) · [演示](docs/demo.md) · [架构](docs/architecture.md) ·
-[复现](docs/reproduce.md) · [验证](docs/verification.md) · [实验](experiments/README.md)
-
-*神话注：刑天断首后仍然战斗。这里果蝇的脑就是头。*
+*刑天在神话里断首后仍继续作战；本项目给它装上一个果蝇的脑。*
 
 ---
 
-## 目录
+## 🎬 视频画廊
 
-1. [视频](#视频)：实体机器人、真实场地 SLAM 地图、真实巡逻回放、真实地图上的大脑、stage 6、上位机
-2. [状态全景](#状态全景每种状态在哪里可以看到)
-3. [系统概览](#系统概览)
-4. [什么是真实的、什么是仿真的、什么只是主张](#什么是真实的什么是仿真的什么只是主张)
-5. [自主导航](#自主导航不经过果蝇脑)
-6. [果蝇脑](#果蝇脑)
-7. [目前的结果](#目前的结果)
-8. [验证与仿真](#验证与仿真)
-9. [已知问题与未解决事项](#已知问题与未解决事项)
-10. [目录结构](#目录结构)
-11. [快速开始](#快速开始)
-12. [安全](#安全)
-13. [文档索引](#文档索引)
-14. [致谢与许可](#致谢与许可)
+<p>
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> 实体机器人（手机拍摄） &nbsp;
+<img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> 机器人自身日志的回放 &nbsp;
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> 真实建筑的已保存 SLAM 地图 &nbsp;
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> 仿真激光雷达，GPU 上的完整连接组 &nbsp;
+<img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> 真实控制台与服务器，回放会话
+</p>
 
----
+### 🤖 实体机器人
 
-## 视频
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/nav_hallway.gif" width="100%" alt="走廊">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 走廊</b><br>
+<sub>站立 / 蹲伏姿态与路线行驶，无果蝇脑 · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/nav_office.gif" width="100%" alt="夜间办公室">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 夜间办公室</b><br>
+<sub>在已建图的办公室中按路线行驶，无果蝇脑 · 6 分钟，4 倍速 · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/real_brain.gif" width="100%" alt="大脑驱动">
+<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>果蝇脑驱动 · stage5_004</b><br>
+<sub>有人逼近；大脑驱动 262 s，30 次逃逸程序，报告 0 次碰撞 · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/tour.gif" width="100%" alt="真实巡逻回放">
+<img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>自主巡逻，按机器人日志回放</b><br>
+<sub>2026-10-04 · 729 s，56.1 m，定位度 ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s 巡逻</a></sub>
+</td>
+</tr>
+</table>
 
-每段素材都标明了它是什么：
+### 🗺️ 真实场地：SLAM 地图
 
-| 标签 | 含义 |
-| --- | --- |
-| **REAL（真实）** | 实体机器人（手机拍摄），或机器人自身日志的回放 |
-| **REAL SITE（真实场地）** | 机器人所在真实建筑的已保存 SLAM 地图（`onboard_20260926_manual_cleanup_20261005`） |
-| **SIM（仿真）** | 仿真激光雷达（在该地图上射线投射）；大脑是 GPU 上的完整连接组 |
-| **CONSOLE（上位机）** | 未经修改的操作员控制台和控制服务器，输入一段回放；大脑处于影子模式（显示但从不发送） |
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/mapbuild.gif" width="100%" alt="建图回放">
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>建图会话回放</b><br>
+<sub>2026-09-25 · 1407 s，54.7 m，550975 个点 · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/orbit.gif" width="100%" alt="三维点云">
+<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>保存的三维点云</b><br>
+<sub>1.3 m 以下的墙体与家具，按高度着色 · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="导航图层"></a>
+<sub><b>同一张地图的导航图层：</b>占据栅格 · 净空场与所有路线遵循的中心线 · 障碍物高度（什么会挡住蹲伏或站立的机器人）· 建图路径与真实巡逻。</sub>
+</td>
+</tr>
+</table>
 
-所有素材都在 [`docs/media/`](docs/media) 中。[docs/demo.md](docs/demo.md) 给出每段素材对应的运行，以及每个面板背后的代码和日志字段。
-地图包本身不在仓库中，仓库里只有它的渲染视图。
+### 🧠 真实地图上的果蝇脑
 
-### 1. 实体机器人
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/decision.gif" width="100%" alt="决策链">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>逐窗口的决策链</b><br>
+<sub>人从左侧逼近：激光雷达 → LC4/LPLC2/LC9 → 下行神经元 → 解码器 → 命令 · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/roam.gif" width="100%" alt="自由漫游">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s 自由漫游</b><br>
+<sub>18.9 m，0 次碰撞；一次运行中出现探索、逃逸、逃跑、冻结和保持 · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/media/cards/stage6.gif" width="100%" alt="stage 6">
+<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6：规划器与果蝇反射</b><br>
+<sub>两组都以 0 碰撞到达；大脑接管两次 · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/media/cards/console.gif" width="100%" alt="上位机">
+<img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>真实地图上的操作员控制台</b><br>
+<sub>定位度 1.00 重定位，大脑影子模式，充电锁开启 · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub>
+</td>
+</tr>
+</table>
 
-| 自主导航：走廊中的姿态与路线行驶（19 s） | 自主导航：夜间办公室，4 倍速（90 s） |
-| --- | --- |
-| ![走廊](docs/media/preview/nav_hallway.gif) | ![办公室](docs/media/preview/nav_office.gif) |
-| [mp4](docs/media/real/hallway_posture_drive.mp4) · 无果蝇脑 | [mp4](docs/media/real/office_night_drive_4x.mp4) · 无果蝇脑 |
-
-| 果蝇脑驱动、有人逼近：stage 5，运行 stage5_004（54 s） |
-| --- |
-| ![大脑驱动](docs/media/preview/real_stage5_escape.gif) |
-| [mp4](docs/media/real/stage5_004_brain_drive_escape.mp4) · 由大脑决策；包络、围栏和 0.3 s 租约位于轮子之前 |
-
-大脑视频按手机录制时间（本地 22:57:17）与驱动窗口（22:53:38–22:58:03）对应。该次运行：大脑驱动 262 s，30 次逃逸程序，报告 0 次碰撞。
-两段导航视频的文件时间戳为 2026-10-08，即导航栈重建的当天。
-
-### 2. 真实场地：SLAM 地图
-
-| 建图会话回放（真实场地，42 s） | 保存的三维点云（真实场地，24 s） |
-| --- | --- |
-| ![建图](docs/media/preview/rm_mapbuild.gif) | ![点云](docs/media/preview/rm_orbit.gif) |
-| [mp4](docs/media/realmap/slam_map_build.mp4) | [mp4](docs/media/realmap/slam_map_orbit.mp4) |
-
-地图于 2026-09-25 在一次会话中建成：1407 s，行驶 54.7 m，550975 个点，0.05 m 分辨率的 912 × 926 栅格，并于 2026-10-05 人工清理。
-建图回放视频按该会话自身的轨迹播放：机器人第一次进入某部分点云 4 m 范围时，这部分点云才出现。
-
-[![导航图层](docs/media/realmap/nav_layers.png)](docs/media/realmap/nav_layers.png)
-
-*同一张地图的导航图层：*（1）占据栅格；（2）规划器的净空场和所有路线遵循的中心线；（3）决定什么会挡住蹲伏或站立机器人的障碍物高度层；
-（4）建图路径和下文的真实自主巡逻。
-
-### 3. 真实自主导航，按机器人自身日志回放
-
-| 自主巡逻，2026-10-04（真实日志，729 s，约 11 倍速） |
-| --- |
-| ![真实巡逻](docs/media/preview/rm_tour.gif) |
-| [mp4，729 s 巡逻](docs/media/realmap/real_tour_729s.mp4) · [mp4，138 s 巡逻](docs/media/realmap/real_tour_138s.mp4) |
-
-由实体机器人的控制台观测日志（`standing_tour_*_20261004*.jsonl`）渲染，不是仿真：每一帧是一条记录下来的导航消息，包含机器人位姿、规划路线、
-目标点、导航状态和原因、定位度以及命令。这些巡逻运行的是 2026-10-04 的导航栈，比下文所述的重建早四天。
-
-| 巡逻 | 行驶距离 | 记录到的状态（消息数） | 定位度 |
-| --- | --- | --- | --- |
-| 729 s | 56.1 m | driving 454、waiting 68、stopped 11、avoiding 5、planning 1 | 最低 0.963，中位 0.995 |
-| 138 s | 12.6 m | driving 104、idle 26、waiting 8、stopped 4、planning 1 | 最低 0.910，中位 0.995 |
-
-等待（waiting）大多来自位姿过期门控（"SLAM 位姿暂时过期，停车等待"）；避让（avoiding）是局部绕行。
-
-### 4. 真实地图上的果蝇脑（仿真）
-
-stage 3 套件的每个场景都在真实 SLAM 地图上用完整连接组（解码器 V9）运行，并附盲基线（经过同一包络的恒定前进）：
+<details>
+<summary><b>真实地图上的全部八个大脑场景</b>（视频、结果、总览图）</summary>
+<br>
 
 | 场景 | 发生了什么 | 大脑：碰撞、最小净空 | 盲基线：碰撞 | 视频 |
 | --- | --- | --- | --- | --- |
@@ -117,72 +142,79 @@ stage 3 套件的每个场景都在真实 SLAM 地图上用完整连接组（解
 | `loom_left` | 同上，从左侧 | 21，−0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_left.mp4) |
 | `loom_right` | 同上，从右侧 | 21，−0.23 m | 19 | [mp4](docs/media/realmap/decision_loom_right.mp4) |
 
-| 决策链，人从左侧逼近 | 120 s 自由漫游 |
-| --- | --- |
-| ![决策链](docs/media/preview/rm_decision.gif) | ![漫游](docs/media/preview/rm_roam.gif) |
+`loom_*` 物体无论机器人做什么都会穿过它：大脑会逃逸，但物体一直跟着。这些场景统计碰撞，不算通过。
 
-每段视频显示地图和射线投射的激光雷达、写入 LC4/LPLC2/LC9 输入格的速率、下行神经元速率、解码器特征与决策，以及整次运行的解码器状态。
-`loom_*` 物体无论机器人做什么都会穿过它：大脑会逃逸，但物体一直跟着，所以这些场景统计碰撞，不算通过。
+<a href="docs/media/realmap/scenarios_brain_vs_blind.png"><img src="docs/media/realmap/scenarios_brain_vs_blind.png" width="100%" alt="大脑与盲基线"></a>
+<a href="docs/media/realmap/decoder_states.png"><img src="docs/media/realmap/decoder_states.png" width="100%" alt="解码器状态"></a>
 
-[![场景](docs/media/realmap/scenarios_brain_vs_blind.png)](docs/media/realmap/scenarios_brain_vs_blind.png)
-[![解码器状态](docs/media/realmap/decoder_states.png)](docs/media/realmap/decoder_states.png)
+</details>
 
-### 5. 真实地图上的 Stage 6：规划器与果蝇反射（仿真）
+<details>
+<summary><b>控制台的四个标签页</b>，以及这段回放是什么</summary>
+<br>
 
-| 同一种子、同一个人；左：只有规划器（大脑影子模式），右：大脑可以接管 |
-| --- |
-| ![stage 6](docs/media/preview/rm_stage6.gif) |
-| [mp4](docs/media/realmap/stage6_planner_vs_reflex.mp4) |
+<table>
+<tr>
+<td width="25%"><a href="docs/media/realmap/console/tab_home.png"><img src="docs/media/realmap/console/tab_home.png" width="100%" alt="Home"></a><br><sub><b>Home</b> · 会话、地图、巡逻</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_mission.png"><img src="docs/media/realmap/console/tab_mission.png" width="100%" alt="Mission"></a><br><sub><b>Mission</b> · 目标、限制、大脑模式</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_drive.png"><img src="docs/media/realmap/console/tab_drive.png" width="100%" alt="Drive"></a><br><sub><b>Drive</b> · 底盘、姿态</sub></td>
+<td width="25%"><a href="docs/media/realmap/console/tab_display.png"><img src="docs/media/realmap/console/tab_display.png" width="100%" alt="Display"></a><br><sub><b>Display</b> · 视图、地图变化</sub></td>
+</tr>
+</table>
 
-规划器组：122.1 s 到达，0 次碰撞。反射组：139.7 s 到达，0 次碰撞，2 次反射接管（大脑控制了 39 个窗口）。相同代码、相同种子的另一次运行在
-180 s 超时，0 次碰撞；见 [已知问题](#已知问题与未解决事项)。
+控制台和服务器是真实的；会话是一段回放，扫描沿脚本路径从保存的点云生成，并加入了一个人。画面显示：重定位、姿态（站立，激光雷达 0.45 m）、
+人被提交为地图变化，以及大脑的影子决策（HOLD、EXPLORE、TURN_LEFT/RIGHT、REST、FORWARD）。
 
-### 6. 真实地图上的操作员控制台（上位机）
+</details>
 
-| 在真实地图上回放会话的控制台，大脑影子模式（61 s） |
-| --- |
-| ![上位机](docs/media/preview/rm_console.gif) |
-| [mp4](docs/media/realmap/console/console_real_map_brain_shadow.mp4) |
+<details>
+<summary><b>每段素材是怎么来的</b>，以及早期的合成场地素材</summary>
+<br>
 
-| Home | Mission | Drive | Display |
-| --- | --- | --- | --- |
-| [![home](docs/media/realmap/console/tab_home.png)](docs/media/realmap/console/tab_home.png) | [![mission](docs/media/realmap/console/tab_mission.png)](docs/media/realmap/console/tab_mission.png) | [![drive](docs/media/realmap/console/tab_drive.png)](docs/media/realmap/console/tab_drive.png) | [![display](docs/media/realmap/console/tab_display.png)](docs/media/realmap/console/tab_display.png) |
+* 大脑视频按手机录制时间（本地 22:57:17）与驱动窗口（22:53:38–22:58:03）对应。两段导航视频的文件时间戳为 2026-10-08，即导航栈重建的当天。
+* 巡逻回放由实体机器人的控制台观测日志（`standing_tour_*_20261004*.jsonl`）渲染：每一帧是一条记录下来的导航消息。它们运行的是
+  2026-10-04 的导航栈，比重建早四天。
 
-控制台和服务器是真实的；会话是回放。它的扫描沿一条脚本路径从保存的点云生成，并加入了一个人，因此会话能在真实地图上重定位（定位度 1.00）。
-画面显示：重定位、姿态（站立，激光雷达 0.45 m）、人被提交为地图变化，以及大脑的影子决策（HOLD、EXPLORE、TURN_LEFT/RIGHT、REST、FORWARD）。
-充电锁始终开启；回放没有机器人连接。
+  | 巡逻 | 行驶距离 | 导航状态（消息数） | 定位度 |
+  | --- | --- | --- | --- |
+  | 729 s | 56.1 m | driving 454、waiting 68、stopped 11、avoiding 5、planning 1 | 最低 0.963，中位 0.995 |
+  | 138 s | 12.6 m | driving 104、idle 26、waiting 8、stopped 4、planning 1 | 最低 0.910，中位 0.995 |
 
-### 7. 早期的合成场地素材（仿真、上位机）
+* 地图于 2026-09-25 建成（0.05 m 分辨率的 912 × 926 栅格），2026-10-05 人工清理。地图包本身不在仓库中；仓库里只有它的渲染视图，经场地所有者同意发布。
+* Stage 6：规划器组 122.1 s 到达；反射组 139.7 s 到达，接管 2 次（大脑控制 39 个窗口）。同一种子的另一次运行在 180 s 超时，0 次碰撞。
+* 早期合成场地素材：[决策链](docs/media/sim/decision_chain_person_front.mp4) · [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) ·
+  [上位机](docs/media/console/console_replay_brain_shadow.mp4)。
+* 每项素材的数据来源和渲染器：[docs/demo.md](docs/demo.md)。
 
-[决策链](docs/media/sim/decision_chain_person_front.mp4) · [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) ·
-[上位机回放](docs/media/console/console_replay_brain_shadow.mp4)。合成场地是生成的矩形；这些素材早于真实地图渲染，因验证记录引用了它们而保留。
+</details>
 
 ---
 
-## 状态全景：每种状态在哪里可以看到
+## 🧭 状态全景
 
-| 层 | 状态 | 展示位置 |
+| 层 | 状态 | 在哪里看 |
 | --- | --- | --- |
-| 导航（真实日志） | `driving`、`waiting`、`stopped`、`avoiding`、`planning`、`idle` | §3 真实巡逻（状态色带、机器人颜色） |
-| 导航（仿真） | `driving`、`arrived`、反射保持 | §5 stage 6 |
-| 导航门控 | 位姿过期 → 等待；绕行（`avoiding`）；航点进度 | §3 原因文字 |
-| 定位 | 在保存的地图上重定位（定位度 1.00）；真实巡逻中的定位度 | §6 上位机；§3 定位度曲线 |
-| 姿态 | 蹲伏、站立 | §1 走廊视频；§3（posture 一行）；§6（Chassis `stand · 0.47 m`） |
-| 地图变化 | 提交新障碍物、清除临时障碍物 | §3 方框；§6 消息 |
-| 解码器（大脑） | FORWARD、EXPLORE、TURN_LEFT、TURN_RIGHT | §4 所有场景 |
-| 解码器（大脑） | FREEZE、ESCAPE_PROGRAM、BACK_OFF、FLEE | §4 人与逼近场景、`roam_open`；§1 stage5_004（实体机器人上的逃逸） |
-| 解码器（大脑） | HOLD、REST | §4 `roam_open`（HOLD）；§6 上位机（HOLD、REST） |
-| 大脑模式 | `off` | §1 导航视频、§3 |
-| 大脑模式 | `shadow` | §5 规划器组、§6 上位机 |
-| 大脑模式 | `drive` | §1 stage5_004（实体机器人） |
-| 大脑模式 | `reflex` | §5 反射组 |
-| 安全 | 充电锁开启 | §6 横幅 |
-| 安全 | 包络削减大脑命令 | §4 决策视频（面板 3 中的 "envelope:"；`loom_*`、`person_right`、`roam_open` 中有削减） |
+| 导航（真实日志） | `driving` · `waiting` · `stopped` · `avoiding` · `planning` · `idle` | 🤖 巡逻回放（状态色带、机器人颜色） |
+| 导航（仿真） | `driving` · `arrived` · 反射保持 | 🧠 Stage 6 |
+| 导航门控 | 位姿过期 → 等待 · 绕行（`avoiding`）· 航点进度 | 🤖 巡逻回放（原因一行） |
+| 定位 | 在保存的地图上重定位（定位度 1.00）· 真实巡逻中的定位度 | 🧠 上位机 · 🤖 巡逻回放 |
+| 姿态 | 蹲伏 · 站立 | 🤖 走廊视频、巡逻回放 · 🧠 上位机（`stand · 0.47 m`） |
+| 地图变化 | 提交新障碍物 · 清除临时障碍物 | 🤖 巡逻回放（方框）· 🧠 上位机消息 |
+| 解码器 | FORWARD · EXPLORE · TURN_LEFT · TURN_RIGHT | 🧠 所有场景 |
+| 解码器 | FREEZE · ESCAPE_PROGRAM · BACK_OFF · FLEE | 🧠 人、逼近与漫游场景 · 🤖 实体机器人 stage5_004 |
+| 解码器 | HOLD · REST | 🧠 漫游（HOLD）· 上位机（HOLD、REST） |
+| 大脑模式 | `off` | 🤖 导航视频与巡逻回放 |
+| 大脑模式 | `shadow` | 🧠 Stage 6 规划器组 · 上位机 |
+| 大脑模式 | `drive` | 🤖 实体机器人 stage5_004 |
+| 大脑模式 | `reflex` | 🧠 Stage 6 反射组 |
+| 安全 | 充电锁开启 | 🧠 上位机横幅 |
+| 安全 | 包络削减大脑命令 | 🧠 决策视频（面板 3 中的 "envelope:"；逼近、`person_right`、漫游） |
 
+🤖 = [实体机器人](#-实体机器人) · 🧠 = [真实地图上的果蝇脑](#-真实地图上的果蝇脑)
 
 ---
 
-## 系统概览
+## 🧱 系统概览
 
 ```text
                  ┌────────────── 计算主机（GPU）──────────────────────────────────────┐
@@ -199,7 +231,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 什么是真实的、什么是仿真的、什么只是主张
+## 🔍 什么是真实的、什么是仿真的、什么只是主张
 
 | 层 | 是什么 | 不是什么 |
 | --- | --- | --- |
@@ -214,11 +246,13 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 自主导航（不经过果蝇脑）
+## 🚗 自主导航（不经过果蝇脑）
 
 这一层本身完整，也是大脑模式为 **关闭** 时机器人运行的部分。
 
-### 感知与机身模型
+<details>
+<summary><b>感知与机身模型</b></summary>
+<br>
 
 * **激光雷达：** 机器人上的 Unitree L1，以二进制帧经 SSH 标准输出流式传到计算主机。L1 朝后安装，因此机身沿激光雷达 −x 方向前进
   （`lidar_slam.BODY_YAW_DEG = 180`）。
@@ -228,18 +262,26 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
   [docs/navigation_method.md](docs/navigation_method.md)。
 * **姿态：** 站立或蹲伏，由激光雷达离地图地面的高度判断。机器人自身的机体通过学习得到的自遮罩从扫描中去除。
 
-### 建图与定位
+</details>
+
+<details>
+<summary><b>建图与定位</b></summary>
+<br>
 
 * **建图会话：** *启动 LiDAR* 在计算主机上以子进程运行 KISS-ICP 里程计。只有 IMU 覆盖的扫描会被去畸变；否则等待一小段时间后
   不去畸变地处理。与保存地图的持续差异会作为带版本的障碍物变化（`added` / `removed`）提交，并进入规划。
 * **保存的地图包**（`maps/<名称>/`）：`map.pgm` / `map.yaml`（0.05 m 栅格）、`map.ply`（保存的点云）、高度层
-  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**；经场地所有者同意，真实场地地图的渲染视图发布在 [视频](#视频) 中。
+  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**；经场地所有者同意，真实场地地图的渲染视图发布在 [视频](#-视频画廊) 中。
 * **重定位：** 新会话在基础地图上全局搜索自己的位姿（匹配度 ≥ 0.8，并对最好和次好的候选做比值检验）。操作员的位姿提示可以替代歧义检验，
   适用于距离提示 1 m、朝向 30° 以内的候选。未完成定位前拒绝导航；定位度 < 0.6 持续 1 s 会取消任务。
 * **地图修正：** 行驶时用基础地图修正位姿。连续两次因幅度过大（0.3 m / 5°）而被拒绝、但对齐良好的修正会触发漂移告警；
   服务器随后取消任务并重新定位。
 
-### 规划：中心线路径
+</details>
+
+<details>
+<summary><b>规划：中心线路径</b></summary>
+<br>
 
 路线沿自由空间的中心线走，因此两堵墙之间机器人两侧的距离相等，不会贴着一面墙走。
 
@@ -252,7 +294,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 **环线巡逻**（`compute_loop`）：中心线网络最外层的闭合回路作为环线运行，分支则以往返方式遍历。深度不超过 3 m 的分支被裁掉；
 更深的分支保留为往返的支路。当前地图中，从常用起点出发的巡逻环线长 71 m。
 
-### 沿路线行驶
+</details>
+
+<details>
+<summary><b>沿路线行驶</b></summary>
+<br>
 
 已确定的路线不会按计时器重新规划，只有以下情况才会改变：
 
@@ -263,7 +309,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 进度采用有界窗口内的弧长投影，因此经过同一位置两次的路线不会跳变。**折返点**（往返的掉头）需要单独处理：机器人在原地转向，接上返程路线。
 到达判定要求剩余弧长和终点距离都在 0.20 m（目标点）或 0.30 m（巡逻）以内。
 
-### 控制（10 Hz）
+</details>
+
+<details>
+<summary><b>控制（10 Hz）</b></summary>
+<br>
 
 * **门控：** 底盘状态缺失、位姿或障碍物层过期（> 3 s）、或定位度低，都会保持任务；连续 5 帧有效后恢复。
 * **纯跟踪：** 前视距离 0.5 + 4 s × 速度（最多 1.0 m）。曲率 κ = 2 sin α / *L*。
@@ -272,7 +322,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 * **原地转向：** 航向误差超过 50° 时先刹停，再以不超过 0.12 rad/s（上限 0.30）转向，直到误差小于 12°。
 * **变化率限制**（相对上一条命令）：线速度 +0.10 / −0.20 m/s²，角速度 +0.8 / −1.2 rad/s²。
 
-### 主机安全链
+</details>
+
+<details>
+<summary><b>主机安全链</b></summary>
+<br>
 
 主机在底盘保护介入之前就会停车：
 
@@ -287,7 +341,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 这些常数是按命令速度估算的，偏乐观：站立时机器人的实际运动是命令的 1.3–2 倍。它们尚未用实测停车距离替换。
 
-### 操作员限制、环线与 Turbo
+</details>
+
+<details>
+<summary><b>操作员限制、环线与 Turbo</b></summary>
+<br>
 
 * **操作员上限：** `XT_MAX_V`（默认 0.30 m/s，不得超过 1.0）。转向速率和速度可在控制台的 *Limits* 组中实时调整。
 * **环线：** 巡逻任务的 `laps` 为 1–20，每圈结束后从当前位姿重新规划。停止、人工接管、某圈失败或电量低于 15 % 都会结束整组。
@@ -295,7 +353,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 * **Turbo**（过检查单后执行，最高 1.0 m/s 实测）：弯前制动的速度曲线（弯道横向加速度 0.15 m/s²）、直道上学习的实测/命令速度增益、
   停车规则 0.8 s + *v*² / (2 × 0.5 m/s²)，以及随定位度缩放的速度（≥ 0.95 全速，≤ 0.85 降到 0.30 m/s）。
 
-### 实测性能（2026-10-08，站立，在机器人上）
+</details>
+
+<details>
+<summary><b>实测性能（2026-10-08，站立，在机器人上）</b></summary>
+<br>
 
 普通模式约 130 m 的调好环线（路线 126–135 m，每个设定速度一圈）：
 
@@ -315,9 +377,13 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 | Turbo 1.0 | 128.0 m | 7.7 min | 0.95 m/s | 0.23 / 0.39 m | 27 % | 0 |
 
 紧急停车（Turbo 车道，按 10 Hz 记录测得）：峰值 0.74 m/s → 停在 0.71 m；峰值 0.77 m/s → 1.76 s 内停在 0.81 m。Turbo 的预算是
-1.0 m/s 时 2.15 m。Turbo 滑移事故见 [已知问题](#已知问题与未解决事项)。
+1.0 m/s 时 2.15 m。Turbo 滑移事故见 [已知问题](#-已知问题与未解决事项)。
 
-### 控制台（操作员电脑）
+</details>
+
+<details>
+<summary><b>控制台（操作员电脑）</b></summary>
+<br>
 
 控制台是运行在操作员电脑上的网页；控制服务留在计算主机上。顶部功能区有四个标签：
 
@@ -331,7 +397,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 大纲树显示：基础地图、会话（激光雷达）、定位（定位度）、底盘（姿态与激光雷达高度）、任务（状态与原因）、地图变化和解决方案信息。
 消息列表记录服务器抛出的每一条事件，包括命令被拒绝的原因。
 
-### 地图与操作流程
+</details>
+
+<details>
+<summary><b>地图与操作流程</b></summary>
+<br>
 
 1. **充电锁：** 会话默认锁定（`XT_CHASSIS_DISABLED=1`）。*启动 LiDAR* 会开始传感器流并定位；只有同时打开两个开关后才能运动。
 2. **建图：** 手动驾驶一段会话覆盖建筑，然后 *Save map*。会话写入 `runs/<id>/`，包括 `map.ply`、`trajectory.csv`、`summary.json` 和 `navigation.jsonl`。
@@ -340,11 +410,15 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 覆盖度是主要限制：基础地图有大片未知区域时，超出已建图范围的重定位会失败（[docs/slam_history.md](docs/slam_history.md)）。
 
+</details>
+
 ---
 
-## 果蝇脑
+## 🧠 果蝇脑
 
-### 流水线
+<details>
+<summary><b>流水线</b></summary>
+<br>
 
 | 步骤 | 位置 | 输出 |
 | --- | --- | --- |
@@ -357,7 +431,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 窗口数据流：每 100 ms 一个窗口的速率和脉冲。早于 0.35 s 的意图，或基于早于 0.45 s 扫描计算的意图会被丢弃
 （见 [docs/architecture.md](docs/architecture.md)）。
 
-### 读出神经元与解码器状态
+</details>
+
+<details>
+<summary><b>读出神经元与解码器状态</b></summary>
+<br>
 
 | 读出神经元 | 在解码器中的作用 |
 | --- | --- |
@@ -371,7 +449,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 **REST**（休息）、**FREEZE**（冻结）、**ESCAPE_PROGRAM**（逃逸程序）、**BACK_OFF**（后退）、**FLEE**（逃跑）。
 解码器 v9（最新运行所用）增加了内源性探索驱动和更长的逃跑。
 
-### 大脑模式
+</details>
+
+<details>
+<summary><b>大脑模式</b></summary>
+<br>
 
 | 模式 | 大脑做什么 | 使用于 |
 | --- | --- | --- |
@@ -380,14 +462,20 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 | `drive`（控制台 *Roam*） | 意图 → 包络 → 地理围栏 / keep-in → 常规 0.3 s 租约；大脑直接驱动机器人 | stage 5 |
 | `reflex` | 规划器驱动；大脑只在冻结或逃逸时接管，之后任务围绕一个禁入圆盘重新规划 | stage 6 |
 
-### 神经元注册表
+</details>
+
+<details>
+<summary><b>神经元注册表</b></summary>
+<br>
 
 `configs/fly/loom_registry.json` 按精确的 `cell_type`、`root_id` 和模型下标，为 FlyWire 783 绑定每个输入和读出格（注释 TSV 的 SHA-256 为
 `9a4f8b2f…`）。用 `tools/build_registry.py` 重建，并已在全新克隆中验证（513 个格，完全一致）。下标不能移植到其他版本的连接组。
 
+</details>
+
 ---
 
-## 目前的结果
+## 📈 目前的结果
 
 所有数字都来自 [`experiments/`](experiments/README.md) 中的记录实验。
 
@@ -401,7 +489,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 验证与仿真
+## ✅ 验证与仿真
 
 * **单元测试**（任何机器）：注册表一致性、视网膜、解码器、EEG 编码器、安全包络、合成场地（`pytest`，11 项）。
 * **盲仿真**（无需 GPU）：`loom_sim` 的恒定前进基线。
@@ -413,7 +501,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 已知问题与未解决事项
+## 🐞 已知问题与未解决事项
 
 以下是我们已知的问题，来自记录的实验和本仓库自己的检查。它们都不是仓库迁移导致的回归：导航、SLAM 和重定位代码与归档版本相比只改了导入路径，
 同一张地图上归档版与仓库版的阶段 6 仿真结果一致。
@@ -433,7 +521,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 目录结构
+## 📁 目录结构
+
+<details>
+<summary><b>展开目录结构：各个包的作用与运行位置</b></summary>
+<br>
 
 | 路径 | 作用 | 运行位置 |
 | --- | --- | --- |
@@ -449,9 +541,11 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 | [`docs/`](docs) | 架构、复现、验证、演示、SLAM 运维、导航 | — |
 | `configs/`、`scripts/`、`tools/`、`tests/` | 神经元注册表、启动脚本、地图工具、渲染器、单元测试 | — |
 
+</details>
+
 ---
 
-## 快速开始
+## 🚀 快速开始
 
 ### 任何机器：单元测试与盲仿真
 
@@ -496,7 +590,7 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 
 ---
 
-## 安全
+## 🔒 安全
 
 实体运动需要在计算主机和机器人两端各自明确开启两个选项（`XT_CHASSIS_DISABLED=0`、`XT_REMOTE_MOTION_ENABLED=1`）；默认是充电锁。
 
@@ -512,11 +606,11 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 | 电池 | 服务器 | < 25 % 警告；< 15 % 停止导航、蹲下、拒绝新任务 |
 | 大脑包络 | 服务器 | 意图只能减小或归零；围栏和 keep-in 在租约之前生效 |
 
-命令 0.3 s 后过期，速度上限默认 0.30 m/s；任何驱动期间都应有遥控监督员。这是研究代码。见 [已知问题](#已知问题与未解决事项)。
+命令 0.3 s 后过期，速度上限默认 0.30 m/s；任何驱动期间都应有遥控监督员。这是研究代码。见 [已知问题](#-已知问题与未解决事项)。
 
 ---
 
-## 文档索引
+## 📚 文档索引
 
 | 文档 | 内容 |
 | --- | --- |
@@ -532,7 +626,7 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 
 ---
 
-## 致谢与许可
+## 📜 致谢与许可
 
 * 连接组模型：[eonsystemspbc/fly-brain](https://github.com/eonsystemspbc/fly-brain)（GPL-2.0），按固定提交获取，本仓库不再分发。
 * 连接组与注释：FlyWire（Dorkenwald 等 2024、Schlegel 等 2024；[flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)）。
