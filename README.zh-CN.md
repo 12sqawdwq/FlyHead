@@ -211,51 +211,84 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 ### 3.1 部署结构
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EEF2FF', 'primaryBorderColor': '#2148B8', 'primaryTextColor': '#1F2328', 'lineColor': '#57606A', 'clusterBkg': '#FAFAF7', 'clusterBorder': '#D0D7DE', 'edgeLabelBackground': '#FFFFFF', 'actorBkg': '#FFFFFF', 'actorBorder': '#57606A', 'signalColor': '#57606A', 'signalTextColor': '#1F2328', 'noteBkgColor': '#FFF4EC', 'noteBorderColor': '#C65F38', 'sequenceNumberColor': '#FFFFFF'}}}%%
 flowchart TB
     subgraph BOT["机器人 · 树莓派 4B，ROS 2 Foxy"]
         direction LR
-        SENS["Unitree L1 激光雷达 + IMU"] --> BR["robot/bridge.py"] --> CH["DIABLO 底盘"]
+        SENS(["Unitree L1 激光雷达 + IMU"]) --> BR["robot/bridge.py"] --> CH(["DIABLO 底盘"])
     end
-    subgraph HOST["计算主机（GPU）"]
+    subgraph HOST["计算主机 · GPU"]
         direction TB
         subgraph SRV["控制服务器 · flyhead.server.app"]
             direction LR
-            SLAM["SLAM<br/>KISS-ICP，重定位"] --> NAV["导航<br/>中心线规划、纯跟踪、<br/>主机安全链"]
-            SLAM --> LINK["脑连接<br/>高度带过滤，视网膜 V3"]
-            ENV["安全包络<br/>围栏、keep-in、定位度门控"] --> CTRL["控制环，10 Hz<br/>选择规划器或大脑命令"]
+            SLAM("<b>SLAM</b><br/>KISS-ICP · 重定位") --> NAV("<b>导航</b><br/>中心线规划 · 纯跟踪<br/>主机安全链")
+            SLAM --> LINK("<b>脑连接</b><br/>高度带过滤 · 视网膜 V3")
+            ENV("<b>安全包络</b><br/>围栏 · keep-in · 定位度门控") --> CTRL("<b>控制环 · 10 Hz</b><br/>规划器或大脑命令")
             NAV --> CTRL
         end
         subgraph SVC["脑服务 · flyhead.fly.service"]
             direction LR
-            CON["连接组<br/>138639 个 LIF 神经元"] --> DEC["解码器 V9"]
+            CON[["<b>连接组</b><br/>138639 个 LIF 神经元"]] --> DEC("<b>解码器 V9</b>")
         end
     end
     subgraph PC["操作员电脑"]
-        UI["网页控制台 · flyhead.monitor"]
+        UI("<b>网页控制台</b><br/>flyhead.monitor")
     end
-    BR -->|"SSH 标准输出，二进制帧"| SLAM
-    LINK -->|"TCP 127.0.0.1，输入速率"| CON
-    DEC -->|"TCP，状态与意图"| ENV
-    CTRL -->|"SSH 标准输入，命令，截止 ≤ 0.3 s"| BR
-    UI <-->|"SSH 隧道，WebSocket"| CTRL
+    BR -->|"SSH 标准输出 · 二进制帧"| SLAM
+    LINK -->|"TCP · 输入速率"| CON
+    DEC -->|"TCP · 状态与意图"| ENV
+    CTRL ==>|"SSH 标准输入 · 命令 ≤ 0.3 s"| BR
+    UI <-.->|"SSH 隧道 · WebSocket"| CTRL
+
+    classDef robot fill:#FFF4EC,stroke:#C65F38,stroke-width:1.5px,color:#1F2328
+    classDef server fill:#EEF2FF,stroke:#2148B8,stroke-width:1.5px,color:#1F2328
+    classDef brain fill:#EAF6EF,stroke:#008A4B,stroke-width:1.5px,color:#1F2328
+    classDef pc fill:#F3F3F1,stroke:#30343A,stroke-width:1.5px,color:#1F2328
+    classDef key fill:#2148B8,stroke:#173AE3,stroke-width:2px,color:#FFFFFF
+    class SENS,BR,CH robot
+    class SLAM,NAV,LINK,ENV server
+    class CTRL key
+    class CON,DEC brain
+    class UI pc
+    style BOT fill:#FFFBF7,stroke:#C65F38,stroke-dasharray:4 3
+    style HOST fill:#FAFAF7,stroke:#8C959F
+    style SRV fill:#F7F9FF,stroke:#2148B8,stroke-dasharray:4 3
+    style SVC fill:#F5FBF7,stroke:#008A4B,stroke-dasharray:4 3
+    style PC fill:#FAFAF9,stroke:#30343A,stroke-dasharray:4 3
+    linkStyle 10 stroke:#C65F38,stroke-width:2.5px
 ```
 
 ### 3.2 一个 100 ms 决策窗口
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EEF2FF', 'primaryBorderColor': '#2148B8', 'primaryTextColor': '#1F2328', 'lineColor': '#57606A', 'clusterBkg': '#FAFAF7', 'clusterBorder': '#D0D7DE', 'edgeLabelBackground': '#FFFFFF', 'actorBkg': '#FFFFFF', 'actorBorder': '#57606A', 'signalColor': '#57606A', 'signalTextColor': '#1F2328', 'noteBkgColor': '#FFF4EC', 'noteBorderColor': '#C65F38', 'sequenceNumberColor': '#FFFFFF'}}}%%
 sequenceDiagram
-    participant R as 机器人桥
-    participant S as 控制服务器
-    participant B as 脑服务（GPU）
-    R->>S: 经 SSH 标准输出发送激光雷达帧
-    S->>S: SLAM 位姿，高度带过滤 0.08–0.50 m，视网膜 V3
-    S->>B: LC4、LPLC2、LC9（左右）的输入速率
-    B->>B: 10 × 10 ms 连接组计算块，状态持续
-    B->>S: 解码器状态与意图（v, w）
-    S->>S: 意图超过 0.35 s 或输入超过 0.45 s 即丢弃
-    S->>S: 安全包络，围栏或 keep-in，定位度门控
-    S->>R: 命令，机器人时钟上截止 ≤ 0.3 s
-    Note over R: 2 s 无服务器流量则运动归零
+    autonumber
+    box rgb(255,244,236) 机器人
+        participant R as 机器人桥
+    end
+    box rgb(238,242,255) 计算主机
+        participant S as 控制服务器
+        participant B as 脑服务（GPU）
+    end
+    rect rgb(247,249,255)
+        Note over R,S: 感知与编码
+        R->>S: 激光雷达帧（SSH 标准输出）
+        S->>S: SLAM 位姿 · 高度带过滤 0.08–0.50 m · 视网膜 V3
+        S->>B: LC4、LPLC2、LC9（左右）的输入速率
+    end
+    rect rgb(245,251,247)
+        Note over B: GPU 上的连接组
+        B->>B: 10 × 10 ms 连接组计算块，状态持续
+        B-->>S: 解码器状态与意图（v, w）
+    end
+    rect rgb(255,251,247)
+        Note over S,R: 门控与执行
+        S->>S: 意图超过 0.35 s 或输入超过 0.45 s 即丢弃
+        S->>S: 安全包络 · 围栏或 keep-in · 定位度门控
+        S->>R: 命令，机器人时钟上截止 ≤ 0.3 s
+    end
+    Note over R: 2 s 无服务器流量 → 运动归零
 ```
 
 控制服务器从不加载 torch：它通过本地 TCP 与脑服务通信。编码器和解码器只依赖 NumPy，机器人桥不导入本包。

@@ -218,51 +218,84 @@ committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN
 ### 3.1 Deployment
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EEF2FF', 'primaryBorderColor': '#2148B8', 'primaryTextColor': '#1F2328', 'lineColor': '#57606A', 'clusterBkg': '#FAFAF7', 'clusterBorder': '#D0D7DE', 'edgeLabelBackground': '#FFFFFF', 'actorBkg': '#FFFFFF', 'actorBorder': '#57606A', 'signalColor': '#57606A', 'signalTextColor': '#1F2328', 'noteBkgColor': '#FFF4EC', 'noteBorderColor': '#C65F38', 'sequenceNumberColor': '#FFFFFF'}}}%%
 flowchart TB
     subgraph BOT["Robot · Raspberry Pi 4B, ROS 2 Foxy"]
         direction LR
-        SENS["Unitree L1 LiDAR + IMU"] --> BR["robot/bridge.py"] --> CH["DIABLO chassis"]
+        SENS(["Unitree L1 LiDAR + IMU"]) --> BR["robot/bridge.py"] --> CH(["DIABLO chassis"])
     end
-    subgraph HOST["Compute host (GPU)"]
+    subgraph HOST["Compute host · GPU"]
         direction TB
         subgraph SRV["Control server · flyhead.server.app"]
             direction LR
-            SLAM["SLAM<br/>KISS-ICP, relocalization"] --> NAV["Navigation<br/>centreline planner, pursuit,<br/>host safety chain"]
-            SLAM --> LINK["Brain link<br/>band filter, retina V3"]
-            ENV["Safety envelope<br/>geofence, keep-in, fitness gate"] --> CTRL["Control loop, 10 Hz<br/>planner or brain command"]
+            SLAM("<b>SLAM</b><br/>KISS-ICP · relocalization") --> NAV("<b>Navigation</b><br/>centreline planner · pursuit<br/>host safety chain")
+            SLAM --> LINK("<b>Brain link</b><br/>band filter · retina V3")
+            ENV("<b>Safety envelope</b><br/>geofence · keep-in · fitness gate") --> CTRL("<b>Control loop · 10 Hz</b><br/>planner or brain command")
             NAV --> CTRL
         end
         subgraph SVC["Brain service · flyhead.fly.service"]
             direction LR
-            CON["Connectome<br/>138,639 LIF neurons"] --> DEC["Decoder V9"]
+            CON[["<b>Connectome</b><br/>138,639 LIF neurons"]] --> DEC("<b>Decoder V9</b>")
         end
     end
     subgraph PC["Operator PC"]
-        UI["Web console · flyhead.monitor"]
+        UI("<b>Web console</b><br/>flyhead.monitor")
     end
-    BR -->|"SSH stdout, binary frames"| SLAM
-    LINK -->|"TCP 127.0.0.1, input rates"| CON
-    DEC -->|"TCP, state and intent"| ENV
-    CTRL -->|"SSH stdin, command, deadline ≤ 0.3 s"| BR
-    UI <-->|"SSH tunnel, WebSocket"| CTRL
+    BR -->|"SSH stdout · binary frames"| SLAM
+    LINK -->|"TCP · input rates"| CON
+    DEC -->|"TCP · state and intent"| ENV
+    CTRL ==>|"SSH stdin · command ≤ 0.3 s"| BR
+    UI <-.->|"SSH tunnel · WebSocket"| CTRL
+
+    classDef robot fill:#FFF4EC,stroke:#C65F38,stroke-width:1.5px,color:#1F2328
+    classDef server fill:#EEF2FF,stroke:#2148B8,stroke-width:1.5px,color:#1F2328
+    classDef brain fill:#EAF6EF,stroke:#008A4B,stroke-width:1.5px,color:#1F2328
+    classDef pc fill:#F3F3F1,stroke:#30343A,stroke-width:1.5px,color:#1F2328
+    classDef key fill:#2148B8,stroke:#173AE3,stroke-width:2px,color:#FFFFFF
+    class SENS,BR,CH robot
+    class SLAM,NAV,LINK,ENV server
+    class CTRL key
+    class CON,DEC brain
+    class UI pc
+    style BOT fill:#FFFBF7,stroke:#C65F38,stroke-dasharray:4 3
+    style HOST fill:#FAFAF7,stroke:#8C959F
+    style SRV fill:#F7F9FF,stroke:#2148B8,stroke-dasharray:4 3
+    style SVC fill:#F5FBF7,stroke:#008A4B,stroke-dasharray:4 3
+    style PC fill:#FAFAF9,stroke:#30343A,stroke-dasharray:4 3
+    linkStyle 10 stroke:#C65F38,stroke-width:2.5px
 ```
 
 ### 3.2 One 100 ms decision window
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EEF2FF', 'primaryBorderColor': '#2148B8', 'primaryTextColor': '#1F2328', 'lineColor': '#57606A', 'clusterBkg': '#FAFAF7', 'clusterBorder': '#D0D7DE', 'edgeLabelBackground': '#FFFFFF', 'actorBkg': '#FFFFFF', 'actorBorder': '#57606A', 'signalColor': '#57606A', 'signalTextColor': '#1F2328', 'noteBkgColor': '#FFF4EC', 'noteBorderColor': '#C65F38', 'sequenceNumberColor': '#FFFFFF'}}}%%
 sequenceDiagram
-    participant R as Robot bridge
-    participant S as Control server
-    participant B as Brain service (GPU)
-    R->>S: LiDAR frame over SSH stdout
-    S->>S: SLAM pose, band filter 0.08–0.50 m, retina V3
-    S->>B: rates for LC4, LPLC2, LC9 (left and right)
-    B->>B: 10 × 10 ms connectome blocks, persistent state
-    B->>S: decoder state and intent (v, w)
-    S->>S: drop if intent older than 0.35 s or input older than 0.45 s
-    S->>S: safety envelope, geofence or keep-in, fitness gate
-    S->>R: command with deadline ≤ 0.3 s on the robot clock
-    Note over R: no server traffic for 2 s, motion zeroed
+    autonumber
+    box rgb(255,244,236) Robot
+        participant R as Robot bridge
+    end
+    box rgb(238,242,255) Compute host
+        participant S as Control server
+        participant B as Brain service (GPU)
+    end
+    rect rgb(247,249,255)
+        Note over R,S: perception and encoding
+        R->>S: LiDAR frame (SSH stdout)
+        S->>S: SLAM pose · band filter 0.08–0.50 m · retina V3
+        S->>B: rates for LC4, LPLC2, LC9 (left and right)
+    end
+    rect rgb(245,251,247)
+        Note over B: connectome on the GPU
+        B->>B: 10 × 10 ms connectome blocks, persistent state
+        B-->>S: decoder state and intent (v, w)
+    end
+    rect rgb(255,251,247)
+        Note over S,R: gating and execution
+        S->>S: drop if intent > 0.35 s or input > 0.45 s old
+        S->>S: safety envelope · geofence or keep-in · fitness gate
+        S->>R: command, deadline ≤ 0.3 s on the robot clock
+    end
+    Note over R: no server traffic for 2 s → motion zeroed
 ```
 
 The control server never loads torch: it talks to the brain service over local TCP. Encoders and decoders are
