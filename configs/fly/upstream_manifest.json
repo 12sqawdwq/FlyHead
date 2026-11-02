@@ -1,0 +1,48 @@
+{
+  "repository": "eonsystemspbc/fly-brain",
+  "commit": "a3db62f9436074e485c0278290c2164ed6150808",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 18092,
+      "git_blob_sha1": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/LICENSE"
+    },
+    {
+      "path": "README.md",
+      "bytes": 17409,
+      "git_blob_sha1": "47c12a0be59baab8a5c13dd21720b94c24dc5b2f",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/README.md"
+    },
+    {
+      "path": "environment.yml",
+      "bytes": 382,
+      "git_blob_sha1": "9edd4b85884b120600b6e83e312b7501235d0c4a",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/environment.yml"
+    },
+    {
+      "path": "code/run_pytorch.py",
+      "bytes": 22859,
+      "git_blob_sha1": "4a929ca500af56e94bfaf64e5d526da65568f332",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/code/run_pytorch.py"
+    },
+    {
+      "path": "code/benchmark.py",
+      "bytes": 19369,
+      "git_blob_sha1": "0c9cb3b39f4cb7f7529f795ae1c6c127d1aae197",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/code/benchmark.py"
+    },
+    {
+      "path": "data/2025_Completeness_783.csv",
+      "bytes": 3465987,
+      "git_blob_sha1": "7bdf251b81e857b19f2cf664eeb2e31ba614151f",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/data/2025_Completeness_783.csv"
+    },
+    {
+      "path": "data/2025_Connectivity_783.parquet",
+      "bytes": 100804642,
+      "git_blob_sha1": "d386555d1a5f40ebfa1380bcb05b1fab044855fd",
+      "url": "https://raw.githubusercontent.com/eonsystemspbc/fly-brain/a3db62f9436074e485c0278290c2164ed6150808/data/2025_Connectivity_783.parquet"
+    }
+  ]
+}

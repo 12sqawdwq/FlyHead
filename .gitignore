@@ -1,0 +1,28 @@
+# runtime output
+/runs/
+/logs/
+/cache/
+/third_party/
+maps/*/
+!maps/README.md
+flyhead/monitor/web/navigation/
+*.xt
+*.ply
+*.npy
+*.npz
+*.pgm
+# environments
+.venv*/
+/venv/
+/env/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+# local secrets and machine config
+*.code
+.env
+configs/local*.env
+.idea/
+.vscode/
+.bridge.lock

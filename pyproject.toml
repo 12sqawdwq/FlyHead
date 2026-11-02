@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flyhead"
+version = "0.1.0"
+description = "Whole-brain FlyWire fruit-fly connectome (LIF) driving a wheel-legged robot: LiDAR loom -> LC4/LPLC2/LC9 -> descending neurons -> escape and obstacle avoidance"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+# GPU host: the connectome model (CUDA; tested with torch 2.x on an RTX 5090D, sm_120)
+brain = ["torch>=2.4", "triton", "pandas", "pyarrow"]
+# compute host: control server, SLAM, navigation
+server = ["aiohttp>=3.9", "scipy>=1.10", "kiss-icp>=1.0", "opencv-python-headless"]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+include = ["flyhead*"]
+
+[tool.setuptools.package-data]
+"flyhead.monitor" = ["web/*", "web/vendor/*", "web/vendor/controls/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

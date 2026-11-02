@@ -1,0 +1,26 @@
+/xt_camera/ob_camera_node:
+  ros__parameters:
+    camera_name: camera
+    serial_number: AU1GC3200SG
+    device_num: 1
+    enable_color: true
+    color_width: 640
+    color_height: 480
+    color_fps: 30
+    color_format: MJPG
+    color_qos: default
+    color_camera_info_qos: default
+    enable_depth: false
+    enable_ir: false
+    enable_point_cloud: false
+    enable_colored_point_cloud: false
+    enable_frame_sync: false
+    time_domain: system
+    enable_sync_host_time: false
+    enable_heartbeat: false
+    enable_d2c_viewer: false
+    enable_color_undistortion: false
+    publish_tf: false
+    max_save_images_count: 0
+    log_level: info
+    retry_on_usb3_detection_failure: false

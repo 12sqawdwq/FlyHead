@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xingtian Console</title>
+<link rel="icon" href="data:,">
+<style>
+/* Engineering-workbench layout: ribbon · outline tree · details grid · graphics viewport · messages · status bar */
+:root{
+  --chrome:#f0f0f0; --chrome-2:#e4e4e4; --panel:#ffffff; --line:#c9c9c9; --line-2:#dcdcdc;
+  --text:#1e1e1e; --muted:#5f5f5f; --faint:#9a9a9a;
+  --gold:#ffb71b; --gold-soft:#fff3d1; --sel:#fde8b3;
+  --ok:#00a651; --warn:#e8a200; --bad:#d9001b; --info:#2f6fbf;
+  --ui:"Segoe UI",system-ui,-apple-system,sans-serif; --mono:Consolas,"Cascadia Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:12px/1.4 var(--ui);color:var(--text);background:var(--chrome);display:grid;overflow:hidden;
+  grid-template-rows:28px auto minmax(0,1fr) 150px 24px;grid-template-columns:290px minmax(0,1fr);
+  grid-template-areas:"title title" "ribbon ribbon" "side view" "side msgs" "status status"}
+/* title + ribbon */
+#title{grid-area:title;display:flex;align-items:center;gap:10px;padding:0 10px;background:#2b2b2b;color:#f2f2f2;font-size:12px}
+#title b{color:var(--gold);letter-spacing:.04em}
+#title span{color:#bdbdbd}
+#ribbon{grid-area:ribbon;background:var(--chrome);border-bottom:1px solid var(--line)}
+#tabs{display:flex;gap:2px;padding:4px 8px 0;background:var(--chrome-2);border-bottom:1px solid var(--line)}
+#tabs button{border:1px solid transparent;border-bottom:0;background:transparent;padding:4px 14px;font:12px var(--ui);color:var(--text);cursor:pointer;border-radius:3px 3px 0 0}
+#tabs button:hover{background:#ececec}
+#tabs button.on{background:var(--chrome);border-color:var(--line);font-weight:600;margin-bottom:-1px}
+.pane{display:none;padding:6px 8px 0;gap:0;min-height:86px;align-items:stretch}
+.pane.on{display:flex}
+.group{display:flex;flex-direction:column;border-right:1px solid var(--line-2);padding:0 10px}
+.group .cmds{display:flex;gap:4px;align-items:flex-start;flex:1;flex-wrap:wrap;max-width:420px}
+.group .cap{text-align:center;font-size:11px;color:var(--muted);padding:2px 0 4px}
+.big{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-width:58px;height:58px;padding:4px 6px}
+.big i{font-style:normal;font-size:20px;line-height:24px}
+.stack{display:flex;flex-direction:column;gap:3px}
+button{font:12px var(--ui);color:var(--text);background:transparent;border:1px solid transparent;border-radius:3px;cursor:pointer;padding:3px 8px;white-space:nowrap}
+button:hover:not(:disabled){background:var(--gold-soft);border-color:var(--gold)}
+button:active:not(:disabled){background:var(--sel)}
+button:focus-visible{outline:1px dotted var(--text);outline-offset:-3px}
+button.active{background:var(--sel);border-color:var(--gold)}
+button.danger{color:var(--bad)}
+button.danger i{color:var(--bad)}
+button.primary{font-weight:600}
+button.cta{background:var(--gold);border-color:#c98a00;font-weight:600}
+button.cta:hover:not(:disabled){background:#ffc84a;border-color:#a87300}
+button.cta:disabled{background:transparent;border-color:transparent}
+button:disabled{color:var(--faint);cursor:default}
+.form{display:grid;grid-template-columns:auto 1fr auto;gap:8px 10px;align-items:center;padding:12px 14px 4px}
+.form input[type=number]{width:72px;font:12px var(--ui);padding:2px 4px;border:1px solid #b9b9b9}
+.form input[type=range]{width:100%}
+.form output{font:11px var(--mono);min-width:64px}
+.form .hint{grid-column:1/-1;color:var(--muted);font-size:11.5px;line-height:1.5}
+button:disabled i{filter:grayscale(1);opacity:.45}
+.ctl{display:grid;grid-template-columns:auto 110px 66px;gap:2px 6px;align-items:center;font-size:11px;color:var(--muted)}
+.ctl output{font:11px var(--mono);color:var(--text)}
+input[type=range]{width:110px;accent-color:#606060;margin:0}
+input[type=checkbox]{accent-color:#606060;margin:0 4px 0 0}
+label.chk{display:flex;align-items:center;font-size:12px;color:var(--text);cursor:pointer;padding:3px 4px}
+#pad{display:grid;grid-template-columns:repeat(3,26px);grid-template-rows:repeat(2,24px);gap:2px;user-select:none;touch-action:none}
+#pad button{padding:0;border:1px solid var(--line);background:#fafafa;font-size:12px}
+#pad button.on{background:var(--gold);border-color:#c98a00}
+/* left: outline + details */
+#side{grid-area:side;grid-row:3/5;display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1.25fr);border-right:1px solid var(--line);background:var(--chrome)}
+.paneHead{padding:3px 8px;background:var(--chrome-2);border-bottom:1px solid var(--line);font-weight:600;font-size:12px;display:flex;justify-content:space-between}
+.paneHead small{font-weight:400;color:var(--muted)}
+#side,#outline,#details,#tree,#detailBody{min-width:0}
+#side{overflow:hidden}
+#outline{display:flex;flex-direction:column;min-height:0;border-bottom:1px solid var(--line)}
+#tree{flex:1;overflow:auto;background:var(--panel);padding:4px 0;margin:0;list-style:none}
+#tree li{padding:2px 8px 2px calc(8px + var(--d,0) * 16px);display:flex;gap:5px;align-items:center;cursor:pointer;white-space:nowrap;overflow:hidden}
+#tree li:hover{background:#f5f5f5}
+#tree li.sel{background:var(--sel);outline:1px solid var(--gold);outline-offset:-1px}
+#tree .ico{width:14px;text-align:center;font-size:11px;color:var(--faint)}
+#tree .ico.ok{color:var(--ok)} #tree .ico.warn{color:var(--warn)} #tree .ico.bad{color:var(--bad)}
+#tree .val{flex:1 1 auto;min-width:0;text-align:right;color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;padding-left:10px}
+#details{display:flex;flex-direction:column;min-height:0}
+#detailBody{flex:1;overflow:auto;background:var(--panel)}
+.props{display:none;width:100%;border-collapse:collapse;table-layout:fixed}
+.props.on{display:table}
+.props th{text-align:left;background:#ececec;font-weight:600;padding:3px 6px;border-bottom:1px solid var(--line-2)}
+.props td{padding:3px 6px;border-bottom:1px solid #eeeeee;vertical-align:middle;overflow-wrap:anywhere}
+.props td:first-child{color:var(--muted);width:42%;border-right:1px solid #eeeeee}
+.props td b{font-weight:600}
+.props .bad{color:var(--bad);font-weight:600}
+.props a{color:var(--info);margin-right:8px}
+#telemetry{display:contents}
+#changeLog{font:11px var(--mono);color:var(--muted);max-height:120px;overflow:auto}
+/* viewport */
+#view{grid-area:view;position:relative;min-width:0;background:linear-gradient(180deg,#7d9fc9 0%,#b9cbe3 45%,#ffffff 100%)}
+#view canvas{display:block}
+#legendBox{position:absolute;left:10px;top:10px;background:#ffffffe8;border:1px solid var(--line);padding:6px 8px 8px;font-size:11px;min-width:150px}
+#legendBox .t{font-weight:600}
+#legendBox .s{color:var(--muted)}
+#bands{display:grid;grid-template-columns:18px auto;gap:0 6px;margin-top:5px;font:11px var(--mono)}
+#bands i{display:block;height:13px;border:1px solid #00000033;border-top-width:0}
+#bands i:first-child{border-top-width:1px}
+#viewTitle{position:absolute;left:50%;top:10px;transform:translateX(-50%);font-size:12px;color:#1e1e1e;background:#ffffffb3;padding:2px 10px;border:1px solid var(--line-2)}
+#goalHint{position:absolute;left:50%;top:40px;transform:translateX(-50%);display:none;background:var(--gold-soft);border:1px solid var(--gold);padding:4px 12px;font-weight:600}
+#banner{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:none;background:#fff;border:1px solid var(--bad);border-left:4px solid var(--bad);padding:5px 12px;color:var(--bad);font-weight:600;box-shadow:0 2px 8px #0002}
+#scale{position:absolute;right:12px;top:10px;font-size:11px;color:var(--muted);background:#ffffffb3;padding:2px 8px;border:1px solid var(--line-2)}
+#cam{position:absolute;right:12px;top:36px;width:320px;display:none;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px #0003}
+#cam.big{width:min(720px,60%)}
+#cam img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#222}
+#camBar{display:flex;justify-content:space-between;align-items:center;padding:2px 6px;font-size:11px;color:var(--muted)}
+/* messages + status */
+#msgs{grid-area:msgs;display:flex;flex-direction:column;min-height:0;border-top:1px solid var(--line)}
+#logWrap{flex:1;overflow:auto;background:var(--panel)}
+#logTable{width:100%;border-collapse:collapse;font-size:11.5px}
+#logTable th{position:sticky;top:0;text-align:left;background:#ececec;font-weight:600;padding:2px 6px;border-bottom:1px solid var(--line)}
+#logTable td{padding:1px 6px;border-bottom:1px solid #f0f0f0;white-space:nowrap}
+#logTable td:nth-child(2){white-space:normal;width:100%}
+#logTable .ty{width:18px;text-align:center}
+#log{display:contents}
+#statusbar{grid-area:status;display:flex;align-items:center;gap:0;background:var(--chrome-2);border-top:1px solid var(--line);font-size:11.5px}
+#statusbar>div{display:flex;align-items:center;gap:6px;padding:0 10px;height:100%;border-right:1px solid var(--line)}
+#statusbar b{font-weight:600}
+button.turbo{font-weight:600}
+button.turbo.active{background:#d9001b;border-color:#8c0011;color:#fff}
+button.turbo.active:hover:not(:disabled){background:#ef1630;border-color:#8c0011}
+#statusbar>#turboTag{background:#d9001b;color:#fff;font-weight:700;letter-spacing:.12em;font-style:italic}
+body.turbo #ribbon .tabs button.on{box-shadow:inset 0 -3px 0 #d9001b}
+body.turbo #statusbar{border-top:2px solid #d9001b}
+#statusTask{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.led{width:9px;height:9px;border-radius:50%;background:#bdbdbd;border:1px solid #0003}
+.led.ok{background:var(--ok)} .led.warn{background:#ffcc00} .led.bad{background:var(--bad)}
+#batt{width:40px;height:10px;border:1px solid #777;padding:1px;background:#fff}
+#batt i{display:block;height:100%;width:0;background:var(--ok)}
+#prog{width:140px;height:12px;border:1px solid #888;background:#fff;display:none}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3fae4a,#7fd36b)}
+dialog{border:1px solid #888;padding:0;min-width:380px;max-width:460px;box-shadow:0 8px 30px #0005;font:12px var(--ui)}
+dialog::backdrop{background:#0003}
+dialog h3{margin:0;padding:6px 10px;background:var(--chrome-2);border-bottom:1px solid var(--line);font-size:12px;font-weight:600}
+dialog ul{margin:0;padding:12px 14px 4px 30px;line-height:1.6} dialog p{margin:0;padding:12px 14px 4px;line-height:1.6}
+dialog .row{display:flex;justify-content:flex-end;gap:6px;padding:10px 12px;background:var(--chrome)}
+dialog .row button{border:1px solid #adadad;background:#e9e9e9;min-width:76px;padding:4px 10px}
+dialog .row button.primary{border-color:#c98a00;background:var(--gold)}
+@media (max-width:1100px){
+  body{overflow:auto;grid-template-columns:1fr;grid-template-rows:28px auto 60vh auto 150px 24px;
+    grid-template-areas:"title" "ribbon" "view" "side" "msgs" "status"}
+  #side{grid-row:auto;height:520px} .pane{flex-wrap:wrap;row-gap:6px}
+}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+</head>
+<body>
+<div id="title"><b>XINGTIAN</b><span>Navigation Console — LiDAR SLAM · centreline navigation</span></div>
+
+<div id="ribbon">
+  <div id="tabs" role="tablist">
+    <button data-tab="home" class="on">Home</button><button data-tab="mission">Mission</button>
+    <button data-tab="drive">Drive</button><button data-tab="display">Display</button>
+  </div>
+  <div class="pane on" data-pane="home">
+    <div class="group"><div class="cmds">
+      <button class="big primary" id="sessOn"><i>▶</i>Start LiDAR</button>
+      <button class="big" id="sessOff"><i>■</i>End</button>
+      <button class="big" id="save"><i>💾</i>Save map</button>
+      <button class="big" id="camToggle"><i>📷</i>Camera</button>
+    </div><div class="cap">Session</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big cta" id="loopHome"><i>⟳</i>Full loop</button>
+    </div><div class="cap">Tour</div></div>
+    <div class="group"><div class="cmds"><div class="stack">
+      <label class="chk" id="baseRow"><input type="checkbox" id="useBase" checked>Continue on base map</label>
+      <button id="runtimeReset">↺ Reset runtime</button>
+    </div></div><div class="cap">Setup</div></div>
+  </div>
+  <div class="pane" data-pane="mission">
+    <div class="group"><div class="cmds">
+      <button class="big" id="goalMode"><i>⌖</i>Set goal</button>
+      <button class="big primary" id="navOn"><i style="color:#00a651">▶</i>Solve</button>
+      <button class="big danger" id="navOff"><i>■</i>Stop</button>
+    </div><div class="cap">Goal</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big cta" id="loopTour"><i>⟳</i>Full loop</button>
+      <button class="big" id="tour"><i>↻</i>One lap</button>
+      <button class="big" id="explore"><i>✣</i>Explore</button>
+      <button class="big" id="goHome"><i>⌂</i>Return</button>
+    </div><div class="cap">Tasks</div></div>
+    <div class="group"><div class="cmds"><div class="ctl">
+      Speed <input type="range" id="nvmax" min="0.03" max="0.40" step="0.01" value="0.10"><output id="nvmaxT"></output>
+      Turn rate <input type="range" id="nwmax" min="0.10" max="0.60" step="0.05" value="0.20"><output id="nwmaxT"></output>
+      Spin rate <input type="range" id="nwrot" min="0.05" max="0.30" step="0.01" value="0.12"><output id="nwrotT"></output>
+    </div></div><div class="cap">Limits</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big" id="avoidBase" disabled title="Always on: centreline planner, live obstacle layer and stop rule"><i>⛨</i>Avoidance</button>
+      <button class="big" id="flyReflex"><i>✶</i>Fly reflexes</button>
+      <button class="big turbo" id="turbo"><i>⚡</i>Turbo</button>
+    </div><div class="cap">Mode</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big" id="brainShadow"><i>◉</i>Shadow</button>
+      <button class="big turbo" id="brainDrive"><i>✶</i>Roam</button>
+      <button class="big" id="brainOff"><i>○</i>Off</button>
+    </div><div class="cap">Fly brain</div></div>
+    <div class="group"><div class="cmds"><button class="big" id="relocalize"><i>◎</i>Relocalize</button></div><div class="cap">Localization</div></div>
+  </div>
+  <div class="pane" data-pane="drive">
+    <div class="group"><div class="cmds">
+      <button class="big" id="chOn"><i style="color:#00a651">⏻</i>Start chassis</button>
+      <button class="big danger" id="chOff"><i>⏻</i>Stop chassis</button>
+      <button class="big" id="reset"><i>⛨</i>Guard reset</button>
+    </div><div class="cap">Chassis</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big" id="postStand"><i>⇧</i>Stand</button>
+      <button class="big" id="postCrouch"><i>⇩</i>Crouch</button>
+    </div><div class="cap">Posture</div></div>
+    <div class="group"><div class="cmds">
+      <div id="pad"><span></span><button data-k="f" aria-label="forward">▲</button><span></span>
+        <button data-k="l" aria-label="turn left">⟲</button><button data-k="b" aria-label="back">▼</button><button data-k="r" aria-label="turn right">⟳</button></div>
+      <div class="ctl" style="margin-left:8px">
+        Linear <input type="range" id="vmax" min="0.05" max="0.30" step="0.01" value="0.12"><output id="vmaxT"></output>
+        Angular <input type="range" id="wmax" min="0.1" max="1.0" step="0.05" value="0.40"><output id="wmaxT"></output>
+      </div>
+    </div><div class="cap">Manual drive · hold W A S D · Space stops</div></div>
+  </div>
+  <div class="pane" data-pane="display">
+    <div class="group"><div class="cmds">
+      <button class="big" data-view="top"><i>⊤</i>Top</button>
+      <button class="big" data-view="3d"><i>◇</i>Iso</button>
+      <button class="big" id="follow"><i>⌖</i>Follow</button>
+      <button class="big" id="clearView"><i>⌫</i>Clear trail</button>
+    </div><div class="cap">View</div></div>
+    <div class="group"><div class="cmds"><div class="ctl">
+      Height limit <input type="range" id="zmax" min="-0.5" max="4" step="0.05" value="2.0"><output id="zmaxT"></output>
+      Point size <input type="range" id="psize" min="1" max="6" step="0.5" value="2"><output id="psizeT"></output>
+    </div></div><div class="cap">Display</div></div>
+    <div class="group"><div class="cmds"><div class="stack">
+      <button id="cloudSubmit">⇪ Commit changes</button>
+      <label class="chk"><input type="checkbox" id="autoSubmit" checked>Auto commit</label>
+      <a href="./map-editor.html" target="_blank" rel="noopener noreferrer" style="padding:3px 8px;color:var(--info)">Map artifact editor ↗</a>
+    </div></div><div class="cap">Map</div></div>
+  </div>
+</div>
+
+<div id="side">
+  <div id="outline">
+    <div class="paneHead">Outline <small>Filter</small></div>
+    <ul id="tree">
+      <li data-node="project" style="--d:0"><span class="ico">▣</span>Project</li>
+      <li data-node="map" style="--d:1"><span class="ico ok">✔</span>Base map<span class="val" id="mapMode">loading…</span></li>
+      <li data-node="session" style="--d:1"><span class="ico" id="icoSession">○</span>Session<span class="val" id="runTag">—</span></li>
+      <li data-node="session" style="--d:2"><span class="ico" id="ledLoc2">○</span>Localization<span class="val" id="vLoc">—</span></li>
+      <li data-node="drive" style="--d:1"><span class="ico" id="icoChassis">○</span>Chassis<span class="val" id="postureTag">—</span></li>
+      <li data-node="mission" style="--d:1" class="sel"><span class="ico" id="icoMission">○</span>Mission<span class="val" id="vMission">idle</span></li>
+      <li data-node="mapchanges" style="--d:2"><span class="ico ok">✔</span>Map changes<span class="val" id="vChanges">—</span></li>
+      <li data-node="telemetry" style="--d:1" id="node-telemetry"><span class="ico" id="icoSolution">○</span>Solution information</li>
+    </ul>
+  </div>
+  <div id="details">
+    <div class="paneHead"><span>Details of “<span id="detailName">Mission</span>”</span></div>
+    <div id="detailBody">
+      <table class="props" data-props="project"><tr><th colspan="2">Project</th></tr>
+        <tr><td>Application</td><td>Xingtian navigation console</td></tr>
+        <tr><td>Backend</td><td id="vBackend">—</td></tr>
+        <tr><td>Link</td><td id="vLink">—</td></tr></table>
+      <table class="props" data-props="map"><tr><th colspan="2">Base map</th></tr>
+        <tr><td>Package</td><td id="vMapName">—</td></tr><tr><td>Display points</td><td id="vMapPts">—</td></tr>
+        <tr><td>Colour</td><td>Height contour, see legend</td></tr></table>
+      <table class="props" data-props="session"><tr><th colspan="2">Session</th></tr>
+        <tr><td>Run</td><td id="vRun">—</td></tr><tr><td>Localization</td><td id="vLoc2">—</td></tr>
+        <tr><td>Downloads</td><td id="downloads"></td></tr></table>
+      <table class="props" data-props="drive"><tr><th colspan="2">Chassis</th></tr>
+        <tr><td>Driver</td><td id="vDriver">—</td></tr><tr><td>Posture</td><td id="postureReceipt">—</td></tr>
+        <tr><td>Battery</td><td id="vBatt">—</td></tr><tr><td>Guard</td><td id="vGuard">—</td></tr></table>
+      <table class="props on" data-props="mission"><tr><th colspan="2">Definition</th></tr>
+        <tr><td>State</td><td><b id="navHead">idle</b></td></tr>
+        <tr><td>Reason</td><td id="navReason">no task</td></tr>
+        <tr><td>Speed limit</td><td id="vNavLimits">—</td></tr>
+        <tr><td>Laps</td><td id="vLaps">—</td></tr>
+        <tr><td>Stopping distance</td><td id="vStop">—</td></tr>
+        <tr><td>Obstacle avoidance</td><td id="vAvoid">—</td></tr>
+        <tr><td>Turbo</td><td id="vTurbo">—</td></tr>
+        <tr><td>Measured speed</td><td id="vMeasured">—</td></tr>
+        <tr><td>Fly brain</td><td id="vBrain">—</td></tr>
+        <tr><th colspan="2">Results</th></tr>
+        <tr><td>Remaining</td><td id="rRemain">—</td></tr><tr><td>Deviation</td><td id="rDev">—</td></tr>
+        <tr><td>Fitness</td><td id="rFit">—</td></tr><tr><td>Speed cap</td><td id="rSpeed">—</td></tr>
+        <tr><td>Front clearance</td><td id="rClear">—</td></tr><tr><td>Detours</td><td id="rDetour">—</td></tr></table>
+      <table class="props" data-props="mapchanges"><tr><th colspan="2">Map changes</th></tr>
+        <tr><td>Log</td><td><div id="changeLog"></div></td></tr></table>
+      <table class="props" data-props="telemetry"><tr><th colspan="2">Solution information</th></tr>
+        <tbody id="telemetry"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="view">
+  <div id="legendBox"><div class="t">A: Height</div><div class="s">Type: map elevation · Unit: m</div><div id="bands"></div></div>
+  <div id="viewTitle">Graphics</div>
+  <div id="scale">top view · drag to orbit</div>
+  <div id="goalHint">Click the map to place the goal · Esc cancels</div>
+  <div id="banner"></div>
+  <div id="cam"><img id="camImg" alt=""><div id="camBar"><span id="camInfo">camera</span><button id="camSize">Enlarge</button></div></div>
+</div>
+
+<div id="msgs">
+  <div class="paneHead">Messages <small id="msgCount">0</small></div>
+  <div id="logWrap"><table id="logTable"><thead><tr><th class="ty"></th><th>Text</th><th>Time</th></tr></thead><tbody id="log"></tbody></table></div>
+</div>
+
+<div id="statusbar">
+  <div id="statusTask">Ready</div>
+  <div id="turboTag" style="display:none">TURBO</div>
+  <div id="lapTag" style="display:none"></div>
+  <div id="prog"><i></i></div>
+  <div><i class="led" id="ledLink"></i>Link <b id="pLink">—</b></div>
+  <div><i class="led" id="ledLoc"></i>Loc <b id="pLoc">—</b></div>
+  <div><i class="led" id="ledChassis"></i>Chassis <b id="pChassis">—</b></div>
+  <div>Battery <span id="batt"><i></i></span><b id="pBatt">—</b></div>
+</div>
+<dialog id="ask"><h3 id="askTitle"></h3><div id="askBody"></div>
+  <div class="row"><button class="primary" id="askYes">OK</button><button id="askNo">Cancel</button></div></dialog>
+
+<script type="module">
+const UI_SPEED_MAX = 0.40;   // m/s, console ceiling for the speed slider and the Full-loop dialog
+const TURBO_SPEED_MAX = 1.0; // m/s measured, Turbo ceiling (also bounded by the server ceiling)
+let turboPending = null;     // requested Turbo state until the server's nav status confirms it
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const $ = id => document.getElementById(id);
+const fmt = (v, d = 2) => v == null || !Number.isFinite(+v) ? '—' : (+v).toFixed(d);
+const backend = new URL(new URLSearchParams(location.search).get('backend') || location.origin);
+if (!['http:', 'https:'].includes(backend.protocol)) throw new Error('backend must be an HTTP(S) URL');
+const socketUrl = path => { const u = new URL(path, backend); u.protocol = backend.protocol === 'https:' ? 'wss:' : 'ws:'; return u.href; };
+$('vBackend').textContent = backend.host;
+
+// ---------- ribbon tabs, outline tree, details ----------
+document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.dataset.pane === b.dataset.tab));
+});
+document.querySelectorAll('#tree li').forEach(li => li.onclick = () => {
+  document.querySelectorAll('#tree li').forEach(x => x.classList.toggle('sel', x === li));
+  document.querySelectorAll('.props').forEach(t => t.classList.toggle('on', t.dataset.props === li.dataset.node));
+  $('detailName').textContent = li.childNodes[1].textContent.trim();
+});
+function ico(id, state) {   // ✔ done · ⚡ in progress · ✖ fault · ○ not started
+  const e = $(id); e.className = 'ico' + (state ? ' ' + state : '');
+  e.textContent = {ok: '✔', warn: '⚡', bad: '✖'}[state] || '○';
+}
+
+// ---------- confirmation dialog ----------
+function ask(title, lines) {
+  const d = $('ask');
+  $('askTitle').textContent = title;
+  $('askBody').innerHTML = Array.isArray(lines) ? '<ul>' + lines.map(l => `<li>${l}</li>`).join('') + '</ul>' : `<p>${lines}</p>`;
+  return new Promise(resolve => {
+    const done = ok => { d.close(); $('askYes').onclick = $('askNo').onclick = null; d.oncancel = null; resolve(ok); };
+    $('askYes').onclick = () => done(true);
+    $('askNo').onclick = () => done(false);
+    d.oncancel = e => { e.preventDefault(); done(false); };
+    d.showModal();
+    $('askNo').focus();
+  });
+}
+
+// ---------- graphics viewport ----------
+const view = $('view');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); renderer.setClearColor(0x000000, 0); }
+catch (err) {
+  const d = document.createElement('div');
+  d.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:40px;text-align:center';
+  d.textContent = '3D view unavailable (WebGL disabled: ' + err.message + '). Controls and status still work.';
+  renderer = {domElement: d, setPixelRatio() {}, setSize() {}, render() {}, setViewport() {}, setScissor() {}, setScissorTest() {}, clearDepth() {}, autoClear: true};
+}
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.05, 500);
+camera.up.set(0, 0, 1);
+camera.position.set(0, -0.01, 18);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 2.0);
+const MAXP = 4_000_000;
+const mapPos = new Float32Array(MAXP * 3), mapCol = new Float32Array(MAXP * 3);
+const mapGeo = new THREE.BufferGeometry();
+mapGeo.setAttribute('position', new THREE.BufferAttribute(mapPos, 3));
+mapGeo.setAttribute('color', new THREE.BufferAttribute(mapCol, 3));
+mapGeo.setDrawRange(0, 0);
+const mapMat = new THREE.PointsMaterial({size: 2, sizeAttenuation: false, vertexColors: true, clippingPlanes: [clip]});
+const mapPts = new THREE.Points(mapGeo, mapMat); mapPts.frustumCulled = false; scene.add(mapPts);
+// banded contour: 9 bands blue -> cyan -> green -> yellow -> red over the legend range
+const BANDS = ['#0000ff', '#0055ff', '#00aaff', '#00ffff', '#00ff80', '#55ff00', '#ffff00', '#ffaa00', '#ff0000'].map(h => new THREE.Color(h));
+const Z_LO = -0.4, Z_HI = 2.2;
+function heightColor(z, out, o) {
+  const k = Math.max(0, Math.min(BANDS.length - 1, Math.floor((z - Z_LO) / (Z_HI - Z_LO) * BANDS.length)));
+  out[o] = BANDS[k].r; out[o + 1] = BANDS[k].g; out[o + 2] = BANDS[k].b;
+}
+$('bands').innerHTML = BANDS.slice().reverse().map((c, i) => {
+  const hi = Z_HI - i * (Z_HI - Z_LO) / BANDS.length;
+  return `<i style="background:#${c.getHexString()}"></i><span>${i === 0 ? hi.toFixed(2) + ' Max' : hi.toFixed(2)}</span>`;
+}).join('') + `<span></span><span>${Z_LO.toFixed(2)} Min</span>`;
+const MAXT = 200000; const trPos = new Float32Array(MAXT * 3); let trN = 0;
+const trGeo = new THREE.BufferGeometry(); trGeo.setAttribute('position', new THREE.BufferAttribute(trPos, 3)); trGeo.setDrawRange(0, 0);
+const trLine = new THREE.Line(trGeo, new THREE.LineBasicMaterial({color: 0xa000c8, depthTest: false})); trLine.frustumCulled = false; trLine.renderOrder = 1; scene.add(trLine);
+const trDots = new THREE.Points(trGeo, new THREE.PointsMaterial({color: 0xa000c8, size: 3, sizeAttenuation: false, depthTest: false})); trDots.renderOrder = 1; trLine.add(trDots);
+const robot = new THREE.Group();
+const arrowBody = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.55, 12), new THREE.MeshBasicMaterial({color: 0xe0001b, depthTest: false}));
+arrowBody.rotation.z = -Math.PI / 2; arrowBody.position.x = 0.27; arrowBody.renderOrder = 4; robot.add(arrowBody);
+const arrowHead = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.3, 16), new THREE.MeshBasicMaterial({color: 0xe0001b, depthTest: false}));
+arrowHead.rotation.z = -Math.PI / 2; arrowHead.position.x = 0.68; arrowHead.renderOrder = 4; robot.add(arrowHead);
+const ring = new THREE.Mesh(new THREE.RingGeometry(0.30, 0.36, 48), new THREE.MeshBasicMaterial({color: 0xe0001b, side: THREE.DoubleSide, depthTest: false}));
+ring.renderOrder = 4; robot.add(ring);
+robot.matrixAutoUpdate = false; robot.visible = false; scene.add(robot);
+const pathGeo = new THREE.BufferGeometry(); pathGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3 * 4000), 3)); pathGeo.setDrawRange(0, 0);
+const pathLine = new THREE.Line(pathGeo, new THREE.LineBasicMaterial({color: 0x000000, depthTest: false})); pathLine.frustumCulled = false; pathLine.renderOrder = 2; scene.add(pathLine);
+const pathDots = new THREE.Points(pathGeo, new THREE.PointsMaterial({color: 0x000000, size: 3.5, sizeAttenuation: false, depthTest: false}));
+pathDots.frustumCulled = false; pathDots.renderOrder = 2; pathLine.add(pathDots);
+const goalMark = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.5, 4), new THREE.MeshBasicMaterial({color: 0x00a651, depthTest: false}));
+goalMark.rotation.x = -Math.PI / 2; goalMark.renderOrder = 3; goalMark.visible = false; scene.add(goalMark);
+// axis triad (bottom-right), drawn in its own small viewport
+const triScene = new THREE.Scene(), triCam = new THREE.PerspectiveCamera(40, 1, 0.1, 10);
+triCam.up.set(0, 0, 1);
+for (const [dir, color] of [[[1, 0, 0], 0xff0000], [[0, 1, 0], 0x00b000], [[0, 0, 1], 0x0000ff]])
+  triScene.add(new THREE.ArrowHelper(new THREE.Vector3(...dir), new THREE.Vector3(), 1, color, 0.3, 0.16));
+let follow = false, lastPose = null, floorZ = -0.2;
+function addTraj(x, y, z) { if (trN >= MAXT) return; trPos.set([x, y, z], trN * 3); trN++; trGeo.setDrawRange(0, trN); trGeo.attributes.position.needsUpdate = true; }
+function clearTrail() { trN = 0; trGeo.setDrawRange(0, 0); lastPose = null; }
+async function loadFixedMap() {
+  const [mj, mb] = await Promise.all([fetch('./navigation/map.json'), fetch('./navigation/map.bin')]);
+  if (!mj.ok || !mb.ok) throw new Error('local base map files are missing');
+  const meta = await mj.json(), xyz = new Float32Array(await mb.arrayBuffer());
+  if (xyz.length !== meta.points * 3 || meta.points > MAXP) throw new Error('base map size does not match its metadata');
+  mapPos.set(xyz);
+  for (let i = 0; i < meta.points; i++) heightColor(xyz[i * 3 + 2], mapCol, i * 3);
+  mapGeo.attributes.position.needsUpdate = mapGeo.attributes.color.needsUpdate = true;
+  mapGeo.setDrawRange(0, meta.points);
+  const lo = meta.bounds_min, hi = meta.bounds_max, x = (lo[0] + hi[0]) / 2, y = (lo[1] + hi[1]) / 2;
+  controls.target.set(x, y, 0);
+  camera.position.set(x, y - 0.01, Math.max(hi[0] - lo[0], hi[1] - lo[1], 5) * 1.35);
+  $('mapMode').textContent = meta.map; $('vMapName').textContent = meta.map; $('vMapPts').textContent = meta.points.toLocaleString();
+}
+function onPose(buf) {
+  // The display map is the saved base: a pose is drawn only on a localized base session.
+  if (!st?.slam?.attached || st?.slam?.base !== true || st?.localization_blocked) { robot.visible = false; return; }
+  const p = new Float32Array(buf.slice(1, 65));
+  robot.matrix.copy(new THREE.Matrix4().set(...p));
+  robot.visible = true;
+  const x = p[3], y = p[7], z = p[11];
+  if (!lastPose || Math.hypot(x - lastPose[0], y - lastPose[1], z - lastPose[2]) > 0.03) addTraj(x, y, z);
+  if (follow && lastPose) { const d = new THREE.Vector3(x - lastPose[0], y - lastPose[1], z - lastPose[2]); camera.position.add(d); controls.target.add(d); }
+  lastPose = [x, y, z];
+}
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); new ResizeObserver(resize).observe(view); resize();
+(function loop() {
+  requestAnimationFrame(loop);
+  controls.update();
+  const w = view.clientWidth, h = view.clientHeight;
+  renderer.setViewport(0, 0, w, h); renderer.setScissorTest(false); renderer.render(scene, camera);
+  // triad follows the view orientation
+  const dir = new THREE.Vector3().subVectors(camera.position, controls.target).normalize().multiplyScalar(4);
+  triCam.position.copy(dir); triCam.lookAt(0, 0, 0); triCam.up.copy(camera.up);
+  renderer.autoClear = false; renderer.clearDepth();
+  renderer.setViewport(w - 96, 8, 88, 88); renderer.setScissor(w - 96, 8, 88, 88); renderer.setScissorTest(true);
+  renderer.render(triScene, triCam);
+  renderer.setScissorTest(false); renderer.autoClear = true;
+})();
+document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => {
+  const t = lastPose ? new THREE.Vector3(...lastPose) : controls.target.clone();
+  controls.target.copy(t);
+  if (b.dataset.view === 'top') { camera.position.set(t.x, t.y - 0.01, t.z + 18); $('scale').textContent = 'top view · drag to orbit'; }
+  else { camera.position.set(t.x - 6, t.y - 6, t.z + 5); $('scale').textContent = 'isometric view'; }
+});
+$('follow').onclick = () => { follow = !follow; $('follow').classList.toggle('active', follow); };
+$('clearView').onclick = clearTrail;
+const bindRange = (id, f, fn) => { const e = $(id), out = $(id + 'T'); const u = () => { out.textContent = f(+e.value); fn && fn(+e.value); }; e.oninput = u; u(); };
+bindRange('zmax', v => v.toFixed(2) + ' m', v => clip.constant = v);
+bindRange('psize', v => v, v => mapMat.size = v);
+bindRange('vmax', v => v.toFixed(2) + ' m/s');
+bindRange('wmax', v => v.toFixed(2) + ' rad/s');
+function limitsText() {   // declared, so it exists before the first slider binding runs
+  if (!$('nwrot')) return;
+  $('vNavLimits').textContent = `${fmt(+$('nvmax').value)} m/s · turn ${fmt(+$('nwmax').value)} · spin ${fmt(+$('nwrot').value)} rad/s`;
+}
+bindRange('nvmax', v => v.toFixed(2) + ' m/s', () => limitsText());
+bindRange('nwmax', v => v.toFixed(2) + ' rad/s', limitsText);
+bindRange('nwrot', v => v.toFixed(2) + ' rad/s', limitsText);
+
+// ---------- goal picking ----------
+let goalMode = false;
+function setGoalMode(on) { goalMode = on; $('goalMode').classList.toggle('active', on); $('goalHint').style.display = on ? 'block' : 'none'; }
+$('goalMode').onclick = () => setGoalMode(!goalMode);
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+let downAt = null;
+renderer.domElement.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; });
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!goalMode || !downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(mouse, camera);
+  const hit = new THREE.Vector3();
+  if (ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 0, 1), -floorZ), hit)) { send({t: 'goal', x: hit.x, y: hit.y}); setGoalMode(false); }
+});
+
+// ---------- connection ----------
+let ws, st = null, nav = null, dataStarted = false, lastStatusAt = 0, lastPongAt = 0, rtt = null, nMsgs = 0;
+const WARN = /fail|error|cannot|refus|blocked|low|lost|stale|exit|fault|no path|too/i;
+function log(t, ts) {
+  const time = new Date((ts || Date.now() / 1000) * 1000).toLocaleTimeString();
+  const tr = document.createElement('tr');
+  const warn = WARN.test(t);
+  tr.innerHTML = `<td class="ty" style="color:${warn ? 'var(--warn)' : 'var(--info)'}">${warn ? '⚠' : 'ⓘ'}</td><td></td><td>${time}</td>`;
+  tr.children[1].textContent = t;
+  $('log').prepend(tr);
+  while ($('log').childNodes.length > 300) $('log').lastChild.remove();
+  $('msgCount').textContent = ++nMsgs;
+}
+function send(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+window.xtSend = send;
+function connect() {
+  ws = new WebSocket(socketUrl('/ws'));
+  ws.onopen = () => { lastStatusAt = lastPongAt = 0; rtt = null; render(); };
+  ws.onclose = () => { held.clear(); padSync(); render(); setTimeout(connect, 1500); };
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.type === 'status') { st = m; lastStatusAt = performance.now(); render(); }
+    else if (m.type === 'nav') { nav = m; onNav(m); }
+    else if (m.type === 'pong') { if (Number.isFinite(m.id)) { lastPongAt = performance.now(); rtt = lastPongAt - m.id; } }
+    else if (m.type === 'event') log(m.text, m.t);
+    else if (m.type === 'hello') {
+      (m.events || []).forEach(x => log(x.text, x.t));
+      if (!dataStarted) { dataStarted = true; connectData('/stream'); connectData('/camera'); }
+    }
+  };
+}
+function connectData(path) {
+  const ch = new WebSocket(socketUrl(path));
+  ch.binaryType = 'arraybuffer';
+  ch.onmessage = e => {
+    if (!(e.data instanceof ArrayBuffer)) return;
+    const k = new Uint8Array(e.data, 0, 1)[0];
+    if (k === 5) onJpeg(e.data); else if (k === 6) { clearTrail(); robot.visible = false; } else if (k === 1) onPose(e.data);
+  };
+  ch.onclose = () => setTimeout(() => connectData(path), 1500);
+}
+setInterval(() => { if (ws?.readyState === 1) send({t: 'ping', id: performance.now()}); render(); }, 2000);
+
+// ---------- camera ----------
+let camUrl = null, decoding = false, pendingJpeg = null, lastFrame = 0, camN = 0, camT0 = performance.now(), camFps = 0;
+function onJpeg(b) {
+  if (decoding) { pendingJpeg = b; return; }
+  decoding = true;
+  const url = URL.createObjectURL(new Blob([new Uint8Array(b, 9)], {type: 'image/jpeg'})), img = $('camImg');
+  const finish = ok => {
+    if (camUrl) URL.revokeObjectURL(camUrl);
+    camUrl = url; decoding = false;
+    if (ok) { lastFrame = performance.now(); camN++; if (lastFrame - camT0 > 1000) { camFps = camN * 1000 / (lastFrame - camT0); camN = 0; camT0 = lastFrame; } $('camInfo').textContent = `RGB ${camFps.toFixed(1)} fps`; }
+    const next = pendingJpeg; pendingJpeg = null; if (next) onJpeg(next);
+  };
+  img.onload = () => finish(true); img.onerror = () => finish(false); img.src = url;
+}
+$('camSize').onclick = () => { const c = $('cam'); c.classList.toggle('big'); $('camSize').textContent = c.classList.contains('big') ? 'Shrink' : 'Enlarge'; };
+
+// ---------- navigation status ----------
+const STATES = {idle: 'idle', planning: 'planning', planned: 'planned', driving: 'driving', avoiding: 'avoiding',
+  waiting: 'holding', blocked: 'blocked', no_path: 'no path', arrived: 'arrived', stopped: 'stopped'};
+const LEGS = {explore: 'explore', home: 'return', tour: 'tour'};
+const CHANGES = {added: 'new obstacle', removed: 'obstacle removed', cleared: 'temporary obstacle cleared'};
+let lastVerdict = null;
+function onNav(m) {
+  const hidden = !!st?.localization_blocked;
+  pathLine.visible = !hidden;
+  if (m.pose) floorZ = (lastPose ? lastPose[2] : 0) - 0.2;
+  goalMark.visible = !!m.goal && !hidden;
+  if (m.goal) goalMark.position.set(m.goal[0], m.goal[1], floorZ + 0.45);
+  const pa = pathGeo.attributes.position, P = m.path || [], n = Math.min(P.length, 4000);
+  for (let i = 0; i < n; i++) { pa.array[i * 3] = P[i][0]; pa.array[i * 3 + 1] = P[i][1]; pa.array[i * 3 + 2] = floorZ + 0.05; }
+  pa.needsUpdate = true; pathGeo.setDrawRange(0, n);
+  const head = (STATES[m.state] || m.state) + (m.leg ? ' · ' + (LEGS[m.leg] || m.leg) : '');
+  $('navHead').textContent = head; $('vMission').textContent = head;
+  $('navReason').textContent = m.reason || (m.goal ? `goal ${m.goal.map(v => v.toFixed(2)).join(', ')}` : 'no task');
+  ico('icoMission', m.active ? (m.state === 'waiting' || m.state === 'avoiding' ? 'warn' : 'warn') : m.state === 'arrived' ? 'ok'
+    : ['blocked', 'no_path'].includes(m.state) ? 'bad' : '');
+  const failed = ['no_path', 'blocked'].includes(m.state);
+  $('statusTask').textContent = failed ? `✖ No solution — ${m.reason || head}` : m.active ? `Solving — ${head}: ${m.reason || ''}`
+    : m.state === 'arrived' ? 'Solution complete — arrived' : 'Ready';
+  const verdict = failed ? `${m.goal ? 'Goal (' + m.goal.map(v => v.toFixed(2)).join(', ') + '): ' : ''}${m.reason || head}` : null;
+  if (verdict && verdict !== lastVerdict) log(verdict);   // planning failures reach the message list once
+  lastVerdict = verdict;
+  const tour = m.leg === 'tour' && m.tour_length_m;
+  $('prog').style.display = tour ? 'block' : 'none';
+  if (tour) $('prog').firstElementChild.style.width = Math.min(100, 100 * m.tour_progress_m / m.tour_length_m) + '%';
+  $('rRemain').textContent = m.remaining_m != null ? m.remaining_m + ' m' : '—';
+  $('rDev').textContent = m.tracking_error_m != null ? fmt(m.tracking_error_m) + ' m' : '—';
+  $('rFit').textContent = fmt(m.fitness, 3); $('rFit').className = m.fitness != null && m.fitness < 0.6 ? 'bad' : '';
+  $('rSpeed').textContent = m.active && m.speed_limit != null ? fmt(m.speed_limit) + ' m/s' : '—';
+  $('rClear').textContent = m.front_clearance_m != null ? fmt(m.front_clearance_m) + ' m' : '—';
+  $('rDetour').textContent = m.detour_count ?? '—';
+  $('changeLog').innerHTML = (m.changes || []).slice().reverse().map(c => new Date(c.t * 1000).toLocaleTimeString() + ' ' + (CHANGES[c.kind] || c.kind)
+    + (c.x != null ? ` (${c.x}, ${c.y}) ${c.area_m2} m²` : ` ${c.cells} cells`)).join('<br>') || 'none';
+  $('vChanges').textContent = 'v' + (m.cloud_version ?? '—');
+  $('autoSubmit').checked = m.auto_submit;
+  $('postureTag').textContent = (m.mode || '—') + (m.lidar_h != null ? ` · ${m.lidar_h.toFixed(2)} m` : '');
+  $('postStand').classList.toggle('active', m.mode === 'stand'); $('postCrouch').classList.toggle('active', m.mode === 'crouch');
+  render();
+}
+
+// ---------- state machine: every control derives from the latest status ----------
+const RECOVERY = {idle: 'idle', rebuilding: 'rebuilding', searching: 'matching map', confirming: 'confirming', ready: 'recovered', failed: 'failed', cancelled: 'cancelled'};
+function led(id, cls) { $(id).className = 'led' + (cls ? ' ' + cls : ''); }
+let resetAwaiting = false, lastResetId = null, lastRecoveryAttempt = 0;
+function render() {
+  const online = ws?.readyState === 1, fresh = online && lastStatusAt && performance.now() - lastStatusAt < 3000;
+  led('ledLink', !online ? 'bad' : fresh ? 'ok' : 'warn');
+  $('pLink').textContent = !online ? 'offline' : rtt != null && performance.now() - lastPongAt < 5000 ? rtt.toFixed(0) + ' ms' : 'up';
+  $('vLink').textContent = $('pLink').textContent;
+  const s = st?.slam || {}, rb = st?.robot || {}, sf = rb.safety, body = rb.body, reloc = s.reloc || {};
+  const running = !!st?.running, replay = !!st?.replay, lock = st?.chassis_disabled === true;
+  const chassisOn = running && !!rb.chassis_running, busy = !!rb.operation_busy;
+  const recovery = st?.recovery || {state: 'idle', attempt: 0};
+  const recovering = ['rebuilding', 'searching', 'confirming'].includes(recovery.state);
+  const localized = !!s.attached && !st?.localization_blocked;
+  const resetState = st?.runtime_reset || {}, resetBusy = resetState.state === 'busy';
+  led('ledLoc', !running ? '' : localized ? 'ok' : recovering || s.base ? 'warn' : '');
+  $('pLoc').textContent = !running ? 'off' : localized ? fmt(s.fitness, 2) : recovering ? RECOVERY[recovery.state] : s.base ? 'searching' : 'own frame';
+  $('vLoc').textContent = $('pLoc').textContent; $('vLoc2').textContent = $('pLoc').textContent;
+  ico('ledLoc2', !running ? '' : localized ? 'ok' : 'warn');
+  ico('icoSession', running ? 'ok' : '');
+  led('ledChassis', chassisOn ? (sf?.present ? 'warn' : 'ok') : rb.chassis_exit != null ? 'bad' : '');
+  $('pChassis').textContent = lock ? 'locked' : chassisOn ? (body?.robot_mode === 3 ? 'stand' : 'crouch') : rb.chassis_exit != null ? 'exit ' + rb.chassis_exit : 'off';
+  ico('icoChassis', chassisOn ? (sf?.present ? 'warn' : 'ok') : rb.chassis_exit != null ? 'bad' : '');
+  ico('icoSolution', st?.pipeline?.fault ? 'bad' : running ? 'ok' : '');
+  const pct = rb.battery?.pct;
+  $('pBatt').textContent = pct != null ? pct.toFixed(0) + '%' : '—';
+  const bar = $('batt').firstElementChild;
+  bar.style.width = pct != null ? Math.max(3, pct) + '%' : '0';
+  bar.style.background = pct == null ? '#bbb' : pct < 15 ? 'var(--bad)' : pct < 25 ? '#ffcc00' : 'var(--ok)';
+  $('vBatt').textContent = rb.battery ? `${rb.battery.pct.toFixed(0)}% · ${rb.battery.voltage} V` : 'reported while the chassis runs';
+  $('vGuard').textContent = sf ? `${sf.present ? 'obstacle' : 'clear'} · nearest ${fmt(sf.nearest_m)} m` : '—';
+  $('vDriver').textContent = chassisOn ? `running · ctrl ${body?.ctrl_mode} · mode ${body?.robot_mode}`
+    : rb.chassis_exit != null ? `exited ${rb.chassis_exit}` + (rb.chassis_exit === 0 ? ' (control authority held elsewhere)' : '') : 'not running';
+  $('runTag').textContent = running ? (replay ? 'replay' : st.run || 'running') : '—';
+  $('vRun').textContent = running ? `${st.run || ''} · ${fmt(st.elapsed, 0)} s` : 'not running';
+  // session
+  $('sessOn').disabled = !online || running || resetBusy;
+  $('sessOff').disabled = !online || !running || resetBusy;
+  $('save').disabled = !online || !st?.run;
+  $('camToggle').disabled = !online || !running || replay;
+  $('camToggle').classList.toggle('active', !!rb.camera_running);
+  $('cam').style.display = rb.camera_running || (lastFrame && performance.now() - lastFrame < 5000) ? 'block' : 'none';
+  if (resetState.id && resetState.id !== lastResetId && ['ready', 'failed'].includes(resetState.state)) {
+    resetAwaiting = false; lastResetId = resetState.id;
+    if (resetState.state === 'ready') {
+      for (const [id, value] of Object.entries(resetState.defaults || {})) if ($(id)) { $(id).value = value; $(id).dispatchEvent(new Event('input')); }
+      $('useBase').checked = true; held.clear(); padSync();
+    }
+  }
+  $('runtimeReset').disabled = !online || replay || resetBusy || resetAwaiting;
+  $('baseRow').style.display = st?.base_path ? 'flex' : 'none';
+  $('downloads').innerHTML = st?.run ? ['map.ply', 'map_topdown.pgm', 'trajectory.csv', 'summary.json']
+    .map(n => `<a href="${new URL('/download/' + n, backend).href}">${n}</a>`).join('') : '—';
+  // drive
+  $('chOn').disabled = !online || lock || !running || replay || chassisOn;
+  $('chOff').disabled = !online || lock || !chassisOn;
+  $('reset').disabled = !online || !chassisOn;
+  $('postStand').disabled = $('postCrouch').disabled = !online || lock || !chassisOn || rb.posture_ready === false || busy;
+  const pr = rb.posture_result || {};
+  $('postureReceipt').textContent = !chassisOn ? 'start the chassis to drive or change posture'
+    : rb.posture_block_reason ? 'unavailable: ' + rb.posture_block_reason
+    : pr.state === 'confirmed' ? 'confirmed ' + (pr.stand ? 'standing' : 'crouching') : pr.note || 'ready';
+  for (const b of document.querySelectorAll('#pad button')) b.disabled = !online || lock || !chassisOn;
+  if (lock || !chassisOn) { if (held.size) { held.clear(); padSync(); } }
+  // mission
+  const active = !!nav?.active;
+  for (const id of ['tour', 'explore', 'goHome', 'loopTour', 'loopHome']) $(id).disabled = !online || lock || busy || !chassisOn || !localized || active;
+  const why = !online ? 'offline' : lock ? 'charging lock' : !chassisOn ? 'start the chassis first' : !localized ? 'waiting for localization'
+    : active ? 'a task is running' : busy ? 'chassis busy' : 'plan and drive full loops of the venue';
+  $('loopTour').title = $('loopHome').title = why;
+  // operator speed range: the server ceiling, but never above UI_SPEED_MAX (fastest lap measured at 0.40)
+  if (turboPending !== null && (!!nav?.turbo === turboPending || !online)) turboPending = null;
+  const turboOn = turboPending ?? !!nav?.turbo;
+  const vTop = turboOn ? turboTop() : Math.min(UI_SPEED_MAX, st?.speed_limit_max || UI_SPEED_MAX);
+  if (+$('nvmax').max !== vTop) $('nvmax').max = vTop;
+  document.body.classList.toggle('turbo', turboOn);
+  $('turbo').classList.toggle('active', turboOn);
+  $('turboTag').style.display = turboOn ? 'flex' : 'none';
+  // only a server whose nav status reports `turbo` implements it; an older one would just
+  // clamp the Turbo speed and drive it with plain pursuit
+  const turboSupported = !!nav && 'turbo' in nav;
+  $('turbo').disabled = !online || lock || !turboSupported;
+  $('turbo').title = !turboSupported ? 'This server version has no Turbo mode' : turboOn ? 'Turbo is on: click to return to normal limits (≤ 0.40 m/s)'
+    : `Fast laps up to ${fmt(turboTop())} m/s with braking before bends`;
+  $('vTurbo').textContent = turboOn ? `on · speed gain ${nav.speed_gain?.toFixed(2) ?? '—'} · profile cap ${nav.profile_cap != null ? fmt(nav.profile_cap) + ' m/s' : '—'}` : 'off';
+  $('vMeasured').textContent = nav?.measured_speed_mps != null ? fmt(nav.measured_speed_mps) + ' m/s' : '—';
+  const br = st?.brain;
+  const brainOn = !!br?.enabled;
+  for (const id of ['brainShadow', 'brainDrive', 'brainOff', 'flyReflex']) $(id).disabled = !online || !brainOn;
+  $('brainDrive').disabled ||= lock || !chassisOn || !localized || active;
+  $('brainShadow').classList.toggle('active', br?.mode === 'shadow'); $('brainDrive').classList.toggle('active', br?.mode === 'drive');
+  const reflexOn = br?.mode === 'reflex';
+  $('flyReflex').classList.toggle('active', reflexOn);
+  $('avoidBase').classList.add('active');
+  $('flyReflex').title = !brainOn ? 'Server started without XT_BRAIN_DIR' : reflexOn
+    ? 'Fly reflexes on: click to return to planner-only obstacle avoidance'
+    : 'Let the fly brain freeze or escape from people and other unmapped objects during navigation tasks';
+  $('vAvoid').textContent = 'planner + stop rule' + (reflexOn ? ` + fly reflexes (${nav?.reflex_count ?? 0} this task)` : '')
+    + (nav?.state === 'reflex' ? ' · REFLEX IN CONTROL' : '');
+  $('brainShadow').title = $('brainOff').title = brainOn ? 'Fly-brain decisions (loom_005)' : 'Server started without XT_BRAIN_DIR';
+  const bl = br?.last || {};
+  $('vBrain').textContent = !brainOn ? 'not available' : br.mode === 'off' ? 'off'
+    : `${br.mode} · ${br.connected ? 'connected' : 'no service'} · ${bl.state || '—'} v ${fmt(bl.brain_v ?? 0)} w ${fmt(bl.brain_w ?? 0)}`
+      + (bl.withheld ? ` · held: ${bl.withheld}` : bl.envelope ? ` · envelope: ${bl.envelope}` : '') + (bl.input_age_s != null ? ` · input ${fmt(bl.input_age_s)} s` : '');
+  const laps = st?.tour_laps;
+  $('lapTag').style.display = laps?.active ? 'flex' : 'none';
+  $('lapTag').textContent = laps ? `Lap ${Math.min(laps.done + 1, laps.total)} / ${laps.total}` : '';
+  $('vLaps').textContent = laps ? `${laps.done} of ${laps.total} complete${laps.active ? '' : ' · series ended'}` : '—';
+  $('vStop').textContent = nav?.stopping_distance_m != null ? nav.stopping_distance_m + ' m at the current speed limit' : '—';
+  $('goHome').disabled ||= !nav?.home;
+  $('navOn').disabled = !online || lock || busy || !chassisOn || !localized || active || !nav?.goal;
+  $('navOff').disabled = !online || !active;
+  $('goalMode').disabled = !online || !localized;
+  if ($('goalMode').disabled && goalMode) setGoalMode(false);
+  $('relocalize').disabled = !online || !running || replay || !s.base || recovering;
+  if (recovery.attempt !== lastRecoveryAttempt) { lastRecoveryAttempt = recovery.attempt; clearTrail(); }
+  if (st?.localization_blocked) robot.visible = pathLine.visible = goalMark.visible = false;
+  // alarm banner
+  const msg = !online ? 'Disconnected from the compute server · reconnecting'
+    : lock ? 'Charging lock · chassis, posture and motion are disabled'
+    : st?.pipeline?.fault ? 'Pipeline fault · ' + st.pipeline.fault
+    : chassisOn && sf?.present ? `Chassis guard · obstacle ${fmt(sf.nearest_m)} m from the robot` : '';
+  $('banner').style.display = msg ? 'block' : 'none'; $('banner').textContent = msg;
+  // solution information
+  const r = st?.rates || {};
+  const rows = [
+    ['Session', running ? (replay ? 'replay' : 'live') + ' · ' + (st.run || '') : 'not running'],
+    ['Rates', `${fmt(r.clouds, 1)} Hz cloud · ${fmt(r.imus, 0)} Hz IMU · ${fmt((r.bytes || 0) / 1024, 0)} KB/s`],
+    ['SLAM', running ? `${s.frames ?? 0} frames · ${fmt(s.proc_ms, 1)} ms · ${s.points ?? '—'} pts` : '—'],
+    ['Pose x y z yaw', s.pose ? s.pose.map(v => fmt(v)).join('  ') : '—'],
+    ['Distance', fmt(s.distance_m) + ' m · ' + ((s.map_points || 0) / 1000).toFixed(0) + 'k map pts'],
+    ['Relocalization', !s.base ? 'no base map' : localized ? 'localized' : `try ${reloc.tries || 0} · fit ${fmt(reloc.fitness)} · ratio ${fmt(reloc.ratio)}`],
+    ['Recovery', (RECOVERY[recovery.state] || recovery.state) + (recovery.reason ? ' · ' + recovery.reason : '')],
+    ['Map correction', s.map_correction ? `${s.map_correction.applied} applied · ${s.map_correction.rejected} rejected` : '—'],
+    ['Chassis', $('vDriver').textContent + (body ? ` · warn ${body.warning} · err ${body.error}` : '')],
+    ['Guard', $('vGuard').textContent],
+    ['Command', st?.cmd ? `v ${fmt(st.cmd[0])} · w ${fmt(st.cmd[1])}` : '—'],
+    ['Battery', $('vBatt').textContent],
+    ['Status age', lastStatusAt ? ((performance.now() - lastStatusAt) / 1000).toFixed(1) + ' s' : '—'],
+    ['Fault', st?.pipeline?.fault || s.error || 'none'],
+  ];
+  $('telemetry').innerHTML = rows.map(([k, v]) => `<tr><td><span>${k}</span></td><td><span>${v}</span></td></tr>`).join('');
+}
+
+// ---------- turbo ----------
+// Turbo speeds are measured speeds; the server ceiling (XT_MAX_V) bounds the command.
+// measured top = command ceiling x measured speed gain
+function turboTop() { return Math.max(UI_SPEED_MAX, Math.min(TURBO_SPEED_MAX, (st?.speed_limit_max || UI_SPEED_MAX) * (nav?.speed_gain || 1))); }
+const TURBO_CHECKS = [
+  'The venue is clear: nobody on the route, no loose objects.',
+  'Someone is holding the remote controller and can take over.',
+  'Standing posture and a charged battery (≥ 40 %).',
+  'The robot brakes before each bend and slows in narrow places; peak speed on straights only.'];
+async function setTurbo(on, v) {
+  if (on && !await ask('Turbo mode', TURBO_CHECKS)) return false;
+  const msg = {t: 'nav_params', turbo: on};
+  if (on) msg.v = v ?? Math.min(turboTop(), 0.8);
+  else msg.v = Math.min(+$('nvmax').value, UI_SPEED_MAX);
+  turboPending = on;
+  send(msg);
+  $('nvmax').max = on ? turboTop() : Math.min(UI_SPEED_MAX, st?.speed_limit_max || UI_SPEED_MAX);
+  $('nvmax').value = msg.v; $('nvmax').dispatchEvent(new Event('input'));
+  return true;
+}
+$('turbo').onclick = () => setTurbo(!nav?.turbo);
+$('brainShadow').onclick = () => send({t: 'brain', mode: 'shadow'});
+$('brainOff').onclick = () => send({t: 'brain', mode: 'off'});
+$('brainDrive').onclick = async () => {
+  if (!await ask('Fly-brain roam', [
+    'The full-connectome fly brain decides motion: forward from P9, turns from DNa02, escape from the giant fibre; the decoder adds rest, freeze, flight and (v9) an endogenous exploration drive.',
+    'Limits: 0.15 m/s forward and 0.40 rad/s; escapes and flights up to 0.20 m/s forward, 0.30 m/s back, 1.0 rad/s.',
+    'It may roam all mapped free floor (keep-in 0.30 m from mapped obstacles); the robot must start inside it.',
+    'Someone follows with the remote controller; manual drive or Stop ends brain drive at once.',
+    'The robot is off the charger, standing or crouched (standing moves about 1.35x the command; the envelope allows for it).'])) return;
+  send({t: 'brain', mode: 'drive', area: 'map'});
+};
+$('flyReflex').onclick = async () => {
+  if (st?.brain?.mode === 'reflex') { send({t: 'brain', mode: 'off'}); return; }
+  if (!await ask('Fly reflexes during navigation', [
+    'The planner keeps driving tasks (goal, explore, laps). The fly brain watches the LiDAR, without mapped walls, and takes over only to freeze or escape from looming people or objects.',
+    'Escapes: up to 0.30 m/s back, 0.20 m/s forward, 1.0 rad/s, through the same stop rule; afterwards the task replans or rejoins its route.',
+    'Escape speeds are capped as above even with Turbo on; at Turbo speeds the robot needs more room to stop.',
+    'Someone keeps the remote controller at hand.'])) return;
+  send({t: 'brain', mode: 'reflex'});
+};
+
+// ---------- full-loop dialog ----------
+function loopDialog() {
+  const d = $('ask');
+  $('askTitle').textContent = 'Full-loop tour';
+  const field = (id, label, min, max, step, value, unit) =>
+    `<label for="${id}">${label}</label><input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${value}"><output id="${id}T">${(+value).toFixed(2)} ${unit}</output>`;
+  $('askBody').innerHTML = `<div class="form">
+    <label for="fLaps">Laps</label><input type="number" id="fLaps" min="1" max="20" step="1" value="1"><span></span>
+    <label for="fTurbo">Turbo</label><label class="chk"><input type="checkbox" id="fTurbo"${nav?.turbo ? ' checked' : ''}${nav && 'turbo' in nav ? '' : ' disabled'}> braking speed profile, up to ${fmt(turboTop())} m/s</label><span></span>
+    ${field('fV', 'Speed limit', 0.03, $('nvmax').max, 0.01, $('nvmax').value, 'm/s')}
+    ${field('fW', 'Turn rate', 0.10, 0.60, 0.05, $('nwmax').value, 'rad/s')}
+    ${field('fWr', 'Spin rate', 0.05, 0.30, 0.01, $('nwrot').value, 'rad/s')}
+    <div class="hint">Plans one closed centreline route around the venue and drives it back to the start, then repeats for each lap.
+      Speed and turn rates can be changed live from the Mission ribbon. Stop ends the series.<br>
+      Nobody within 1 m; someone can take over with the remote controller.</div></div>`;
+  for (const [id, unit] of [['fV', 'm/s'], ['fW', 'rad/s'], ['fWr', 'rad/s']])
+    $(id).oninput = () => { $(id + 'T').textContent = (+$(id).value).toFixed(2) + ' ' + unit; };
+  const turboRange = () => {
+    const on = $('fTurbo').checked;
+    $('fV').max = on ? turboTop() : Math.min(UI_SPEED_MAX, st?.speed_limit_max || UI_SPEED_MAX);
+    if (on && +$('fV').value <= UI_SPEED_MAX) $('fV').value = Math.min(turboTop(), 0.8);
+    $('fV').dispatchEvent(new Event('input'));
+  };
+  $('fTurbo').onchange = turboRange; turboRange();
+  return new Promise(resolve => {
+    const done = ok => {
+      const out = ok ? {laps: Math.max(1, Math.min(20, Math.round(+$('fLaps').value || 1))), v: +$('fV').value, w: +$('fW').value, wr: +$('fWr').value, turbo: $('fTurbo').checked} : null;
+      d.close(); $('askYes').onclick = $('askNo').onclick = null; d.oncancel = null; resolve(out);
+    };
+    $('askYes').onclick = () => done(true);
+    $('askNo').onclick = () => done(false);
+    d.oncancel = e => { e.preventDefault(); done(false); };
+    d.showModal();
+    $('fLaps').focus();
+  });
+}
+async function startLoop() {
+  const r = await loopDialog();
+  if (!r) return;
+  if (nav && 'turbo' in nav && r.turbo !== !!nav.turbo && !await setTurbo(r.turbo, r.v)) return;
+  for (const [id, value] of [['nvmax', r.v], ['nwmax', r.w], ['nwrot', r.wr]]) { $(id).value = value; $(id).dispatchEvent(new Event('input')); }
+  send(Object.assign({t: 'tour', laps: r.laps, v: r.v, w: r.w, wr: r.wr}, nav && 'turbo' in nav ? {turbo: r.turbo} : {}));
+}
+$('loopTour').onclick = startLoop;
+$('loopHome').onclick = startLoop;
+
+// ---------- commands ----------
+const navLimits = () => ({v: +$('nvmax').value, w: +$('nwmax').value, wr: +$('nwrot').value});
+const SAFE = 'Nobody within 1 m; someone can take over with the remote controller';
+$('sessOn').onclick = () => send({t: 'session', on: true, base: !!(st?.base_path && $('useBase').checked)});
+$('sessOff').onclick = async () => { if (await ask('End session', 'Stops the chassis and the LiDAR and saves the map.')) send({t: 'session', on: false}); };
+$('save').onclick = () => send({t: 'save'});
+$('camToggle').onclick = () => send({t: 'camera', on: !st?.robot?.camera_running});
+$('runtimeReset').onclick = async () => {
+  if (!await ask('Reset runtime', ['Cancels the task, stops and crouches the robot, saves the session', 'Restores default speeds and settings, then relocalizes on the base map',
+    'Maps, history and safety thresholds are kept; the old route is not resumed', 'Nothing is under the robot and someone can take over'])) return;
+  held.clear(); padSync(); resetAwaiting = true; render();
+  send({t: 'reset_runtime', confirm: true});
+  setTimeout(() => { if (resetAwaiting) log('No reset acknowledgement yet; check the status before retrying'); }, 15000);
+};
+$('chOn').onclick = async () => { if (await ask('Start chassis', ['The charging cable is unplugged', SAFE, 'No steps or drops nearby; the driver takes SDK control authority'])) send({t: 'chassis', on: true}); };
+$('chOff').onclick = () => send({t: 'chassis', on: false});
+$('reset').onclick = () => send({t: 'safety_reset'});
+$('postStand').onclick = async () => { if (await ask('Stand up', ['The space around and above the robot is clear', SAFE])) send({t: 'posture', stand: true}); };
+$('postCrouch').onclick = async () => { if (await ask('Crouch', 'Nothing is under the robot.')) send({t: 'posture', stand: false}); };
+$('navOn').onclick = () => { send({t: 'nav_params', ...navLimits()}); send({t: 'nav', on: true}); };
+$('navOff').onclick = () => send({t: 'nav', on: false});
+$('relocalize').onclick = () => { held.clear(); padSync(); robot.visible = pathLine.visible = goalMark.visible = false; $('relocalize').disabled = true; send({t: 'relocalize'}); };
+$('tour').onclick = async () => { if (await ask('Tour the map', ['Plans one closed centreline route and drives it back to the start', 'Obstacles: hold, detour locally or reverse briefly', SAFE])) send({t: 'tour', ...navLimits()}); };
+$('explore').onclick = async () => { if (await ask('Explore and return', ['Drives to an open point 5–10 m away and back to the start', SAFE])) send({t: 'explore', ...navLimits()}); };
+$('goHome').onclick = () => send({t: 'go_home', ...navLimits()});
+$('cloudSubmit').onclick = () => send({t: 'cloud_submit'});
+$('autoSubmit').onchange = () => send({t: 'auto_submit', on: $('autoSubmit').checked});
+['nvmax', 'nwmax', 'nwrot'].forEach(id => $(id).addEventListener('change', () => send({t: 'nav_params', ...navLimits()})));
+
+// ---------- hold-to-drive (commands expire after 0.3 s on the server) ----------
+const held = new Set();
+const keymap = {KeyW: 'f', ArrowUp: 'f', KeyS: 'b', ArrowDown: 'b', KeyA: 'l', ArrowLeft: 'l', KeyD: 'r', ArrowRight: 'r'};
+function padSync() { document.querySelectorAll('#pad button').forEach(b => b.classList.toggle('on', held.has(b.dataset.k))); }
+function stopAll() { held.clear(); padSync(); send({t: 'stop_motion'}); }
+const typing = e => ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || $('ask').open;
+addEventListener('keydown', e => {
+  if (e.code === 'Escape' && goalMode) { setGoalMode(false); return; }
+  if (typing(e)) return;
+  if (e.code === 'Space') { e.preventDefault(); stopAll(); return; }
+  const k = keymap[e.code]; if (!k || document.querySelector('#pad button').disabled) return;
+  e.preventDefault(); held.add(k); padSync();
+});
+addEventListener('keyup', e => { const k = keymap[e.code]; if (!k || !held.delete(k)) return; padSync(); if (!held.size) send({t: 'stop_motion'}); });
+const release = () => { if (held.size) stopAll(); };   // focus changes release keys; they never stop a task
+addEventListener('blur', release);
+document.addEventListener('visibilitychange', () => { if (document.hidden) release(); });
+document.querySelectorAll('#pad button').forEach(b => {
+  b.onpointerdown = e => { b.setPointerCapture(e.pointerId); held.add(b.dataset.k); padSync(); };
+  b.onpointerup = b.onpointercancel = b.onlostpointercapture = () => { if (!held.delete(b.dataset.k)) return; padSync(); if (!held.size) send({t: 'stop_motion'}); };
+});
+setInterval(() => {
+  if (!held.size || st?.chassis_disabled) return;
+  const vm = +$('vmax').value, wm = +$('wmax').value;
+  send({t: 'cmd', v: (held.has('f') ? vm : 0) - (held.has('b') ? vm : 0), w: (held.has('l') ? wm : 0) - (held.has('r') ? wm : 0)});
+}, 100);
+
+connect();
+render();
+loadFixedMap().catch(err => { $('mapMode').textContent = 'failed'; log('Base map failed to load: ' + err.message); });
+</script>
+</body>
+</html>
