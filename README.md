@@ -80,7 +80,7 @@ not import the package. See [docs/architecture.md](docs/architecture.md).
 git clone https://github.com/12sqawdwq/FlyHead.git && cd FlyHead
 python -m venv .venv && . .venv/bin/activate
 pip install -e ".[dev]" && pytest                 # encoders, decoders, envelope, synthetic map
-python -m flyhead.sim.loom_sim loom_front blind 15 runs/blind.jsonl && python -m flyhead.sim.report runs/blind.jsonl
+python -m flyhead.sim.loom_sim person_front blind 25 runs/blind.jsonl && python -m flyhead.sim.report runs/blind.jsonl
 ```
 
 With a CUDA GPU (≥ 16 GB free), run the connectome in the loop:
@@ -88,10 +88,12 @@ With a CUDA GPU (≥ 16 GB free), run the connectome in the loop:
 ```bash
 pip install -e ".[brain]"
 python scripts/fetch_upstream.py                  # pinned fly-brain code + FlyWire v783 data, identity-checked
-python -m flyhead.sim.loom_sim loom_front brain 15 runs/brain.jsonl --decoder 9
+python tools/repro_stage1.py runs/repro_stage1                      # stage 1: identical to the archived record
+python -m flyhead.sim.loom_sim person_front brain 25 runs/brain.jsonl --decoder 9
 ```
 
 Full instructions, including the robot and the control server: [docs/reproduce.md](docs/reproduce.md).
+What has been re-run from a fresh clone, with results: [docs/verification.md](docs/verification.md).
 
 ## Safety
 

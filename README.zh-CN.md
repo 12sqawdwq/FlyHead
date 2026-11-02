@@ -41,7 +41,8 @@ LiDAR 逼近信号经工程编码输入已鉴定的视觉投射神经元（LC4�
 ## 复现
 
 见 [docs/reproduce.md](docs/reproduce.md)。不需要机器人和 GPU 也能跑单元测试与盲基线仿真；
-有 CUDA GPU 时可把完整连接组放进仿真闭环。
+有 CUDA GPU 时可把完整连接组放进仿真闭环。从全新克隆重跑的检查与结果见
+[docs/verification.md](docs/verification.md)（Stage 1 与归档记录逐值一致，Stage 6 仿真通过）。
 
 ## 实验结果
 
