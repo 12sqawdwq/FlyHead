@@ -215,18 +215,58 @@ committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN
 
 ## 3. System overview
 
-```text
-                 ┌────────────── compute host (GPU) ──────────────────────────────────┐
-LiDAR + IMU ───► │ SLAM (KISS-ICP) ─► relocalize on saved map ─► planner ─► command    │──► robot ──► wheels
- (robot)         │        │                                    ▲        │             │   (0.3 s lease)
-                 │        └─► virtual retina ─► brain service ─┘ reflex  ▼             │
-                 │            LC4/LPLC2/LC9 ─► connectome (138k LIF) ─► decoder ─► safety envelope
-                 └─────────────────────────────────────────────────────────────────────┘
-operator PC: web console (Start LiDAR, goals, tours, Turbo, brain modes) ── SSH tunnel ──► server
+### 3.1 Deployment
+
+```mermaid
+flowchart TB
+    subgraph BOT["Robot · Raspberry Pi 4B, ROS 2 Foxy"]
+        direction LR
+        SENS["Unitree L1 LiDAR + IMU"] --> BR["robot/bridge.py"] --> CH["DIABLO chassis"]
+    end
+    subgraph HOST["Compute host (GPU)"]
+        direction TB
+        subgraph SRV["Control server · flyhead.server.app"]
+            direction LR
+            SLAM["SLAM<br/>KISS-ICP, relocalization"] --> NAV["Navigation<br/>centreline planner, pursuit,<br/>host safety chain"]
+            SLAM --> LINK["Brain link<br/>band filter, retina V3"]
+            ENV["Safety envelope<br/>geofence, keep-in, fitness gate"] --> CTRL["Control loop, 10 Hz<br/>planner or brain command"]
+            NAV --> CTRL
+        end
+        subgraph SVC["Brain service · flyhead.fly.service"]
+            direction LR
+            CON["Connectome<br/>138,639 LIF neurons"] --> DEC["Decoder V9"]
+        end
+    end
+    subgraph PC["Operator PC"]
+        UI["Web console · flyhead.monitor"]
+    end
+    BR -->|"SSH stdout, binary frames"| SLAM
+    LINK -->|"TCP 127.0.0.1, input rates"| CON
+    DEC -->|"TCP, state and intent"| ENV
+    CTRL -->|"SSH stdin, command, deadline ≤ 0.3 s"| BR
+    UI <-->|"SSH tunnel, WebSocket"| CTRL
 ```
 
-The control server never loads torch: it talks to the brain service over local TCP. Encoders and
-decoders are plain NumPy, and the robot bridge does not import the package. Module boundaries are in
+### 3.2 One 100 ms decision window
+
+```mermaid
+sequenceDiagram
+    participant R as Robot bridge
+    participant S as Control server
+    participant B as Brain service (GPU)
+    R->>S: LiDAR frame over SSH stdout
+    S->>S: SLAM pose, band filter 0.08–0.50 m, retina V3
+    S->>B: rates for LC4, LPLC2, LC9 (left and right)
+    B->>B: 10 × 10 ms connectome blocks, persistent state
+    B->>S: decoder state and intent (v, w)
+    S->>S: drop if intent older than 0.35 s or input older than 0.45 s
+    S->>S: safety envelope, geofence or keep-in, fitness gate
+    S->>R: command with deadline ≤ 0.3 s on the robot clock
+    Note over R: no server traffic for 2 s, motion zeroed
+```
+
+The control server never loads torch: it talks to the brain service over local TCP. Encoders and decoders are
+plain NumPy, and the robot bridge does not import the package. Module boundaries are in
 [docs/architecture.md](docs/architecture.md).
 
 ---

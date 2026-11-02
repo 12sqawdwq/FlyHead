@@ -208,14 +208,54 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 
 ## 3. 系统概览
 
-```text
-                 ┌────────────── 计算主机（GPU）──────────────────────────────────────┐
-LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定位 ─► 规划器 ─► 命令              │──► 机器人 ──► 轮子
- （机器人）       │        │                                 ▲        │              │   （0.3 s 租约）
-                 │        └─► 虚拟视网膜 ─► 脑服务 ─────────┘ 反射    ▼              │
-                 │            LC4/LPLC2/LC9 ─► 连接组（13.8 万 LIF）─► 解码器 ─► 安全包络
-                 └─────────────────────────────────────────────────────────────────────┘
-操作员电脑：网页控制台（启动 LiDAR、目标点、环线、Turbo、脑模式）── SSH 隧道 ──► 服务器
+### 3.1 部署结构
+
+```mermaid
+flowchart TB
+    subgraph BOT["机器人 · 树莓派 4B，ROS 2 Foxy"]
+        direction LR
+        SENS["Unitree L1 激光雷达 + IMU"] --> BR["robot/bridge.py"] --> CH["DIABLO 底盘"]
+    end
+    subgraph HOST["计算主机（GPU）"]
+        direction TB
+        subgraph SRV["控制服务器 · flyhead.server.app"]
+            direction LR
+            SLAM["SLAM<br/>KISS-ICP，重定位"] --> NAV["导航<br/>中心线规划、纯跟踪、<br/>主机安全链"]
+            SLAM --> LINK["脑连接<br/>高度带过滤，视网膜 V3"]
+            ENV["安全包络<br/>围栏、keep-in、定位度门控"] --> CTRL["控制环，10 Hz<br/>选择规划器或大脑命令"]
+            NAV --> CTRL
+        end
+        subgraph SVC["脑服务 · flyhead.fly.service"]
+            direction LR
+            CON["连接组<br/>138639 个 LIF 神经元"] --> DEC["解码器 V9"]
+        end
+    end
+    subgraph PC["操作员电脑"]
+        UI["网页控制台 · flyhead.monitor"]
+    end
+    BR -->|"SSH 标准输出，二进制帧"| SLAM
+    LINK -->|"TCP 127.0.0.1，输入速率"| CON
+    DEC -->|"TCP，状态与意图"| ENV
+    CTRL -->|"SSH 标准输入，命令，截止 ≤ 0.3 s"| BR
+    UI <-->|"SSH 隧道，WebSocket"| CTRL
+```
+
+### 3.2 一个 100 ms 决策窗口
+
+```mermaid
+sequenceDiagram
+    participant R as 机器人桥
+    participant S as 控制服务器
+    participant B as 脑服务（GPU）
+    R->>S: 经 SSH 标准输出发送激光雷达帧
+    S->>S: SLAM 位姿，高度带过滤 0.08–0.50 m，视网膜 V3
+    S->>B: LC4、LPLC2、LC9（左右）的输入速率
+    B->>B: 10 × 10 ms 连接组计算块，状态持续
+    B->>S: 解码器状态与意图（v, w）
+    S->>S: 意图超过 0.35 s 或输入超过 0.45 s 即丢弃
+    S->>S: 安全包络，围栏或 keep-in，定位度门控
+    S->>R: 命令，机器人时钟上截止 ≤ 0.3 s
+    Note over R: 2 s 无服务器流量则运动归零
 ```
 
 控制服务器从不加载 torch：它通过本地 TCP 与脑服务通信。编码器和解码器只依赖 NumPy，机器人桥不导入本包。
