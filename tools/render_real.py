@@ -286,8 +286,8 @@ def scenarios(out, pkg, run_dir):
     names = sorted({Path(f).stem.rsplit('_', 1)[0] for f in glob.glob(str(Path(run_dir) / '*_brain.jsonl'))})
     cols = 4
     rows_n = math.ceil(len(names) / cols)
-    fig, axs = plt.subplots(rows_n, cols, figsize=(18, 4.8 * rows_n + 1), dpi=100, squeeze=False)
-    fig.subplots_adjust(left=0.01, right=0.99, top=0.9, bottom=0.03, wspace=0.04, hspace=0.25)
+    fig, axs = plt.subplots(rows_n, cols, figsize=(18, 4.9 * rows_n + 1.2), dpi=110, squeeze=False)
+    fig.subplots_adjust(left=0.01, right=0.99, top=0.88, bottom=0.06, wspace=0.05, hspace=0.28)
     fig.text(0.01, 0.965, 'Every simulation scenario on the real SLAM map: fly brain (coloured by decoder state) vs. blind baseline (grey)', fontsize=15, weight='bold')
     fig.text(0.01, 0.94, 'SIMULATION on ' + (REAL % Path(pkg).name) + ' | ray-cast LiDAR | full connectome on GPU, decoder V9 | person = orange track', fontsize=10, color='#b00020')
     for a, name in zip(axs.flat, names):
@@ -297,8 +297,9 @@ def scenarios(out, pkg, run_dir):
         xy = np.array([[r['x'], r['y']] for r in B + X])
         objs = np.array([o for r in B for o in r.get('objects', [])]) if B[0].get('objects') else np.zeros((0, 2))
         allxy = np.vstack([xy, objs]) if len(objs) else xy
-        pad = 1.8
-        view = (allxy[:, 0].min() - pad, allxy[:, 0].max() + pad, allxy[:, 1].min() - pad, allxy[:, 1].max() + pad)
+        c = (allxy.min(0) + allxy.max(0)) / 2
+        half = max(3.5, (allxy.max(0) - allxy.min(0)).max() / 2 + 1.5)       # same square window shape for every panel
+        view = (c[0] - half, c[0] + half, c[1] - half, c[1] + half)
         base_image(a, nm, view)
         if X:
             a.plot([r['x'] for r in X], [r['y'] for r in X], color='#6c757d', lw=1.6, ls='--', label='blind')
