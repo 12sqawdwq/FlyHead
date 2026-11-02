@@ -23,6 +23,8 @@ __pycache__/
 *.code
 .env
 configs/local*.env
+configs/*.local.md
 .idea/
 .vscode/
 .bridge.lock
+field_records/

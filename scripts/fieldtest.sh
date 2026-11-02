@@ -2,8 +2,11 @@
 # Field-test launcher on the compute host: brain service + control server with one command.
 #   bash scripts/fieldtest.sh up            # charging lock ON: sensors, SLAM, brain shadow; no motion
 #   bash scripts/fieldtest.sh up motion     # both motion opt-ins set; speed ceiling XT_MAX_V (default 0.10 m/s)
+#   bash scripts/fieldtest.sh up turbo      # as motion, ceiling 1.0 m/s so Turbo reaches 1.0 m/s measured
+#                                           # (manual drive stays <= 0.40 m/s, plain navigation <= 0.40 m/s)
 #   bash scripts/fieldtest.sh status        # sessions, ports, robot link, battery, brain
 #   bash scripts/fieldtest.sh down          # stop the server (ends any robot session), then the brain service
+#   bash scripts/fieldtest.sh collect [RUN...] [--raw] [--robot]   # bundle runs into field_records/ (tools/collect_run.py)
 # Site settings are read from configs/local.env (git-ignored), for example:
 #   XT_ROBOT_HOST=robot  XT_ROBOT_ROOT=/home/<user>/FlyHead  XT_MAP=maps/<package>
 #   XT_PYTHON=.venv/bin/python  FLYHEAD_BRAIN_PYTHON=.venv-brain/bin/python  XT_BRAIN_PORT=8095
@@ -49,6 +52,10 @@ up)
     fi
     if [ "$MODE" = motion ]; then
         export XT_CHASSIS_DISABLED=0 XT_REMOTE_MOTION_ENABLED=1 XT_MAX_V="${XT_MAX_V:-0.10}"
+    elif [ "$MODE" = turbo ]; then
+        export XT_CHASSIS_DISABLED=0 XT_REMOTE_MOTION_ENABLED=1 XT_MAX_V=1.0
+    elif [ "$MODE" != locked ]; then
+        echo "unknown mode '$MODE' (locked | motion | turbo)"; exit 2
     else
         export XT_CHASSIS_DISABLED=1 XT_REMOTE_MOTION_ENABLED=0 XT_MAX_V="${XT_MAX_V:-0.10}"
     fi
@@ -64,7 +71,11 @@ down)
 status)
     status
     ;;
+collect)
+    shift
+    "${XT_PYTHON:-python3}" tools/collect_run.py "$@"
+    ;;
 *)
-    sed -n '2,12p' "$0"; exit 2
+    sed -n '2,15p' "$0"; exit 2
     ;;
 esac

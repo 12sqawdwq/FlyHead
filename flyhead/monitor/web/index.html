@@ -306,6 +306,8 @@ dialog .row button.primary{border-color:#c98a00;background:var(--gold)}
   <div id="turboTag" style="display:none">TURBO</div>
   <div id="lapTag" style="display:none"></div>
   <div id="prog"><i></i></div>
+  <div id="ctlCell" title="Motion owner: one source commands motion at a time"><i class="led" id="ledCtl"></i>Control <b id="pCtl">—</b>
+    <button id="takeCtl" style="display:none;height:18px;padding:0 6px;font-size:11px">Take control</button></div>
   <div><i class="led" id="ledLink"></i>Link <b id="pLink">—</b></div>
   <div><i class="led" id="ledLoc"></i>Loc <b id="pLoc">—</b></div>
   <div><i class="led" id="ledChassis"></i>Chassis <b id="pChassis">—</b></div>
@@ -514,6 +516,8 @@ function log(t, ts) {
   $('msgCount').textContent = ++nMsgs;
 }
 function send(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+let myName = null;           // this console's name as the server knows it (hello.you)
+$('takeCtl').onclick = () => { if (confirm('Take motion control from the other console? A running task keeps running; its manual drive stops.')) send({t: 'take_control'}); };
 window.xtSend = send;
 function connect() {
   ws = new WebSocket(socketUrl('/ws'));
@@ -526,6 +530,7 @@ function connect() {
     else if (m.type === 'pong') { if (Number.isFinite(m.id)) { lastPongAt = performance.now(); rtt = lastPongAt - m.id; } }
     else if (m.type === 'event') log(m.text, m.t);
     else if (m.type === 'hello') {
+      myName = m.you || null;
       (m.events || []).forEach(x => log(x.text, x.t));
       if (!dataStarted) { dataStarted = true; connectData('/stream'); connectData('/camera'); }
     }
@@ -690,6 +695,14 @@ function render() {
     : `Fast laps up to ${fmt(turboTop())} m/s with braking before bends`;
   $('vTurbo').textContent = turboOn ? `on · speed gain ${nav.speed_gain?.toFixed(2) ?? '—'} · profile cap ${nav.profile_cap != null ? fmt(nav.profile_cap) + ' m/s' : '—'}` : 'off';
   $('vMeasured').textContent = nav?.measured_speed_mps != null ? fmt(nav.measured_speed_mps) + ' m/s' : '—';
+  const ctl = st?.control;
+  const mine = !!ctl && ctl.controller === myName;
+  const observer = !!ctl?.controller && !mine;
+  $('pCtl').textContent = !ctl ? '—' : ctl.owner + (ctl.reflex ? ' + reflex' : '') + (ctl.controller ? (mine ? ' · this console' : ` · ${ctl.controller}`) : '');
+  led('ledCtl', !ctl ? '' : ctl.owner === 'halt' ? 'bad' : observer ? 'warn' : ctl.owner === 'idle' ? '' : 'ok');
+  $('ctlCell').title = !ctl ? 'Motion owner' : `Owner ${ctl.owner} for ${fmt(ctl.since_s, 1)} s: ${ctl.reason}` +
+    (ctl.halts?.length ? ` | Halted: ${ctl.halts.join('; ')}` : '') + (observer ? ' | This console observes: motion requests are refused until you take control; Stop always works.' : '');
+  $('takeCtl').style.display = online && observer ? '' : 'none';
   const br = st?.brain;
   const brainOn = !!br?.enabled;
   for (const id of ['brainShadow', 'brainDrive', 'brainOff', 'flyReflex']) $(id).disabled = !online || !brainOn;
@@ -760,7 +773,7 @@ const TURBO_CHECKS = [
 async function setTurbo(on, v) {
   if (on && !await ask('Turbo mode', TURBO_CHECKS)) return false;
   const msg = {t: 'nav_params', turbo: on};
-  if (on) msg.v = v ?? Math.min(turboTop(), 0.8);
+  if (on) msg.v = v ?? turboTop();          // Turbo requests its full top speed (1.0 m/s with `up turbo`)
   else msg.v = Math.min(+$('nvmax').value, UI_SPEED_MAX);
   turboPending = on;
   send(msg);
@@ -810,7 +823,7 @@ function loopDialog() {
   const turboRange = () => {
     const on = $('fTurbo').checked;
     $('fV').max = on ? turboTop() : Math.min(UI_SPEED_MAX, st?.speed_limit_max || UI_SPEED_MAX);
-    if (on && +$('fV').value <= UI_SPEED_MAX) $('fV').value = Math.min(turboTop(), 0.8);
+    if (on && +$('fV').value <= UI_SPEED_MAX) $('fV').value = turboTop();
     $('fV').dispatchEvent(new Event('input'));
   };
   $('fTurbo').onchange = turboRange; turboRange();

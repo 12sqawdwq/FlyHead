@@ -46,6 +46,7 @@ from flyhead.slam import rawlog
 from flyhead.slam import reloc as RL
 from flyhead.navigation import nav as NV
 from .brain_link import BrainLink
+from .arbiter import Arbiter
 
 from flyhead import paths
 
@@ -57,6 +58,8 @@ SPEED_HARD_MAX = 1.0            # m/s; no setting goes above this
 # Operator speed ceiling, passed to the robot bridge as XT_MAX_V (the bridge clamps every command
 # to it too).  0.30 unless the service is started with XT_MAX_V for speed exploration.
 SPEED_LIMIT_MAX = max(0.05, min(SPEED_HARD_MAX, float(os.environ.get('XT_MAX_V', '0.30'))))
+# Manual drive stays at the plain-navigation limit even when the ceiling is raised for Turbo (`fieldtest.sh up turbo`).
+MANUAL_V_MAX = min(SPEED_LIMIT_MAX, NV.NORMAL_V_LIMIT)
 MAX_TOUR_LAPS = 20
 BAT_WARN, BAT_LOW = 25.0, 15.0     # % : warn / stop navigation, crouch, refuse new missions
 IDLE_CROUCH_S = 60          # standing with no motion for this long -> crouch (motor heat)
@@ -117,6 +120,12 @@ class Session:
         self.idle_since = None
         self.clients_lost_at = None
         self.manual_client = None
+        self.arb = Arbiter()               # exactly one motion owner at a time (flyhead/server/arbiter.py)
+        self.posture_baseline = None      # robot posture_result 't' present when our request was sent
+        self.nav_pending = 0              # nav tasks between ownership and start (async goal search)
+        self.retrace_seen = False
+        self.refusal_logged = {}
+        self.arb_logged = 0               # last arbiter transition written to the event log
         self.brain = BrainLink(self)       # fly-brain mode (off unless XT_BRAIN_DIR)
         self.tour_laps = None           # {'total', 'done', 'active'} of a multi-lap tour
         self.drift_handled = None       # last map-correction drift event acted on
@@ -185,6 +194,35 @@ class Session:
             return self.reader_task is not None and not self.reader_task.done()
         return self.proc is not None and self.proc.returncode is None
 
+    def end_owner(self, ended, why):
+        """Side effects when the arbiter ends an owner: stop what that owner was running."""
+        if ended == 'nav' and self.nav is not None:
+            if self.nav.active or self.nav.tour_planning:
+                self.nav.cancel(why)
+            if self.tour_laps:
+                self.tour_laps['active'] = False
+        elif ended == 'brain' and self.brain.mode == 'drive':
+            self.brain.mode = 'shadow'
+        elif ended == 'manual':
+            self.manual_client = None
+        if ended:
+            self.cmd, self.cmd_at = (0.0, 0.0), 0.0
+        self.log_transitions()
+
+    def log_transitions(self):
+        """One event per ownership transition ('Control: idle -> brain (brain drive)'), in order."""
+        for h in self.arb.history:
+            if h['n'] > self.arb_logged:
+                self.arb_logged = h['n']
+                self.event('Control: %s -> %s (%s)' % (h['previous'], h['owner'], h['reason']))
+
+    def refuse(self, client, why):
+        """Report a refused control request, at most once per second per console and reason."""
+        now = time.monotonic()
+        if now - self.refusal_logged.get((client, why), -1e9) > 1.0:
+            self.refusal_logged[(client, why)] = now
+            self.event('Refused: %s' % why)
+
     def event(self, text, **kw):
         """Thread-safe: may be called from the SLAM / planner threads."""
         e = dict(t=time.time(), text=text, **kw)
@@ -225,6 +263,8 @@ class Session:
         self.record_telemetry(dict(
             type='control', t=now, interval_s=interval,
             duration_s=time.monotonic() - started, requested_command=list(command),
+            owner=self.arb.owner, controller=self.arb.controller_name, reflex=self.arb.reflex,
+            pose=None if nav is None or nav.pose is None else [round(float(v), 3) for v in nav.pose[1:4]],
             queue_wait_s=self.queue_wait_s, dropped_clouds=self.slam_dropped,
             frame=None if self.slam is None else self.slam.frames,
             source_stamp=None if self.slam is None else self.slam.frame_stamp,
@@ -666,6 +706,7 @@ class Session:
 
     async def stop(self):
         self.brain.mode = 'off'
+        self.arb.stop('session ending')
         async with self.lifecycle_lock:
             await self._stop()
 
@@ -978,6 +1019,7 @@ class Session:
                     elapsed=time.time() - self.started if self.started and self.running else 0,
                     rates=self.rate_view, slam_dropped=self.slam_dropped, speed_limit_max=SPEED_LIMIT_MAX,
                     tour_laps=dict(self.tour_laps) if self.tour_laps else None, brain=self.brain.status(),
+                    control=self.arb.status(),
                     pipeline=dict(queue_policy='latest_complete_scan', compute_isolation='spawn_process',
                                   fault=self.pipeline_fault, finish_error=self.finish_error,
                                   command_send_ms=self.command_send_ms, command_timeouts=self.command_timeouts,
@@ -1114,6 +1156,9 @@ async def control_loop(app):
             s.cmd, s.cmd_at = (0.0, 0.0), 0.0
             if s.nav is not None:
                 s.nav.cancel('Pipeline fault: %s' % s.pipeline_fault)
+            s.end_owner(s.arb.halt('fault', 'pipeline fault: %s' % s.pipeline_fault), 'pipeline fault')
+        else:
+            s.arb.clear('fault')
         status_age = time.time() - s.robot_status.get('t', 0)
         status_fresh = 0 <= status_age < 2.0
         body = s.robot_status.get('body') or {}
@@ -1125,6 +1170,9 @@ async def control_loop(app):
             s.cmd_at = 0.0
             if s.nav is not None:
                 s.nav.cancel('Waiting for relocalization')
+            s.end_owner(s.arb.halt('localization', 'waiting for relocalization'), 'waiting for relocalization')
+        else:
+            s.arb.clear('localization')
         if not s.localization_blocked and not s.pipeline_fault and s.nav is not None and s.nav.active:
             # The navigator has to know what the chassis guard is doing: the guard can stop
             # the robot on something the live route layer does not mark.
@@ -1132,6 +1180,11 @@ async def control_loop(app):
             vw = s.nav.control(slam_ok=s.slam is not None and s.slam.attached,
                                chassis_ok=status_fresh and bool(s.robot_status.get('chassis_running')))
             if vw is not None:
+                if s.arb.owner == 'nav':
+                    s.arb.submit('nav', *vw)
+                elif s.nav.active:
+                    s.nav.cancel('Control owner is %s' % s.arb.owner)
+                    s.event('Navigation stopped: control owner is %s' % s.arb.owner)
                 s.cmd = vw
                 s.cmd_at = time.time()
                 if not s.nav.active:
@@ -1149,16 +1202,20 @@ async def control_loop(app):
                         else:
                             laps['active'] = False
                             s.event('Lap series ended after %d of %d laps' % (laps['done'], laps['total']))
+        if (s.arb.owner == 'nav' and s.nav is not None and not s.nav.active and not s.nav.tour_planning
+                and not s.nav_pending and not (s.tour_laps and s.tour_laps.get('active'))):
+            s.arb.release('nav', 'navigation ended: %s' % (s.nav.reason or s.nav.state))
         if s.brain.mode != 'off':
             try:
                 bv, bw, rec = s.brain.command(time.time())
             except Exception as exc:          # a brain fault must never stop the control loop
                 bv, bw, rec = 0.0, 0.0, dict(mode=s.brain.mode, withheld='brain link error %r' % exc)
             if s.brain.mode == 'drive':
-                if s.nav is not None and s.nav.active:
-                    s.brain.mode = 'off'
-                    s.event('Brain drive ended: a navigation task started')
+                if s.arb.owner != 'brain':
+                    s.brain.mode = 'shadow'
+                    s.event('Brain drive ended: control owner is %s (brain stays in shadow mode)' % s.arb.owner)
                 else:
+                    s.arb.submit('brain', bv, bw)
                     s.cmd = (bv, bw)
                     s.cmd_at = time.time() if (bv or bw) else 0.0
             elif s.brain.mode == 'reflex' and rec.get('takeover') and s.nav is not None and s.nav.active:
@@ -1167,10 +1224,26 @@ async def control_loop(app):
                     s.event('Fly-brain reflex: %s takes over from the planner' % rec.get('state'))
                     s.nav.add_keepout(s.brain.threat_xy)     # later plans give the threat a wide berth
                 s.nav.reflex_hold(rec.get('state'))
+                s.arb.submit('nav', bv, bw, reflex=True)
                 s.cmd = (bv, bw)
                 s.cmd_at = time.time()
                 rec['planner_held'] = True
             s.record_telemetry(dict(type='brain', t=time.time(), **rec))
+        ended = s.arb.expire()
+        if ended:
+            s.end_owner(ended, s.arb.reason)
+        s.log_transitions()
+        if s.arb.owner == 'posture':
+            pr = s.robot_status.get('posture_result') or {}
+            if pr.get('ok') in (True, False) and pr.get('t') != s.posture_baseline:
+                s.arb.release('posture', 'posture %s' % pr.get('state'))
+        if s.arb.owner == 'retrace':
+            lr = s.robot_status.get('link_return') or {}
+            if lr.get('active'):
+                s.retrace_seen = True
+            elif s.retrace_seen:
+                s.retrace_seen = False
+                s.arb.release('retrace', 'return along the path finished')
         now = time.time()
         await battery_policy(s)
         # Network observations do not gate a locally running autonomous task.
@@ -1195,14 +1268,17 @@ async def control_loop(app):
                 # obstacle layer for the new posture.  Cancelling the tour here was a
                 # verified way to end a lap that was only waiting for an obstacle
                 # (live_20261006T212844 stopped at 1.05 m of 248 m for this reason).
+                if s.arb.owner == 'brain':
+                    s.end_owner(s.arb.stop('standing idle; crouching'), 'standing idle')
+                if s.arb.owner == 'idle' and s.arb.request('posture', reason='idle crouch')[0]:
+                    s.posture_baseline = (s.robot_status.get('posture_result') or {}).get('t')
                 await s.send({'op': 'posture', 'stand': False})
                 s.event('Standing idle too long; crouching automatically (motor heat)')
-        fresh = time.time() - s.cmd_at < CMD_LEASE_S
-        v, w = s.cmd if fresh else (0.0, 0.0)
+        v, w = s.arb.command(CMD_LEASE_S)      # only the control owner's command, while its lease holds
         if (not status_fresh or s.pipeline_fault or time.monotonic() - started >= CMD_LEASE_S):
             v, w = 0.0, 0.0
         if v or w:
-            remaining = max(0.0, CMD_LEASE_S - (time.time() - s.cmd_at))
+            remaining = max(0.0, CMD_LEASE_S - (time.monotonic() - s.arb.cmd_at))
             deadline_mono = min(started + CMD_LEASE_S, time.monotonic() + remaining,
                                 time.monotonic() + max(0.0, 2.0 - (time.time() - s.robot_status.get('t', 0))))
             if s.nav is not None and s.nav.active:
@@ -1270,6 +1346,10 @@ async def battery_policy(s):
     if pct is None:
         return
     state = 'low' if pct < BAT_LOW else 'warn' if pct < BAT_WARN else 'ok'
+    if state == 'low':
+        s.end_owner(s.arb.halt('battery', 'battery %.0f%% (below %.0f%%)' % (pct, BAT_LOW)), 'battery low')
+    else:
+        s.arb.clear('battery')
     if state != s.bat_state:
         s.bat_state = state
         if state == 'warn':
@@ -1370,8 +1450,11 @@ async def ws_handler(request):
     await ws.prepare(request)
     app['clients'].add(ws)
     s.clients_lost_at = None
+    app['client_seq'] = app.get('client_seq', 0) + 1
+    cid = id(ws)
+    cname = 'console %d (%s)' % (app['client_seq'], request.remote or 'local')
     await ws.send_str(json.dumps(
-        dict(type='hello', events=s.events, channels=['/stream', '/camera'],
+        dict(type='hello', events=s.events, channels=['/stream', '/camera'], you=cname,
              capabilities=['ping', 'relocalize', 'reset-runtime']),
         ensure_ascii=False,
     ))
@@ -1401,6 +1484,16 @@ async def ws_handler(request):
                 s.event('Relocalization has not completed, so motion cannot start; stop, retry relocalization '
                         'or end the session')
                 continue
+            if t in ('goal', 'nav_params', 'cloud_submit', 'auto_submit', 'safety_reset'):
+                ok, why = s.arb.allowed(cid)
+                if not ok:
+                    s.refuse(cid, why)
+                    continue
+            if t == 'take_control':
+                previous, ended = s.arb.take_control(cid, cname)
+                s.end_owner(ended, 'control taken by %s' % cname)
+                s.event('Control taken by %s%s' % (cname, (' from %s' % previous) if previous else ''))
+                continue
             if t == 'reset_runtime':
                 if m.get('confirm') is not True:
                     s.event('Reset needs explicit confirmation: it clears the old task and relocalizes, '
@@ -1425,21 +1518,20 @@ async def ws_handler(request):
                 await ws.send_json(dict(type='pong', id=m.get('id')))
             elif t == 'cmd':
                 v, w = float(m.get('v', 0)), float(m.get('w', 0))
-                if (v or w) and s.brain.mode == 'drive':
-                    s.brain.mode = 'shadow'
-                    s.event('Brain drive ended: manual takeover (brain stays in shadow mode)')
-                if s.nav is not None and (v or w):
-                    if s.nav.active or s.nav.tour_planning:
-                        s.event('Navigation cancelled: manual takeover')
-                    s.nav.cancel('Manual takeover')
-                    if s.tour_laps:
-                        s.tour_laps['active'] = False
-                if math.isfinite(v) and math.isfinite(w):
-                    if s.nav is None or not s.nav.active:
-                        s.manual_client = ws if v or w else None
-                        s.cmd = (max(-SPEED_LIMIT_MAX, min(SPEED_LIMIT_MAX, v)), max(-1., min(1., w)))
-                        s.cmd_at = time.time()
+                if not (math.isfinite(v) and math.isfinite(w)):
+                    continue
+                if v or w or s.arb.owner == 'manual':
+                    ok, why, ended = s.arb.request('manual', cid, cname, 'manual drive')
+                    if not ok:
+                        s.refuse(cid, why)
+                        continue
+                    s.end_owner(ended, 'manual takeover by %s' % cname)
+                    s.manual_client = ws if v or w else None
+                    v, w = max(-MANUAL_V_MAX, min(MANUAL_V_MAX, v)), max(-1., min(1., w))
+                    s.arb.submit('manual', v, w)
+                    s.cmd, s.cmd_at = (v, w), time.time()
             elif t == 'stop_motion':
+                s.end_owner(s.arb.stop('emergency stop by %s' % cname), 'emergency stop')
                 if s.brain.mode == 'drive':
                     s.brain.mode = 'shadow'
                     s.event('Brain drive ended: emergency stop (brain stays in shadow mode)')
@@ -1459,6 +1551,8 @@ async def ws_handler(request):
                     s.event('Start a LiDAR session first')
                 else:
                     s.cmd = (0.0, 0.0)
+                    if not m.get('on'):
+                        s.end_owner(s.arb.stop('chassis stopped by %s' % cname), 'chassis stopped')
                     await s.send({'op': 'chassis', 'on': bool(m.get('on'))})
                     if m.get('on'):
                         asyncio.get_event_loop().create_task(chassis_retry(s, s.recovery_generation))
@@ -1480,9 +1574,17 @@ async def ws_handler(request):
                     elif not (s.slam and s.slam.attached):
                         s.event('Not localized on the base map yet; navigation cannot start')
                     else:
-                        ok, why = s.nav.start()
-                        s.event('Autonomous navigation started' if ok else why)
+                        ok, why, ended = s.arb.request('nav', cid, cname, 'navigation')
+                        if not ok:
+                            s.refuse(cid, why)
+                        else:
+                            s.end_owner(ended, 'navigation started')
+                            ok, why = s.nav.start()
+                            if not ok:
+                                s.arb.release('nav', 'navigation did not start')
+                            s.event('Autonomous navigation started' if ok else why)
                 else:
+                    s.arb.release('nav', 'stopped by %s' % cname)
                     s.nav.cancel('Stopped by the operator')
                     if s.tour_laps:
                         s.tour_laps['active'] = False
@@ -1501,6 +1603,11 @@ async def ws_handler(request):
                 if s.nav is None or s.nav.active or s.nav.tour_planning or not (s.slam and s.slam.attached):
                     s.event('Cannot start a tour: navigation must be idle and localized')
                 else:
+                    ok, why, ended = s.arb.request('nav', cid, cname, 'tour')
+                    if not ok:
+                        s.refuse(cid, why)
+                        continue
+                    s.end_owner(ended, 'tour started')
                     apply_nav_params(s, m)
                     s.tour_laps = dict(total=int(max(1, min(MAX_TOUR_LAPS, int(m.get('laps', 1))))), done=0, active=True)
                     await start_tour_lap(s)
@@ -1517,20 +1624,38 @@ async def ws_handler(request):
                 elif not (s.slam and s.slam.attached):
                     s.event('Not localized on the base map yet')
                 else:
+                    ok, why, ended = s.arb.request('nav', cid, cname, t.replace('_', ' '))
+                    if not ok:
+                        s.refuse(cid, why)
+                        continue
+                    s.end_owner(ended, '%s started' % t)
                     apply_nav_params(s, m)
                     if t == 'go_home':
                         ok, why = s.nav.go_home()
+                        if not ok:
+                            s.arb.release('nav', 'return home did not start')
                         s.event(('Returning to the start point %s' % (s.nav.home,)) if ok else why)
                     else:
                         navigator = s.nav
                         generation = s.recovery_generation
-                        goal, why = await asyncio.get_event_loop().run_in_executor(None, navigator.pick_explore_goal)
+                        s.nav_pending += 1
+                        try:
+                            goal, why = await asyncio.get_event_loop().run_in_executor(None, navigator.pick_explore_goal)
+                        finally:
+                            s.nav_pending -= 1
+                        if s.arb.owner != 'nav':
+                            s.event('Exploration goal found but not started: control owner is %s' % s.arb.owner)
+                            continue
                         if s.localization_blocked or generation != s.recovery_generation or s.nav is not navigator:
+                            s.arb.release('nav', 'exploration abandoned')
                             continue
                         if goal is None:
+                            s.arb.release('nav', 'no exploration goal')
                             s.event('Exploration goal selection failed: %s' % why)
                         else:
                             ok, why2 = s.nav.start_mission(goal)
+                            if not ok:
+                                s.arb.release('nav', 'exploration did not start')
                             s.event('Exploring: goal (%.2f, %.2f) %s; posture %s, speed limit %.2f m/s; '
                                     'returns to the start point on arrival' % (
                                         goal[0], goal[1], why, s.nav.mode, s.nav.v_max) if ok else why2)
@@ -1541,7 +1666,17 @@ async def ws_handler(request):
                 elif mode == 'drive' and (s.nav is None or s.nav.active or not s.robot_status.get('chassis_running')):
                     s.event('Brain drive refused: needs the chassis running, a localized session and no navigation task')
                 else:
+                    if mode == 'drive':
+                        ok, why0, ended = s.arb.request('brain', cid, cname, 'brain drive')
+                        if not ok:
+                            s.refuse(cid, why0)
+                            continue
+                        s.end_owner(ended, 'brain drive started')
+                    elif s.arb.owner == 'brain':
+                        s.arb.release('brain', 'brain mode %s' % mode)
                     why = s.brain.set_mode(mode, m.get('radius'), m.get('area'))
+                    if why and mode == 'drive':
+                        s.arb.release('brain', 'brain drive refused')
                     where = ''
                     if why:
                         pass
@@ -1573,9 +1708,16 @@ async def ws_handler(request):
                 elif s.robot_status.get('operation_busy'):
                     s.event('Another robot operation is in progress; posture request not repeated')
                 else:
+                    ok, why, ended = s.arb.request('posture', cid, cname, 'stand' if stand else 'crouch')
+                    if not ok:
+                        s.refuse(cid, why)
+                        continue
                     s.cmd = (0.0, 0.0)
                     s.cmd_at = 0.0
+                    s.posture_baseline = (s.robot_status.get('posture_result') or {}).get('t')
                     sent = await s.send({'op': 'posture', 'stand': stand})
+                    if not sent:
+                        s.arb.release('posture', 'posture request not delivered')
                     s.event(('%s request sent; waiting for the chassis to confirm the posture' if sent
                              else '%s request was not delivered; check the clock anchor / connection')
                             % ('Stand' if stand else 'Crouch'))
@@ -1585,6 +1727,12 @@ async def ws_handler(request):
                 # Operator-requested return along the path the robot actually drove.
                 # Works without base-map localisation: the bridge replays its own
                 # applied-command trace backwards, with the chassis guard still live.
+                ok, why, ended = s.arb.request('retrace', cid, cname, 'return along the driven path')
+                if not ok:
+                    s.refuse(cid, why)
+                    continue
+                s.end_owner(ended, 'return along the driven path')
+                s.retrace_seen = False
                 if s.nav is not None and s.nav.active:
                     s.nav.cancel('Return along the driven path requested')
                 s.cmd, s.cmd_at = (0.0, 0.0), 0.0
@@ -1596,6 +1744,7 @@ async def ws_handler(request):
                 s.event('Map saved: %s' % path)
     finally:
         app['clients'].discard(ws)
+        s.end_owner(s.arb.client_lost(cid), 'controlling console disconnected')
         autonomous = s.nav is not None and s.nav.active
         if s.manual_client is ws:
             s.manual_client = None
@@ -1689,7 +1838,8 @@ def main():
     import faulthandler
     import signal as _signal
     (ROOT / 'logs').mkdir(exist_ok=True)
-    faulthandler.register(_signal.SIGUSR1, file=open(ROOT / 'logs' / 'stacks.txt', 'a'), all_threads=True)
+    if hasattr(faulthandler, 'register'):         # POSIX only
+        faulthandler.register(_signal.SIGUSR1, file=open(ROOT / 'logs' / 'stacks.txt', 'a'), all_threads=True)
     ap = argparse.ArgumentParser(description='Xingtian SLAM / navigation compute service')
     ap.add_argument('--robot-host', help='SSH destination of the robot (live sessions)')
     ap.add_argument('--robot-root', default=os.environ.get('XT_ROBOT_ROOT', ''),
@@ -1728,6 +1878,10 @@ def main():
         app['robot_cmd'] = ['ssh', '-T', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8',
                             '-o', 'StrictHostKeyChecking=yes', '-o', 'ServerAliveInterval=2',
                             '-o', 'ServerAliveCountMax=3', a.robot_host, remote_command]
+        if os.environ.get('XT_ROBOT_CMD'):
+            # offline test hook: a stand-in bridge (tools/fake_bridge.py) instead of SSH to the robot
+            app['robot_cmd'] = shlex.split(os.environ['XT_ROBOT_CMD'])
+            print('robot command overridden for testing:', app['robot_cmd'], flush=True)
     if a.base:
         def load():
             app['base'] = RL.BaseMap(RL.load_points(a.base))
