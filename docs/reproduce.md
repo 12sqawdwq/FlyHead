@@ -32,12 +32,17 @@ the same pipeline behaviour, not the same numbers.
 ## 2b. Control server and SLAM without a robot
 
 ```bash
-python tools/make_synthetic_raw.py runs/synth_raw.xt 25          # LiDAR + IMU recording in the arena
+python tools/make_synthetic_raw.py runs/synth_raw.xt --seconds 25   # LiDAR + IMU recording in the arena
 python -m flyhead.server.app --replay runs/synth_raw.xt --port 8091
 ```
 
 Open the console (or send `{"t": "session", "on": true}` on `ws://127.0.0.1:8091/ws`) to replay it
 through the server, KISS-ICP SLAM and the map writer; `/diagnostics` reports background errors.
+
+In replay, recorded times are mapped onto the replay clock, so with `XT_BRAIN_ENABLED=1`, a running
+brain service, a base map and a navigation package the console's **Mission → Shadow** shows live
+brain decisions (never sent: replay has no robot link). The full console walkthrough, with a
+recording that includes an approaching person, is in [demo.md](demo.md#regenerating--复现这些素材).
 
 ## 3. Connectome in the loop (CUDA GPU)
 
