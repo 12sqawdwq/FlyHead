@@ -72,6 +72,7 @@ class Session:
         self.speed = speed
         self.proc = None
         self.remote_clock = RemoteClock() if app.get('robot_host') else None
+        self.replay_clock = None        # (first recorded wall time, replay start wall time) in replay
         # Physical motion needs both interlocks at startup: charging lock off and remote opt-in.
         self.chassis_disabled = (os.environ.get('XT_CHASSIS_DISABLED', '1') == '1'
                                  or os.environ.get('XT_REMOTE_MOTION_ENABLED', '0') != '1')
@@ -135,6 +136,11 @@ class Session:
                          name='recovery-archive', daemon=True).start()
 
     def source_time(self, stamp):
+        if self.replay_clock is not None and stamp is not None:
+            # Replay: recorded times move onto the replay wall clock, so freshness gates
+            # (navigation pose age, brain input age) see the data as it is being replayed.
+            t0, w0 = self.replay_clock
+            return w0 + (stamp - t0) / self.speed
         return self.remote_clock.source_time(stamp) if self.remote_clock is not None else stamp
 
     def wait_for_archive_idle(self):
@@ -851,6 +857,7 @@ class Session:
             for wall, kind, payload in rawlog.read_records(self.replay):
                 if t0 is None:
                     t0, w0 = wall, time.time()
+                    self.replay_clock = (t0, w0)
                 delay = (wall - t0) / self.speed - (time.time() - w0)
                 if delay > 0:
                     await asyncio.sleep(delay)
@@ -1093,6 +1100,13 @@ async def control_loop(app):
             deadline = started  # no burst of catch-up commands after a stall
         n += 1
         if not s.proc or s.proc.returncode is not None:
+            if s.replay and s.running and s.brain.mode == 'shadow':
+                # Replay has no robot link: evaluate shadow intents for the console and the log only.
+                try:
+                    _, _, rec = s.brain.command(time.time())
+                except Exception as exc:
+                    rec = dict(mode=s.brain.mode, withheld='brain link error %r' % exc)
+                s.record_telemetry(dict(type='brain', t=time.time(), **rec))
             continue
         if s.raw is not None and s.raw.error:
             s.pipeline_fault = s.raw.error

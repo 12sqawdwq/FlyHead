@@ -10,6 +10,17 @@ LiDAR 逼近信号经工程编码输入已鉴定的视觉投射神经元（LC4�
 由下行神经元（巨纤维 DNp01、DNa02、DNp09、MDN）的放电解码出逃逸、转向和行走，
 再经只能减速或归零、不能增加运动的安全包络后才发给底盘。
 
+## 演示
+
+| 真实执行：大脑驱动、有人逼近（stage5_004） | 仿真：逐窗口的决策链 |
+| --- | --- |
+| ![真实机器人](docs/media/preview/real_stage5_escape.gif) | ![决策链](docs/media/preview/decision_chain.gif) |
+| **仿真：规划器与果蝇反射（Stage 6）** | **上位机回放：大脑影子模式** |
+| ![stage 6](docs/media/preview/stage6.gif) | ![上位机](docs/media/preview/console.gif) |
+
+每段素材展示什么、对应哪次运行、每个面板由哪段代码和哪个日志字段产生，见
+[docs/demo.md](docs/demo.md)。真实视频是实体机器人；仿真和上位机回放均已标注，使用合成 LiDAR。
+
 ## 分层与边界
 
 | 层 | 是什么 | 不是什么 |

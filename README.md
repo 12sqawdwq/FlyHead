@@ -21,6 +21,18 @@ robot ◄── 0.3 s command lease ◄── safety envelope ◄── fence / 
 
 *Mythology note: Xingtian (刑天) fights on after losing his head. Here a fly brain is the head.*
 
+## Demos
+
+| REAL: brain drive, person approaching (stage5_004) | SIM: the decision chain, window by window |
+| --- | --- |
+| ![real robot](docs/media/preview/real_stage5_escape.gif) | ![decision chain](docs/media/preview/decision_chain.gif) |
+| **SIM: planner vs. fly reflexes (stage 6)** | **CONSOLE: operator console, brain in shadow (replay)** |
+| ![stage 6](docs/media/preview/stage6.gif) | ![console](docs/media/preview/console.gif) |
+
+What each clip shows, which run it belongs to and which code produced every panel:
+[docs/demo.md](docs/demo.md). Real footage is the physical robot; SIM and CONSOLE clips are
+labelled as such and use synthetic LiDAR.
+
 ## What it is and what it is not
 
 | Layer | It is | It is not |

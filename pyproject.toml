@@ -16,6 +16,7 @@ brain = ["torch>=2.4", "triton", "pandas", "pyarrow"]
 # compute host: control server, SLAM, navigation
 server = ["aiohttp>=3.9", "scipy>=1.10", "kiss-icp>=1.0", "opencv-python-headless"]
 dev = ["pytest>=7", "scipy>=1.10"]       # tests + blind simulation (navmap uses scipy)
+demo = ["matplotlib>=3.7", "scipy>=1.10"]    # tools/render_demo.py
 
 [tool.setuptools.packages.find]
 include = ["flyhead*"]
