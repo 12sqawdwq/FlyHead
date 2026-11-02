@@ -52,25 +52,25 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_hallway.gif" width="100%" alt="hallway">
-<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · hallway</b><br>
-<sub>Standing / crouched posture and route driving, no fly brain · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · hallway</b></p>
+<p><sub>Standing / crouched posture and route driving, no fly brain · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_office.gif" width="100%" alt="office at night">
-<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · office at night</b><br>
-<sub>Route driving through the mapped office, no fly brain · 6 min at 4× · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · office at night</b></p>
+<p><sub>Route driving through the mapped office, no fly brain · 6 min at 4× · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/real_brain.gif" width="100%" alt="brain drive">
-<img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>The fly brain drives · stage5_004</b><br>
-<sub>A person approaches; 262 s of brain drive, 30 escape programs, 0 contacts reported · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>The fly brain drives · stage5_004</b></p>
+<p><sub>A person approaches; 262 s of brain drive, 30 escape programs, 0 contacts reported · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/tour.gif" width="100%" alt="real tour replay">
-<img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>Autonomous tour, from the robot's log</b><br>
-<sub>2026-10-04 · 729 s, 56.1 m, fitness ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s tour</a></sub>
+<p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>Autonomous tour, from the robot's log</b></p>
+<p><sub>2026-10-04 · 729 s, 56.1 m, fitness ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s tour</a></sub></p>
 </td>
 </tr>
 </table>
@@ -81,22 +81,26 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/mapbuild.gif" width="100%" alt="map build-up">
-<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The mapping session, replayed</b><br>
-<sub>2026-09-25 · 1,407 s, 54.7 m, 550,975 points · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The mapping session, replayed</b></p>
+<p><sub>2026-09-25 · 1,407 s, 54.7 m, 550,975 points · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/orbit.gif" width="100%" alt="3-D point cloud">
-<img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The saved point cloud in 3-D</b><br>
-<sub>Walls and furniture below 1.3 m, coloured by height · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub>
-</td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="navigation layers"></a>
-<sub><b>Navigation layers of the same map:</b> occupancy grid · clearance field and the centreline every route follows · obstacle heights (what blocks a crouched or a standing robot) · the mapping path and the real tours.</sub>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The saved point cloud in 3-D</b></p>
+<p><sub>Walls and furniture below 1.3 m, coloured by height · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub></p>
 </td>
 </tr>
 </table>
+
+<details>
+<summary><b>Navigation layers of the same map</b> (occupancy, clearance and centreline, obstacle heights, real runs)</summary>
+<br>
+
+<a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="navigation layers"></a>
+
+<sub><b>Navigation layers of the same map:</b> occupancy grid · clearance field and the centreline every route follows · obstacle heights (what blocks a crouched or a standing robot) · the mapping path and the real tours.</sub>
+
+</details>
 
 ### 🧠 The fly brain on the real map
 
@@ -104,25 +108,25 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/decision.gif" width="100%" alt="decision chain">
-<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>The decision chain, window by window</b><br>
-<sub>A person from the left: LiDAR → LC4/LPLC2/LC9 → descending neurons → decoder → command · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>The decision chain, window by window</b></p>
+<p><sub>A person from the left: LiDAR → LC4/LPLC2/LC9 → descending neurons → decoder → command · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/roam.gif" width="100%" alt="free roaming">
-<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s of free roaming</b><br>
-<sub>18.9 m, 0 contacts; explore, escape, flee, freeze and hold in one run · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s of free roaming</b></p>
+<p><sub>18.9 m, 0 contacts; explore, escape, flee, freeze and hold in one run · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/stage6.gif" width="100%" alt="stage 6">
-<img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6: planner vs. fly reflexes</b><br>
-<sub>Both arms arrive with 0 contacts; the brain takes over twice · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6: planner vs. fly reflexes</b></p>
+<p><sub>Both arms arrive with 0 contacts; the brain takes over twice · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/console.gif" width="100%" alt="operator console">
-<img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>Operator console on the real map</b><br>
-<sub>Relocalized at fitness 1.00, brain in shadow mode, charging lock on · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub>
+<p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>Operator console on the real map</b></p>
+<p><sub>Relocalized at fitness 1.00, brain in shadow mode, charging lock on · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub></p>
 </td>
 </tr>
 </table>
