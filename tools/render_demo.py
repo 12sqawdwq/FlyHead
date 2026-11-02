@@ -36,6 +36,7 @@ COLORS = {'FORWARD': '#4c9be8', 'EXPLORE': '#7fc8f8', 'TURN_LEFT': '#9b8de0', 'T
           'BLIND': '#666666'}
 LEFT_C, RIGHT_C = '#3a7bd5', '#e07a2f'
 SIM_LABEL = 'SIMULATION - synthetic arena, ray-cast LiDAR; full FlyWire v783 connectome (138,639 LIF neurons) on GPU'
+REAL_MAP_LABEL = SIM_LABEL.replace('synthetic arena', 'saved SLAM map of a real site')
 
 
 def load(path):
@@ -85,7 +86,7 @@ def decision(out, run, map_pkg=None, fps=10, still_t=None):
     ax_cmd = fig.add_subplot(gs[1, 1]); ax_tl = fig.add_subplot(gs[2, :])
     fig.text(0.03, 0.96, 'FlyHead decision chain:  LiDAR -> loom retina (LC4 / LPLC2 / LC9) -> connectome -> descending neurons -> decoder -> command',
              fontsize=14, weight='bold')
-    fig.text(0.03, 0.93, SIM_LABEL, fontsize=10, color='#b00020')
+    fig.text(0.03, 0.93, SIM_LABEL if map_pkg is None else REAL_MAP_LABEL, fontsize=10, color='#b00020')
     head = fig.text(0.03, 0.895, '', fontsize=12, family='monospace')
 
     # timeline (static) + cursor
@@ -169,7 +170,7 @@ def reflex(out, planner_path, reflex_path, map_pkg=None, fps=10, step=3):
     fig, axes = plt.subplots(1, 2, figsize=(16, 9), dpi=100)
     fig.subplots_adjust(left=0.02, right=0.98, top=0.83, bottom=0.04, wspace=0.05)
     fig.text(0.02, 0.95, 'Stage 6: SLAM planner + fly-brain reflexes (same seed, same person)', fontsize=15, weight='bold')
-    fig.text(0.02, 0.915, SIM_LABEL + '; brain service over TCP, decoder V9', fontsize=10, color='#b00020')
+    fig.text(0.02, 0.915, (SIM_LABEL if map_pkg is None else REAL_MAP_LABEL) + '; brain service over TCP, decoder V9', fontsize=10, color='#b00020')
     fig.text(0.02, 0.885, 'blue path = planner command, red = brain (reflex) command; robot colour = decoder state; star = goal',
              fontsize=10)
 
