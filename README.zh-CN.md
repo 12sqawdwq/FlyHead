@@ -153,10 +153,12 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 
 <table>
 <tr>
-<td width="25%"><a href="docs/media/realmap/console/tab_home.png"><img src="docs/media/realmap/console/tab_home.png" width="100%" alt="Home"></a><br><sub><b>Home</b> · 会话、地图、巡逻</sub></td>
-<td width="25%"><a href="docs/media/realmap/console/tab_mission.png"><img src="docs/media/realmap/console/tab_mission.png" width="100%" alt="Mission"></a><br><sub><b>Mission</b> · 目标、限制、大脑模式</sub></td>
-<td width="25%"><a href="docs/media/realmap/console/tab_drive.png"><img src="docs/media/realmap/console/tab_drive.png" width="100%" alt="Drive"></a><br><sub><b>Drive</b> · 底盘、姿态</sub></td>
-<td width="25%"><a href="docs/media/realmap/console/tab_display.png"><img src="docs/media/realmap/console/tab_display.png" width="100%" alt="Display"></a><br><sub><b>Display</b> · 视图、地图变化</sub></td>
+<td width="50%" valign="top"><a href="docs/media/realmap/console/tab_home.png"><img src="docs/media/realmap/console/tab_home.png" width="400" alt="Home"></a><br><sub><b>Home</b> · 会话、地图、巡逻</sub></td>
+<td width="50%" valign="top"><a href="docs/media/realmap/console/tab_mission.png"><img src="docs/media/realmap/console/tab_mission.png" width="400" alt="Mission"></a><br><sub><b>Mission</b> · 目标、限制、大脑模式</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="docs/media/realmap/console/tab_drive.png"><img src="docs/media/realmap/console/tab_drive.png" width="400" alt="Drive"></a><br><sub><b>Drive</b> · 底盘、姿态</sub></td>
+<td width="50%" valign="top"><a href="docs/media/realmap/console/tab_display.png"><img src="docs/media/realmap/console/tab_display.png" width="400" alt="Display"></a><br><sub><b>Display</b> · 视图、地图变化</sub></td>
 </tr>
 </table>
 
