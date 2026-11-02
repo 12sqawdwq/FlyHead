@@ -259,300 +259,239 @@ marks the field→eye assignment and the yaw sign as **not calibrated**.
 
 ## 5. Autonomous navigation (no brain)
 
-This layer is complete on its own. It is what the robot runs when the brain mode is **off**.
+The classical layer runs on its own; it is what the robot does when the brain mode is `off`. Full method:
+[docs/navigation_method.md](docs/navigation_method.md); operations: [docs/slam_operations.md](docs/slam_operations.md).
 
-<details>
-<summary><b>Sensing and the body model</b></summary>
-<br>
+### 5.1 Sensors and body model
 
-* **LiDAR:** Unitree L1 on the robot, streamed to the compute host as binary frames over SSH stdout.
-  The L1 faces backwards, so the body moves LiDAR −x (`lidar_slam.BODY_YAW_DEG = 180`).
-* **IMU:** 200 Hz. Used for gravity levelling at session start and for deskewing each scan.
-* **Reference point:** all planning and control is on the robot's **turning point**, the point that stays
-  fixed when the robot turns in place: 0.11 m behind the LiDAR, fitted from 47 in-place turns (residual
-  under 1 cm). Controlling the body centre instead produced sideways swings of 0.45 m per 46° of turn.
-  See [docs/navigation_method.md](docs/navigation_method.md).
-* **Posture:** crouched or standing, from the LiDAR height above the map floor. The robot's own body is
-  masked out of the scan with a learned self-mask.
+| Item | Value | Notes | Code |
+| --- | --- | --- | --- |
+| LiDAR | Unitree L1, ~10 Hz clouds | streamed as binary frames over SSH stdout; mounted facing backwards (body forward = LiDAR −x) | `robot/bridge.py`, `lidar_slam.BODY_YAW_DEG = 180` |
+| IMU | 200 Hz | gravity levelling at session start; per-scan deskew | `flyhead/slam/lidar_slam.py` |
+| Reference point | turning point, 0.11 m behind the LiDAR | fitted from 47 in-place turns, residual < 1 cm; replaces a body centre 0.56 m ahead of it | `nav.REFERENCE_BODY = (-0.11, -0.01)` |
+| Body footprint | disc of radius 0.35 m | about the turning point; robot 0.5–0.7 m wide | `envelope.BODY_R` |
+| Posture | crouch / stand | from LiDAR height above the map floor; self-returns removed by a learned mask | `flyhead/slam/lidar_slam.py` |
 
-</details>
+### 5.2 Mapping and localization
 
-<details>
-<summary><b>Mapping and localization</b></summary>
-<br>
+| Stage | Method | Thresholds | Code |
+| --- | --- | --- | --- |
+| Odometry | KISS-ICP in a child process | first frame 2 s of points; then 0.2 s sub-cloud batches | `flyhead/slam/slam_process.py` |
+| Deskew | IMU orientation interpolated per point | frames wait for IMU coverage, then run undeskewed | `lidar_slam.imu_deskew` |
+| Relocalization | global search on the base map | accept: fitness ≥ 0.8 and best/second ratio ≥ 1.3; hint: within 1 m and 30° | `flyhead/slam/reloc.py` (`MIN_FIT`, `MIN_RATIO`) |
+| Localization gate | navigation refused until localized | fitness < 0.6 for 1 s cancels a task | `flyhead/navigation/nav.py` |
+| Map correction | pose corrected against the base map while driving | corrections > 0.3 m or 5° rejected; two well-aligned rejections raise a drift alarm | `lidar_slam.py`, `Session.check_drift` |
+| Map changes | persistent differences vs. the base map | ≥ 0.03 m² for 1.5 s → committed as `added` / `removed` | `flyhead/slam/navmap.py` |
 
-* **Mapping session:** *Start LiDAR* runs KISS-ICP odometry in a child process on the compute host. Each
-  scan is deskewed with the IMU when the IMU covers it; otherwise it is processed undeskewed after a short
-  wait. Persistent differences from the saved map are committed as versioned obstacle changes (`added` /
-  `removed`) and enter planning.
-* **Saved map package** (`maps/<name>/`): `map.pgm` / `map.yaml` (0.05 m grid), `map.ply` (the saved
-  cloud), height layers (`floor.npy`, `obst_hmin/hmax.npy`, `obst_bins.npy`) and `MAP_INFO.json` with the
-  session lineage. Map packages are not committed to this repository; rendered views of the real
-  site's map are published in [Videos](#1-demonstrations) with the site owner's consent.
-* **Relocalization:** a new session searches the base map for its pose (global search, fitness ≥ 0.8,
-  ratio test between the best and second candidate). An operator pose hint can replace the ambiguity test
-  for candidates within 1 m and 30° of the hint. Navigation is refused until localized; fitness < 0.6 for
-  1 s cancels a task.
-* **Map correction:** while driving, the pose is corrected against the base map. Two consecutive
-  corrections rejected only for their size (0.3 m / 5°) that align well raise a drift alarm; the server
-  then cancels the task and relocalizes.
+**Map package** (`maps/<name>/`, not committed; renders in [Section 1](#1-demonstrations)):
 
-</details>
+| File | Content |
+| --- | --- |
+| `map.pgm`, `map.yaml` | occupancy grid, 0.05 m cells (0 occupied, 254 free, 205 unknown) |
+| `map.ply` | the saved point cloud |
+| `floor.npy` | per-cell floor height |
+| `obst_hmin.npy`, `obst_hmax.npy`, `obst_bins.npy` | lowest / highest obstacle point above floor, 16 height bins of 0.15 m |
+| `MAP_INFO.json` | frame definition, source session, lineage, grid statistics |
 
-<details>
-<summary><b>Planning: centreline routes</b></summary>
-<br>
+### 5.3 Route planning (centreline routes)
 
-Routes follow the centreline of free space, so between two walls the robot keeps equal clearance on
-both sides and never runs along one wall.
+| Step | Definition | Parameter |
+| --- | --- | --- |
+| Clearance *d* | distance to the nearest blocked or unknown cell | — |
+| Centreline | λ-medial axis of free space | λ = 0.8 m; only cells with *d* ≥ 0.45 m |
+| Offset ratio | *r* = *m* / (*m* + *d*), *m* = distance to the centreline | 0 on the centreline, → 1 at a wall |
+| Search | A\* on a 0.10 m grid, 8-connected, no corner cutting | step cost 1 + 39 *r*²; *d* < 0.45 m never entered |
+| Smoothing | Laplacian smoothing inside the centreline band | resampled at 0.05 m with curvature and clearance |
+| Tour loop | outermost cycle of the centreline network; branches out and back | branches ≤ 3 m cut; current map: 71 m loop |
 
-1. **Clearance** *d*: distance to the nearest blocked or unknown cell.
-2. **Centreline:** the λ-medial axis with λ = 0.8 m, so wall roughness does not create branches. Only
-   cells with *d* ≥ 0.45 m count.
-3. **Offset ratio** *r* = *m* / (*m* + *d*), where *m* is the distance to the centreline.
-4. **A\*** on a 0.10 m grid, 8-connected without corner cutting. Step cost 1 + 39 *r*²; cells with
-   *d* < 0.45 m are never entered (hard clearance = 0.35 m body radius + 0.10 m).
-5. **Smoothing** inside the centreline band, resampled at 0.05 m with per-point curvature and clearance.
+### 5.4 Route following
 
-**Tours** (`compute_loop`): the outermost cycle of the centreline network runs as the loop; branches are
-traced out and back. Branches up to 3 m deep are cut; deeper ones stay as out-and-back excursions. In the
-current map the tour is a 71 m loop from the usual start.
+| Event | Condition | Action |
+| --- | --- | --- |
+| New obstacle on the route | within 0.40 m of the route, next 3 m, 3 control cycles | approach to ≤ 0.5 m, splice a local detour (retry ≤ every 3 s) |
+| Off the route | > 0.5 m for 2 s | splice a rejoin route 1.0–3.5 m ahead |
+| Far off the route | > 1.5 m | stop the task |
+| Cusp (turnaround) | heading change > 120° within ±0.15 m | turn in place onto the return leg |
+| Arrival | remaining arc and end-point distance | ≤ 0.20 m (goal), ≤ 0.30 m (tour) |
 
-</details>
+### 5.5 Control loop (10 Hz)
 
-<details>
-<summary><b>Following a route</b></summary>
-<br>
+| Stage | Rule | Values |
+| --- | --- | --- |
+| Gates | chassis status present, pose and obstacle layer fresh, fitness adequate | stale > 3 s holds; resumes after 5 fresh frames |
+| Pure pursuit | lookahead 0.5 + 4 s × speed | ≤ 1.0 m; κ = 2 sin α / *L* |
+| Speed | min of operator ceiling, curvature cap, clearance cap, 0.5 × remaining arc, pose-age cap | half speed at 0.45 m route clearance, full at 0.8 m; κ·v ≤ ω_max |
+| Turn in place | heading error > 50° | brake, turn at ≤ 0.12 rad/s (ceiling 0.30) until < 12° |
+| Rate limits | on the previous command | linear +0.10 / −0.20 m/s²; angular +0.8 / −1.2 rad/s² |
 
-A committed route is never re-planned on a timer. It changes only when:
-
-* **a new obstacle is confirmed** on the route (within 0.40 m of it in the next 3 m, for 3 control
-  cycles): the robot approaches to 0.5 m at most and a **local detour** is spliced in, retried at most
-  every 3 s;
-* **the robot is more than 0.5 m off the route** for 2 s: a short **rejoin** route is spliced in; more
-  than 1.5 m off stops the task.
-
-Progress is an arc-length projection in a bounded window, so a route that passes the same place twice
-never jumps. **Cusps** (out-and-back turnarounds) are handled explicitly: the robot turns in place onto
-the return leg. Arrival needs the remaining arc and the end-point distance within 0.20 m (goals) or
-0.30 m (tours).
-
-</details>
-
-<details>
-<summary><b>Control (10 Hz)</b></summary>
-<br>
-
-* **Gates:** a missing chassis status, a stale pose or obstacle layer (> 3 s), or low fitness holds the
-  task; it resumes after 5 fresh frames.
-* **Pure pursuit:** lookahead 0.5 + 4 s × speed (≤ 1.0 m). Curvature κ = 2 sin α / *L*.
-* **Speed:** the minimum of the operator ceiling, a curvature cap, a clearance cap (half speed at 0.45 m
-  route clearance, full at 0.8 m), 0.5 × remaining arc, a pose-age cap and a heading scale; then limited
-  so κ·v ≤ ω_max.
-* **Turns in place:** above 50° heading error the robot brakes to zero and turns at ≤ 0.12 rad/s
-  (ceiling 0.30) until the error is under 12°.
-* **Rate limits** on the previous command: linear +0.10 / −0.20 m/s², angular +0.8 / −1.2 rad/s².
-
-</details>
-
-<details>
-<summary><b>Host safety chain</b></summary>
-<br>
-
-The host stops before the chassis guard has to:
+### 5.6 Host safety chain
 
 | Stage | Rule |
 | --- | --- |
-| Free travel | swept body disc along the route, checked out to 2.5 m |
-| Speed from travel | highest *v* with *v* × 0.6 s + *v*² / (2 × 0.20 m/s²) inside the free travel minus 0.35 m |
-| Chassis guard | < 0.15 m → stop (report-only on the robot; the host enforces) |
-| Stall | forward command with no motion for 2 s → stop |
-| Blocked | 8 s without a detour → reverse up to 0.6 m at 0.08 m/s (rear clear), wait 2 s, re-plan; after 3 cycles at one place, hold for the operator |
-| Give-up | goal tasks give up after 60 s blocked; tours wait |
+| Free travel | swept body disc along the route, checked to 2.5 m |
+| Speed from travel | highest *v* with *v* × 0.6 s + *v*² / (2 × 0.20 m/s²) ≤ free travel − 0.35 m |
+| Chassis guard | < 0.15 m → stop (report-only on the robot; enforced by the host) |
+| Stall | forward command, no motion for 2 s → stop |
+| Blocked | 8 s without a detour → reverse ≤ 0.6 m at 0.08 m/s, wait 2 s, re-plan; 3 cycles → hold for the operator |
+| Give-up | goal tasks after 60 s blocked; tours wait |
 
-These constants are commanded-speed figures and are optimistic: standing, the robot moves 1.3–2× the
-command. They are not yet replaced by measured stops.
+The stop constants are commanded-speed estimates; standing, the robot moves 1.3–2× the command.
 
-</details>
+### 5.7 Speed modes
 
-<details>
-<summary><b>Operator limits, laps and Turbo</b></summary>
-<br>
+| Mode | Ceiling | Bends | Stop rule | Fitness scaling |
+| --- | --- | --- | --- | --- |
+| Plain | `XT_MAX_V` (default 0.30, ≤ 0.40 m/s outside Turbo) | curvature cap over the next 0.6 m | 0.6 s + *v*² / (2 × 0.20 m/s²), commanded speed | < 0.80 → 0.15 m/s |
+| Turbo | 1.0 m/s measured | profile *v* ≤ √(0.15 m/s² / κ), braking before bends | 0.8 s + *v*² / (2 × 0.5 m/s²), measured speed | full ≥ 0.95, 0.30 m/s at ≤ 0.85 |
+| Laps | 1–20 laps, re-planned each lap | — | stop, manual takeover, failed lap or battery < 15 % ends the series | — |
 
-* **Operator ceiling:** `XT_MAX_V` (default 0.30 m/s, never above 1.0). Turn rates and speed are set live
-  from the console *Limits* group.
-* **Laps:** a tour with `laps` (1–20) re-plans from the current pose after each lap. Stop, a manual
-  takeover, a failed lap or battery below 15 % ends the series. **Full loop** opens the dialog.
-* **Turbo** (drives laps up to 1.0 m/s *measured*, after a checklist): a speed profile with braking before
-  each bend (lateral acceleration 0.15 m/s² in bends), a measured/commanded speed gain learned on
-  straights, a stop rule of 0.8 s + *v*² / (2 × 0.5 m/s²), and fitness-scaled speed (full at ≥ 0.95,
-  0.30 m/s at ≤ 0.85).
+### 5.8 Measured performance (2026-10-08, standing, real robot)
 
-</details>
+| Run | v_max | Route | Lap time | Mean | Peak measured | Tracking p95 / max | Turning in place | Detours |
+|---|---|---|---|---|---|---|---|---|
+| Plain | 0.30 | 126.5 m | 9.3 min | 0.23 m/s | 0.45 m/s | 0.17 / 0.35 m | 15 % | 0 |
+| Plain | 0.40 | 131.0 m | 8.8 min | 0.25 m/s | 0.53 m/s | 0.20 / 0.34 m | 23 % | 0 |
+| Plain | 0.50 | 135.0 m | 9.0 min | 0.25 m/s | 0.65 m/s | 0.33 / 0.48 m | 30 % | 0 |
+| Plain | 0.60 | 135.2 m | 10.6 min | 0.21 m/s | 0.73 m/s | 0.44 / 0.72 m | 39 % | 6 |
+| Turbo | 0.6 | 131.8 m | 8.7 min | — | 0.67 m/s | 0.19 / 0.32 m | 29 % | 0 |
+| Turbo | 0.8 | 125.9 m | 8.4 min | — | 0.85 m/s | 0.28 / 0.46 m | 34 % | 0 |
+| Turbo | 1.0 | 128.0 m | 7.7 min | — | 0.95 m/s | 0.23 / 0.39 m | 27 % | 0 |
 
-<details>
-<summary><b>Measured performance (2026-10-08, standing, on the robot)</b></summary>
-<br>
+| Emergency stop (Turbo lane) | Peak measured | Stop distance | Stop time |
+| --- | --- | --- | --- |
+| run 1 | 0.74 m/s | 0.71 m | — |
+| run 2 | 0.77 m/s | 0.81 m | 1.76 s |
 
-Tuned plain laps of about 130 m (route 126–135 m, one lap per setpoint):
+0.40 m/s is the fastest plain lap; above it the robot overshoots bends and stops to turn in place. The Turbo
+slip incident of the same evening is listed in [Section 9](#9-known-problems-and-open-issues).
 
-| Setpoint v_max | Route | Lap time | Mean | Peak measured | Tracking p95 / max | Turning in place | Detours |
-|---|---|---|---|---|---|---|---|
-| 0.30 | 126.5 m | 9.3 min | 0.23 m/s | 0.45 m/s | 0.17 / 0.35 m | 15 % | 0 |
-| 0.40 | 131.0 m | 8.8 min | 0.25 m/s | 0.53 m/s | 0.20 / 0.34 m | 23 % | 0 |
-| 0.50 | 135.0 m | 9.0 min | 0.25 m/s | 0.65 m/s | 0.33 / 0.48 m | 30 % | 0 |
-| 0.60 | 135.2 m | 10.6 min | 0.21 m/s | 0.73 m/s | 0.44 / 0.72 m | 39 % | 6 |
+### 5.9 Operator console
 
-0.40 m/s is the fastest plain lap: above it the robot overshoots bends, its heading error passes 50° and
-it stops to turn in place. Turbo on the robot, one lap each:
-
-| Run | Route | Time | Peak measured | Tracking p95 / max | Turning in place | Detours |
-|---|---|---|---|---|---|---|
-| Turbo 0.6 | 131.8 m | 8.7 min | 0.67 m/s | 0.19 / 0.32 m | 29 % | 0 |
-| Turbo 0.8 | 125.9 m | 8.4 min | 0.85 m/s | 0.28 / 0.46 m | 34 % | 0 |
-| Turbo 1.0 | 128.0 m | 7.7 min | 0.95 m/s | 0.23 / 0.39 m | 27 % | 0 |
-
-Emergency stops (Turbo lanes, from the 10 Hz records): 0.74 m/s peak → 0.71 m; 0.77 m/s peak → 0.81 m in
-1.76 s. The Turbo budget is 2.15 m at 1.0 m/s. The Turbo slip incident is in
-[Known problems](#9-known-problems-and-open-issues).
-
-</details>
-
-<details>
-<summary><b>The console (operator PC)</b></summary>
-<br>
-
-The console is a web page served on the operator PC; the control server stays on the compute host. Its
-ribbon has four tabs:
-
-| Tab | What it does |
+| Tab | Controls |
 | --- | --- |
-| **Home** | *Start LiDAR* / *End* (session), *Save map*, *Camera*, *Full loop*, *Reset runtime*, *Continue on base map* |
-| **Mission** | *Set goal* / *Solve* / *Stop*, *Explore*, *Return*, speed and turn-rate limits, *Avoidance* (planner + stop rule), *Fly reflexes*, *Turbo*, the fly-brain modes *Shadow* / *Roam* / *Off*, *Relocalize* |
-| **Drive** | *Start chassis* / *Stop chassis*, *Guard reset*, posture (*Stand* / *Crouch*) |
-| **Display** | map views (*Top*, *Iso*, *Follow*, *Clear trail*), map changes (*Commit changes*, *Auto commit*) |
+| Home | Start LiDAR / End, Save map, Camera, Full loop, Reset runtime, Continue on base map |
+| Mission | Set goal / Solve / Stop, Explore, Return, speed and turn-rate limits, Avoidance, Fly reflexes, Turbo, brain Shadow / Roam / Off, Relocalize |
+| Drive | Start / Stop chassis, Guard reset, Stand / Crouch |
+| Display | Top / Iso / Follow / Clear trail, Commit changes, Auto commit |
 
-The outline tree shows the base map, the session (LiDAR), localization (fitness), the chassis (posture and
-LiDAR height), the mission (state and reason), map changes and solution information. The message list
-records every event the server raises, including the reasons a command was refused.
+| Outline node | Shows |
+| --- | --- |
+| Base map, Session | loaded map; session type (live / replay) |
+| Localization | relocalization state and fitness |
+| Chassis | posture and LiDAR height |
+| Mission | navigator state and reason |
+| Map changes | committed change versions |
 
-</details>
+### 5.10 Mapping workflow
 
-<details>
-<summary><b>Maps and the operator's workflow</b></summary>
-<br>
-
-1. **Charging lock:** the session starts locked (`XT_CHASSIS_DISABLED=1`). *Start LiDAR* streams the
-   sensors and localizes; no motion until the lock is lifted with both opt-ins.
-2. **Mapping:** drive a manual session to cover the building, then *Save map*. The session writes
-   `runs/<id>/` with `map.ply`, `trajectory.csv`, `summary.json` and `navigation.jsonl`.
-3. **Export:** `tools/export_session_map.py` builds a map package (grid, height layers, `MAP_INFO.json`).
-   `tools/correct_map.py` and `correction_draft.json` record manual cleanups of obstacle changes.
-4. **Navigation:** start the server with `XT_MAP=maps/<package>`; the session then continues on it.
-
-Coverage is the main limit: a base map with large unknown areas makes relocalization fail outside the
-mapped region ([docs/slam_history.md](docs/slam_history.md)).
-
-</details>
+| Step | Action | Output |
+| --- | --- | --- |
+| 1 | start with the charging lock (`XT_CHASSIS_DISABLED=1`); Start LiDAR | sensors streaming, no motion |
+| 2 | drive a manual session over the building; Save map | `runs/<id>/`: `map.ply`, `trajectory.csv`, `summary.json`, `navigation.jsonl` |
+| 3 | `tools/export_session_map.py`; manual cleanup with `tools/correct_map.py` | map package with grid, height layers, `MAP_INFO.json` |
+| 4 | start the server with `XT_MAP=maps/<package>` | sessions relocalize and navigate on it |
 
 ---
 
 ## 6. The fly brain
 
-<details>
-<summary><b>Pipeline</b></summary>
-<br>
+### 6.1 Pipeline per 100 ms window
 
-| Step | Where | Output |
-| --- | --- | --- |
-| LiDAR → retina (`LidarRetinaV3`) | compute host, per scan | Hz per input cell for LC4, LPLC2, LC9, left and right |
-| Input cells | GPU, registry order | the connectome receives these rates as Poisson input |
-| Connectome | GPU, 10 × 10 ms blocks per window, persistent state | spike counts of 9 readout types, per anatomical side |
-| Decoder (v1–v9) | service | state and intent (*v*, *w*) |
-| Envelope | server | reduces or zeroes the intent; never adds motion |
+| Step | Where | Input → output | Parameters | Code |
+| --- | --- | --- | --- | --- |
+| Band filter | server, per scan | world points → points 0.08–0.50 m above the floor, body frame | reflex mode drops points ≤ 0.20 m from mapped obstacles | `flyhead/server/brain_link.py` |
+| Retina V3 | server | points pooled 0.3 s in world coordinates, 24 bins of 15° → rates | object width 0.30 m; loom gain 600 Hz per rad/s; deadband 0.12 rad/s; LC9 from free space 0.5–2.5 m ahead (≤ 120 Hz); rates ≤ 200 Hz | `flyhead/fly/encoders/lidar_loom.py` |
+| Input cells | GPU | rates → Poisson input to LC4, LPLC2, LC9 (left / right) | registry order; stale scan (> 0.30 s) → zero input | `configs/fly/loom_registry.json` |
+| Connectome | GPU | 10 × 10 ms blocks, persistent state | 138,639 LIF neurons, 15,091,983 connection records | `flyhead/fly/model.py` |
+| Readout | GPU | spike counts of 9 types per anatomical side | DNp01, DNp02, DNp04, DNp06, DNp11, DNp09, DNa01, DNa02, MDN | `Brain.readouts_by_type` |
+| Decoder | service | rates → state and intent (*v*, *w*) | V9 (below) | `flyhead/fly/decoders/loom.py` |
+| Gates and envelope | server | intent → command | intent > 0.35 s or input > 0.45 s old dropped; fitness ≥ 0.80 (0.50 during escapes); envelope only reduces or zeroes | `brain_link.py`, `flyhead/safety/envelope.py` |
 
-Window data flow: a 100 ms window of rates and spikes. Intents older than 0.35 s, or computed from scans
-older than 0.45 s, are dropped ([docs/architecture.md](docs/architecture.md)).
+### 6.2 Readouts
 
-</details>
+| Readout | Decoder variable | Reference rate | Effect |
+| --- | --- | --- | --- |
+| DNp09 (P9) | forward drive | 60 Hz → 0.15 m/s | walking speed |
+| MDN | backward drive | 35 Hz → 0.10 m/s | backing up |
+| DNa02 right − left | turn | 20 Hz → 0.40 rad/s | DNa02 right > left turns right (yaw < 0) |
+| DNp01 (giant fibre) | escape trigger | burst ≥ 60 Hz (V6+); ≥ 100 Hz escalates a freeze | starts an escape program; side from left/right asymmetry |
+| DNp02, DNp04, DNp06, DNp11 | — | — | recorded, not used by the decoder |
+| DNa01 | — | — | diagnostic (biased by the forward drive) |
 
-<details>
-<summary><b>Readouts and decoder states</b></summary>
-<br>
+### 6.3 Decoder V9 states
 
-| Readout | Role in the decoder |
+| State | Entered when | Command | Leaves when |
+| --- | --- | --- | --- |
+| FORWARD / TURN_LEFT / TURN_RIGHT | neural drive above thresholds | *v* from DNp09 − MDN, *w* from DNa02 | drive changes |
+| EXPLORE | endogenous walk bout (20–45 s, seeded) and neural *v* < 0.10 m/s | *v* = 0.10 m/s, *w* from DNa02 | pause bout (4–12 s) or a defensive state |
+| HOLD | no drive above thresholds | stop | drive returns |
+| REST | smoothed DNp09 < 8 Hz (outside walk bouts) | stop | DNp09 > 20 Hz |
+| FREEZE | giant-fibre burst while DNp09 < 15 Hz | stop | escalates after 1.5 s or GF ≥ 100 Hz; ends 2 s after GF quiet |
+| ESCAPE_PROGRAM | giant-fibre burst ≥ 60 Hz | frontal (\|asym\| < 0.30): reverse 0.30 m/s, then turn away; lateral: 0.20 m/s forward, 1.0 rad/s away | 1.5 s program (turn 2.5 s); side kept unless \|asym\| ≥ 0.45 on the other side |
+| BACK_OFF | MDN drive exceeds the forward drive | backward | drive changes |
+| FLEE | after an escape program | 0.20 m/s, steering from DNa02 | 6 s + 4 s × arousal, ≤ 20 s |
+
+EXPLORE and the arousal term are decoder-side engineering additions, not connectome activity; records keep
+`neural_v` so the neural and endogenous parts stay separable.
+
+### 6.4 Brain modes
+
+| Mode | Brain role | Command limits | Used in |
+| --- | --- | --- | --- |
+| `off` | none | — | default |
+| `shadow` | runs on live scans; intents logged, never sent | — | stage 4 |
+| `drive` (console: Roam) | decides motion | 0.15 m/s forward, 0.10 m/s back, 0.40 rad/s; escapes 0.20 / 0.30 m/s, 1.0 rad/s; geofence or map keep-in | stage 5 |
+| `reflex` | planner drives; brain takes over on FREEZE / ESCAPE_PROGRAM, then the task replans around a keep-out | brain limits as in `drive` while it is in control | stage 6 |
+
+### 6.5 Neuron registry
+
+| Item | Value |
 | --- | --- |
-| DNp01 | giant fibre, escape trigger |
-| DNp02, DNp04, DNp06, DNp11 | loom-responsive descending neurons |
-| DNp09 | P9, forward walking |
-| DNa01, DNa02 | steering; DNa02 right minus left sets the turn |
-| MDN | moonwalk, backing up |
-
-Decoder states: **FORWARD**, **EXPLORE**, **TURN_LEFT**, **TURN_RIGHT**, **HOLD**, **REST**, **FREEZE**,
-**ESCAPE_PROGRAM**, **BACK_OFF**, **FLEE**. Decoder v9 (used in the latest runs) adds an endogenous
-exploration drive and longer flights.
-
-</details>
-
-<details>
-<summary><b>Brain modes</b></summary>
-<br>
-
-| Mode | What the brain does | Where it is used |
-| --- | --- | --- |
-| `off` | nothing; classical navigation only | default |
-| `shadow` | runs on live scans, logs intents, sends nothing | stage 4 |
-| `drive` (*Roam*) | intent → envelope → geofence / keep-in → the normal 0.3 s lease; the brain drives the robot | stage 5 |
-| `reflex` | the planner drives; the brain takes over only to freeze or escape, then the task replans around a keep-out disc | stage 6 |
-
-</details>
-
-<details>
-<summary><b>Neuron registry</b></summary>
-<br>
-
-`configs/fly/loom_registry.json` binds every input and readout cell by exact `cell_type`, `root_id` and
-model index for FlyWire 783 (annotation TSV SHA-256 `9a4f8b2f…`). It is rebuilt with
-`tools/build_registry.py` and was verified from a fresh clone (513 cells, identical). Indices are not
-portable to other connectome versions.
-
-</details>
+| File | `configs/fly/loom_registry.json` |
+| Binding | exact `cell_type` → `root_id` → model index |
+| Connectome | FlyWire 783; annotation TSV SHA-256 `9a4f8b2f…` |
+| Cells | 513 (LC4 104, LPLC2 210, LC9 179, readouts 20) |
+| Rebuild | `tools/build_registry.py`; identical from a fresh clone |
+| Not calibrated | field side → eye, robot yaw sign |
 
 ---
 
 ## 7. Results so far
 
-All numbers come from the recorded experiments in [`experiments/`](experiments/README.md).
+| Result | Value | Source |
+| --- | --- | --- |
+| Shadow mode on the real robot (stage 4) | reaction 0.0–0.33 s to 9 operator approaches | `experiments/loom_005`, stage4_002 |
+| Brain drive, loom → escape decision (stage 5) | median 0.35 s (0.09–1.08 s); 4 of 12 episodes not triggered | stage5_003 |
+| Escape direction | lateral looms turn away from the stronger giant fibre (≤ ~100°); frontal looms reverse | stage 5 runs |
+| Contacts in brain drive | 0 in every drive with operator-reported contacts | stage 5 runs |
+| Left/right consistency | no swap in LiDAR → body → retina → brain → decoder | stage 4 |
+| Brain compute per 100 ms window | 84–110 ms on a shared RTX 5090D (0.9–1.2× real time); 46 ms on an idle GPU | stage 1; [verification](docs/verification.md) |
+| Stage 1 reproduction | 629 / 629 recorded rates identical from a fresh clone | [verification](docs/verification.md) |
+| Stage 3 (closed-loop simulation) | formally failed on person_right (known evaluation flaw) | stage3_002 – stage3_010 |
+| Stage 6 (planner + reflexes, simulation) | passed in stage6_003 | `runs/stage6_003` |
+| Real-map simulation suite (V9) | person, wall, roam scenarios: 0 contacts; loom stress tests: 21–37 contacts | [Section 1.3](#13-the-fly-brain-on-the-real-map) |
+| EEG → DNa02 (offline) | 24/24 calibration directions; 25/33 accepted replays matched the label | `experiments/eeg_dna02` |
 
-* **Loom → escape on the real robot** (stage 4/5, LiDAR only): in shadow mode, reactions of 0.0–0.33 s to
-  9 operator approaches; in drive mode a median 0.35 s from loom to escape decision (0.09–1.08 s; 4 of 12
-  episodes not triggered in `stage5_003`). Lateral looms turn the robot away from the stronger giant fibre
-  (up to ~100°); frontal looms back it off. 0 contacts in every drive where the operator reported contacts.
-  No left/right swap anywhere in LiDAR → body → retina → brain → decoder.
-* **Brain timing:** 84–110 ms of GPU time per 100 ms window on a shared RTX 5090D (0.9–1.2× real time).
-  On an idle GPU the reproduction measured 46 ms per window (about 2.2× real time).
-* **Stage 1 reproduction:** all 629 recorded rates identical from a fresh clone
-  ([docs/verification.md](docs/verification.md)).
-* **Closed-loop simulation:** stage 6 (planner + fly reflexes) passed in `stage6_003`; stage 3 formally
-  failed on one scenario with a known evaluation flaw (person_right).
-* **EEG → DNa02** (offline): 24/24 calibration conditions turned the expected way. This validates a direct
-  motor-node pathway, not "the fly understands EEG".
+The EEG result validates a direct motor-node pathway, not "the fly understands EEG".
 
 ---
 
 ## 8. Verification and simulation
 
-* **Unit tests** (any machine): registry identity, retina, decoders, EEG encoder, envelope, synthetic
-  arena (`pytest`, 11 tests).
-* **Blind simulation** (no GPU): `loom_sim` with a constant-forward baseline.
-* **Brain in the loop** (GPU): `loom_sim … brain`, Stage 1 reproduction (`tools/repro_stage1.py`), the
-  stage-3 suite (`experiments/loom_005/stage3_eval7.py`), and stage 6 (`reflex_sim` with the brain service).
-* **Control server without a robot:** `tools/make_synthetic_raw.py` writes a LiDAR + IMU recording;
-  `flyhead.server.app --replay` runs it through the server, SLAM and the brain link.
-* **Console replay:** the same replay drives the operator console, including brain shadow display.
+| Check | How | Result |
+| --- | --- | --- |
+| Upstream data identity | `scripts/fetch_upstream.py --annotations` | all files match pinned size and SHA-1 |
+| Neuron registry | rebuild from the annotation TSV, compare | 513 cells identical |
+| Unit tests | `pytest` (also with only `.[dev]`) | 11 passed |
+| Connectome, stage 1 | `tools/repro_stage1.py` vs. the archived record | 629 / 629 identical |
+| Refactor equivalence | as-executed `sim_brain.py` vs. `flyhead.sim.loom_sim`, 3 scenarios × V4 / V9 | 366 / 366 windows identical (timing excluded) |
+| Stage 3 suite, V9, synthetic arena | 5 scenarios, brain and blind | 0 contacts; C1, C2 pass; person scenarios fail on the onset flaw |
+| Control server and SLAM | synthetic recording through `flyhead.server.app --replay` | 77 frames deskewed and levelled, map saved, no errors |
+| Stage 6, synthetic arena | 2 arms × 3 seeds with the brain service | STAGE 6 SIM PASSED |
+| Stage 6, real map, archived vs. repository code | same map and seed | arrived 139.6 s vs. 139.7 s, 0 contacts, 2 takeovers each |
 
-What has been re-run from a fresh clone, with the results: [docs/verification.md](docs/verification.md).
-Not covered there: `robot/` on real hardware, and the numbers that depend on the private recorded maps.
+Details: [docs/verification.md](docs/verification.md). Not covered: `robot/` on hardware and numbers that depend
+on the private recorded maps.
 
 ---
 
