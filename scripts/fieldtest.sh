@@ -32,7 +32,7 @@ bat = r.get("battery") or {}
 print("charging lock:", s.get("chassis_disabled"), "| speed ceiling:", s.get("speed_limit_max"))
 print("robot session:", d["session_running"], "| run:", s.get("run"), "| lidar:", r.get("lidar_running"), "| chassis:", r.get("chassis_running"))
 print("rates:", s.get("rates"))
-print("battery:", bat.get("voltage"), "V", bat.get("pct"), "% (age %s s)" % bat.get("age"))
+print("battery:", bat.get("voltage"), "V", bat.get("pct"), "%%, age %s s" % bat.get("age"))
 print("localization:", (sl.get("reloc") or {}).get("state"), "fitness", sl.get("fitness"))
 print("brain: enabled", b.get("enabled"), "mode", b.get("mode"), "connected", b.get("connected"))
 print("background errors:", d.get("errors") or "none")'
