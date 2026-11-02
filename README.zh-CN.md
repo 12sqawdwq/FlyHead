@@ -51,24 +51,24 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="docs/media/cards/nav_hallway.gif" width="100%" alt="走廊">
+<img src="docs/media/cards/nav_hallway.gif" width="400" alt="走廊">
 <p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 走廊</b></p>
 <p><sub>站立 / 蹲伏姿态与路线行驶，无果蝇脑 · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
-<img src="docs/media/cards/nav_office.gif" width="100%" alt="夜间办公室">
+<img src="docs/media/cards/nav_office.gif" width="400" alt="夜间办公室">
 <p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 夜间办公室</b></p>
 <p><sub>在已建图的办公室中按路线行驶，无果蝇脑 · 6 分钟，4 倍速 · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<img src="docs/media/cards/real_brain.gif" width="100%" alt="大脑驱动">
+<img src="docs/media/cards/real_brain.gif" width="400" alt="大脑驱动">
 <p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>果蝇脑驱动 · stage5_004</b></p>
 <p><sub>有人逼近；大脑驱动 262 s，30 次逃逸程序，报告 0 次碰撞 · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
-<img src="docs/media/cards/tour.gif" width="100%" alt="真实巡逻回放">
+<img src="docs/media/cards/tour.gif" width="400" alt="真实巡逻回放">
 <p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>自主巡逻，按机器人日志回放</b></p>
 <p><sub>2026-10-04 · 729 s，56.1 m，定位度 ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s 巡逻</a></sub></p>
 </td>
@@ -80,12 +80,12 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="docs/media/cards/mapbuild.gif" width="100%" alt="建图回放">
+<img src="docs/media/cards/mapbuild.gif" width="400" alt="建图回放">
 <p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>建图会话回放</b></p>
 <p><sub>2026-09-25 · 1407 s，54.7 m，550975 个点 · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
-<img src="docs/media/cards/orbit.gif" width="100%" alt="三维点云">
+<img src="docs/media/cards/orbit.gif" width="400" alt="三维点云">
 <p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>保存的三维点云</b></p>
 <p><sub>1.3 m 以下的墙体与家具，按高度着色 · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub></p>
 </td>
@@ -107,24 +107,24 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="docs/media/cards/decision.gif" width="100%" alt="决策链">
+<img src="docs/media/cards/decision.gif" width="400" alt="决策链">
 <p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>逐窗口的决策链</b></p>
 <p><sub>人从左侧逼近：激光雷达 → LC4/LPLC2/LC9 → 下行神经元 → 解码器 → 命令 · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
-<img src="docs/media/cards/roam.gif" width="100%" alt="自由漫游">
+<img src="docs/media/cards/roam.gif" width="400" alt="自由漫游">
 <p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s 自由漫游</b></p>
 <p><sub>18.9 m，0 次碰撞；一次运行中出现探索、逃逸、逃跑、冻结和保持 · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<img src="docs/media/cards/stage6.gif" width="100%" alt="stage 6">
+<img src="docs/media/cards/stage6.gif" width="400" alt="stage 6">
 <p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6：规划器与果蝇反射</b></p>
 <p><sub>两组都以 0 碰撞到达；大脑接管两次 · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
-<img src="docs/media/cards/console.gif" width="100%" alt="上位机">
+<img src="docs/media/cards/console.gif" width="400" alt="上位机">
 <p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>真实地图上的操作员控制台</b></p>
 <p><sub>定位度 1.00 重定位，大脑影子模式，充电锁开启 · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub></p>
 </td>
