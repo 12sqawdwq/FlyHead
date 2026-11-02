@@ -142,5 +142,7 @@ The decision and stage-6 renders above use the synthetic arena. Renders on the s
 real site (`onboard_20260926_manual_cleanup_20261005`, the map the stage-3 and stage-5 sims were
 written against) exist locally and are **not published** here: the map is a floor plan of a real
 building. Publishing them needs the owner's approval. The sim runs on that map give 0 contacts for
-the brain in the person_front scenario; the planner arm arrives, and the reflex arm times out at
-180 s with 5 takeovers and 0 contacts.
+the brain in the person_front scenario. Stage 6 on that map (seed 1): the planner arm arrives; the
+reflex arm arrived in one repeat (139.7 s, 2 takeovers, 0 contacts) and timed out at 180 s in an earlier
+run with the same code and seed (5 takeovers, 0 contacts). The difference is run-to-run variation of the
+real-time simulation, not yet explained.
