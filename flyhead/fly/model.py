@@ -35,7 +35,8 @@ class Brain:
         from .event_model import EventModel
         backend = load_backend(upstream)
         data = (Path(upstream) if upstream else paths.upstream_dir()) / 'data'
-        cache_dir = cache_dir or paths.cache_dir()
+        cache_dir = Path(cache_dir or paths.cache_dir())
+        cache_dir.mkdir(parents=True, exist_ok=True)    # upstream get_weights does not create it
         self.window_blocks = window_blocks
         self.window_s = window_blocks * 0.010
         with contextlib.redirect_stdout(sys.stderr):

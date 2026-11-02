@@ -1,7 +1,9 @@
 """Synthetic navigation map package for simulation without a recorded map.
 
 Writes map.pgm + map.yaml in the format flyhead.slam.navmap.NavMap reads (0 occupied / 254 free,
-0.05 m cells): a walled arena with a few pillars, laid out so the scenarios in loom_sim.py and the
+0.05 m cells) and the height layers of tools/export_nav.py (floor.npy, obst_hmin/hmax.npy,
+obst_bins.npy; flat floor at z = 0, obstacles WALL_TOP high). The navigator needs the floor layer
+to know the LiDAR height; without it the brain link ignores every scan. A walled arena with a few pillars, laid out so the scenarios in loom_sim.py and the
 start pose of reflex_sim.py have the clearances they were designed for (open area around (7, -1.1),
 a lane toward a far wall from (5.6, 6.45)). It reproduces the pipeline, not the recorded numbers:
 the published experiment results were obtained on a recorded map that is not part of this repo.
@@ -22,6 +24,8 @@ ARENA = (1.0, 13.0, -5.5, 9.5)            # x0, x1, y0, y1 of the inner wall fac
 WALL_M = 0.20
 PILLARS = [(10.0, 5.0, 0.30), (3.0, 7.5, 0.40), (11.5, -4.0, 0.30)]   # (x, y, radius)
 BOXES = [(2.6, 2.4, 3.6, 3.4)]             # x0, y0, x1, y1
+WALL_TOP = 1.5                             # obstacle height above the floor (m)
+BINS_BASE, BINS_H = 0.08, 0.15             # as navmap / export_nav (obst_bins.npy)
 
 
 def build():
@@ -45,7 +49,14 @@ def build():
 def write(out_dir):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    write_pgm(build(), out / 'map.pgm')
+    grid = build()
+    write_pgm(grid, out / 'map.pgm')
+    occupied = grid == 0
+    np.save(out / 'floor.npy', np.zeros(grid.shape, np.float32))
+    np.save(out / 'obst_hmin.npy', np.where(occupied, BINS_BASE, np.inf).astype(np.float16))
+    np.save(out / 'obst_hmax.npy', np.where(occupied, WALL_TOP, -np.inf).astype(np.float16))
+    n_bins = int(np.ceil((WALL_TOP - BINS_BASE) / BINS_H))
+    np.save(out / 'obst_bins.npy', np.where(occupied, (1 << n_bins) - 1, 0).astype(np.uint16))
     (out / 'map.yaml').write_text('image: map.pgm\nmode: trinary\nresolution: %.3f\norigin: [%.4f, %.4f, 0.0]\n'
                                   'negate: 0\noccupied_thresh: 0.65\nfree_thresh: 0.196\n' % (RES, ORIGIN[0], ORIGIN[1]))
     return out

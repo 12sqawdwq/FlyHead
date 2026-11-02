@@ -17,14 +17,27 @@ the decoders, the EEG encoder, the safety envelope (never adds motion) and the s
 
 ```bash
 pip install -e ".[server]"
-python -m flyhead.sim.loom_sim loom_front blind 15 runs/blind.jsonl
+python -m flyhead.sim.loom_sim person_front blind 25 runs/blind.jsonl
 python -m flyhead.sim.report runs/blind.jsonl
 ```
 
 Scenarios: `wall_ahead`, `roam_open`, `loom_front|left|right`, `person_front|left|right`.
+The `loom_*` objects (stage3_001) move at 0.6 m/s and never stop, so they run into the robot
+whatever it does; the formal stage-3 criteria use `wall_ahead` (40 s), `roam_open` (120 s) and
+`person_*` (25 s, the person stops 0.7 m away).
 Without `--map` a synthetic arena is generated (`flyhead.sim.synthetic_map`); the published
 stage-3 numbers were obtained on a recorded map that is not part of this repository, so expect
 the same pipeline behaviour, not the same numbers.
+
+## 2b. Control server and SLAM without a robot
+
+```bash
+python tools/make_synthetic_raw.py runs/synth_raw.xt 25          # LiDAR + IMU recording in the arena
+python -m flyhead.server.app --replay runs/synth_raw.xt --port 8091
+```
+
+Open the console (or send `{"t": "session", "on": true}` on `ws://127.0.0.1:8091/ws`) to replay it
+through the server, KISS-ICP SLAM and the map writer; `/diagnostics` reports background errors.
 
 ## 3. Connectome in the loop (CUDA GPU)
 
@@ -34,11 +47,15 @@ Tested on an RTX 5090D (sm_120) with Python 3.11, torch 2.x, CUDA 13; the full g
 ```bash
 pip install -e ".[brain,server]"
 python scripts/fetch_upstream.py                  # ~105 MB: fly-brain code at a pinned commit + FlyWire v783 data
-python -m flyhead.sim.loom_sim loom_front brain 15 runs/brain.jsonl --decoder 9
+python tools/repro_stage1.py runs/repro_stage1    # stage 1 dose response vs. the archived record
+python -m flyhead.sim.loom_sim person_front brain 25 runs/brain.jsonl --decoder 9
 python -m flyhead.sim.report runs/brain.jsonl
 ```
 
-The first run builds the weight cache in `cache/` (`FLYHEAD_CACHE_DIR`). Reflex simulation
+The first run builds the weight cache in `cache/` (`FLYHEAD_CACHE_DIR`). `repro_stage1.py` replays
+the stage 1 protocol (same conditions, order and seed) and compares every rate with
+`experiments/loom_005/runs/stage1_001/STAGE1_CURVES.json`; on the reference GPU all 629 values are
+identical (`COMPARE.json`, `"identical": true`). Reflex simulation
 (planner + brain, stage 6) needs the brain service running:
 
 ```bash

@@ -31,3 +31,6 @@ def test_synthetic_arena(tmp_path):
     assert clear[i, j] >= 2.0                              # roam_open start has room, as designed
     i, j = nm.to_ij(np.array([5.6, 6.45]))
     assert clear[i, j] >= 1.0
+    # the navigator needs the floor layer for the LiDAR height; without it brain_link drops every scan
+    assert np.isfinite(nm.floor_at(np.array([[7.0, -1.1]]))[0])
+    assert np.array_equal(nm.blocked_for(0.32), nm.static == 0)    # height layers block what the grid blocks
