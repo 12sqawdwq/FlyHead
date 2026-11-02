@@ -92,15 +92,9 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 </tr>
 </table>
 
-<details>
-<summary><b>Navigation layers of the same map</b> (occupancy, clearance and centreline, obstacle heights, real runs)</summary>
-<br>
-
 <a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="navigation layers"></a>
 
-<sub><b>Navigation layers of the same map:</b> occupancy grid · clearance field and the centreline every route follows · obstacle heights (what blocks a crouched or a standing robot) · the mapping path and the real tours.</sub>
-
-</details>
+**Figure 1.** Navigation layers of the saved SLAM map: occupancy grid · clearance field and the centreline every route follows · obstacle heights (what blocks a crouched or a standing robot) · the mapping path and the real tours.
 
 ### 1.3 The fly brain on the real map
 
@@ -131,9 +125,7 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 </tr>
 </table>
 
-<details>
-<summary><b>All eight brain scenarios on the real map</b> (videos, outcomes, overview figures)</summary>
-<br>
+### 1.4 All eight brain scenarios on the real map
 
 | Scenario | What happens | Brain: contacts, min clearance | Blind: contacts | Video |
 | --- | --- | --- | --- | --- |
@@ -150,13 +142,15 @@ The `loom_*` objects drive through the robot whatever it does: the brain escapes
 count contacts and are not passed scenarios.
 
 <a href="docs/media/realmap/scenarios_brain_vs_blind.png"><img src="docs/media/realmap/scenarios_brain_vs_blind.png" width="100%" alt="brain vs blind"></a>
+
+**Figure 2.** Every scenario on the real SLAM map: the fly brain's path coloured by decoder state, the blind baseline dashed, the person or object track in orange; contacts and minimum clearance per run.
+
 <a href="docs/media/realmap/decoder_states.png"><img src="docs/media/realmap/decoder_states.png" width="100%" alt="decoder states"></a>
 
-</details>
+**Figure 3.** Decoder state over time in each brain run (simulation on the real map, decoder V9).
 
-<details>
-<summary><b>The four console tabs</b> and what the replay is</summary>
-<br>
+
+### 1.5 The four console tabs
 
 <table>
 <tr>
@@ -171,11 +165,7 @@ The console and server are real; the session is a replay whose scans were taken 
 along a scripted path, with a person added. Shown: relocalization, posture (stand, LiDAR 0.45 m), the person
 committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN_LEFT/RIGHT, REST, FORWARD).
 
-</details>
-
-<details>
-<summary><b>How each clip was made</b> and the earlier synthetic-arena clips</summary>
-<br>
+### 1.6 Provenance of each clip
 
 * The brain clip is matched to its run by the phone's recording time (22:57:17 local, inside the drive window
   22:53:38–22:58:03). The two navigation clips carry file timestamps of 2026-10-08, the day the navigation
@@ -196,8 +186,6 @@ committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN
 * Earlier synthetic-arena clips: [decision chain](docs/media/sim/decision_chain_person_front.mp4) ·
   [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) · [console](docs/media/console/console_replay_brain_shadow.mp4).
 * Sources and renderers for every item: [docs/demo.md](docs/demo.md).
-
-</details>
 
 ---
 
@@ -519,10 +507,6 @@ versions of the stage-6 simulation gave the same result on the same map.
 
 ## 10. Repository layout
 
-<details>
-<summary><b>Show the layout: packages, what each does, where it runs</b></summary>
-<br>
-
 | Path | Role | Runs on |
 | --- | --- | --- |
 | [`flyhead/fly/`](flyhead/fly) | 果蝇: connectome model, encoders (LiDAR loom, EEG), decoders, brain service | GPU host |
@@ -536,8 +520,6 @@ versions of the stage-6 simulation gave the same result on the same map.
 | [`experiments/`](experiments/README.md) | protocols, locked results and as-executed scripts of every stage | — |
 | [`docs/`](docs) | architecture, reproduction, verification, demos, SLAM operations, navigation | — |
 | `configs/`, `scripts/`, `tools/`, `tests/` | neuron registry, launchers, map tools, renderers, unit tests | — |
-
-</details>
 
 ---
 

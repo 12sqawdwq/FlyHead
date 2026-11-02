@@ -92,15 +92,9 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 </tr>
 </table>
 
-<details>
-<summary><b>同一张地图的导航图层</b>（占据栅格、净空与中心线、障碍物高度、真实行驶）</summary>
-<br>
-
 <a href="docs/media/realmap/nav_layers.png"><img src="docs/media/realmap/nav_layers.png" width="100%" alt="导航图层"></a>
 
-<sub><b>同一张地图的导航图层：</b>占据栅格 · 净空场与所有路线遵循的中心线 · 障碍物高度（什么会挡住蹲伏或站立的机器人）· 建图路径与真实巡逻。</sub>
-
-</details>
+**图 1.** 已保存 SLAM 地图的导航图层：占据栅格 · 净空场与所有路线遵循的中心线 · 障碍物高度（什么会挡住蹲伏或站立的机器人）· 建图路径与真实巡逻。
 
 ### 1.3 真实地图上的果蝇脑
 
@@ -131,9 +125,7 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 </tr>
 </table>
 
-<details>
-<summary><b>真实地图上的全部八个大脑场景</b>（视频、结果、总览图）</summary>
-<br>
+### 1.4 真实地图上的全部八个大脑场景
 
 | 场景 | 发生了什么 | 大脑：碰撞、最小净空 | 盲基线：碰撞 | 视频 |
 | --- | --- | --- | --- | --- |
@@ -149,13 +141,15 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 `loom_*` 物体无论机器人做什么都会穿过它：大脑会逃逸，但物体一直跟着。这些场景统计碰撞，不算通过。
 
 <a href="docs/media/realmap/scenarios_brain_vs_blind.png"><img src="docs/media/realmap/scenarios_brain_vs_blind.png" width="100%" alt="大脑与盲基线"></a>
+
+**图 2.** 真实 SLAM 地图上的每个场景：果蝇脑的路径按解码器状态着色，盲基线为虚线，人或物体的轨迹为橙色；每次运行的碰撞数与最小净空。
+
 <a href="docs/media/realmap/decoder_states.png"><img src="docs/media/realmap/decoder_states.png" width="100%" alt="解码器状态"></a>
 
-</details>
+**图 3.** 每次大脑运行中解码器状态随时间的变化（真实地图上的仿真，解码器 V9）。
 
-<details>
-<summary><b>控制台的四个标签页</b>，以及这段回放是什么</summary>
-<br>
+
+### 1.5 控制台的四个标签页
 
 <table>
 <tr>
@@ -169,11 +163,7 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 控制台和服务器是真实的；会话是一段回放，扫描沿脚本路径从保存的点云生成，并加入了一个人。画面显示：重定位、姿态（站立，激光雷达 0.45 m）、
 人被提交为地图变化，以及大脑的影子决策（HOLD、EXPLORE、TURN_LEFT/RIGHT、REST、FORWARD）。
 
-</details>
-
-<details>
-<summary><b>每段素材是怎么来的</b>，以及早期的合成场地素材</summary>
-<br>
+### 1.6 各段素材的来源
 
 * 大脑视频按手机录制时间（本地 22:57:17）与驱动窗口（22:53:38–22:58:03）对应。两段导航视频的文件时间戳为 2026-10-08，即导航栈重建的当天。
 * 巡逻回放由实体机器人的控制台观测日志（`standing_tour_*_20261004*.jsonl`）渲染：每一帧是一条记录下来的导航消息。它们运行的是
@@ -189,8 +179,6 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 * 早期合成场地素材：[决策链](docs/media/sim/decision_chain_person_front.mp4) · [stage 6](docs/media/sim/stage6_planner_vs_reflex.mp4) ·
   [上位机](docs/media/console/console_replay_brain_shadow.mp4)。
 * 每项素材的数据来源和渲染器：[docs/demo.md](docs/demo.md)。
-
-</details>
 
 ---
 
@@ -505,10 +493,6 @@ EEG 结果验证的是一条直接的运动节点通路，不是"果蝇理解了
 
 ## 10. 目录结构
 
-<details>
-<summary><b>展开目录结构：各个包的作用与运行位置</b></summary>
-<br>
-
 | 路径 | 作用 | 运行位置 |
 | --- | --- | --- |
 | [`flyhead/fly/`](flyhead/fly) | 果蝇：连接组模型、编码器（LiDAR 逼近、EEG）、解码器、脑服务 | GPU 主机 |
@@ -522,8 +506,6 @@ EEG 结果验证的是一条直接的运动节点通路，不是"果蝇理解了
 | [`experiments/`](experiments/README.md) | 各阶段协议、锁定结果和实际执行的脚本 | — |
 | [`docs/`](docs) | 架构、复现、验证、演示、SLAM 运维、导航 | — |
 | `configs/`、`scripts/`、`tools/`、`tests/` | 神经元注册表、启动脚本、地图工具、渲染器、单元测试 | — |
-
-</details>
 
 ---
 
