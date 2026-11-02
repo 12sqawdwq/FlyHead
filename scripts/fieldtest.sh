@@ -19,10 +19,14 @@ PORT="${XT_API_PORT:-8091}"
 BRAIN_PORT="${XT_BRAIN_PORT:-8095}"
 export XT_BRAIN_PORT="$BRAIN_PORT"
 
+# Port check without `ss | grep -q`: under pipefail that pipeline fails when grep exits early and ss
+# gets SIGPIPE, so a listening port was reported closed once the socket list grew (2026-11-02).
+listening() { ss -ltn 2>/dev/null | awk -v p=":$1" '$4 ~ p"$" {found = 1} END {exit !found}'; }
+
 status() {
     echo "sessions: $(tmux ls 2>/dev/null | grep -oE '^flyhead-(server|brain)' | tr '\n' ' ')"
     for p in "$PORT" "$BRAIN_PORT"; do
-        ss -ltn | grep -q ":$p " && echo "port $p: listening" || echo "port $p: closed"
+        listening "$p" && echo "port $p: listening" || echo "port $p: closed"
     done
     curl -s -m 5 "127.0.0.1:$PORT/diagnostics" | "${XT_PYTHON:-python3}" -c '
 import json, sys
@@ -47,8 +51,8 @@ up)
     if tmux has-session -t flyhead-server 2>/dev/null; then echo "flyhead-server already running; run 'down' first"; exit 1; fi
     if ! tmux has-session -t flyhead-brain 2>/dev/null; then
         LOOM_DECODER="${LOOM_DECODER:-9}" bash scripts/start_brain_service.sh "field_$(date +%Y%m%dT%H%M%S)"
-        for _ in $(seq 90); do ss -ltn | grep -q ":$BRAIN_PORT " && break; sleep 2; done
-        ss -ltn | grep -q ":$BRAIN_PORT " || { echo "brain service did not come up; see logs/brain_service.log"; exit 1; }
+        for _ in $(seq 90); do listening "$BRAIN_PORT" && break; sleep 2; done
+        listening "$BRAIN_PORT" || { echo "brain service did not come up; see logs/brain_service.log"; exit 1; }
     fi
     if [ "$MODE" = motion ]; then
         export XT_CHASSIS_DISABLED=0 XT_REMOTE_MOTION_ENABLED=1 XT_MAX_V="${XT_MAX_V:-0.10}"
