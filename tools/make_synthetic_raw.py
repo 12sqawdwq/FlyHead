@@ -76,15 +76,24 @@ def write_base(out_dir):
     print('base map', out / 'map.ply', len(pts), 'points; navigation package', nav)
 
 
-def main(out, seconds=20.0, person=False, base_out=None):
-    grid = SM.build() == 0
-    res, ox, oy = SM.RES, SM.ORIGIN[0], SM.ORIGIN[1]
+def main(out, seconds=20.0, person=False, base_out=None, map_pkg=None):
+    if map_pkg:
+        # a saved map package moved to the start frame (tools/shift_map_package.py): rays hit its walls
+        from flyhead.slam.navmap import NavMap
+        nm = NavMap(map_pkg)
+        grid = nm.blocked_for(0.32)
+        res, ox, oy = nm.res, nm.origin[0], nm.origin[1]
+        start = (0.0, 0.0, 0.0)
+    else:
+        grid = SM.build() == 0
+        res, ox, oy = SM.RES, SM.ORIGIN[0], SM.ORIGIN[1]
+        start = START
     az = np.linspace(-math.pi, math.pi, 360, endpoint=False)
     el = np.radians(np.linspace(-5, 55, 16))
     steps = np.arange(0.2, 12.0, 0.02)
     rng = np.random.default_rng(1)
     t0 = 1.0e9
-    x, y, yaw = START
+    x, y, yaw = start
     stop_pose = None
     track = None
     records = []
@@ -147,5 +156,6 @@ if __name__ == '__main__':
     ap.add_argument('--seconds', type=float, default=20.0)
     ap.add_argument('--person', action='store_true')
     ap.add_argument('--base-out')
+    ap.add_argument('--map', help='saved map package shifted to the start frame (tools/shift_map_package.py)')
     a = ap.parse_args()
-    main(a.out, a.seconds, a.person, a.base_out)
+    main(a.out, a.seconds, a.person, a.base_out, a.map)

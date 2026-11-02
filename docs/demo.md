@@ -35,16 +35,20 @@ Full clip (54 s, audio removed): [media/real/stage5_004_brain_drive_escape.mp4](
 * Supervision as in `PROTOCOL_STAGE5.md`: RC supervisor, geofence, speed limits 0.20 m/s forward,
   −0.30 m/s back, 1.0 rad/s.
 
-### 1.2 Platform clips from the SLAM / navigation phase (before 2026-10-08)
+### 1.2 Autonomous navigation clips (SLAM phase, before the brain modes)
 
-These two clips predate the brain modes (first brain run: 2026-10-10). They show the robot
-platform; the brain is not involved. Their recording metadata does not say how the robot was
-being commanded.
+These two clips show **autonomous navigation without the fly brain**: the robot drives planned
+routes on a saved SLAM map (the classical layer in the README, section 1). The brain was not
+involved. They were recorded before the first brain run (2026-10-10); the file timestamps are
+2026-10-08, the day the navigation stack was rebuilt.
 
 | Clip | Content |
 | --- | --- |
-| [media/real/hallway_posture_drive.mp4](media/real/hallway_posture_drive.mp4) (19 s) | standing / crouched posture and driving in a hallway |
-| [media/real/office_night_drive_4x.mp4](media/real/office_night_drive_4x.mp4) (6 min shown at 4×) | driving through the office at night, the environment of the SLAM maps |
+| [media/real/hallway_posture_drive.mp4](media/real/hallway_posture_drive.mp4) (19 s) | standing / crouched posture changes and route driving in a hallway |
+| [media/real/office_night_drive_4x.mp4](media/real/office_night_drive_4x.mp4) (6 min shown at 4×) | autonomous route driving through the office at night, in the environment of the SLAM maps |
+
+Their numbers (lap times, speeds, stop distances) are in the README, section 1.8, from the same
+period and the same navigation code.
 
 ---
 
@@ -129,3 +133,14 @@ XT_BRAIN_ENABLED=1 python -m flyhead.server.app --replay runs/synth_person.xt \
 python tools/export_preview_map.py --source <copy of runs/replay_<id>/map.ply>
 python flyhead/monitor/preview.py --compute-host <alias>                     # Start LiDAR, then Mission -> Shadow
 ```
+
+---
+
+## Real-site map renders / 真实场地地图的渲染
+
+The decision and stage-6 renders above use the synthetic arena. Renders on the saved SLAM map of a
+real site (`onboard_20260926_manual_cleanup_20261005`, the map the stage-3 and stage-5 sims were
+written against) exist locally and are **not published** here: the map is a floor plan of a real
+building. Publishing them needs the owner's approval. The sim runs on that map give 0 contacts for
+the brain in the person_front scenario; the planner arm arrives, and the reflex arm times out at
+180 s with 5 takeovers and 0 contacts.
