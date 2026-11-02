@@ -13,9 +13,9 @@
 
 <p>
 <b>English</b> · <a href="README.zh-CN.md">中文</a> ·
-<a href="#-gallery">Gallery</a> ·
-<a href="#-state-coverage">State coverage</a> ·
-<a href="#-quick-start">Quick start</a> ·
+<a href="#1-demonstrations">Demonstrations</a> ·
+<a href="#2-state-coverage">State coverage</a> ·
+<a href="#11-quick-start">Quick start</a> ·
 <a href="docs/demo.md">Demo page</a> ·
 <a href="docs/architecture.md">Architecture</a> ·
 <a href="docs/verification.md">Verification</a> ·
@@ -28,15 +28,15 @@ FlyHead is a research robot with **two decision layers in one body**:
 
 | | |
 | --- | --- |
-| 🧭 **Autonomous navigation** | LiDAR SLAM on a saved map of the building, centreline route planning, tours, detours and a host safety chain. Works on its own, without the brain. |
-| 🧠 **The fly brain** | The complete FlyWire v783 *Drosophila* connectome on a GPU turns LiDAR looming into escape, turning and walking through identified descending neurons. A safety envelope may only reduce or zero its commands. |
+| **Autonomous navigation** | LiDAR SLAM on a saved map of the building, centreline route planning, tours, detours and a host safety chain. Works on its own, without the brain. |
+| **Fly brain** | The complete FlyWire v783 *Drosophila* connectome on a GPU turns LiDAR looming into escape, turning and walking through identified descending neurons. A safety envelope may only reduce or zero its commands. |
 
 Hardware: a DIABLO wheel-legged robot (Raspberry Pi 4B, ROS 2 Foxy, Unitree L1 LiDAR), a GPU compute host
 and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; here a fly brain is the head.*
 
 ---
 
-## 🎬 Gallery
+## 1. Demonstrations
 
 <p>
 <img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> physical robot (phone footage) &nbsp;
@@ -46,47 +46,47 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 <img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> real console and server, replayed session
 </p>
 
-### 🤖 The real robot
+### 1.1 The real robot
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_hallway.gif" width="400" alt="hallway">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · hallway</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Video 1.</b> <b>Autonomous navigation · hallway</b></p>
 <p><sub>Standing / crouched posture and route driving, no fly brain · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_office.gif" width="400" alt="office at night">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Autonomous navigation · office at night</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Video 2.</b> <b>Autonomous navigation · office at night</b></p>
 <p><sub>Route driving through the mapped office, no fly brain · 6 min at 4× · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/real_brain.gif" width="400" alt="brain drive">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>The fly brain drives · stage5_004</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>Video 3.</b> <b>The fly brain drives · stage5_004</b></p>
 <p><sub>A person approaches; 262 s of brain drive, 30 escape programs, 0 contacts reported · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/tour.gif" width="400" alt="real tour replay">
-<p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>Autonomous tour, from the robot's log</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>Video 4.</b> <b>Autonomous tour, from the robot's log</b></p>
 <p><sub>2026-10-04 · 729 s, 56.1 m, fitness ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s tour</a></sub></p>
 </td>
 </tr>
 </table>
 
-### 🗺️ The real site: SLAM map
+### 1.2 The real site: SLAM map
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/mapbuild.gif" width="400" alt="map build-up">
-<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The mapping session, replayed</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>Video 5.</b> <b>The mapping session, replayed</b></p>
 <p><sub>2026-09-25 · 1,407 s, 54.7 m, 550,975 points · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/orbit.gif" width="400" alt="3-D point cloud">
-<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>The saved point cloud in 3-D</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>Video 6.</b> <b>The saved point cloud in 3-D</b></p>
 <p><sub>Walls and furniture below 1.3 m, coloured by height · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub></p>
 </td>
 </tr>
@@ -102,30 +102,30 @@ and a Windows operator PC. *Xingtian (刑天) fights on after losing his head; h
 
 </details>
 
-### 🧠 The fly brain on the real map
+### 1.3 The fly brain on the real map
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/decision.gif" width="400" alt="decision chain">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>The decision chain, window by window</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Video 7.</b> <b>The decision chain, window by window</b></p>
 <p><sub>A person from the left: LiDAR → LC4/LPLC2/LC9 → descending neurons → decoder → command · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/roam.gif" width="400" alt="free roaming">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s of free roaming</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Video 8.</b> <b>120 s of free roaming</b></p>
 <p><sub>18.9 m, 0 contacts; explore, escape, flee, freeze and hold in one run · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/stage6.gif" width="400" alt="stage 6">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6: planner vs. fly reflexes</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Video 9.</b> <b>Stage 6: planner vs. fly reflexes</b></p>
 <p><sub>Both arms arrive with 0 contacts; the brain takes over twice · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/console.gif" width="400" alt="operator console">
-<p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>Operator console on the real map</b></p>
+<p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>Video 10.</b> <b>Operator console on the real map</b></p>
 <p><sub>Relocalized at fitness 1.00, brain in shadow mode, charging lock on · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub></p>
 </td>
 </tr>
@@ -201,31 +201,29 @@ committed as a map change, and the brain's shadow decisions (HOLD, EXPLORE, TURN
 
 ---
 
-## 🧭 State coverage
+## 2. State coverage
 
-| Layer | State | Where to see it |
+| Layer | State | Shown in |
 | --- | --- | --- |
-| Navigator (real logs) | `driving` · `waiting` · `stopped` · `avoiding` · `planning` · `idle` | 🤖 tour replay (state band, robot colour) |
-| Navigator (sim) | `driving` · `arrived` · reflex hold | 🧠 Stage 6 |
-| Navigator gates | stale pose → wait · detour (`avoiding`) · waypoint progress | 🤖 tour replay (reason line) |
-| Localization | relocalized on the saved map (fitness 1.00) · fitness over a real tour | 🧠 console · 🤖 tour replay |
-| Posture | crouch · stand | 🤖 hallway clip, tour replay · 🧠 console (`stand · 0.47 m`) |
-| Map changes | new obstacle committed · temporary obstacle cleared | 🤖 tour replay (boxes) · 🧠 console messages |
-| Decoder | FORWARD · EXPLORE · TURN_LEFT · TURN_RIGHT | 🧠 every scenario |
-| Decoder | FREEZE · ESCAPE_PROGRAM · BACK_OFF · FLEE | 🧠 person, loom and roam scenarios · 🤖 stage5_004 on the real robot |
-| Decoder | HOLD · REST | 🧠 roam (HOLD) · console (HOLD, REST) |
-| Brain mode | `off` | 🤖 navigation clips and tour replays |
-| Brain mode | `shadow` | 🧠 Stage 6 planner arm · console |
-| Brain mode | `drive` | 🤖 stage5_004 on the real robot |
-| Brain mode | `reflex` | 🧠 Stage 6 reflex arm |
-| Safety | charging lock on | 🧠 console banner |
-| Safety | envelope reducing a brain command | 🧠 decision videos ("envelope:" in panel 3; loom, `person_right`, roam) |
-
-🤖 = [the real robot](#-the-real-robot) · 🧠 = [the fly brain on the real map](#-the-fly-brain-on-the-real-map)
+| Navigator (real logs) | `driving`, `waiting`, `stopped`, `avoiding`, `planning`, `idle` | Video 4 (state band, robot colour) |
+| Navigator (simulation) | `driving`, `arrived`, reflex hold | Video 9 |
+| Navigator gates | stale pose (wait), detour (`avoiding`), waypoint progress | Video 4 (reason line) |
+| Localization | relocalized on the saved map (fitness 1.00); fitness along a real tour | Video 10; Video 4 |
+| Posture | crouch, stand | Videos 1, 4, 10 |
+| Map changes | new obstacle committed, temporary obstacle cleared | Video 4 (boxes); Video 10 (messages) |
+| Decoder | FORWARD, EXPLORE, TURN_LEFT, TURN_RIGHT | Videos 7, 8 and every scenario |
+| Decoder | FREEZE, ESCAPE_PROGRAM, BACK_OFF, FLEE | Videos 7, 8; person and loom scenarios; Video 3 (real robot) |
+| Decoder | HOLD, REST | Video 8 (HOLD); Video 10 (HOLD, REST) |
+| Brain mode | `off` | Videos 1, 2, 4 |
+| Brain mode | `shadow` | Video 9 (planner arm); Video 10 |
+| Brain mode | `drive` | Video 3 (real robot) |
+| Brain mode | `reflex` | Video 9 (reflex arm) |
+| Safety | charging lock on | Video 10 |
+| Safety | envelope reducing a brain command | decision videos, panel 3 ("envelope:"); loom scenarios, `person_right`, Video 8 |
 
 ---
 
-## 🧱 System overview
+## 3. System overview
 
 ```text
                  ┌────────────── compute host (GPU) ──────────────────────────────────┐
@@ -243,7 +241,7 @@ decoders are plain NumPy, and the robot bridge does not import the package. Modu
 
 ---
 
-## 🔍 What is real, what is simulated, what is a claim
+## 4. What is real, what is simulated, what is a claim
 
 | Layer | It is | It is not |
 | --- | --- | --- |
@@ -259,7 +257,7 @@ marks the field→eye assignment and the yaw sign as **not calibrated**.
 
 ---
 
-## 🚗 Autonomous navigation (no brain)
+## 5. Autonomous navigation (no brain)
 
 This layer is complete on its own. It is what the robot runs when the brain mode is **off**.
 
@@ -290,7 +288,7 @@ This layer is complete on its own. It is what the robot runs when the brain mode
 * **Saved map package** (`maps/<name>/`): `map.pgm` / `map.yaml` (0.05 m grid), `map.ply` (the saved
   cloud), height layers (`floor.npy`, `obst_hmin/hmax.npy`, `obst_bins.npy`) and `MAP_INFO.json` with the
   session lineage. Map packages are not committed to this repository; rendered views of the real
-  site's map are published in [Videos](#-gallery) with the site owner's consent.
+  site's map are published in [Videos](#1-demonstrations) with the site owner's consent.
 * **Relocalization:** a new session searches the base map for its pose (global search, fitness ≥ 0.8,
   ratio test between the best and second candidate). An operator pose hint can replace the ambiguity test
   for candidates within 1 m and 30° of the hint. Navigation is refused until localized; fitness < 0.6 for
@@ -416,7 +414,7 @@ it stops to turn in place. Turbo on the robot, one lap each:
 
 Emergency stops (Turbo lanes, from the 10 Hz records): 0.74 m/s peak → 0.71 m; 0.77 m/s peak → 0.81 m in
 1.76 s. The Turbo budget is 2.15 m at 1.0 m/s. The Turbo slip incident is in
-[Known problems](#-known-problems-and-open-issues).
+[Known problems](#9-known-problems-and-open-issues).
 
 </details>
 
@@ -459,7 +457,7 @@ mapped region ([docs/slam_history.md](docs/slam_history.md)).
 
 ---
 
-## 🧠 The fly brain
+## 6. The fly brain
 
 <details>
 <summary><b>Pipeline</b></summary>
@@ -522,7 +520,7 @@ portable to other connectome versions.
 
 ---
 
-## 📈 Results so far
+## 7. Results so far
 
 All numbers come from the recorded experiments in [`experiments/`](experiments/README.md).
 
@@ -542,7 +540,7 @@ All numbers come from the recorded experiments in [`experiments/`](experiments/R
 
 ---
 
-## ✅ Verification and simulation
+## 8. Verification and simulation
 
 * **Unit tests** (any machine): registry identity, retina, decoders, EEG encoder, envelope, synthetic
   arena (`pytest`, 11 tests).
@@ -558,7 +556,7 @@ Not covered there: `robot/` on real hardware, and the numbers that depend on the
 
 ---
 
-## 🐞 Known problems and open issues
+## 9. Known problems and open issues
 
 These are the problems we know about, from the recorded experiments and from this repository's own
 checks. None is a known regression from the repository move: the navigation, SLAM and relocalization
@@ -580,7 +578,7 @@ versions of the stage-6 simulation gave the same result on the same map.
 
 ---
 
-## 📁 Repository layout
+## 10. Repository layout
 
 <details>
 <summary><b>Show the layout: packages, what each does, where it runs</b></summary>
@@ -604,9 +602,9 @@ versions of the stage-6 simulation gave the same result on the same map.
 
 ---
 
-## 🚀 Quick start
+## 11. Quick start
 
-### Anywhere: unit tests and blind simulation
+### 11.1 Anywhere: unit tests and blind simulation
 
 ```bash
 git clone https://github.com/12sqawdwq/FlyHead.git && cd FlyHead
@@ -616,7 +614,7 @@ python -m flyhead.sim.loom_sim person_front blind 25 runs/blind.jsonl
 python -m flyhead.sim.report runs/blind.jsonl
 ```
 
-### With a CUDA GPU (≥ 16 GB free): the connectome in the loop
+### 11.2 With a CUDA GPU (≥ 16 GB free): the connectome in the loop
 
 ```bash
 pip install -e ".[brain]"
@@ -625,7 +623,7 @@ python tools/repro_stage1.py runs/repro_stage1      # stage 1: compared with the
 python -m flyhead.sim.loom_sim person_front brain 25 runs/brain.jsonl --decoder 9
 ```
 
-### Demo renders
+### 11.3 Demo renders
 
 ```bash
 pip install -e ".[demo]"
@@ -633,7 +631,7 @@ python tools/render_demo.py decision runs/decision.mp4 runs/brain.jsonl     # th
 python tools/render_demo.py reflex runs/stage6.mp4 runs/planner.jsonl runs/reflex.jsonl
 ```
 
-### The robot and the control server
+### 11.4 The robot and the control server
 
 Full procedure: [docs/reproduce.md](docs/reproduce.md) (sections 2b and 4) and
 [docs/slam_operations.md](docs/slam_operations.md). In short:
@@ -651,7 +649,7 @@ bridge enforces the same two interlocks.
 
 ---
 
-## 🔒 Safety
+## 12. Safety
 
 Physical motion needs two explicit opt-ins on both the compute host and the robot
 (`XT_CHASSIS_DISABLED=0`, `XT_REMOTE_MOTION_ENABLED=1`); the default is a charging lock.
@@ -669,11 +667,11 @@ Physical motion needs two explicit opt-ins on both the compute host and the robo
 | Brain envelope | server | intents only reduced or zeroed; geofence and keep-in before the lease |
 
 Commands expire after 0.3 s, the speed ceiling defaults to 0.30 m/s, and an RC supervisor is expected
-during any drive. This is research code. See [Known problems](#-known-problems-and-open-issues).
+during any drive. This is research code. See [Known problems](#9-known-problems-and-open-issues).
 
 ---
 
-## 📚 Documentation index
+## 13. Documentation index
 
 | Document | What it covers |
 | --- | --- |
@@ -689,7 +687,7 @@ during any drive. This is research code. See [Known problems](#-known-problems-a
 
 ---
 
-## 📜 Credits and licences
+## 14. Credits and licences
 
 * Connectome model: [eonsystemspbc/fly-brain](https://github.com/eonsystemspbc/fly-brain) (GPL-2.0), fetched at a pinned commit, not redistributed here.
 * Connectome and annotations: FlyWire (Dorkenwald et al. 2024, Schlegel et al. 2024; [flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)).

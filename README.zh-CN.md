@@ -13,9 +13,9 @@
 
 <p>
 <a href="README.md">English</a> · <b>中文</b> ·
-<a href="#-视频画廊">视频画廊</a> ·
-<a href="#-状态全景">状态全景</a> ·
-<a href="#-快速开始">快速开始</a> ·
+<a href="#1-演示">演示</a> ·
+<a href="#2-状态全景">状态全景</a> ·
+<a href="#11-快速开始">快速开始</a> ·
 <a href="docs/demo.md">演示页</a> ·
 <a href="docs/architecture.md">架构</a> ·
 <a href="docs/verification.md">验证</a> ·
@@ -28,15 +28,15 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 
 | | |
 | --- | --- |
-| 🧭 **自主导航** | 在建筑的已保存地图上做激光雷达 SLAM，中心线路径规划、巡逻、绕行和主机安全链。不需要大脑也能独立工作。 |
-| 🧠 **果蝇脑** | GPU 上的完整 FlyWire v783 果蝇连接组，把激光雷达的逼近信号经已鉴定的下行神经元转化为逃逸、转向和行走。安全包络只能减速或归零它的命令。 |
+| **自主导航** | 在建筑的已保存地图上做激光雷达 SLAM，中心线路径规划、巡逻、绕行和主机安全链。不需要大脑也能独立工作。 |
+| **果蝇脑** | GPU 上的完整 FlyWire v783 果蝇连接组，把激光雷达的逼近信号经已鉴定的下行神经元转化为逃逸、转向和行走。安全包络只能减速或归零它的命令。 |
 
 硬件：DIABLO 轮足机器人（树莓派 4B、ROS 2 Foxy、Unitree L1 激光雷达）、GPU 计算主机和 Windows 操作员电脑。
 *刑天在神话里断首后仍继续作战；本项目给它装上一个果蝇的脑。*
 
 ---
 
-## 🎬 视频画廊
+## 1. 演示
 
 <p>
 <img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> 实体机器人（手机拍摄） &nbsp;
@@ -46,47 +46,47 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 <img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> 真实控制台与服务器，回放会话
 </p>
 
-### 🤖 实体机器人
+### 1.1 实体机器人
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_hallway.gif" width="400" alt="走廊">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 走廊</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>视频 1.</b> <b>自主导航 · 走廊</b></p>
 <p><sub>站立 / 蹲伏姿态与路线行驶，无果蝇脑 · 19 s · <a href="docs/media/real/hallway_posture_drive.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/nav_office.gif" width="400" alt="夜间办公室">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>自主导航 · 夜间办公室</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>视频 2.</b> <b>自主导航 · 夜间办公室</b></p>
 <p><sub>在已建图的办公室中按路线行驶，无果蝇脑 · 6 分钟，4 倍速 · <a href="docs/media/real/office_night_drive_4x.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/real_brain.gif" width="400" alt="大脑驱动">
-<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>果蝇脑驱动 · stage5_004</b></p>
+<p><img src="https://img.shields.io/badge/REAL-f78166?style=flat-square" alt="REAL"> <b>视频 3.</b> <b>果蝇脑驱动 · stage5_004</b></p>
 <p><sub>有人逼近；大脑驱动 262 s，30 次逃逸程序，报告 0 次碰撞 · <a href="docs/media/real/stage5_004_brain_drive_escape.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/tour.gif" width="400" alt="真实巡逻回放">
-<p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>自主巡逻，按机器人日志回放</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20LOG-3fb950?style=flat-square" alt="REAL LOG"> <b>视频 4.</b> <b>自主巡逻，按机器人日志回放</b></p>
 <p><sub>2026-10-04 · 729 s，56.1 m，定位度 ≥ 0.963 · <a href="docs/media/realmap/real_tour_729s.mp4">mp4</a> · <a href="docs/media/realmap/real_tour_138s.mp4">138 s 巡逻</a></sub></p>
 </td>
 </tr>
 </table>
 
-### 🗺️ 真实场地：SLAM 地图
+### 1.2 真实场地：SLAM 地图
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/mapbuild.gif" width="400" alt="建图回放">
-<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>建图会话回放</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>视频 5.</b> <b>建图会话回放</b></p>
 <p><sub>2026-09-25 · 1407 s，54.7 m，550975 个点 · <a href="docs/media/realmap/slam_map_build.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/orbit.gif" width="400" alt="三维点云">
-<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>保存的三维点云</b></p>
+<p><img src="https://img.shields.io/badge/REAL%20SITE-d29922?style=flat-square" alt="REAL SITE"> <b>视频 6.</b> <b>保存的三维点云</b></p>
 <p><sub>1.3 m 以下的墙体与家具，按高度着色 · <a href="docs/media/realmap/slam_map_orbit.mp4">mp4</a></sub></p>
 </td>
 </tr>
@@ -102,30 +102,30 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 
 </details>
 
-### 🧠 真实地图上的果蝇脑
+### 1.3 真实地图上的果蝇脑
 
 <table>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/decision.gif" width="400" alt="决策链">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>逐窗口的决策链</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>视频 7.</b> <b>逐窗口的决策链</b></p>
 <p><sub>人从左侧逼近：激光雷达 → LC4/LPLC2/LC9 → 下行神经元 → 解码器 → 命令 · <a href="docs/media/realmap/decision_person_left.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/roam.gif" width="400" alt="自由漫游">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>120 s 自由漫游</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>视频 8.</b> <b>120 s 自由漫游</b></p>
 <p><sub>18.9 m，0 次碰撞；一次运行中出现探索、逃逸、逃跑、冻结和保持 · <a href="docs/media/realmap/decision_roam_open.mp4">mp4</a></sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 <img src="docs/media/cards/stage6.gif" width="400" alt="stage 6">
-<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>Stage 6：规划器与果蝇反射</b></p>
+<p><img src="https://img.shields.io/badge/SIM-58a6ff?style=flat-square" alt="SIM"> <b>视频 9.</b> <b>Stage 6：规划器与果蝇反射</b></p>
 <p><sub>两组都以 0 碰撞到达；大脑接管两次 · <a href="docs/media/realmap/stage6_planner_vs_reflex.mp4">mp4</a></sub></p>
 </td>
 <td width="50%" valign="top">
 <img src="docs/media/cards/console.gif" width="400" alt="上位机">
-<p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>真实地图上的操作员控制台</b></p>
+<p><img src="https://img.shields.io/badge/CONSOLE-a371f7?style=flat-square" alt="CONSOLE"> <b>视频 10.</b> <b>真实地图上的操作员控制台</b></p>
 <p><sub>定位度 1.00 重定位，大脑影子模式，充电锁开启 · <a href="docs/media/realmap/console/console_real_map_brain_shadow.mp4">mp4</a></sub></p>
 </td>
 </tr>
@@ -194,31 +194,29 @@ FlyHead 是一台研究用机器人，**一个机身上有两层决策**：
 
 ---
 
-## 🧭 状态全景
+## 2. 状态全景
 
-| 层 | 状态 | 在哪里看 |
+| 层 | 状态 | 出处 |
 | --- | --- | --- |
-| 导航（真实日志） | `driving` · `waiting` · `stopped` · `avoiding` · `planning` · `idle` | 🤖 巡逻回放（状态色带、机器人颜色） |
-| 导航（仿真） | `driving` · `arrived` · 反射保持 | 🧠 Stage 6 |
-| 导航门控 | 位姿过期 → 等待 · 绕行（`avoiding`）· 航点进度 | 🤖 巡逻回放（原因一行） |
-| 定位 | 在保存的地图上重定位（定位度 1.00）· 真实巡逻中的定位度 | 🧠 上位机 · 🤖 巡逻回放 |
-| 姿态 | 蹲伏 · 站立 | 🤖 走廊视频、巡逻回放 · 🧠 上位机（`stand · 0.47 m`） |
-| 地图变化 | 提交新障碍物 · 清除临时障碍物 | 🤖 巡逻回放（方框）· 🧠 上位机消息 |
-| 解码器 | FORWARD · EXPLORE · TURN_LEFT · TURN_RIGHT | 🧠 所有场景 |
-| 解码器 | FREEZE · ESCAPE_PROGRAM · BACK_OFF · FLEE | 🧠 人、逼近与漫游场景 · 🤖 实体机器人 stage5_004 |
-| 解码器 | HOLD · REST | 🧠 漫游（HOLD）· 上位机（HOLD、REST） |
-| 大脑模式 | `off` | 🤖 导航视频与巡逻回放 |
-| 大脑模式 | `shadow` | 🧠 Stage 6 规划器组 · 上位机 |
-| 大脑模式 | `drive` | 🤖 实体机器人 stage5_004 |
-| 大脑模式 | `reflex` | 🧠 Stage 6 反射组 |
-| 安全 | 充电锁开启 | 🧠 上位机横幅 |
-| 安全 | 包络削减大脑命令 | 🧠 决策视频（面板 3 中的 "envelope:"；逼近、`person_right`、漫游） |
-
-🤖 = [实体机器人](#-实体机器人) · 🧠 = [真实地图上的果蝇脑](#-真实地图上的果蝇脑)
+| 导航（真实日志） | `driving`、`waiting`、`stopped`、`avoiding`、`planning`、`idle` | 视频 4（状态色带、机器人颜色） |
+| 导航（仿真） | `driving`、`arrived`、反射保持 | 视频 9 |
+| 导航门控 | 位姿过期（等待）、绕行（`avoiding`）、航点进度 | 视频 4（原因一行） |
+| 定位 | 在保存的地图上重定位（定位度 1.00）；真实巡逻中的定位度 | 视频 10；视频 4 |
+| 姿态 | 蹲伏、站立 | 视频 1、4、10 |
+| 地图变化 | 提交新障碍物、清除临时障碍物 | 视频 4（方框）；视频 10（消息） |
+| 解码器 | FORWARD、EXPLORE、TURN_LEFT、TURN_RIGHT | 视频 7、8 及所有场景 |
+| 解码器 | FREEZE、ESCAPE_PROGRAM、BACK_OFF、FLEE | 视频 7、8；人与逼近场景；视频 3（实体机器人） |
+| 解码器 | HOLD、REST | 视频 8（HOLD）；视频 10（HOLD、REST） |
+| 大脑模式 | `off` | 视频 1、2、4 |
+| 大脑模式 | `shadow` | 视频 9（规划器组）；视频 10 |
+| 大脑模式 | `drive` | 视频 3（实体机器人） |
+| 大脑模式 | `reflex` | 视频 9（反射组） |
+| 安全 | 充电锁开启 | 视频 10 |
+| 安全 | 包络削减大脑命令 | 决策视频面板 3（"envelope:"）；逼近场景、`person_right`、视频 8 |
 
 ---
 
-## 🧱 系统概览
+## 3. 系统概览
 
 ```text
                  ┌────────────── 计算主机（GPU）──────────────────────────────────────┐
@@ -235,7 +233,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 🔍 什么是真实的、什么是仿真的、什么只是主张
+## 4. 什么是真实的、什么是仿真的、什么只是主张
 
 | 层 | 是什么 | 不是什么 |
 | --- | --- | --- |
@@ -250,7 +248,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 🚗 自主导航（不经过果蝇脑）
+## 5. 自主导航（不经过果蝇脑）
 
 这一层本身完整，也是大脑模式为 **关闭** 时机器人运行的部分。
 
@@ -275,7 +273,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 * **建图会话：** *启动 LiDAR* 在计算主机上以子进程运行 KISS-ICP 里程计。只有 IMU 覆盖的扫描会被去畸变；否则等待一小段时间后
   不去畸变地处理。与保存地图的持续差异会作为带版本的障碍物变化（`added` / `removed`）提交，并进入规划。
 * **保存的地图包**（`maps/<名称>/`）：`map.pgm` / `map.yaml`（0.05 m 栅格）、`map.ply`（保存的点云）、高度层
-  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**；经场地所有者同意，真实场地地图的渲染视图发布在 [视频](#-视频画廊) 中。
+  （`floor.npy`、`obst_hmin/hmax.npy`、`obst_bins.npy`）和记录会话来源的 `MAP_INFO.json`。地图包 **不提交到本仓库**；经场地所有者同意，真实场地地图的渲染视图发布在 [视频](#1-演示) 中。
 * **重定位：** 新会话在基础地图上全局搜索自己的位姿（匹配度 ≥ 0.8，并对最好和次好的候选做比值检验）。操作员的位姿提示可以替代歧义检验，
   适用于距离提示 1 m、朝向 30° 以内的候选。未完成定位前拒绝导航；定位度 < 0.6 持续 1 s 会取消任务。
 * **地图修正：** 行驶时用基础地图修正位姿。连续两次因幅度过大（0.3 m / 5°）而被拒绝、但对齐良好的修正会触发漂移告警；
@@ -381,7 +379,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 | Turbo 1.0 | 128.0 m | 7.7 min | 0.95 m/s | 0.23 / 0.39 m | 27 % | 0 |
 
 紧急停车（Turbo 车道，按 10 Hz 记录测得）：峰值 0.74 m/s → 停在 0.71 m；峰值 0.77 m/s → 1.76 s 内停在 0.81 m。Turbo 的预算是
-1.0 m/s 时 2.15 m。Turbo 滑移事故见 [已知问题](#-已知问题与未解决事项)。
+1.0 m/s 时 2.15 m。Turbo 滑移事故见 [已知问题](#9-已知问题与未解决事项)。
 
 </details>
 
@@ -418,7 +416,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 🧠 果蝇脑
+## 6. 果蝇脑
 
 <details>
 <summary><b>流水线</b></summary>
@@ -479,7 +477,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 📈 目前的结果
+## 7. 目前的结果
 
 所有数字都来自 [`experiments/`](experiments/README.md) 中的记录实验。
 
@@ -493,7 +491,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## ✅ 验证与仿真
+## 8. 验证与仿真
 
 * **单元测试**（任何机器）：注册表一致性、视网膜、解码器、EEG 编码器、安全包络、合成场地（`pytest`，11 项）。
 * **盲仿真**（无需 GPU）：`loom_sim` 的恒定前进基线。
@@ -505,7 +503,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 🐞 已知问题与未解决事项
+## 9. 已知问题与未解决事项
 
 以下是我们已知的问题，来自记录的实验和本仓库自己的检查。它们都不是仓库迁移导致的回归：导航、SLAM 和重定位代码与归档版本相比只改了导入路径，
 同一张地图上归档版与仓库版的阶段 6 仿真结果一致。
@@ -525,7 +523,7 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 📁 目录结构
+## 10. 目录结构
 
 <details>
 <summary><b>展开目录结构：各个包的作用与运行位置</b></summary>
@@ -549,9 +547,9 @@ LiDAR + IMU ───► │ SLAM（KISS-ICP）─► 在保存地图上重定�
 
 ---
 
-## 🚀 快速开始
+## 11. 快速开始
 
-### 任何机器：单元测试与盲仿真
+### 11.1 任何机器：单元测试与盲仿真
 
 ```bash
 git clone https://github.com/12sqawdwq/FlyHead.git && cd FlyHead
@@ -561,7 +559,7 @@ python -m flyhead.sim.loom_sim person_front blind 25 runs/blind.jsonl
 python -m flyhead.sim.report runs/blind.jsonl
 ```
 
-### 有 CUDA GPU（≥ 16 GB 空闲）：连接组在环
+### 11.2 有 CUDA GPU（≥ 16 GB 空闲）：连接组在环
 
 ```bash
 pip install -e ".[brain]"
@@ -570,7 +568,7 @@ python tools/repro_stage1.py runs/repro_stage1      # Stage 1：与归档记录�
 python -m flyhead.sim.loom_sim person_front brain 25 runs/brain.jsonl --decoder 9
 ```
 
-### 演示渲染
+### 11.3 演示渲染
 
 ```bash
 pip install -e ".[demo]"
@@ -578,7 +576,7 @@ python tools/render_demo.py decision runs/decision.mp4 runs/brain.jsonl     # �
 python tools/render_demo.py reflex runs/stage6.mp4 runs/planner.jsonl runs/reflex.jsonl
 ```
 
-### 机器人与控制服务器
+### 11.4 机器人与控制服务器
 
 完整流程见 [docs/reproduce.md](docs/reproduce.md)（第 2b 节和第 4 节）与 [docs/slam_operations.md](docs/slam_operations.md)。简要如下：
 
@@ -594,7 +592,7 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 
 ---
 
-## 🔒 安全
+## 12. 安全
 
 实体运动需要在计算主机和机器人两端各自明确开启两个选项（`XT_CHASSIS_DISABLED=0`、`XT_REMOTE_MOTION_ENABLED=1`）；默认是充电锁。
 
@@ -610,11 +608,11 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 | 电池 | 服务器 | < 25 % 警告；< 15 % 停止导航、蹲下、拒绝新任务 |
 | 大脑包络 | 服务器 | 意图只能减小或归零；围栏和 keep-in 在租约之前生效 |
 
-命令 0.3 s 后过期，速度上限默认 0.30 m/s；任何驱动期间都应有遥控监督员。这是研究代码。见 [已知问题](#-已知问题与未解决事项)。
+命令 0.3 s 后过期，速度上限默认 0.30 m/s；任何驱动期间都应有遥控监督员。这是研究代码。见 [已知问题](#9-已知问题与未解决事项)。
 
 ---
 
-## 📚 文档索引
+## 13. 文档索引
 
 | 文档 | 内容 |
 | --- | --- |
@@ -630,7 +628,7 @@ XT_COMPUTE_HOST=<别名> python flyhead/monitor/preview.py
 
 ---
 
-## 📜 致谢与许可
+## 14. 致谢与许可
 
 * 连接组模型：[eonsystemspbc/fly-brain](https://github.com/eonsystemspbc/fly-brain)（GPL-2.0），按固定提交获取，本仓库不再分发。
 * 连接组与注释：FlyWire（Dorkenwald 等 2024、Schlegel 等 2024；[flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)）。
