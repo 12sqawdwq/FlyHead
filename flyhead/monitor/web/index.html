@@ -104,6 +104,7 @@ label.chk{display:flex;align-items:center;font-size:12px;color:var(--text);curso
 #cam{position:absolute;right:12px;top:36px;width:320px;display:none;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px #0003}
 #cam.big{width:min(720px,60%)}
 #cam img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#222}
+button.big.ready{outline:2px solid var(--ok);outline-offset:-2px;background:#e8f7ee}
 #stim{position:absolute;right:12px;bottom:10px;width:430px;max-height:calc(100% - 50px);overflow:auto;display:none;background:#fffffff2;border:1px solid var(--line);box-shadow:0 2px 10px #0003;font-size:11px}
 #stim .hd{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;border-bottom:1px solid var(--line-2);background:var(--chrome)}
 #stim .hd b{font-size:12px}
@@ -745,6 +746,10 @@ function render() {
   const brainOn = !!br?.enabled;
   for (const id of ['brainShadow', 'brainDrive', 'brainOff', 'flyReflex']) $(id).disabled = !online || !brainOn;
   $('brainDrive').disabled ||= lock || !chassisOn || !localized || active;
+  const roamReady = !$('brainDrive').disabled && br?.mode === 'shadow';
+  $('brainDrive').classList.toggle('ready', roamReady);
+  $('brainDrive').title = roamReady ? 'Ready: one click starts Roam, owned by this console (Stop, manual drive or closing this console ends it)'
+    : br?.mode === 'drive' ? 'Roam is running' : 'Roam needs the chassis running, a localized session and no navigation task';
   $('brainShadow').classList.toggle('active', br?.mode === 'shadow'); $('brainDrive').classList.toggle('active', br?.mode === 'drive');
   const reflexOn = br?.mode === 'reflex';
   $('flyReflex').classList.toggle('active', reflexOn);
@@ -823,12 +828,14 @@ $('turbo').onclick = () => setTurbo(!nav?.turbo);
 $('brainShadow').onclick = () => send({t: 'brain', mode: 'shadow'});
 $('brainOff').onclick = () => send({t: 'brain', mode: 'off'});
 $('brainDrive').onclick = async () => {
-  if (!await ask('Fly-brain roam', [
+  // the checklist is confirmed once per console page; after that Roam is one click
+  if (sessionStorage.getItem('roamConfirmed') !== '1' && !await ask('Fly-brain roam', [
     'The full-connectome fly brain decides motion: forward from P9, turns from DNa02, escape from the giant fibre; the decoder adds rest, freeze, flight and (v9) an endogenous exploration drive.',
     'Limits: 0.15 m/s forward and 0.40 rad/s; escapes and flights up to 0.20 m/s forward, 0.30 m/s back, 1.0 rad/s.',
     'It may roam all mapped free floor (keep-in 0.30 m from mapped obstacles); the robot must start inside it.',
     'Someone follows with the remote controller; manual drive or Stop ends brain drive at once.',
     'The robot is off the charger, standing or crouched (standing moves about 1.35x the command; the envelope allows for it).'])) return;
+  sessionStorage.setItem('roamConfirmed', '1');
   send({t: 'brain', mode: 'drive', area: 'map'});
 };
 $('flyReflex').onclick = async () => {

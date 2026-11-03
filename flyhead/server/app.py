@@ -405,6 +405,11 @@ class Session:
             self.reader_task = asyncio.get_event_loop().create_task(self.read_robot())
             asyncio.get_event_loop().create_task(self.read_stderr())
             self.event('Robot bridge connected; starting the LiDAR')
+        if self.brain.enabled and self.brain.mode == 'off':
+            # Shadow decodes and records but never commands motion, so the Stimulus panel and the brain
+            # record are live from the start of every session; Roam and reflexes still need an operator.
+            self.brain.set_mode('shadow')
+            self.event('Brain mode: shadow (default at session start; decoded, never sent)')
 
     def bind_navigation(self, slam, nav):
         def on_frame(*values):
