@@ -104,6 +104,23 @@ label.chk{display:flex;align-items:center;font-size:12px;color:var(--text);curso
 #cam{position:absolute;right:12px;top:36px;width:320px;display:none;background:#fff;border:1px solid var(--line);box-shadow:0 2px 10px #0003}
 #cam.big{width:min(720px,60%)}
 #cam img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#222}
+#stim{position:absolute;right:12px;bottom:10px;width:430px;max-height:calc(100% - 50px);overflow:auto;display:none;background:#fffffff2;border:1px solid var(--line);box-shadow:0 2px 10px #0003;font-size:11px}
+#stim .hd{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;border-bottom:1px solid var(--line-2);background:var(--chrome)}
+#stim .hd b{font-size:12px}
+#stim .bd{padding:6px 8px}
+#stim .row{display:grid;grid-template-columns:52px 1fr 52px;gap:6px;align-items:center;margin:2px 0}
+#stim .bar{height:9px;background:#eee;position:relative}
+#stim .bar i{position:absolute;top:0;bottom:0;background:var(--info)}
+#stim .bar.l i{right:0}
+#stim .bar.r i{left:0}
+#stim .st{display:inline-block;padding:1px 6px;border-radius:3px;color:#fff;font-weight:600;background:#888}
+#stim .st.def{background:var(--bad)} #stim .st.calm{background:var(--ok)} #stim .st.turn{background:var(--warn)}
+#stim .kv{display:grid;grid-template-columns:repeat(4,1fr);gap:2px 8px;margin:4px 0}
+#stim .kv span{color:var(--muted)}
+#stim canvas{width:100%;height:56px;display:block;border:1px solid var(--line-2);margin:4px 0}
+#stim table{width:100%;border-collapse:collapse;margin-top:4px}
+#stim th,#stim td{text-align:left;padding:1px 3px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+#stim .note{color:var(--muted);margin-top:4px}
 #camBar{display:flex;justify-content:space-between;align-items:center;padding:2px 6px;font-size:11px;color:var(--muted)}
 /* messages + status */
 #msgs{grid-area:msgs;display:flex;flex-direction:column;min-height:0;border-top:1px solid var(--line)}
@@ -223,6 +240,9 @@ dialog .row button.primary{border-color:#c98a00;background:var(--gold)}
       <button class="big" id="follow"><i>⌖</i>Follow</button>
       <button class="big" id="clearView"><i>⌫</i>Clear trail</button>
     </div><div class="cap">View</div></div>
+    <div class="group"><div class="cmds">
+      <button class="big" id="stimToggle" title="Live looming input, decoded state and stimulus episodes (best with the brain in Shadow and the robot still)"><i>✺</i>Stimulus</button>
+    </div><div class="cap">Fly brain</div></div>
     <div class="group"><div class="cmds"><div class="ctl">
       Height limit <input type="range" id="zmax" min="-0.5" max="4" step="0.05" value="2.0"><output id="zmaxT"></output>
       Point size <input type="range" id="psize" min="1" max="6" step="0.5" value="2"><output id="psizeT"></output>
@@ -293,6 +313,23 @@ dialog .row button.primary{border-color:#c98a00;background:var(--gold)}
   <div id="scale">top view · drag to orbit</div>
   <div id="goalHint">Click the map to place the goal · Esc cancels</div>
   <div id="banner"></div>
+  <div id="stim">
+    <div class="hd"><b>Stimulus response</b><span id="stimTag">—</span></div>
+    <div class="bd">
+      <div class="row"><span>loom L</span><div class="bar l"><i id="stimBarL"></i></div><span id="stimLoomL">—</span></div>
+      <div class="row"><span>loom R</span><div class="bar r"><i id="stimBarR"></i></div><span id="stimLoomR">—</span></div>
+      <div class="kv">
+        <div><span>state</span><br><b class="st" id="stimState">—</b></div>
+        <div><span>GF / MDN Hz</span><br><b id="stimGf">—</b></div>
+        <div><span>P9 Hz · arousal</span><br><b id="stimP9">—</b></div>
+        <div><span>nearest L / R</span><br><b id="stimNear">—</b></div>
+      </div>
+      <canvas id="stimTrace" width="414" height="56" title="last 8 s: looming L (blue) and R (orange); state strip below (red defensive, green explore or forward, amber turn)"></canvas>
+      <div id="stimCur" class="note"></div>
+      <table><thead><tr><th>#</th><th>time</th><th>trigger</th><th>side</th><th>peak</th><th>response</th><th>latency</th><th>dur</th></tr></thead><tbody id="stimEps"></tbody></table>
+      <div class="note">Shadow mode keeps the robot still: walls do not loom, so the signal comes from things that approach. Model output of the connectome simulation; nothing here commands the robot.</div>
+    </div>
+  </div>
   <div id="cam"><img id="camImg" alt=""><div id="camBar"><span id="camInfo">camera</span><button id="camSize">Enlarge</button></div></div>
 </div>
 
@@ -695,6 +732,7 @@ function render() {
     : `Fast laps up to ${fmt(turboTop())} m/s with braking before bends`;
   $('vTurbo').textContent = turboOn ? `on · speed gain ${nav.speed_gain?.toFixed(2) ?? '—'} · profile cap ${nav.profile_cap != null ? fmt(nav.profile_cap) + ' m/s' : '—'}` : 'off';
   $('vMeasured').textContent = nav?.measured_speed_mps != null ? fmt(nav.measured_speed_mps) + ' m/s' : '—';
+  renderStim();
   const ctl = st?.control;
   const mine = !!ctl && ctl.controller === myName;
   const observer = !!ctl?.controller && !mine;
@@ -856,6 +894,51 @@ $('sessOn').onclick = () => send({t: 'session', on: true, base: !!(st?.base_path
 $('sessOff').onclick = async () => { if (await ask('End session', 'Stops the chassis and the LiDAR and saves the map.')) send({t: 'session', on: false}); };
 $('save').onclick = () => send({t: 'save'});
 $('camToggle').onclick = () => send({t: 'camera', on: !st?.robot?.camera_running});
+let stimOpen = false;
+$('stimToggle').onclick = () => { stimOpen = !stimOpen; renderStim(); };
+const STIM_DEF = ['FREEZE', 'ESCAPE_PROGRAM', 'FLEE', 'BACK_OFF'];
+const stimClass = s => STIM_DEF.includes(s) ? 'def' : /TURN/.test(s || '') ? 'turn' : s ? 'calm' : '';
+const stimColor = s => ({def: '#d9001b', turn: '#e8a200', calm: '#00a651'})[stimClass(s)] || '#bbb';
+function renderStim() {
+  const sm = st?.brain?.stimulus, br = st?.brain;
+  $('stimToggle').classList.toggle('active', stimOpen);
+  $('stimToggle').disabled = !br?.enabled;
+  $('stim').style.display = stimOpen ? 'block' : 'none';
+  if (!stimOpen) return;
+  const lv = sm?.live;
+  $('stimTag').textContent = !br?.enabled ? 'brain not enabled' : br.mode === 'off' ? 'brain off: choose Shadow'
+    : !lv ? 'waiting for brain windows' : `${br.mode} · ${lv.static ? 'robot still' : 'robot moving'} · window ${lv.window}`;
+  const full = Math.max(0.15, (sm?.thresholds?.loom_on || 0.03) * 5);
+  const pct = v => Math.min(100, 100 * (v || 0) / full) + '%';
+  $('stimBarL').style.width = pct(lv?.loom_l); $('stimBarR').style.width = pct(lv?.loom_r);
+  $('stimLoomL').textContent = lv ? fmt(lv.loom_l, 3) : '—'; $('stimLoomR').textContent = lv ? fmt(lv.loom_r, 3) : '—';
+  $('stimState').textContent = lv?.state || '—'; $('stimState').className = 'st ' + stimClass(lv?.state);
+  $('stimGf').textContent = lv ? `${fmt(lv.gf_hz, 0)} / ${fmt(lv.mdn_hz, 0)}` : '—';
+  $('stimP9').textContent = lv ? `${fmt(lv.p9_hz, 0)} · ${fmt(lv.arousal, 2)}` : '—';
+  $('stimNear').textContent = lv ? `${fmt(lv.nearest_l, 2)} / ${fmt(lv.nearest_r, 2)} m` : '—';
+  const cv = $('stimTrace'), g = cv.getContext('2d'), W = cv.width, H = cv.height, tr = sm?.trace || [];
+  g.clearRect(0, 0, W, H);
+  if (tr.length > 1) {
+    const t1 = tr[tr.length - 1][0], t0 = t1 - 8, x = t => (t - t0) / 8 * W;
+    const yMax = Math.max(full, ...tr.map(r => Math.max(r[1], r[2])));
+    const y = v => (H - 10) - (H - 14) * v / yMax;
+    g.strokeStyle = '#ddd'; g.lineWidth = 1; g.beginPath(); g.moveTo(0, y(sm.thresholds.loom_on)); g.lineTo(W, y(sm.thresholds.loom_on)); g.stroke();
+    for (const [k, c] of [[1, '#2f6fbf'], [2, '#e07b00']]) {
+      g.strokeStyle = c; g.lineWidth = 1.5; g.beginPath();
+      tr.forEach((r, i) => i ? g.lineTo(x(r[0]), y(r[k])) : g.moveTo(x(r[0]), y(r[k]))); g.stroke();
+    }
+    tr.forEach((r, i) => { const xe = i + 1 < tr.length ? x(tr[i + 1][0]) : W; g.fillStyle = stimColor(r[3]); g.fillRect(x(r[0]), H - 6, Math.max(1, xe - x(r[0])), 6); });
+  }
+  const cur = sm?.current;
+  $('stimCur').textContent = cur ? `Episode ${cur.n} in progress (${cur.trigger}): peak ${fmt(cur.peak_loom, 3)} rad/s, response ${cur.response || '—'}`
+    + (cur.latency_ms != null ? ` after ${cur.latency_ms} ms` : '') + ` · ${cur.states.join(' → ')}` : 'No stimulus episode in progress.';
+  const clock = t => new Date(t * 1000).toLocaleTimeString([], {hour12: false});
+  $('stimEps').innerHTML = (sm?.episodes || []).slice(0, 8).map(e =>
+    `<tr title="${(e.states || []).join(' → ')} · GF ${fmt(e.peak_gf, 0)} · MDN ${fmt(e.peak_mdn, 0)} · P9 ${fmt(e.peak_p9, 0)} Hz · nearest ${fmt(e.nearest_m, 2)} m · ${e.static ? 'robot still' : 'robot moving'}">`
+    + `<td>${e.n}</td><td>${clock(e.start)}</td><td>${e.trigger}</td><td>${e.side || '—'}</td><td>${fmt(e.peak_loom, 3)}</td>`
+    + `<td><b class="st ${stimClass(e.response)}">${e.response || 'none'}</b></td><td>${e.latency_ms != null ? e.latency_ms + ' ms' : '—'}</td><td>${fmt(e.duration_s, 1)} s</td></tr>`).join('')
+    || '<tr><td colspan="8" style="color:var(--muted)">no episodes yet</td></tr>';
+}
 $('runtimeReset').onclick = async () => {
   if (!await ask('Reset runtime', ['Cancels the task, stops and crouches the robot, saves the session', 'Restores default speeds and settings, then relocalizes on the base map',
     'Maps, history and safety thresholds are kept; the old route is not resumed', 'Nothing is under the robot and someone can take over'])) return;

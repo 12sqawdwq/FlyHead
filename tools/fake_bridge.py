@@ -10,6 +10,8 @@ Not a robot model. The pose integrates the accepted (v, w) with the bridge's lea
 a posture request confirms after 1.5 s (FAKE_POSTURE=fail reports `failed`, as TRANSFORM UP FAIL did).
 A retrace drives nothing and finishes after 3 s. Every received operation goes to --log (jsonl), the
 record of who commanded what. Writing a percentage to <log>.battery sets the reported battery.
+FAKE_PERSON=1 adds a person (0.25 m cylinder) every FAKE_PERSON_PERIOD s (default 20): it appears 3 m in front
+of the robot, walks toward it at 0.5 m/s, stops 0.8 m away for 2 s and leaves sideways -- a looming stimulus.
 """
 import argparse
 import json
@@ -60,6 +62,8 @@ class Fake:
         self.az = np.linspace(-math.pi, math.pi, 360, endpoint=False)
         self.steps = np.arange(0.2, 12.0, 0.02)
         self.battery = float(os.environ.get('FAKE_BATTERY', '70'))
+        self.person_period = float(os.environ.get('FAKE_PERSON_PERIOD', '20')) if os.environ.get('FAKE_PERSON') == '1' else None
+        self.t0 = time.monotonic()
         self.battery_file = Path(a.log + '.battery') if a.log else None   # test override: write a percentage
 
     # ------------------------------------------------------------------ output
@@ -165,8 +169,21 @@ class Fake:
         hit[ok] = self.grid[ij[..., 0][ok], ij[..., 1][ok]]
         first = np.where(hit.any(axis=1), hit.argmax(axis=1), -1)
         wall = np.where(first >= 0, self.steps[np.maximum(first, 0)], 11.0)
-        c = cloud_frame(self.cloud, self.x, self.y, self.yaw, self.az, wall, None, self.rng)
+        c = cloud_frame(self.cloud, self.x, self.y, self.yaw, self.az, wall, self.person(), self.rng)
         self.emit(1, struct.pack('<dI', t, len(c)) + c.tobytes())
+
+    def person(self):
+        """Position of the approaching person in the map frame, or None."""
+        if not self.person_period:
+            return None
+        k = (time.monotonic() - self.t0) % self.person_period - 5.0      # first appearance after 5 s
+        approach = (3.0 - 0.8) / 0.5
+        if k < 0 or k > approach + 2.0 + 4.0:
+            return None
+        hx, hy = math.cos(self.yaw + math.pi), math.sin(self.yaw + math.pi)   # body forward
+        d = 3.0 - 0.5 * min(k, approach)
+        side = 0.6 * max(0.0, k - approach - 2.0)                        # leaves sideways
+        return (self.x + d * hx - side * hy, self.y + d * hy + side * hx)
 
     def status(self):
         now = time.monotonic()

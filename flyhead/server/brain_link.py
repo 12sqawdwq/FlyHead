@@ -23,6 +23,7 @@ from flyhead import paths
 from flyhead.fly.encoders.lidar_loom import LidarRetinaV3
 from flyhead.safety import envelope as ENV
 from flyhead.slam.navmap import ROBOT_HEIGHT
+from .stimulus import StimulusMonitor
 
 BRAIN_ENABLED = os.environ.get('XT_BRAIN_ENABLED', os.environ.get('XT_BRAIN_DIR') and '1' or '0') == '1'
 PORT = int(os.environ.get('XT_BRAIN_PORT', '8095'))
@@ -67,6 +68,7 @@ class BrainLink:
         self.keepin = None              # map keep-in: dict(out=metres outside, gx, gy=gradient, nm=NavMap)
         self.last = {}
         self.windows = 0
+        self.stim = StimulusMonitor()   # observes stimulus -> response for the console's Stimulus panel
         if self.enabled:
             threading.Thread(target=self._connect_loop, daemon=True).start()
 
@@ -229,6 +231,18 @@ class BrainLink:
             row, at, pts, pts_at = self.intent, self.intent_at, self.body_points, self.points_at
         rec = dict(mode=self.mode, connected=self.connected())
         nav = self.s.nav
+        arb = getattr(self.s, 'arb', None)
+        static = arb is None or arb.owner in ('idle', 'halt', 'posture')   # nothing commands motion
+        try:
+            ep = self.stim.update(row, self.last.get('features'), static, self.mode)
+        except Exception as exc:                  # observing must never affect the command path
+            ep, self.last['stimulus_error'] = None, repr(exc)
+        if ep is not None:
+            self.s.record_telemetry(dict(type='stimulus_episode', **ep))
+            self.s.event('Stimulus %d: %s %s, peak loom %.2f rad/s -> %s%s (%s)' % (
+                ep['n'], ep['trigger'], ep['side'] or '-', ep['peak_loom'], ep['response'] or 'no defensive state',
+                '' if ep['latency_ms'] is None else ' after %d ms' % ep['latency_ms'],
+                'robot still' if ep['static'] else 'robot moving'))
         why = None
         if row is None or now - at > INTENT_MAX_AGE_S:
             why = 'no fresh brain window'
@@ -289,4 +303,5 @@ class BrainLink:
         rec = self.last.get('record') or {}
         return dict(enabled=self.enabled, mode=self.mode, connected=self.connected() if self.enabled else False,
                     windows=self.windows, fence=self.fence,
-                    keepin=self.keepin and dict(area_m2=self.keepin['area_m2'], clearance_m=KEEPIN_CLEARANCE_M), last=rec, features=self.last.get('features'))
+                    keepin=self.keepin and dict(area_m2=self.keepin['area_m2'], clearance_m=KEEPIN_CLEARANCE_M), last=rec, features=self.last.get('features'),
+                    stimulus=self.stim.status() if self.enabled else None)
