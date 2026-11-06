@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>flyhead_sim.rviz - RViz</title>
+<style>
+:root{--win:#efefef;--panel:#fafafa;--line:#c6c6c6;--line2:#dadada;--sel:#308cc6;--txt:#222;--muted:#666;--title:#2b2b2b}
+*{box-sizing:border-box}
+html,body{margin:0;width:1600px;height:900px;overflow:hidden;background:var(--win);color:var(--txt);
+  font:13px "Ubuntu","DejaVu Sans","Segoe UI",Arial,sans-serif}
+#titlebar{position:absolute;left:0;top:0;width:1600px;height:34px;background:var(--title);color:#e8e8e8;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13.5px}
+#titlebar .btns{position:absolute;right:10px;top:7px;display:flex;gap:8px}
+#titlebar .btns i{width:20px;height:20px;border-radius:50%;background:#4a4a4a;display:inline-block}
+#titlebar .btns i:last-child{background:#e95420}
+#menubar{position:absolute;left:0;top:34px;width:1600px;height:26px;display:flex;align-items:center;gap:18px;padding:0 10px;border-bottom:1px solid var(--line2)}
+#toolbar{position:absolute;left:0;top:60px;width:1600px;height:40px;display:flex;align-items:center;gap:4px;padding:0 6px;border-bottom:1px solid var(--line)}
+.tool{display:flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid transparent;border-radius:3px;font-size:13px}
+.tool.on{background:#dcdcdc;border-color:#b8b8b8}
+.tool b{display:inline-block;width:16px;height:16px;border-radius:2px;font:600 11px/16px Arial;text-align:center;color:#fff}
+.dock{position:absolute;background:var(--panel);border:1px solid var(--line)}
+.dock .hd{height:24px;line-height:24px;padding:0 8px;background:#e6e6e6;border-bottom:1px solid var(--line);font-size:12.5px}
+#displays{left:4px;top:104px;width:356px;height:686px}
+#views{right:4px;top:104px;width:264px;height:686px}
+.tree{font-size:12.5px}
+.tr{display:grid;grid-template-columns:184px 1fr;height:21px;align-items:center;border-bottom:1px solid #f0f0f0;white-space:nowrap;overflow:hidden}
+.tr.alt{background:#f3f3f3}
+.tr.sel{background:var(--sel);color:#fff}
+.tr .k{display:flex;align-items:center;gap:4px;overflow:hidden}
+.tr .v{padding-left:6px;overflow:hidden;text-overflow:ellipsis;color:inherit}
+.arr{width:10px;color:#777;font-size:9px;text-align:center}
+.cb{width:13px;height:13px;border:1px solid #8a8a8a;border-radius:2px;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;line-height:1;color:#222}
+.ic{width:14px;height:14px;border-radius:2px;display:inline-block}
+.ok{color:#2e8b2e}
+.sw{display:inline-block;width:12px;height:12px;border:1px solid #888;vertical-align:-2px;margin-right:4px}
+.dockbtns{position:absolute;left:6px;right:6px;bottom:6px;display:flex;gap:4px}
+.dockbtns span{flex:1;text-align:center;border:1px solid #b4b4b4;border-radius:3px;padding:3px 0;background:#f4f4f4;font-size:12px}
+#viewport{position:absolute;left:364px;top:104px;width:968px;height:686px;background:#303030;overflow:hidden;border:1px solid var(--line)}
+#viewport canvas{position:absolute;left:0;top:0}
+#time{position:absolute;left:4px;right:4px;top:794px;height:56px}
+#time .row{display:flex;gap:10px;align-items:center;padding:6px 8px;font-size:12.5px}
+#time input{width:132px;height:21px;border:1px solid #b4b4b4;border-radius:2px;background:#fff;font:12px "Ubuntu Mono","DejaVu Sans Mono",Consolas,monospace;padding:0 4px}
+#status{position:absolute;left:0;top:874px;width:1600px;height:26px;display:flex;align-items:center;gap:12px;padding:0 8px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+#status .btn{border:1px solid #b4b4b4;border-radius:3px;padding:1px 10px;background:#f4f4f4;color:#222}
+#status .fps{margin-left:auto}
+.lbl{position:absolute;font:12px "DejaVu Sans",Arial,sans-serif;white-space:nowrap;transform:translate(-50%,-50%);text-shadow:0 0 2px #000}
+.ovl{position:absolute;background:rgba(0,0,0,.62);color:#e6f2ff;font:13px/1.45 "DejaVu Sans Mono","Ubuntu Mono",Consolas,monospace;padding:8px 11px;white-space:pre}
+#ovlText{left:10px;top:10px;width:420px}
+#ovlPlot{right:10px;bottom:10px;width:300px;height:132px;padding:0}
+#ovlPlot canvas{position:static}
+</style>
+</head>
+<body>
+<div id="titlebar">flyhead_sim.rviz* - RViz<div class="btns"><i></i><i></i><i></i></div></div>
+<div id="menubar"><span>File</span><span>Panels</span><span>Help</span></div>
+<div id="toolbar">
+  <div class="tool on"><b style="background:#5a7fbf">↖</b>Interact</div>
+  <div class="tool"><b style="background:#6b6b6b">✥</b>Move Camera</div>
+  <div class="tool"><b style="background:#6b6b6b">▢</b>Select</div>
+  <div class="tool"><b style="background:#6b6b6b">◎</b>Focus Camera</div>
+  <div class="tool"><b style="background:#6b6b6b">↔</b>Measure</div>
+  <div class="tool"><b style="background:#3a9a3a">➚</b>2D Pose Estimate</div>
+  <div class="tool"><b style="background:#c03a3a">➚</b>2D Goal Pose</div>
+  <div class="tool"><b style="background:#b07a1a">⊙</b>Publish Point</div>
+</div>
+<div class="dock" id="displays"><div class="hd">Displays</div><div class="tree" id="dtree"></div>
+  <div class="dockbtns"><span>Add</span><span>Duplicate</span><span>Remove</span><span>Rename</span></div></div>
+<div id="viewport">
+  <div id="labels"></div>
+  <div class="ovl" id="ovlText"></div>
+  <div class="ovl" id="ovlPlot"><canvas id="plot" width="300" height="132"></canvas></div>
+</div>
+<div class="dock" id="views"><div class="hd">Views</div><div class="tree" id="vtree"></div>
+  <div class="dockbtns"><span>Save</span><span>Remove</span><span>Rename</span></div></div>
+<div class="dock" id="time"><div class="hd">Time</div><div class="row">
+  ROS Time: <input id="rosT"> ROS Elapsed: <input id="rosE"> Wall Time: <input id="wallT"> Wall Elapsed: <input id="wallE">
+  <span class="cb"></span> Experimental</div></div>
+<div id="status"><span class="btn">Reset</span><span>Left-Click: Rotate.  Middle-Click: Move X/Y.  Right-Click/Mouse Wheel:: Zoom.  Shift: More options.</span><span class="fps">30 fps</span></div>
+<script type="module" src="./rviz.js"></script>
+</body>
+</html>

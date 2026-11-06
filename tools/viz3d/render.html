@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FlyHead 3D simulation render</title>
+<style>
+:root{--ink:#f5f5f7;--ink2:#b4b4ba;--ink3:#8e8e93;--panel:rgba(18,18,20,.72);--hair:rgba(245,245,247,.14)}
+html,body{margin:0;width:1600px;height:900px;overflow:hidden;background:#050506;color:var(--ink);
+  font-family:"Inter","Segoe UI Variable Display","Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif}
+canvas{position:absolute;inset:0}
+#shadeTop{position:absolute;left:0;right:0;top:0;height:190px;background:linear-gradient(#050506 30%,rgba(5,5,6,0));pointer-events:none}
+#shadeBot{position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(rgba(5,5,6,0),#050506 60%);pointer-events:none}
+.hud{position:absolute;pointer-events:none}
+#title{left:36px;top:28px;width:1020px}
+#title h1{margin:0;font-size:30px;font-weight:650;letter-spacing:-.01em}
+#title p{margin:6px 0 0;font-size:17px;color:var(--ink2)}
+#title small{display:block;margin-top:8px;font-size:13px;color:#ff8a7a;letter-spacing:.01em}
+#clock{right:36px;top:30px;text-align:right}
+#clock .t{font:600 34px "Cascadia Mono",Consolas,monospace}
+#state{display:inline-block;margin-top:8px;padding:5px 12px;border-radius:7px;font-weight:650;font-size:17px;color:#0b0b0c}
+#side{right:36px;top:150px;width:352px;padding:16px 18px;background:var(--panel);border:1px solid var(--hair);border-radius:14px;backdrop-filter:blur(6px)}
+#side h3{margin:12px 0 7px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+#side h3:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:92px 1fr 62px;align-items:center;gap:8px;margin:5px 0;font-size:13.5px}
+.row span:first-child{color:var(--ink2)}
+.row b{font:500 13px "Cascadia Mono",Consolas,monospace;text-align:right}
+.bar{height:8px;border-radius:4px;background:rgba(245,245,247,.08);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:4px}
+#legend{left:36px;bottom:92px;font-size:14px;color:var(--ink2)}
+#legend span{display:inline-flex;align-items:center;gap:8px;margin-right:22px}
+#legend i{display:inline-block;width:22px;height:10px;border-radius:3px}
+#timeline{left:36px;right:36px;bottom:34px;height:42px}
+#tl{position:absolute;left:0;right:0;top:0;height:14px;border-radius:4px;overflow:hidden;display:flex}
+#tl i{height:100%}
+#cursor{position:absolute;top:-4px;width:2px;height:22px;background:#fff;border-radius:1px}
+#tlabels{position:absolute;left:0;right:0;top:22px;font-size:12.5px;color:var(--ink3);display:flex;gap:18px;flex-wrap:wrap}
+#tlabels b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tag{position:absolute;font-size:13px;color:var(--ink);padding:3px 8px;border-radius:6px;background:rgba(10,10,12,.72);border:1px solid var(--hair);white-space:nowrap;transform:translate(-50%,-100%)}
+</style>
+</head>
+<body>
+<div id="shadeTop"></div><div id="shadeBot"></div>
+<div class="hud" id="title"><h1>FlyHead — fruit-fly connectome in closed loop</h1><p id="desc"></p>
+  <small>SIMULATION · ray-cast LiDAR on the saved SLAM map of a real site · full FlyWire v783 connectome (138,639 LIF neurons) · not a robot run</small></div>
+<div class="hud" id="clock"><div class="t" id="tval">0.0 s</div><div id="state">—</div></div>
+<div class="hud" id="side">
+  <h3>Retina input</h3>
+  <div class="row"><span>Looming L</span><div class="bar"><i id="bLoomL" style="background:#3a7bd5"></i></div><b id="vLoomL"></b></div>
+  <div class="row"><span>Looming R</span><div class="bar"><i id="bLoomR" style="background:#e07a2f"></i></div><b id="vLoomR"></b></div>
+  <div class="row"><span>LC9 L</span><div class="bar"><i id="bLcL" style="background:#169A87"></i></div><b id="vLcL"></b></div>
+  <div class="row"><span>LC9 R</span><div class="bar"><i id="bLcR" style="background:#169A87"></i></div><b id="vLcR"></b></div>
+  <h3>Escape and walking neurons (Hz)</h3>
+  <div class="row"><span>Giant fibre</span><div class="bar"><i id="bGf" style="background:#e4572e"></i></div><b id="vGf"></b></div>
+  <div class="row"><span>MDN (back)</span><div class="bar"><i id="bMdn" style="background:#f08a4b"></i></div><b id="vMdn"></b></div>
+  <div class="row"><span>P9 (forward)</span><div class="bar"><i id="bP9" style="background:#4c9be8"></i></div><b id="vP9"></b></div>
+  <h3>Descending readouts (Hz)</h3>
+  <div id="reads"></div>
+  <h3>Command to the robot</h3>
+  <div class="row"><span>v (m/s)</span><div class="bar"><i id="bV" style="background:#f5f5f7"></i></div><b id="vV"></b></div>
+  <div class="row"><span>w (rad/s)</span><div class="bar"><i id="bW" style="background:#9b8de0"></i></div><b id="vW"></b></div>
+  <div class="row"><span>Clearance</span><div class="bar"><i id="bClr" style="background:#8e8e93"></i></div><b id="vClr"></b></div>
+</div>
+<div class="hud" id="legend"><span><i style="background:#d9d9de"></i>With the brain</span><span><i style="background:rgba(160,160,170,.35);border:1px dashed #9a9aa2"></i>Without the brain (drives straight)</span><span id="objLegend"></span></div>
+<div class="hud" id="timeline"><div id="tl"></div><div id="cursor"></div><div id="tlabels"></div></div>
+<div id="tags"></div>
+<script type="module" src="./render.js"></script>
+</body>
+</html>
