@@ -971,6 +971,9 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     if (cards) cards.forEach(function (c) { c.shown = -1; });
     dirty = true; measure();
   }
+  var FADE = .008;          // caption fade, in timeline units (.01 = 12 % of a screen)
+  var ENTER = .026;         // landing point inside a chapter: past the fade and the number count-up
+  var SETTLE_MS = 150, GLIDE_MS = 420;
   var trackEl = $('#track'), trackLen = 1;
   function measure() { trackLen = Math.max(1, trackEl.offsetHeight - window.innerHeight); }
   function scrollP() { return clamp(window.scrollY / trackLen); }
@@ -1125,12 +1128,12 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
   function railFromEvent(e) { var r = railTrack.getBoundingClientRect(); goto(clamp((e.clientY - r.top) / r.height)); }
   railTrack.addEventListener('pointerdown', function (e) { railDrag = true; railTrack.setPointerCapture(e.pointerId); railFromEvent(e); e.preventDefault(); });
   railTrack.addEventListener('pointermove', function (e) { if (railDrag) railFromEvent(e); });
-  railTrack.addEventListener('pointerup', function () { railDrag = false; });
+  railTrack.addEventListener('pointerup', function () { railDrag = false; settle(0); });
   railTrack.addEventListener('pointercancel', function () { railDrag = false; });
   railTrack.addEventListener('lostpointercapture', function () { railDrag = false; });
   railTrack.addEventListener('keydown', function (e) {
-    var d = { ArrowUp: -.01, ArrowLeft: -.01, ArrowDown: .01, ArrowRight: .01, PageUp: -.06, PageDown: .06 }[e.key];
-    if (d) { goto(clamp(scrollP() + d)); e.preventDefault(); }
+    var d = { ArrowUp: -1, ArrowLeft: -1, ArrowDown: 1, ArrowRight: 1, PageUp: -1, PageDown: 1 }[e.key];
+    if (d) { stepChapter(d); e.preventDefault(); e.stopPropagation(); }
     if (e.key === 'Home') { goto(0); e.preventDefault(); }
     if (e.key === 'End') { goto(1); e.preventDefault(); }
   });
@@ -1143,6 +1146,74 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
       if (b.dataset.go) $('#' + b.dataset.go).scrollIntoView({ behavior: reduceMq.matches ? 'auto' : 'smooth' });
       else goto(+b.dataset.p, true);
     });
+  });
+
+  /* ---------- 章节吸附：停在过渡区时滑到可读位置 ---------- */
+  // Readable zone of a chapter = its window minus the fades. Stopping inside one changes nothing; stopping in a
+  // transition glides on in the scroll direction. Only wheel, touch and keys trigger it, so #p= links,
+  // the scrollbar and rail drags stay exact.
+  var chapters = cards.map(function (c) {
+    var a = Math.max(c.from, 0), b = Math.min(c.to, 1), lo = c.from < 0 ? 0 : a + FADE, hi = c.to > 1 ? 1 : b - FADE, mid = (lo + hi) / 2;
+    return { lo: lo, hi: hi, mid: c.from < 0 ? 0 : mid, enter: Math.min(mid, a + ENTER), leave: Math.max(mid, b - ENTER) };
+  });
+  var inputAt = -1e9, inputWindow = 1200, touching = false, settleTimer = 0, glideId = 0, lastY = window.scrollY, scrollDir = 0;
+  function stopGlide() { glideId++; }
+  function glide(p) {
+    var id = ++glideId, y0 = window.scrollY, y1 = p * trackLen, t0 = performance.now();
+    if (reduceMq.matches) { window.scrollTo(0, y1); return; }
+    (function step(now) {
+      if (id !== glideId) return;
+      var k = clamp((now - t0) / GLIDE_MS), e = 1 - Math.pow(1 - k, 3);
+      window.scrollTo(0, y0 + (y1 - y0) * e);
+      if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  function settle(dir) {
+    var p = scrollP();
+    if (window.scrollY > trackLen || p >= 1) return;
+    var i, before = null, after = null;
+    for (i = 0; i < chapters.length; i++) {
+      if (p >= chapters[i].lo - 1e-4 && p <= chapters[i].hi + 1e-4) return;   // readable: stay
+      if (chapters[i].hi < p) before = chapters[i];
+      else if (!after && chapters[i].lo > p) after = chapters[i];
+    }
+    if (!before && !after) return;
+    if (!dir) dir = !after || (before && p - before.hi < after.lo - p) ? -1 : 1;
+    var c = dir > 0 ? (after || before) : (before || after);
+    glide(c === after ? c.enter : c.leave);
+  }
+  function noteInput(ms) { inputAt = performance.now(); inputWindow = ms; stopGlide(); }
+  window.addEventListener('wheel', function () { noteInput(1200); }, { passive: true });
+  window.addEventListener('touchstart', function () { touching = true; noteInput(4000); }, { passive: true });
+  window.addEventListener('touchend', function () { touching = false; noteInput(4000); }, { passive: true });
+  window.addEventListener('touchcancel', function () { touching = false; }, { passive: true });
+  window.addEventListener('keydown', function (e) {
+    if (/^(Arrow|Page|Home|End| )/.test(e.key)) noteInput(1200);
+    if ((e.key === 'PageDown' || e.key === 'PageUp') && window.scrollY <= trackLen && !e.defaultPrevented) {
+      if (stepChapter(e.key === 'PageDown' ? 1 : -1)) e.preventDefault();
+    }
+  });
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    if (y !== lastY) { scrollDir = y > lastY ? 1 : -1; lastY = y; }
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(function () {
+      if (!touching && !railDrag && performance.now() - inputAt < inputWindow) settle(scrollDir);
+    }, SETTLE_MS);
+  }, { passive: true });
+  // one chapter forward or back; false when there is none in that direction
+  function stepChapter(d) {
+    var p = scrollP(), i, c = null;
+    for (i = 0; i < chapters.length; i++) {
+      if (d > 0 && chapters[i].mid > p + .004) { c = chapters[i]; break; }
+      if (d < 0 && chapters[i].mid < p - .004) c = chapters[i];
+    }
+    if (!c) return false;
+    stopGlide(); glide(c.mid);
+    return true;
+  }
+  chapters.forEach(function (c) {
+    var t = document.createElement('i'); t.className = 'rail-tick'; t.style.top = (c.mid * 100).toFixed(2) + '%'; railTrack.appendChild(t);
   });
 
   /* ---------- 主循环 ---------- */
@@ -1513,16 +1584,16 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
 
     // 文案
     for (i = 0; i < cards.length; i++) {
-      var c = cards[i], rampIn = .012;
-      // one-sided ramps: out by `to`, in from `from`, so two captions never overlap
-      var o = range(p, c.from, c.from + 2 * rampIn) * (1 - range(p, c.to - 2 * rampIn, c.to));
+      var c = cards[i];
+      // short one-sided ramps: out by `to`, in from `from`, so two captions never overlap
+      var o = range(p, c.from, c.from + FADE) * (1 - range(p, c.to - FADE, c.to));
       if (o !== c.shown) {
         c.shown = o;
         c.el.style.opacity = o;
         c.el.style.visibility = o > .002 ? 'visible' : 'hidden';
         c.el.classList.toggle('live', o > .5);
         if (!reduced) {
-          c.el.style.setProperty('--ty', ((1 - o) * (p < c.from + 2 * rampIn ? 26 : -26)).toFixed(1) + 'px');
+          c.el.style.setProperty('--ty', ((1 - o) * (p < c.from + FADE ? 26 : -26)).toFixed(1) + 'px');
         }
       }
     }

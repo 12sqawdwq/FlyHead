@@ -114,6 +114,7 @@ button:focus-visible,.rail-track:focus-visible,a:focus-visible{outline:2px solid
 .rail-track{position:relative;width:18px;height:100%;cursor:ns-resize;touch-action:none}
 .rail-track::before{content:"";position:absolute;left:8.5px;top:0;bottom:0;width:1px;background:var(--hair)}
 .rail-fill{position:absolute;left:8.5px;top:0;width:1px;height:0;background:var(--ink)}
+.rail-tick{position:absolute;left:6.5px;width:5px;height:1px;background:var(--ink2);pointer-events:none}
 .rail-thumb{position:absolute;left:5px;top:0;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--ink)}
 
 .decision{position:fixed;z-index:3;left:50%;bottom:clamp(20px,4vh,44px);transform:translateX(-50%);text-align:center;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;text-shadow:0 0 22px #000,0 0 6px #000}
