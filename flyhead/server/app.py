@@ -64,7 +64,9 @@ MAX_TOUR_LAPS = 20
 BAT_WARN, BAT_LOW = 25.0, 15.0     # % : warn / stop navigation, crouch, refuse new missions
 IDLE_CROUCH_S = 60          # standing with no motion for this long -> crouch (motor heat)
 BRAIN_IDLE_CROUCH_S = 300   # ... while the fly brain is driving
-RECOVERY_TIMEOUT_S = 120.0
+RECOVERY_TIMEOUT_S = float(os.environ.get('XT_RECOVERY_TIMEOUT_S', '120'))
+RECOVERY_RETRY_DELAY_S = 10.0   # a failed relocalization rescans by itself after this (motion stays stopped)
+RECOVERY_MAX_RETRIES = 20
 RECOVERY_CONFIRM_SAMPLES = 5
 
 
@@ -125,6 +127,9 @@ class Session:
         self.nav_pending = 0              # nav tasks between ownership and start (async goal search)
         self.retrace_seen = False
         self.refusal_logged = {}
+        self.recovery_retry_at = None
+        self.recovery_retries = 0
+        self.last_good_pose = None        # (x, y, yaw) before a relocalization: hint for the rescans
         self.arb_logged = 0               # last arbiter transition written to the event log
         self.brain = BrainLink(self)       # fly-brain mode (off unless XT_BRAIN_DIR)
         self.tour_laps = None           # {'total', 'done', 'active'} of a multi-lap tour
@@ -448,6 +453,9 @@ class Session:
         if self.recovery_archive_pending or self.recovery_archives.full() or self.failed_recovery_archives:
             self.event('Previous state archives are backlogged or failed; end the session first to keep the data')
             return
+        self.recovery_retry_at = None
+        if self.nav is not None and self.nav.pose is not None:
+            self.last_good_pose = tuple(float(v) for v in self.nav.pose[1:4])
         self.recovery_generation += 1
         token = self.recovery_generation
         attempt = self.recovery['attempt'] + 1
@@ -572,6 +580,8 @@ class Session:
                              input_cutover_at=time.time())
         self.record_recovery()
         self.event('Localizer rebuilt: the previous pose and path are discarded')
+        if self.last_good_pose is not None and slam.base is not None:
+            slam.set_reloc_hint(*self.last_good_pose, ttl=RECOVERY_TIMEOUT_S + 30)
 
     def observe_recovery(self, slam, frame, fitness):
         if slam is not self.slam or self.recovery['state'] not in ('searching', 'confirming'):
@@ -587,6 +597,7 @@ class Session:
         if self.recovery_good_samples >= RECOVERY_CONFIRM_SAMPLES:
             self.recovery_deadline = None
             self.localization_blocked = False
+            self.recovery_retries, self.recovery_retry_at = 0, None
             self.recovery.update(state='ready', reason='Relocalized; set a new goal or tour')
             self.record_recovery()
             self.event('Relocalization complete; navigation stays stopped and the previous route is not resumed')
@@ -604,6 +615,11 @@ class Session:
         if self.nav is not None:
             self.nav.cancel('Relocalization did not complete')
         self.event('Relocalization did not complete: %s; motion stays stopped (retry or end the session)' % reason)
+        if self.recovery_retries < RECOVERY_MAX_RETRIES:
+            self.recovery_retries += 1
+            self.recovery_retry_at = time.monotonic() + RECOVERY_RETRY_DELAY_S
+            self.event('Rescanning automatically in %.0f s (%d of %d); motion stays stopped'
+                       % (RECOVERY_RETRY_DELAY_S, self.recovery_retries, RECOVERY_MAX_RETRIES))
 
     async def check_drift(self):
         """Stop and relocalize when the map correction reports a large slip it may not apply.
@@ -636,6 +652,10 @@ class Session:
         await self.request_recovery()
 
     def poll_recovery(self):
+        if self.recovery_retry_at is not None and time.monotonic() >= self.recovery_retry_at:
+            self.recovery_retry_at = None
+            if self.running and self.recovery['state'] == 'failed':
+                asyncio.get_event_loop().create_task(self.request_recovery())
         if self.recovery_deadline is not None and time.monotonic() >= self.recovery_deadline:
             self.fail_recovery(self.recovery_generation,
                                'no consecutive confident match within %.0f s' % RECOVERY_TIMEOUT_S)
@@ -1515,7 +1535,7 @@ async def ws_handler(request):
                         await asyncio.get_event_loop().run_in_executor(
                             None, s.slam.set_reloc_hint, float(m['x']), float(m['y']), yaw)
                         s.event('Relocalization pose hint set: (%.2f, %.2f)%s; a match within 1 m and '
-                                'fitness 0.8 is accepted' % (float(m['x']), float(m['y']),
+                                'fitness 0.7 is accepted' % (float(m['x']), float(m['y']),
                                 '' if yaw is None else ', yaw %.0f deg' % math.degrees(yaw)))
                 else:
                     await s.request_recovery()

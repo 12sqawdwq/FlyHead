@@ -128,6 +128,7 @@ class BaseMap:
     # robot within HINT_RADIUS_M / HINT_YAW_DEG of the hint and still reaches MIN_FIT is
     # accepted although a similar place elsewhere scores close to it.
     HINT_RADIUS_M = 1.0
+    HINT_MIN_FIT = 0.70  # near a known pose only (crowds hide walls); above the wrong 0.64 match
     HINT_YAW_DEG = 30.0
 
     def __init__(self, pts):
@@ -182,7 +183,7 @@ class BaseMap:
                 near = math.hypot(rx - hint[0], ry - hint[1]) <= self.HINT_RADIUS_M
                 if hint[2] is not None:
                     near = near and abs(math.degrees(math.remainder(ryaw - hint[2], 2 * math.pi))) <= self.HINT_YAW_DEG
-                if near and r['fitness'] >= self.MIN_FIT:
+                if near and r['fitness'] >= self.HINT_MIN_FIT:
                     best, confident, hinted = r, True, True
                     break
         keys = ('fitness', 'rmse', 'corr', 't', 'yaw_deg', 'robot')
