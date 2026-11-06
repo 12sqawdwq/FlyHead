@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlyHead: a wheel-legged robot driven by a fruit-fly connectome</title>
+<meta name="description" content="FlyHead: a research prototype that drives a Diablo wheel-legged robot with a simulated whole-brain fruit-fly connectome.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="stage" aria-label="3D view of the robot. Scroll to take it apart and rebuild it; drag to rotate."></canvas>
+<svg id="leaders" aria-hidden="true"></svg>
+<div id="labels" aria-hidden="true"></div>
+<div id="shade" aria-hidden="true"></div>
+
+<header class="mast">
+  <a class="mark" href="#top" data-zh="刑天">FlyHead</a>
+  <nav aria-label="Sections">
+    <button data-p="0.195" data-zh="结构">Structure</button>
+    <button data-p="0.425" data-zh="场地">Site</button>
+    <button data-p="0.65" data-zh="大脑">Brain</button>
+    <button data-p="0.915" data-zh="决策">Decisions</button>
+    <button data-go="specs" data-zh="规格">Specs</button>
+    <button id="langBtn" lang="zh-CN">中文</button>
+  </nav>
+</header>
+
+<nav class="rail" id="rail" aria-label="Page progress">
+  <div class="rail-track" id="railTrack" role="slider" tabindex="0" aria-label="Page progress, draggable"
+       aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="rail-fill" id="railFill"></div>
+    <div class="rail-thumb" id="railThumb"></div>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="track" id="track"></div>
+
+  <div class="cards">
+    <section class="card" data-from="-1" data-to="0.075">
+      <div class="head top hero">
+        <h1 data-zh="刑天">FlyHead</h1>
+        <p data-zh="用一只果蝇的全脑连接组，驱动一台轮腿机器人。">One fruit fly's whole-brain connectome, driving a wheel-legged robot.</p>
+      </div>
+      <div class="cue" aria-hidden="true" data-zh="向下滚动">Scroll</div>
+    </section>
+
+    <section class="card" data-from="0.095" data-to="0.205">
+      <div class="head bottom">
+        <h2 data-zh="拆开看。">Take it apart.</h2>
+        <ul class="key">
+          <li><i class="solid"></i><span data-zh="厂商网格，细节为展示">Vendor mesh, details for display</span></li>
+          <li><i class="dash"></i><span data-zh="示意件">Illustrative part</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" data-from="0.215" data-to="0.335">
+      <div class="stat l"><b class="num" data-v="6">6</b><span data-zh="个直驱关节">direct-drive joints</span></div>
+      <div class="stat r"><b><span class="num" data-v="94">94</span><small> mm</small></b><span data-zh="轮半径">wheel radius</span></div>
+      <div class="head bottom"><h2 data-zh="平衡交给原厂控制器。">Balance stays with the factory controller.</h2><p data-zh="脑只给速度。">The brain only sets speed.</p></div>
+    </section>
+
+    <section class="card" data-from="0.355" data-to="0.448">
+      <div class="head bottom">
+        <h2 data-zh="真实建图的场地。">A real, LiDAR-mapped site.</h2>
+        <p data-zh="LiDAR 建图，白线是录制轨迹。">The white line is a recorded trajectory.</p>
+      </div>
+      <div class="stat l"><b><span class="num" data-v="45">45</span><small> m</small></b><span data-zh="场地跨度">site span</span></div>
+      <div class="stat r"><b class="num" data-v="550975" data-sep="1">550,975</b><span data-zh="个地图点">map points</span></div>
+    </section>
+
+    <section class="card" data-from="0.456" data-to="0.502">
+      <div class="stat l dim" id="dStatL"><b><span id="dStatLv">25.5</span><small> s</small></b><span id="dStatLt"></span><span class="sm" data-zh="最长卡住">longest stuck</span></div>
+      <div class="stat r" id="dStatR"><b><span id="dStatRv">0.0</span><small> s</small></b><span id="dStatRt"></span><span class="sm" data-zh="最长卡住">longest stuck</span></div>
+      <div class="head top slim">
+        <span class="tag" data-zh="闭环仿真">Closed-loop simulation</span>
+        <h2 data-zh="遇到阻挡，不带脑只能停下。">Without a brain, blocked means stuck.</h2>
+        <div class="dvrow">
+          <div class="scn dvs" role="group" aria-label="Scenario">
+            <button data-sc="wall" class="on" data-zh="迎面障碍">Obstacle ahead</button>
+            <button data-sc="person" data-zh="有人挡路">Person in the way</button>
+            <button data-sc="roam" data-zh="全场漫游">Free roam</button>
+          </div>
+          <div class="scn dv" role="group" aria-label="Vehicle">
+            <button data-m="brain" class="on" data-zh="带脑">With brain</button>
+            <button data-m="blind" data-zh="不带脑">No brain</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" data-from="0.516" data-to="0.605">
+      <div class="stat l"><b><span class="num" data-v="1.75" data-d="2">1.75</span><small> GiB</small></b><span data-zh="机载内存，放不下大脑">onboard memory, too small for the brain</span></div>
+      <div class="stat r"><b><span class="num" data-v="0.3" data-d="1">0.3</span><small> s</small></b><span data-zh="每条指令的最长期限">longest life of any command</span></div>
+      <div class="head bottom"><h2 data-zh="分布式架构，大脑外置。">Distributed. The brain runs off-board.</h2><p data-zh="断链 2 s 就停车。">Lose the link for 2 s and it stops.</p></div>
+    </section>
+
+    <section class="card" data-from="0.615" data-to="0.675">
+      <div class="head bottom">
+        <span class="tag" data-zh="连接组仿真">Connectome simulation</span>
+        <h2 data-zh="一只果蝇的全脑。">A whole fly brain.</h2>
+        <p data-zh="138,639 个神经元，15,091,983 条连接记录。">138,639 neurons. 15,091,983 connection records.</p>
+        <ul class="rg-legend" id="rgLegend"></ul>
+        <p class="fine" data-zh="颜色来自 FlyWire 细胞类别注释，每点是一个抽样神经元，在真实坐标上。<span class='hv'>把鼠标移到标签上可单独查看。</span>">Colour follows FlyWire cell-class annotations. Each point is one sampled neuron at its real coordinate. <span class="hv">Hover a label to isolate it.</span></p>
+      </div>
+    </section>
+
+    <section class="card" data-from="0.685" data-to="0.745">
+      <div class="stat l"><b class="num" data-v="493">493</b><span data-zh="个输入细胞">input cells</span>
+        <ul class="legend">
+          <li><i style="--c:var(--lc4)"></i><b>LC4</b>104</li>
+          <li><i style="--c:var(--lplc2)"></i><b>LPLC2</b>210</li>
+          <li><i style="--c:var(--lc9)"></i><b>LC9</b>179</li>
+        </ul>
+      </div>
+      <div class="head bottom"><span class="tag" data-zh="工程代理">Engineering proxy</span><h2 data-zh="LiDAR 变成神经输入。">LiDAR becomes neural input.</h2></div>
+    </section>
+
+    <section class="card" data-from="0.755" data-to="0.865">
+      <div class="head bottom wide">
+        <h2 data-zh="从脑区到动作。">From brain region to motion.</h2>
+        <p class="flowline"><i style="--c:var(--rg-vpn)"></i><span data-zh="视觉投射神经元">Visual projection neurons</span><em>→</em><i style="--c:var(--ink)"></i><span data-zh="下降神经元">Descending neurons</span><em>→</em><span data-zh="轮腿指令">Wheel-leg command</span></p>
+        <div class="amap" role="group" aria-label="Action">
+          <button data-a="forward" class="on"><small data-zh="前方开阔">Clear ahead</small><b data-zh="前进">Forward</b><code>LC9 → DNp09</code><small>44–60 Hz → ≤ 0.15 m/s</small></button>
+          <button data-a="turn"><small data-zh="单侧逼近">One side looming</small><b data-zh="转向">Turn</b><code data-zh="LC4·LPLC2 → DNa02 对侧">LC4·LPLC2 → DNa02 opposite</code><small>10–37 Hz → ≤ 0.40 rad/s</small></button>
+          <button data-a="back"><small data-zh="双侧逼近">Both sides looming</small><b data-zh="后退">Back off</b><code>LC4·LPLC2 → MDN</code><small>26–39 Hz → ≤ 0.10 m/s</small></button>
+          <button data-a="escape"><small data-zh="突然逼近">Sudden loom</small><b data-zh="逃逸">Escape</b><code>LC4·LPLC2 → DNp01</code><small data-zh="≥ 60 Hz → 后退 0.30 m/s 或转身 1.0 rad/s">≥ 60 Hz → back 0.30 m/s or turn 1.0 rad/s</small></button>
+        </div>
+        <p class="fine" data-zh="放电率：Stage 1 仿真。指令：工程解码器 v6，非生物运动复原。信号与车轮动画为示意。">Firing rates: Stage 1 simulation. Commands: engineering decoder v6, not reconstructed fly motor control. Signal and wheel animation illustrative.</p>
+      </div>
+    </section>
+
+    <section class="card" data-from="0.878" data-to="0.948">
+      <div class="head top slim">
+        <span class="tag" data-zh="实机记录 · 人形示意">Real-robot record · person illustrative</span>
+        <div class="scn rp" role="group" aria-label="Approach direction">
+          <button data-e="front" class="on" data-zh="正前">Front</button>
+          <button data-e="left" data-zh="左侧">Left</button>
+          <button data-e="right" data-zh="右侧">Right</button>
+        </div>
+      </div>
+      <div class="stat l"><b class="num" data-v="59">59</b><span data-zh="次逃逸，153 s 实机驱动内">escapes in 153 s of brain-driven running</span></div>
+    </section>
+
+    <section class="card" data-from="0.968" data-to="2">
+      <div class="head top hero"><h1 data-zh="刑天">FlyHead</h1></div>
+      <div class="cue" aria-hidden="true" data-zh="规格">Specs</div>
+    </section>
+  </div>
+
+  <div class="decision" id="decision"><b></b><span></span></div>
+
+  <aside class="neuro" id="neuro" aria-label="Neural activity">
+    <canvas id="neuroCanvas" role="img"></canvas>
+  </aside>
+
+  <article class="ledger" id="specs">
+    <h2 data-zh="规格">Specs</h2>
+    <div class="bento">
+      <div class="cell w2"><b>138,639</b><span data-zh="神经元 · FlyWire v783 连接组仿真">neurons · FlyWire v783 connectome simulation</span></div>
+      <div class="cell w2"><b>15,091,983</b><span data-zh="条连接记录">connection records</span></div>
+      <div class="cell"><b>493</b><span data-zh="输入细胞&lt;br&gt;LC4 104 · LPLC2 210 · LC9 179">input cells<br>LC4 104 · LPLC2 210 · LC9 179</span></div>
+      <div class="cell"><b>20</b><span data-zh="读出神经元">readout neurons</span></div>
+      <div class="cell"><b>84<small> ms</small></b><span data-zh="每 100 ms 模型时间的计算耗时&lt;br&gt;实机影子，p50">compute per 100 ms of model time<br>real-robot shadow run, p50</span></div>
+      <div class="cell"><b>0.35<small> s</small></b><span data-zh="从逼近到决定，中位数&lt;br&gt;12 次中 4 次未触发">loom to decision, median<br>4 of 12 never triggered</span></div>
+      <div class="cell"><b>67<small> min</small></b><span data-zh="单次实机驱动最长&lt;br&gt;接触情况未记录">longest brain-driven run<br>contacts not recorded</span></div>
+      <div class="cell"><b>216<small> m</small></b><span data-zh="单次实机行驶最长&lt;br&gt;含非神经的探索驱动">longest distance in one run<br>includes a non-neural exploration drive</span></div>
+      <div class="cell"><b>−0.30<small> m/s</small></b><span data-zh="逃逸后退指令&lt;br&gt;实测最多退 0.77 m">escape reverse command<br>measured back at most 0.77 m</span></div>
+      <div class="cell"><b>6</b><span data-zh="直驱关节">direct-drive joints</span></div>
+    </div>
+
+    <h2 class="sub">TODO</h2>
+    <ul class="todo">
+      <li class="done"><i></i><b data-zh="连接组身份绑定">Bind cell identities to the connectome</b></li>
+      <li class="done"><i></i><b data-zh="离线回放">Offline replay</b><span data-zh="第二次通过">passed on the second try</span></li>
+      <li class="done"><i></i><b data-zh="100 ms 窗口内算完">Compute inside the 100 ms window</b><span data-zh="实机影子 p50 84 ms；早期共享 GPU 时 p95 122 ms">84 ms p50 in the shadow run; 122 ms p95 early on a shared GPU</span></li>
+      <li class="done"><i></i><b data-zh="实机影子">Real-robot shadow mode</b><span data-zh="静止段 24 s，短于协议的 60 s">still segment 24 s, short of the protocol's 60 s</span></li>
+      <li class="done"><i></i><b data-zh="规划器加反射，仿真到达">Planner plus reflex reaches the goal in simulation</b><span data-zh="路径来自规划器">the route comes from the planner</span></li>
+      <li><i></i><b data-zh="闭环仿真全部通过">Pass every closed-loop simulation test</b><span data-zh="剩 person_right，先修它的判定缺陷">person_right remains; fix its evaluation flaw first</span></li>
+      <li><i></i><b data-zh="实机 keep-in 越界压到 0.25 m 内">Keep real-robot boundary overshoot under 0.25 m</b><span data-zh="现在 0.30–0.46 m">now 0.30–0.46 m</span></li>
+      <li><i></i><b data-zh="补全实机接触记录">Complete the real-robot contact records</b><span data-zh="4 次运行未记录">4 runs unrecorded</span></li>
+      <li><i></i><b data-zh="漫游时少卡住">Get stuck less while roaming</b><span data-zh="带脑仍有 32% 的时间停着">with a brain it still stops 32% of the time</span></li>
+      <li><i></i><b data-zh="遇人时能走过去">Get past a person in the way</b><span data-zh="现在是转身离开">today it turns and leaves</span></li>
+      <li><i></i><b data-zh="前进来自神经">Make forward drive neural</b><span data-zh="stage5_008 用了非神经的探索驱动">stage5_008 used a non-neural exploration drive</span></li>
+      <li><i></i><b data-zh="规划器加反射上实机">Run planner plus reflex on the real robot</b><span data-zh="目前只在仿真">simulation only so far</span></li>
+    </ul>
+
+    <a class="gh" href="https://github.com/12sqawdwq/FlyHead" target="_blank" rel="noopener">
+      <span data-zh="在 GitHub 查看项目">View the project on GitHub</span>
+      <b>github.com/12sqawdwq/FlyHead →</b>
+    </a>
+
+    <footer class="sources">
+      <p data-zh="研究原型，非在售产品。机械：DDTRobot/diablo_ros2（Apache-2.0），直驱关节数见 Liu et al. 2024；车轮按其尺寸重建，细节未与 ts-diablo 实物核对。神经元坐标：FlyWire 注释表。脑区颜色：FlyWire super_class 与 cell_class，按区抽样，疏密不代表数量。脑区功能：文献概述。地图与轨迹：项目 SLAM 底图。阻挡对比：闭环仿真 stage3_009。决策：实机 stage5_005 挑选的片段，位移为指令积分。腿和车轮动效、人形为示意。渲染：three.js（MIT）。细节见 README。">Research prototype, not a product for sale. Mechanics: DDTRobot/diablo_ros2 (Apache-2.0), joint count from Liu et al. 2024; wheels rebuilt to its dimensions, details not checked against the ts-diablo unit. Neuron coordinates: FlyWire annotations. Region colours: FlyWire super_class and cell_class, sampled per region, so density is not to scale. Region functions: summary of the literature. Map and trajectory: project SLAM map. Blocking comparison: closed-loop simulation stage3_009. Decisions: selected segments of real-robot run stage5_005, displacement integrated from commands. Leg and wheel motion and the person are illustrative. Rendering: three.js (MIT). Details in the README.</p>
+    </footer>
+  </article>
+</main>
+
+<div class="nogl" id="nogl" hidden data-zh="此设备无法启动 WebGL">WebGL is not available on this device</div>
+
+<script src="assets/three.classic.js"></script>
+<script src="assets/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
