@@ -4,4 +4,3 @@
 *.pyw text eol=lf
 *.js linguist-vendored=false
 flyhead/monitor/web/vendor/** linguist-vendored
-experiments/** linguist-documentation

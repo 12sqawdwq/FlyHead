@@ -22,12 +22,11 @@ python -m flyhead.sim.report runs/blind.jsonl
 ```
 
 Scenarios: `wall_ahead`, `roam_open`, `loom_front|left|right`, `person_front|left|right`.
-The `loom_*` objects (stage3_001) move at 0.6 m/s and never stop, so they run into the robot
-whatever it does; the formal stage-3 criteria use `wall_ahead` (40 s), `roam_open` (120 s) and
-`person_*` (25 s, the person stops 0.7 m away).
-Without `--map` a synthetic arena is generated (`flyhead.sim.synthetic_map`); the published
-stage-3 numbers were obtained on a recorded map that is not part of this repository, so expect
-the same pipeline behaviour, not the same numbers.
+The `loom_*` objects move at 0.6 m/s and never stop, so they run into the robot
+whatever it does; in `person_*` the person stops 0.7 m away.
+Without `--map` a synthetic arena is generated (`flyhead.sim.synthetic_map`); the demo clips were
+rendered on a recorded map that is not part of this repository, so expect the same pipeline
+behaviour, not the same numbers.
 
 ## 2b. Control server and SLAM without a robot
 
@@ -41,8 +40,7 @@ through the server, KISS-ICP SLAM and the map writer; `/diagnostics` reports bac
 
 In replay, recorded times are mapped onto the replay clock, so with `XT_BRAIN_ENABLED=1`, a running
 brain service, a base map and a navigation package the console's **Mission → Shadow** shows live
-brain decisions (never sent: replay has no robot link). The full console walkthrough, with a
-recording that includes an approaching person, is in [demo.md](demo.md#regenerating--复现这些素材).
+brain decisions (never sent: replay has no robot link).
 
 ## 3. Connectome in the loop (CUDA GPU)
 
@@ -52,16 +50,12 @@ Tested on an RTX 5090D (sm_120) with Python 3.11, torch 2.x, CUDA 13; the full g
 ```bash
 pip install -e ".[brain,server]"
 python scripts/fetch_upstream.py                  # ~105 MB: fly-brain code at a pinned commit + FlyWire v783 data
-python tools/repro_stage1.py runs/repro_stage1    # stage 1 dose response vs. the archived record
 python -m flyhead.sim.loom_sim person_front brain 25 runs/brain.jsonl --decoder 9
 python -m flyhead.sim.report runs/brain.jsonl
 ```
 
-The first run builds the weight cache in `cache/` (`FLYHEAD_CACHE_DIR`). `repro_stage1.py` replays
-the stage 1 protocol (same conditions, order and seed) and compares every rate with
-`experiments/loom_005/runs/stage1_001/STAGE1_CURVES.json`; on the reference GPU all 629 values are
-identical (`COMPARE.json`, `"identical": true`). Reflex simulation
-(planner + brain, stage 6) needs the brain service running:
+The first run builds the weight cache in `cache/` (`FLYHEAD_CACHE_DIR`). Reflex simulation
+(planner + brain) needs the brain service running:
 
 ```bash
 bash scripts/start_brain_service.sh sim_service           # tmux; LOOM_DECODER=9 for the latest decoder
@@ -93,4 +87,4 @@ an operator PC. Hosts reach each other over SSH (any VPN or LAN).
 
 Physical motion requires `XT_CHASSIS_DISABLED=0 XT_REMOTE_MOTION_ENABLED=1` on the server
 launch; the bridge enforces the same two interlocks. Use an RC supervisor, a cleared area and
-short sessions; step up speeds only by recorded protocol amendment (see `experiments/loom_005`).
+short sessions, and raise speeds step by step.

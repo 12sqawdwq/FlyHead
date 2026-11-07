@@ -2,7 +2,7 @@
 
   python -m flyhead.ops <command> [--json]
 
-Every command says which tier it belongs to (AGENTS.md, section 2):
+Every command says which safety tier it belongs to:
 
   tier 0  read only, run any time                doctor, status, lock show
   tier 1  offline, own processes and ports only  test, offline up | check | down | run, collect

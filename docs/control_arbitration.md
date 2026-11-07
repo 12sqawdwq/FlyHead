@@ -89,7 +89,7 @@ ownership.
 Every transition is written once to the event log, for example `Control: idle -> brain (brain drive)`.
 Every 10 Hz control record in `runs/live_*/navigation.jsonl` carries `owner`, `controller`, `reflex` and
 `pose`. [`tools/collect_run.py`](../tools/collect_run.py) turns a run into a bundle with an owner-time table
-and a transition table (see [field_test.md](field_test.md)).
+and a transition table.
 
 ## Verification
 

@@ -1,6 +1,6 @@
 """EEG left/right probabilities -> DNa02 stimulus rates. No socket, ROS, or actuator imports.
 
-Used by experiments/eeg_dna02 (offline). Gain and threshold are uncalibrated examples.
+Offline use only. Gain and threshold are uncalibrated examples.
 """
 import math
 
