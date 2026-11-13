@@ -493,8 +493,8 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
       var r = $('#dStatR'), a = RUNS[scn];
       l.classList.toggle('dim', m !== 'blind'); r.classList.toggle('dim', m !== 'brain');
       $('#dStatLv').textContent = a.blind.longest.toFixed(1); $('#dStatRv').textContent = a.brain.longest.toFixed(1);
-      $('#dStatLt').textContent = Z('No brain: ', '不带脑：') + SC_TEXT[scn].blind.replace('%p', a.blind.path.toFixed(1));
-      $('#dStatRt').textContent = Z('With brain: ', '带脑：') + SC_TEXT[scn].brain.replace('%p', a.brain.path.toFixed(1));
+      $('#dStatLt').textContent = SC_TEXT[scn].blind.replace('%p', a.blind.path.toFixed(1));
+      $('#dStatRt').textContent = SC_TEXT[scn].brain.replace('%p', a.brain.path.toFixed(1));
     }
     if (blindLine) {
       stepLine(blindLine, RUNS[scn].blind.steps); stepLine(brainPath, RUNS[scn].brain.steps);
@@ -887,6 +887,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     base: [-74, -26], motorL: [84, -56], finL: [52, -106], upperL: [70, -60], lowerL: [84, 56], rimL: [64, 72], tireL: [70, -44],
     lidar: [74, -14], compute: [120, -34], radio: [-96, -18], battery: [-82, 52], camera: [-150, -30]
   };
+  var CAMERA_DIR_REAR = [104, 34];
 
   function sample(p) {
     var i = 0; while (i < K.length - 2 && p > K[i + 1].p) i++;
@@ -992,6 +993,8 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     return n.sep ? t.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : t;
   }
   var railFill = $('#railFill'), railThumb = $('#railThumb'), railTrack = $('#railTrack');
+  // which masthead entry the timeline is in: Structure, Site, Brain (from the off-board chapter on), Decisions
+  var navBtns = $$('.mast button[data-p]'), NAV_SPANS = [[.085, .345], [.345, .51], [.51, .87], [.87, .96]], navOn = -2, stageShown = false;
   var lastEx = 0;
 
   /* 场景数据：loom_005/RESULTS.md Stage 1（runs/stage1_001） */
@@ -1036,6 +1039,16 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
   var decisionEl = $('#decision');
   var neuro = $('#neuro'), nc = $('#neuroCanvas'), nctx = nc.getContext('2d');
   var decB = $('#decision b'), decS = $('#decision span');
+  // In the replay chapter the big word shares the bottom of the screen with the neural panel: shrink it to the gap.
+  // On narrow screens the panel is not laid out, and the word only has to fit the screen.
+  function fitDecision() {
+    decB.style.fontSize = '';
+    var vw = document.documentElement.clientWidth;
+    var room = neuro.offsetWidth ? 2 * (neuro.getBoundingClientRect().left - 28 - vw / 2) : vw - 36;
+    var r = document.createRange(); r.selectNodeContents(decB);
+    var w = r.getBoundingClientRect().width;
+    if (room > 0 && w > room) decB.style.fontSize = (parseFloat(getComputedStyle(decB).fontSize) * room / w).toFixed(1) + 'px';
+  }
   function regSide(t, side) { var a = groups[t][side]; return a ? a.length / 3 : 0; }
   // 同类型同侧的细胞共用一个输入速率（loom_005/retina.py rates_vector），因此逐点点亮是忠实的
   var CELLS = [
@@ -1100,7 +1113,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     var key = currentEp + '|' + idx + '|' + W + '|' + inRecord;
     if (key === uiKey) return;
     uiKey = key;
-    if (rw > .01) decB.textContent = inRecord ? decisionText(row) : Z('Person approaching', '有人走近');
+    if (rw > .01) { decB.textContent = inRecord ? decisionText(row) : Z('Person approaching', '有人走近'); fitDecision(); }
     if (p >= .885) {
       drawNeuro(ep, idx);
       nc.setAttribute('aria-label', 'Loom ' + row[1] + ' / ' + row[2] + ', DNp01 ' + row[5] + ' / ' + row[6] + ', DNp09 ' + row[7] + ', MDN ' + row[8] + ' Hz');
@@ -1231,7 +1244,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     var w = ui.w || (ui.w = ui.el.offsetWidth), h = ui.h || (ui.h = ui.el.offsetHeight);
     var lx = x + dx, ly = y + dy;
     var left = dx >= 0 ? lx + 6 : lx - w - 6;
-    left = clamp(left, 8, W - w - 8);
+    left = clamp(left, 8, W - w - (narrow ? 24 : 44));   // stay clear of the progress rail and the scrollbar
     ui.el.style.transform = 'translate(' + left.toFixed(1) + 'px,' + (ly - h / 2).toFixed(1) + 'px)';
     ui.el.style.opacity = alpha;
     ui.path.setAttribute('d', 'M' + x.toFixed(1) + ' ' + y.toFixed(1) + 'L' + lx.toFixed(1) + ' ' + ly.toFixed(1));
@@ -1467,6 +1480,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     decisionEl.style.opacity = decA; decisionEl.style.visibility = decA > .002 ? 'visible' : 'hidden';
     if (lw > .02) {
       var isStopped = Math.abs(dRec[7]) < .01;
+      if (decB.style.fontSize) decB.style.fontSize = '';
       if (driveT * DRIVE_SPEED < DRIVE.dur) stuckS = isStopped ? stuckS + dt * DRIVE_SPEED : 0;
       var driveKey = driveMode + '|' + driveScn + '|' + dk + '|' + Math.round(stuckS);
       if (driveKey !== driveUi) {
@@ -1581,6 +1595,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     }
     renderer.render(scene, camera);
     scene.background = bgTex; renderer.autoClear = true;
+    if (!stageShown) { stageShown = true; canvas.classList.add('ready'); }
 
     // 文案
     for (i = 0; i < cards.length; i++) {
@@ -1626,6 +1641,7 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
       if (alpha > 0) {
         v2.copy(q.anchor).applyMatrix4(q.inner.matrix).add(q.outer.position);
         var dir = LABEL_DIR[id];
+        if (id === 'camera' && p > .5) dir = CAMERA_DIR_REAR;   // second exploded view: the left side is the chassis
         place(q.ui, v2.x, v2.y, v2.z, dir[0], dir[1], alpha * viewFade);
       } else place(q.ui, 0, 0, 0, 0, 0, 0);
     }
@@ -1673,6 +1689,12 @@ var A = new T.Matrix4(), B = new T.Matrix4(), C = new T.Matrix4();
     railFill.style.height = (p * 100).toFixed(2) + '%';
     railThumb.style.top = (p * 100).toFixed(2) + '%';
     railTrack.setAttribute('aria-valuenow', Math.round(p * 100));
+    var navNow = -1;
+    for (i = 0; i < NAV_SPANS.length; i++) if (p >= NAV_SPANS[i][0] && p < NAV_SPANS[i][1]) navNow = i;
+    if (navNow !== navOn) {
+      navOn = navNow;
+      navBtns.forEach(function (b, k) { if (k === navNow) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    }
     lastEx = Math.round(s.ex * 100);
 
     // 结果段落滚入后不再显示固定层

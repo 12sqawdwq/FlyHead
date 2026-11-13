@@ -5,7 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FlyHead: a wheel-legged robot driven by a fruit-fly connectome</title>
 <meta name="description" content="FlyHead: a research prototype that drives a Diablo wheel-legged robot with a simulated whole-brain fruit-fly connectome.">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://flyhead.live/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FlyHead">
+<meta property="og:url" content="https://flyhead.live/">
+<meta property="og:title" content="FlyHead: a wheel-legged robot driven by a fruit-fly connectome">
+<meta property="og:description" content="In this research prototype, one fruit fly's whole-brain connectome, simulated on a GPU, drives a real wheel-legged robot. Scroll to take the robot apart in 3D.">
+<meta property="og:image" content="https://flyhead.live/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The FlyHead wordmark above a 3D render of the wheel-legged robot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://flyhead.live/assets/og.jpg">
+<link rel="stylesheet" href="style.css?v=20261113">
+<script>(function(){var z=0,n=0;document.documentElement.className='fx';try{z=((/[?&]lang=(en|zh)/.exec(location.search)||[])[1]||localStorage.getItem('xt_lang'))==='zh';n=(performance.getEntriesByType('navigation')[0]||{}).type}catch(e){}if(!z&&(!n||n==='navigate')&&!/[#&]p=/.test(location.hash))document.documentElement.className='fx early'})()</script>
 </head>
 <body>
 
@@ -72,8 +88,8 @@
     </section>
 
     <section class="card" data-from="0.456" data-to="0.502">
-      <div class="stat l dim" id="dStatL"><b><span id="dStatLv">25.5</span><small> s</small></b><span id="dStatLt"></span><span class="sm" data-zh="最长卡住">longest stuck</span></div>
-      <div class="stat r" id="dStatR"><b><span id="dStatRv">0.0</span><small> s</small></b><span id="dStatRt"></span><span class="sm" data-zh="最长卡住">longest stuck</span></div>
+      <div class="stat l dim" id="dStatL"><em data-zh="不带脑">No brain</em><b><span id="dStatLv">25.5</span><small> s</small></b><span data-zh="最长卡住">longest stuck</span><span class="sm" id="dStatLt"></span></div>
+      <div class="stat r" id="dStatR"><em data-zh="带脑">With brain</em><b><span id="dStatRv">0.0</span><small> s</small></b><span data-zh="最长卡住">longest stuck</span><span class="sm" id="dStatRt"></span></div>
       <div class="head top slim">
         <span class="tag" data-zh="闭环仿真">Closed-loop simulation</span>
         <h2 data-zh="遇到阻挡，不带脑只能停下。">Without a brain, blocked means stuck.</h2>
@@ -193,7 +209,7 @@
     </a>
 
     <footer class="sources">
-      <p data-zh="研究原型，非在售产品。机械：DDTRobot/diablo_ros2（Apache-2.0），直驱关节数见 Liu et al. 2024；车轮按其尺寸重建，细节未与 ts-diablo 实物核对。神经元坐标：FlyWire 注释表。脑区颜色：FlyWire super_class 与 cell_class，按区抽样，疏密不代表数量。脑区功能：文献概述。地图与轨迹：项目 SLAM 底图。阻挡对比：闭环仿真 stage3_009。决策：实机 stage5_005 挑选的片段，位移为指令积分。腿和车轮动效、人形为示意。渲染：three.js（MIT）。细节见 README。">Research prototype, not a product for sale. Mechanics: DDTRobot/diablo_ros2 (Apache-2.0), joint count from Liu et al. 2024; wheels rebuilt to its dimensions, details not checked against the ts-diablo unit. Neuron coordinates: FlyWire annotations. Region colours: FlyWire super_class and cell_class, sampled per region, so density is not to scale. Region functions: summary of the literature. Map and trajectory: project SLAM map. Blocking comparison: closed-loop simulation stage3_009. Decisions: selected segments of real-robot run stage5_005, displacement integrated from commands. Leg and wheel motion and the person are illustrative. Rendering: three.js (MIT). Details in the README.</p>
+      <p data-zh="研究原型，非在售产品。机械：DDTRobot/diablo_ros2（Apache-2.0），直驱关节数见 Liu et al. 2024；车轮按其尺寸重建，细节未与实物核对。神经元坐标：FlyWire 注释表。脑区颜色：FlyWire super_class 与 cell_class，按区抽样，疏密不代表数量。脑区功能：文献概述。地图与轨迹：项目 SLAM 底图。阻挡对比：闭环仿真 stage3_009。决策：实机 stage5_005 挑选的片段，位移为指令积分。腿和车轮动效、人形为示意。渲染：three.js（MIT）。细节见 README。">Research prototype, not a product for sale. Mechanics: DDTRobot/diablo_ros2 (Apache-2.0), joint count from Liu et al. 2024; wheels rebuilt to its dimensions, details not checked against the actual robot. Neuron coordinates: FlyWire annotations. Region colours: FlyWire super_class and cell_class, sampled per region, so density is not to scale. Region functions: summary of the literature. Map and trajectory: project SLAM map. Blocking comparison: closed-loop simulation stage3_009. Decisions: selected segments of real-robot run stage5_005, displacement integrated from commands. Leg and wheel motion and the person are illustrative. Rendering: three.js (MIT). Details in the README.</p>
     </footer>
   </article>
 </main>
@@ -202,6 +218,6 @@
 
 <script src="assets/three.classic.js"></script>
 <script src="assets/data.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=20261113"></script>
 </body>
 </html>
