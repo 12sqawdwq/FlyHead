@@ -97,7 +97,9 @@ def feed(x, y, yaw, person):
     brain.on_scan(navigator, world, Wb[:3, 3].copy())
 
 
-session = types.SimpleNamespace(nav=navigator)
+# BrainLink.command also reports stimulus episodes to the session (app.Session.event / record_telemetry);
+# the simulation has no server session, so both are no-ops here.
+session = types.SimpleNamespace(nav=navigator, event=lambda *a, **k: None, record_telemetry=lambda *a, **k: None)
 brain = BrainLink(session)
 x, y, yaw = START
 v = w = 0.0

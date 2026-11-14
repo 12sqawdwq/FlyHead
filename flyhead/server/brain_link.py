@@ -238,11 +238,14 @@ class BrainLink:
         except Exception as exc:                  # observing must never affect the command path
             ep, self.last['stimulus_error'] = None, repr(exc)
         if ep is not None:
-            self.s.record_telemetry(dict(type='stimulus_episode', **ep))
-            self.s.event('Stimulus %d: %s %s, peak loom %.2f rad/s -> %s%s (%s)' % (
-                ep['n'], ep['trigger'], ep['side'] or '-', ep['peak_loom'], ep['response'] or 'no defensive state',
-                '' if ep['latency_ms'] is None else ' after %d ms' % ep['latency_ms'],
-                'robot still' if ep['static'] else 'robot moving'))
+            try:                                  # ... nor may reporting it (stage 6 crashed here: its session
+                self.s.record_telemetry(dict(type='stimulus_episode', **ep))      # stub had no telemetry)
+                self.s.event('Stimulus %d: %s %s, peak loom %.2f rad/s -> %s%s (%s)' % (
+                    ep['n'], ep['trigger'], ep['side'] or '-', ep['peak_loom'], ep['response'] or 'no defensive state',
+                    '' if ep['latency_ms'] is None else ' after %d ms' % ep['latency_ms'],
+                    'robot still' if ep['static'] else 'robot moving'))
+            except Exception as exc:
+                self.last['stimulus_error'] = repr(exc)
         why = None
         if row is None or now - at > INTENT_MAX_AGE_S:
             why = 'no fresh brain window'
